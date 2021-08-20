@@ -1,56 +1,30 @@
 
-export interface Set {
-  exercise: Exercise;
-  reps: number[];
+import TargetTracker from './TargetTracker';
+import WorkoutPattern from './WorkoutPattern';
+
+export interface Target {
+  muscle: string;
+  desiredWeight: number;
+  currentWeight: number;
 }
 
-export interface SuperSet {
-  sets: Set[],
-}
+export default class Workout {
+  public static* generator(targetName: string, intensity: number, timeMinutes: number) {
+  	// Create target tracker
+    const targetTracker = new TargetTracker(targetName, intensity, timeMinutes);
 
-export interface Exercise {
-  name: string;
-  activations: Activation[];
-  // equipment: Equipment[];
-  reps: number;
-  secondsPerRep: number;
-  tags: string[];
-}
-
-export interface Activation {
-  muscle: Muscle;
-  intensity: number;
-}
-
-export interface Muscle {
-  name: string;
-}
-
-// export interface Equipment {
-//   name: string;
-// }
-
-const MAX_LEFTOVER_TIME_S = 5 * 60;
-
-export class Workout {
-  public static async generate(targets: Activation[], intensity: number, timeMinutes: number): Promise<Workout> {
-  	// Break targets into most specific muscles
-
-  	// Collect relevant exercises
-
-  	// Select exercises optimizing for activation/time
-  	const sets: Set|SuperSet[] = [];
-  	let secondsRemaining = timeMinutes * 60;
-  	while (secondsRemaining > MAX_LEFTOVER_TIME_S) {
-
-  	}
-
-    return new Workout(sets);
+    const workoutPatternGenerator = WorkoutPattern.generator(targetTracker);
+    let currWorkoutPattern = workoutPatternGenerator.next();
+    while (!currWorkoutPattern.done) {
+      yield new Workout(currWorkoutPattern.value);
+      currWorkoutPattern = workoutPatternGenerator.next();
+    }
+    throw new Error('Out of options');
   }
 
   constructor(
-  	public sets: Set|SuperSet[],
+  	public workoutPattern: WorkoutPattern,
   ) {
-
+    console.log('new workout ->', workoutPattern);
   }
 }

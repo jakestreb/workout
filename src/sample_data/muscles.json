@@ -1,33 +1,33 @@
 [{
 	"name": "body",
-	"default_weight": 1,
+	"weight": 1,
 	"children": [{
 		"name": "chest",
-		"default_weight": 2,
+		"weight": 2,
 		"children": [{
 			"name": "upper_chest",
-			"default_weight": 1
+			"weight": 1
 		}, {
 			"name": "middle_chest",
-			"default_weight": 2
+			"weight": 2
 		}, {
 			"name": "lower_chest",
-			"default_weight": 1
+			"weight": 1
 		}]
 	}, {
 		"name": "back",
-		"default_weight": 2,
+		"weight": 2,
 	}, {
 		"name": "shoulders",
-		"default_weight": 1,
+		"weight": 1,
 	}, {
 		"name": "abs",
-		"default_weight": 1,
+		"weight": 1,
 	}, {
 		"name": "arms",
-		"default_weight": 1,
+		"weight": 1,
 	}, {
 		"name": "legs",
-		"default_weight": 2
+		"weight": 2
 	}]
 }]

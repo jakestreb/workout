@@ -1,44 +1,73 @@
 [{
   "name": "bench_press",
+  "weight": 1,
   "activations": [
     {
       "muscle": "middle_chest",
-      "intensityPerRep": 10,
+      "intensity": 10
     },
     {
       "muscle": "triceps",
-      "intensityPerRep": 5,
+      "intensity": 5
     }
   ],
-  "secondsPerRep": 5,
-  "tags": ["big_three"],
+  "seconds": 5,
+  "tags": ["big_three"]
 }, {
   "name": "incline_bench_press",
+  "weight": 1,
   "activations": [
     {
       "muscle": "upper_chest",
-      "intensityPerRep": 10,
+      "intensity": 10
     },
     {
       "muscle": "triceps",
-      "intensityPerRep": 5,
+      "intensity": 5
     }
   ],
-  "secondsPerRep": 5,
-  "tags": ["big_three"],
+  "seconds": 5,
+  "tags": ["big_three"]
 }, {
-  "name": "push_up",
+  "name": "dumbbell_fly",
+  "weight": 1,
   "activations": [
     {
       "muscle": "middle_chest",
-      "intensityPerRep": 3,
+      "intensity": 6
+    }
+  ],
+  "seconds": 5,
+  "tags": ["standard"]
+}, {
+  "name": "close_grip_bench_press",
+  "weight": 1,
+  "activations": [
+    {
+      "muscle": "triceps",
+      "intensity": 8
+    },
+    {
+      "muscle": "middle_chest",
+      "intensity": 4
+    }
+  ],
+  "seconds": 5,
+  "tags": ["standard"]
+}, {
+  "name": "push_up",
+  "weight": 1,
+  "activations": [
+    {
+      "muscle": "middle_chest",
+      "intensity": 3
     },
     {
       "muscle": "triceps",
-      "intensityPerRep": 2,
+      "intensity": 2
     }
   ],
-  "secondsPerRep": 1,
+  "seconds": 1,
   "tags": ["bodyweight"],
   "supersets": [{
      "exercise": "sit_up",
@@ -46,10 +75,11 @@
   }]
 }, {
   "name": "sit_up",
+  "weight": 1,
   "activations": [{
     "muscle": "abs",
-    "intensityPerRep": 2,
+    "intensity": 2
   }],
-  "secondsPerRep": 2,
-  "tags": ["bodyweight"],
+  "seconds": 2,
+  "tags": ["bodyweight"]
 }]

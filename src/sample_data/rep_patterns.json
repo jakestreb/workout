@@ -21,7 +21,7 @@
 }, {
 	"weight": 5,
 	"pattern": [8, 8, 8, 8, 8],
-	"minLength": 3,
+	"minLength": 3
 }, {
 	"weight": 2,
 	"pattern": [6, 6, 6, 6, 6],
