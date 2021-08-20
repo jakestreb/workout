@@ -1,0 +1,28 @@
+[{
+	"name": "basic",
+	"weight": 1,
+	"stages": [{
+		"tags": [{
+			"name": "big-three",
+			"weight": 1,
+		}],
+	}, {
+		"tags": [{
+			"name": "standard",
+			"weight": 1,
+		}],
+	}, {
+		"tags": [{
+			"name": "standard",
+			"weight": 1,
+		}],
+	}, {
+		"tags": [{
+			"name": "standard",
+			"weight": 1,
+		}, {
+			"name": "bodyweight",
+			"weight": 1,
+		}],
+	}]
+}]

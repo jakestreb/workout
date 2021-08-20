@@ -1,0 +1,41 @@
+[{
+	"weight": 1,
+	"pattern": [30, 30, 30, 30, 30],
+	"minLength": 3
+}, {
+	"weight": 1,
+	"pattern": [20, 20, 20, 20, 20],
+	"minLength": 3
+}, {
+	"weight": 1,
+	"pattern": [15, 15, 15, 15, 15],
+	"minLength": 3
+}, {
+	"weight": 4,
+	"pattern": [12, 12, 12, 12, 12],
+	"minLength": 3
+}, {
+	"weight": 5,
+	"pattern": [10, 10, 10, 10, 10],
+	"minLength": 3
+}, {
+	"weight": 5,
+	"pattern": [8, 8, 8, 8, 8],
+	"minLength": 3,
+}, {
+	"weight": 2,
+	"pattern": [6, 6, 6, 6, 6],
+	"minLength": 3
+}, {
+	"weight": 1,
+	"pattern": [30, 20, 15, 12, 10],
+	"minLength": 4
+}, {
+	"weight": 1,
+	"pattern": [20, 15, 12, 10, 8],
+	"minLength": 4
+}, {
+	"weight": 1,
+	"pattern": [15, 12, 10, 8, 6],
+	"minLength": 4
+}]
