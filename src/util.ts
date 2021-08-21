@@ -1,12 +1,6 @@
-import Workout from './Workout';
-
-interface SelectItem {
+interface WeightedItem {
 	weight: number;
-}
-
-interface SelectResult {
-	result: any;
-	remaining: any[];
+	[propName: string]: any;
 }
 
 export function* randomSelector<T>(array: T[]): Generator<T> {
@@ -14,42 +8,28 @@ export function* randomSelector<T>(array: T[]): Generator<T> {
 	while (copy.length > 0) {
 		const r = Math.floor(Math.random() * copy.length);
 		yield copy[r];
-		copy = copy.slice()
 		copy.splice(r, 1);
 	}
 	return;
 }
 
-// TODO: Make generator
-export function selectByWeight(array: SelectItem[]): SelectResult {
-	const total = array.map(x => x.weight).reduce((a, b) => a + b, 0);
-	const r = Math.random() * total;
+export function* weightedSelector(array: WeightedItem[]): Generator<WeightedItem> {
+	let copy = array.slice();
+	let total = array.map(x => x.weight).reduce((a, b) => a + b, 0);
 
-	let sum = 0;
-	for (let i = 0; i < array.length; i++) {
-		sum += array[i].weight;
-		if (r <= sum) {
-			const remaining = array.slice()
-			remaining.splice(i, 1);
-			return {
-				result: array[i],
-				remaining
-			};
+	while (copy.length > 0) {
+		const r = Math.random() * total;
+
+		let sum = 0;
+		for (let i = 0; i < array.length; i++) {
+			sum += copy[i].weight;
+			if (r <= sum) {
+				yield copy[i];
+				total -= copy[i].weight;
+				copy.splice(i, 1);
+				break;
+			}
 		}
 	}
-
-	return {
-		result: null,
-		remaining: []
-	};
-}
-
-export function printWorkout(workout: Workout): void {
-	console.log('WORKOUT');
-	workout.exercises.forEach(e => {
-		console.log('>', {
-			exercise: e.name,
-			reps: e.reps
-		});
-	});
+	return;
 }
