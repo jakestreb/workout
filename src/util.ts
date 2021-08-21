@@ -9,6 +9,18 @@ interface SelectResult {
 	remaining: any[];
 }
 
+export function* randomSelector<T>(array: T[]): Generator<T> {
+	let copy = array.slice();
+	while (copy.length > 0) {
+		const r = Math.floor(Math.random() * copy.length);
+		yield copy[r];
+		copy = copy.slice()
+		copy.splice(r, 1);
+	}
+	return;
+}
+
+// TODO: Make generator
 export function selectByWeight(array: SelectItem[]): SelectResult {
 	const total = array.map(x => x.weight).reduce((a, b) => a + b, 0);
 	const r = Math.random() * total;
@@ -37,7 +49,7 @@ export function printWorkout(workout: Workout): void {
 	workout.exercises.forEach(e => {
 		console.log('>', {
 			exercise: e.name,
-			reps: e.reps.reps
+			reps: e.reps
 		});
 	});
 }

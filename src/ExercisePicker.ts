@@ -1,4 +1,4 @@
-import ExerciseSet from './ExerciseSet';
+import Exercise from './Exercise';
 
 export interface Target {
 	name: string;
@@ -14,17 +14,17 @@ export interface MuscleTarget {
 
 export default class ExercisePicker {
 
-	private exercises: ExerciseSet[];
-	private generators: Generator<ExerciseSet>[];
+	private exercises: Exercise[] = [];
+	private generators: Generator<Exercise>[] = [];
 
 	constructor(private tags: string[], private target: Target) {
 
 	}
 
-	public pick(): ExerciseSet[]|void {
+	public pick(): Exercise[]|void {
 		if (this.exercises.length < this.tags.length) {
 			const tag = this.tags[this.exercises.length];
-			const generator = this.generators[this.exercises.length] || ExerciseSet.generator(tag, this.exercises);
+			const generator = this.generators[this.exercises.length] || Exercise.generator(tag, this.exercises);
     		let currWorkoutStage = generator.next();
     		while (!currWorkoutStage.done) {
     			this.exercises.push(currWorkoutStage.value);
