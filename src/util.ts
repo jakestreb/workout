@@ -1,3 +1,4 @@
+import Workout from './Workout';
 
 interface SelectItem {
 	weight: number;
@@ -29,4 +30,15 @@ export function selectByWeight(array: SelectItem[]): SelectResult {
 		result: null,
 		remaining: []
 	};
+}
+
+export function printWorkout(workout: Workout): void {
+	console.log('WORKOUT');
+	workout.stages.forEach(stage => {
+		console.log('>', {
+			tag: stage.tag,
+			exercise: stage.set.name,
+			reps: stage.set.reps.reps
+		});
+	});
 }
