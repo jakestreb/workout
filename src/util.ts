@@ -34,11 +34,10 @@ export function selectByWeight(array: SelectItem[]): SelectResult {
 
 export function printWorkout(workout: Workout): void {
 	console.log('WORKOUT');
-	workout.stages.forEach(stage => {
+	workout.exercises.forEach(e => {
 		console.log('>', {
-			tag: stage.tag,
-			exercise: stage.set.name,
-			reps: stage.set.reps.reps
+			exercise: e.name,
+			reps: e.reps.reps
 		});
 	});
 }
