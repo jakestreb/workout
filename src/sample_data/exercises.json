@@ -4,14 +4,14 @@
   "activations": [
     {
       "muscle": "middle_chest",
-      "intensity": 10
+      "intensityPerRep": 10
     },
     {
       "muscle": "triceps",
-      "intensity": 5
+      "intensityPerRep": 5
     }
   ],
-  "seconds": 5,
+  "secondsPerRep": 5,
   "sets": [3, 4, 5],
   "reps": [6, 8, 10],
   "tags": ["big_three"]
@@ -21,14 +21,14 @@
   "activations": [
     {
       "muscle": "upper_chest",
-      "intensity": 10
+      "intensityPerRep": 10
     },
     {
       "muscle": "triceps",
-      "intensity": 5
+      "intensityPerRep": 5
     }
   ],
-  "seconds": 5,
+  "secondsPerRep": 5,
   "sets": [3, 4, 5],
   "reps": [6, 8, 10],
   "tags": ["big_three"]
@@ -38,10 +38,10 @@
   "activations": [
     {
       "muscle": "middle_chest",
-      "intensity": 6
+      "intensityPerRep": 6
     }
   ],
-  "seconds": 5,
+  "secondsPerRep": 5,
   "sets": [3, 4, 5],
   "reps": [6, 8, 10],
   "tags": ["standard"]
@@ -51,14 +51,14 @@
   "activations": [
     {
       "muscle": "triceps",
-      "intensity": 8
+      "intensityPerRep": 8
     },
     {
       "muscle": "middle_chest",
-      "intensity": 4
+      "intensityPerRep": 4
     }
   ],
-  "seconds": 5,
+  "secondsPerRep": 5,
   "sets": [3, 4, 5],
   "reps": [6, 8, 10],
   "tags": ["standard"]
@@ -68,14 +68,14 @@
   "activations": [
     {
       "muscle": "middle_chest",
-      "intensity": 3
+      "intensityPerRep": 3
     },
     {
       "muscle": "triceps",
-      "intensity": 2
+      "intensityPerRep": 2
     }
   ],
-  "seconds": 1,
+  "secondsPerRep": 1,
   "sets": [3, 4, 5],
   "reps": [10, 15, 20],
   "tags": ["bodyweight"],
@@ -88,9 +88,9 @@
   "weight": 1,
   "activations": [{
     "muscle": "abs",
-    "intensity": 2
+    "intensityPerRep": 2
   }],
-  "seconds": 2,
+  "secondsPerRep": 2,
   "sets": [3, 4, 5],
   "reps": [10, 15, 20],
   "tags": ["bodyweight"]

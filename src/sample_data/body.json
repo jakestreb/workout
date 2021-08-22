@@ -1,10 +1,8 @@
-[{
+{
 	"name": "body",
-	"weight": 1,
-	"children": [{
+	"components": [{
 		"name": "chest",
-		"weight": 2,
-		"children": [{
+		"components": [{
 			"name": "upper_chest",
 			"weight": 1
 		}, {
@@ -16,18 +14,24 @@
 		}]
 	}, {
 		"name": "back",
-		"weight": 2,
+		"weight": 2
 	}, {
 		"name": "shoulders",
-		"weight": 1,
+		"weight": 1
 	}, {
 		"name": "abs",
-		"weight": 1,
+		"weight": 1
 	}, {
 		"name": "arms",
-		"weight": 1,
+		"components": [{
+			"name": "triceps",
+			"weight": 1
+		}, {
+			"name": "biceps",
+			"weight": 1
+		}]
 	}, {
 		"name": "legs",
 		"weight": 2
 	}]
-}]
+}

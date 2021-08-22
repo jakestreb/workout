@@ -1,11 +1,12 @@
 import Exercise from './Exercise';
 import ExercisePicker from './ExercisePicker';
-import * as rountines from './sample_data/routines.json';
+import * as routines from './sample_data/routines.json';
 import * as util from './util';
 
 export default class Workout {
 	public static* generator(name: string, intensity: number, timeMinutes: number) {
-		for (const routine of util.weightedSelector(rountines)) {
+		console.warn('ROUTINES', routines);
+		for (const routine of util.weightedSelector(routines)) {
 			const exercisePicker = new ExercisePicker(routine.tags, { name, intensity, timeMinutes });
 			const exercises = exercisePicker.pick();
 			if (exercises) {
@@ -15,7 +16,9 @@ export default class Workout {
 		return;
 	}
 
-	constructor(public exercises: Exercise[]) {
+	public exercises: Exercise[];
 
+	constructor(exercises: Exercise[]) {
+		this.exercises = exercises;
 	}
 }

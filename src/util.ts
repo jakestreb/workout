@@ -1,3 +1,4 @@
+
 interface WeightedItem {
 	weight: number;
 	[propName: string]: any;
@@ -15,7 +16,7 @@ export function* randomSelector<T>(array: T[]): Generator<T> {
 
 export function* weightedSelector(array: WeightedItem[]): Generator<WeightedItem> {
 	let copy = array.slice();
-	let total = array.map(x => x.weight).reduce((a, b) => a + b, 0);
+	let total = sum(array.map(x => x.weight));
 
 	while (copy.length > 0) {
 		const r = Math.random() * total;
@@ -32,4 +33,8 @@ export function* weightedSelector(array: WeightedItem[]): Generator<WeightedItem
 		}
 	}
 	return;
+}
+
+export function sum(array: number[]): number {
+	return array.reduce((a, b) => a + b, 0);
 }
