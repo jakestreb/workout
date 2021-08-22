@@ -9,14 +9,14 @@ interface Target {
 	timeMinutes: number;
 }
 
-const TRANSITION_TIME_S = 40;
+const TRANSITION_TIME_S = 120;
 const MAX_LEFTOVER_TIME_S = 5 * 60;
 
 export default class ExercisePicker {
 
 	private readonly _tags: string[];
-	private _exercises: Exercise[] = [];
-	private _generators: Generator<Exercise>[];
+	private readonly _exercises: Exercise[] = [];
+	private readonly _generators: Generator<Exercise>[];
 
 	private readonly _activityTarget: MuscleActivityTarget;
 	private readonly _totalTime: number;
@@ -26,29 +26,28 @@ export default class ExercisePicker {
 		this._activityTarget = MuscleActivityTarget.fromTarget(target.name, target.intensity);
 		this._totalTime = target.timeMinutes * 60;
 
- 		this._generators = [Exercise.generator(this._tags[0], [])];
+		this._generators = [Exercise.generator(this._tags[0], [])];
 	}
 
 	public pick(): Exercise[]|void {
-		if (this._index === this._capacity) {
-			return this._exercises;
+		while (this._index < this._capacity) {
+			const generator = this._generators[this._index];
+
+			// Try exercises from current generator until one works
+			for (const exercise of generator) {
+				if (this._addExercise(exercise)) {
+					return this.pick();
+				}
+			}
+
+			if (this._index === 0) {
+				return;
+			}
+
+			// If no exercises from current generator work, backtrack
+			this._removeExercise();
 		}
-		const generator = this._generators[this._index];
-
-		// Try exercises from current generator until one works
-		for (const exercise of generator) {
-    		if (this._addExercise(exercise)) {
-    			return this.pick();
-    		}
-    	}
-
-    	// If no exercises from current generator work, backtrack
-    	if (this._index > 0) {
-    		this._removeExercise();
-    		return this.pick();
-    	}
-
-    	return;
+		return this._exercises;
 	}
 
 	private get _capacity() {
@@ -63,6 +62,7 @@ export default class ExercisePicker {
 		return (this._capacity - 1) * TRANSITION_TIME_S;
 	}
 
+	// Returns true if add is successful, false if not
 	private _addExercise(exercise: Exercise): boolean {
 		this._exercises.push(exercise);
 		if (!this._checkTargets()) {
@@ -82,7 +82,13 @@ export default class ExercisePicker {
 	}
 
 	private _checkTargets(): boolean {
-		return this._checkFocus() && this._checkTime();
+		// console.log('>', this._exercises.map(e => `${e.name} ${e.reps.toString()}`));
+		// console.log('>', MuscleActivity.combine(...this._exercises.map(e => e.muscleActivity)));
+		// console.log('>', util.sum(this._exercises.map(e => e.totalSeconds)) + this._transitionTime);
+		// console.log('T', this._activityTarget);
+		// console.log('T', this._totalTime);
+		// console.log('\n');
+		return this._checkTime() && this._checkFocus();
 	}
 
 	private _checkFocus(): boolean {
@@ -97,7 +103,12 @@ export default class ExercisePicker {
 		const allActivity = MuscleActivity.combine(...this._exercises.map(e => e.muscleActivity))
 
 		// Ensure the final focus is within tolerances
-		return this._activityTarget.isSatisfiedBy(allActivity) && isLatestAllowed;
+		const isSuccessful = this._activityTarget.isSatisfiedBy(allActivity) && isLatestAllowed;
+		if (isSuccessful) {
+			// console.log('F >', this._exercises.map(e => `${e.name} ${e.reps.toString()}`));
+			// console.log(`F > ${allActivity} / ${this._activityTarget}`;
+		}
+		return isSuccessful;
 	}
 
 	private _checkTime(): boolean {
@@ -110,6 +121,11 @@ export default class ExercisePicker {
 		}
 
 		// Ensure the final time is within 5 minutes of the requested, and not over
-		return isUnderTime && (elapsedTime >= this._totalTime - MAX_LEFTOVER_TIME_S);
+		const isSuccessful = isUnderTime && (elapsedTime >= this._totalTime - MAX_LEFTOVER_TIME_S);
+		if (isSuccessful) {
+			// console.log('T >', this._exercises.map(e => `${e.name} ${e.reps.toString()}`));
+			// console.log(`T > ${elapsedTime} / ${this._totalTime}`);
+		}
+		return isSuccessful;
 	}
 }

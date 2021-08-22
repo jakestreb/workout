@@ -4,13 +4,8 @@ function printWorkout(workout: Workout) {
 	console.log('->', workout.exercises);
 }
 
-let i = 0;
-
-for (const workout of Workout.generator('chest_day', 50, 60)) {
+for (const workout of Workout.generator('chest_day', 5, 30)) {
 	printWorkout(workout);
-	if (i > 2) {
-		break;
-	}
-	i++;
+	break;
 }
 console.log('done');

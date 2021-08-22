@@ -13,7 +13,7 @@ interface Muscle {
 const HARD_WORKOUT_REPS = 250
 
 // Allowed intensity difference when determining if muscle activity is similar
-const INTENSITY_TOLERANCE = 1;
+const INTENSITY_TOLERANCE = 2;
 
 export default class MuscleActivityTarget extends MuscleActivity {
 
@@ -35,7 +35,7 @@ export default class MuscleActivityTarget extends MuscleActivity {
 		const muscleActivity = new MuscleActivityTarget(intensity);
 		const totalWeight = util.sum(components.map(c => c.weight!));
 		components.forEach(c => {
-			muscleActivity.push(c.name, (c.weight! / totalWeight) * (intensity / 10) * HARD_WORKOUT_REPS);
+			muscleActivity.push(c.name, (c.weight! / totalWeight) * intensity * HARD_WORKOUT_REPS);
 		});
 
 		return muscleActivity;

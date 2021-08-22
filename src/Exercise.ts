@@ -17,7 +17,7 @@ interface Activation {
 	intensityPerRep: number;
 }
 
-const REST_TIME_S = 50;
+const REST_TIME_S = 60;
 
 export default class Exercise {
 	public static* generator(tag: string, previouslySelected: Exercise[]) {
