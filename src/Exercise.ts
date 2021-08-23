@@ -1,4 +1,4 @@
-import * as exerciseRecords from './sample_data/exercises.json';
+import * as exerciseRecords from './data/exercises.json';
 import MuscleActivity from './MuscleActivity';
 import * as util from './util';
 
@@ -50,7 +50,7 @@ export default class Exercise {
 		this.totalSeconds = restSeconds + activeSeconds;
 
 		exerciseRecord.activations.forEach(a => {
-			this.muscleActivity.push(a.muscle, a.intensityPerRep * this.totalReps);
+			this.muscleActivity.set(a.muscle, a.intensityPerRep * this.totalReps);
 		});
 	}
 }

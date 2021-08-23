@@ -1,6 +1,6 @@
 import Exercise from './Exercise';
 import ExercisePicker from './ExercisePicker';
-import * as routines from './sample_data/routines.json';
+import * as routines from './data/routines.json';
 import * as util from './util';
 
 export default class Workout {
@@ -15,7 +15,7 @@ export default class Workout {
 		return;
 	}
 
-	public exercises: Exercise[];
+	public readonly exercises: Exercise[];
 
 	constructor(exercises: Exercise[]) {
 		this.exercises = exercises;

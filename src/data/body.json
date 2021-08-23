@@ -1,0 +1,62 @@
+{
+	"name": "body",
+	"children": [{
+		"name": "chest",
+		"children": [{
+			"name": "upper_chest"
+		}, {
+			"name": "middle_chest"
+		}, {
+			"name": "lower_chest"
+		}]
+	}, {
+		"name": "back",
+		"children": [{
+			"name": "erectors"
+		}, {
+			"name": "lats"
+		}, {
+			"name": "traps"
+		}, {
+			"name": "rhomboids"
+		}]
+	}, {
+		"name": "shoulders",
+		"children": [{
+			"name": "front_delt"
+		}, {
+			"name": "middle_delt"
+		}, {
+			"name": "rear_delt"
+		}]
+	}, {
+		"name": "core",
+		"children": [{
+			"name": "abs"
+		}, {
+			"name": "obliques"
+		}]
+	}, {
+		"name": "arms",
+		"children": [{
+			"name": "triceps"
+		}, {
+			"name": "biceps"
+		}, {
+			"name": "forearms"
+		}]
+	}, {
+		"name": "legs",
+		"children": [{
+			"name": "glutes"
+		}, {
+			"name": "quads"
+		}, {
+			"name": "inner_thigh"
+		}, {
+			"name": "hamstrings"
+		}, {
+			"name": "calves"
+		}]
+	}]
+}

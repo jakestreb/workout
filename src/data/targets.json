@@ -1,10 +1,10 @@
 [{
 	"name": "chest_day",
 	"muscles": [{
-		"muscle": "chest",
+		"name": "chest",
 		"weight": 1
 	}, {
-		"muscle": "abs",
+		"name": "core",
 		"weight": 0
 	}]
 }]

@@ -5,37 +5,29 @@ export default class MuscleActivity {
 		return args.reduce((a, b) => a.add(b), new MuscleActivity());
 	}
 
-	public map: {[muscle: string]: number} = {};
+	private readonly _activity: {[muscle: string]: number} = {};
 
 	constructor() {
 
 	}
 
-	public push(muscleName: string, activity: number) {
-		this.map[muscleName] = activity;
+	// Note that muscle groups should not be pushed to MuscleActivity
+	public set(muscleName: string, activity: number) {
+		this._activity[muscleName] = activity;
 	}
 
 	public get(muscleName: string) {
-		return this.map[muscleName];
+		return this._activity[muscleName];
 	}
 
 	public keys() {
-		return Object.keys(this.map);
+		return Object.keys(this._activity);
 	}
 
-	public add(activity: MuscleActivity): MuscleActivity {
-		activity.keys().forEach(k => {
-			this.map[k] = (this.map[k] || 0) + activity.get(k);
+	public add(muscleActivity: MuscleActivity): MuscleActivity {
+		muscleActivity.keys().forEach(k => {
+			this._activity[k] = (this._activity[k] || 0) + muscleActivity.get(k);
 		});
 		return this;
-	}
-
-	public overlaps(activity: MuscleActivity): boolean {
-		for (const m of Object.keys(this.map)) {
-			if (activity.get(m)) {
-				return true;
-			}
-		}
-		return false;
 	}
 }
