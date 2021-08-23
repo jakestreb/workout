@@ -1,17 +1,40 @@
-[{
-	"name": "standard_short",
-	"weight": 1,
-	"tags": ["big_three", "standard", "standard"]
-}, {
-	"name": "standard_short_bodyweight_finish",
-	"weight": 1,
-	"tags": ["big_three", "standard", "bodyweight"]
-}, {
-	"name": "standard_medium",
-	"weight": 1,
-	"tags": ["big_three", "standard", "standard", "standard"]
-}, {
-	"name": "standard_medium_bodyweight_finish",
-	"weight": 1,
-	"tags": ["big_three", "standard", "standard", "bodyweight"]
-}]
+[
+  {
+    "name" : "standard_short",
+    "weight" : 1,
+    "tags" : [
+      "big_three",
+      "standard",
+      "standard"
+    ]
+  },
+  {
+    "name" : "standard_short_bodyweight_finish",
+    "weight" : 1,
+    "tags" : [
+      "big_three",
+      "standard",
+      "bodyweight"
+    ]
+  },
+  {
+    "name" : "standard_medium",
+    "weight" : 1,
+    "tags" : [
+      "big_three",
+      "standard",
+      "standard",
+      "standard"
+    ]
+  },
+  {
+    "name" : "standard_medium_bodyweight_finish",
+    "weight" : 1,
+    "tags" : [
+      "big_three",
+      "standard",
+      "standard",
+      "bodyweight"
+    ]
+  }
+]
