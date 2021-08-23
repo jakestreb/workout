@@ -19,16 +19,16 @@ interface Muscle {
 	activity: number;
 }
 
-// Number of total reps with average intensity exercises to be categorized at intensity 10
-const HARD_WORKOUT_REPS = 250
-
 // Allowed intensity difference when determining if muscle activity is similar
 const INTENSITY_TOLERANCE = 1;
+
+const AVG_WORKOUT_REPS = 250;
+const AVG_WORKOUT_TIME_S = 60 * 45;
 
 export default class MuscleActivityTarget {
 
 	// Creates all component targets
-	static fromTarget(targetName: string, intensity: number) {
+	static fromTarget(targetName: string, intensity: number, timeSeconds: number) {
 		const targetRecord = targetRecords.find(t => t.name === targetName);
 		if (!targetRecord) { throw new Error('Target not found'); }
 
@@ -38,7 +38,7 @@ export default class MuscleActivityTarget {
 
 		targetRecord.muscles.forEach(m => {
 			const name = m.name;
-			const activity = (m.weight / totalWeight) * intensity * HARD_WORKOUT_REPS;
+			const activity = (m.weight / totalWeight) * intensity * AVG_WORKOUT_REPS * (timeSeconds / AVG_WORKOUT_TIME_S);
 			const muscles: string[] = getChildren(name);
 			if (muscles.length > 0) {
 				activityTarget.addGroup({ name, activity, muscles });
@@ -77,7 +77,7 @@ export default class MuscleActivityTarget {
 	public addGroup(group: MuscleGroup) {
 		if (group.activity === 0) {
 			group.muscles.forEach(name => {
-				this._avoid.add(group.name);
+				this._avoid.add(name);
 			});
 		} else {
 			group.muscles.forEach(name => {

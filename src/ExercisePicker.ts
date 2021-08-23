@@ -18,26 +18,30 @@ export default class ExercisePicker {
 	private readonly _exercises: Exercise[] = [];
 	private readonly _generators: Generator<Exercise>[];
 
-	private readonly _activityTarget: MuscleActivityTarget;
 	private readonly _totalTime: number;
+	private readonly _activityTarget: MuscleActivityTarget;
 
 	constructor(tags: string[], target: Target) {
 		this._tags = tags;
-		this._activityTarget = MuscleActivityTarget.fromTarget(target.name, target.intensity);
 		this._totalTime = target.timeMinutes * 60;
+		this._activityTarget = MuscleActivityTarget.fromTarget(target.name, target.intensity, this._totalTime);
 
 		this._generators = [Exercise.generator(this._tags[0], [])];
 	}
 
 	public pick(): Exercise[]|void {
 		while (this._index < this._capacity) {
-			const generator = this._generators[this._index];
+			const gen = this._generators[this._index];
+			let added = false;
 
 			// Try exercises from current generator until one works
-			for (const exercise of generator) {
-				if (this._addExercise(exercise)) {
-					return this.pick();
+			let curr = gen.next();
+			while (!curr.done) {
+				added = this._addExercise(curr.value);
+				if (added) {
+					break;
 				}
+				curr = gen.next();
 			}
 
 			if (this._index === 0) {
@@ -45,7 +49,9 @@ export default class ExercisePicker {
 			}
 
 			// If no exercises from current generator work, backtrack
-			this._removeExercise();
+			if (!added) {
+				this._removeExercise();
+			}
 		}
 		return this._exercises;
 	}

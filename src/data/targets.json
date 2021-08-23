@@ -4,7 +4,11 @@
     "muscles" : [
       {
         "name" : "chest",
-        "weight" : 1
+        "weight" : 2
+      },
+      {
+        "name": "triceps",
+        "weight": 1
       },
       {
         "name" : "core",
