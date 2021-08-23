@@ -94,11 +94,7 @@
   "secondsPerRep": 1,
   "sets": [3, 4, 5],
   "reps": [10, 15, 20],
-  "tags": ["bodyweight"],
-  "supersets": [{
-     "exercise": "sit_up",
-     "weight": 1
-  }]
+  "tags": ["bodyweight"]
 }, {
   "name": "sit_up",
   "weight": 1,

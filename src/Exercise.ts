@@ -53,6 +53,10 @@ export default class Exercise {
 			this.muscleActivity.set(a.muscle, a.intensityPerRep * this.totalReps);
 		});
 	}
+
+	public toString(): string {
+		return `${this.name} ${this.reps[0]}x${this.reps.length}`;
+	}
 }
 
 function getRepPatterns(exerciseRecord: any): number[][] {

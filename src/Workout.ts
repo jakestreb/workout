@@ -20,4 +20,8 @@ export default class Workout {
 	constructor(exercises: Exercise[]) {
 		this.exercises = exercises;
 	}
+
+	public toString(): string {
+		return `${this.exercises.join('\n')}\n`;
+	}
 }

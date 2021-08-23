@@ -23,7 +23,7 @@ interface Muscle {
 const HARD_WORKOUT_REPS = 250
 
 // Allowed intensity difference when determining if muscle activity is similar
-const INTENSITY_TOLERANCE = 2;
+const INTENSITY_TOLERANCE = 1;
 
 export default class MuscleActivityTarget {
 
