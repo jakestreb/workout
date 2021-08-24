@@ -59,7 +59,7 @@ export default class Exercise {
 	}
 }
 
-function getRepPatterns(exerciseRecord: any): number[][] {
+function getRepPatterns(exerciseRecord: ExerciseRecord): number[][] {
 	const result: number[][] = [];
 	exerciseRecord.reps.forEach((r: number) => {
 		exerciseRecord.sets.forEach((s: number) => {

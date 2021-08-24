@@ -9,6 +9,15 @@
     ]
   },
   {
+    "name" : "intense_short",
+    "weight" : 1,
+    "tags" : [
+      "big_three",
+      "big_three",
+      "standard"
+    ]
+  },
+  {
     "name" : "standard_short_bodyweight_finish",
     "weight" : 1,
     "tags" : [
@@ -23,6 +32,16 @@
     "tags" : [
       "big_three",
       "standard",
+      "standard",
+      "standard"
+    ]
+  },
+  {
+    "name" : "intense_medium",
+    "weight" : 1,
+    "tags" : [
+      "big_three",
+      "big_three",
       "standard",
       "standard"
     ]

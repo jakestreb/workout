@@ -38,7 +38,9 @@ export default class MuscleActivityTarget {
 
 		targetRecord.muscles.forEach(m => {
 			const name = m.name;
-			const activity = (m.weight / totalWeight) * intensity * AVG_WORKOUT_REPS * (timeSeconds / AVG_WORKOUT_TIME_S);
+			const relativeWeight = m.weight / totalWeight;
+			const relativeTime = timeSeconds / AVG_WORKOUT_TIME_S;
+			const activity = relativeWeight * relativeTime * intensity * AVG_WORKOUT_REPS;
 			const muscles: string[] = getChildren(name);
 			if (muscles.length > 0) {
 				activityTarget.addGroup({ name, activity, muscles });

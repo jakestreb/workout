@@ -1,313 +1,399 @@
-[
-  {
-    "name" : "bench_press",
-    "weight" : 1,
-    "activations" : [
-      {
-        "muscle" : "upper_chest",
-        "intensityPerRep" : 3
+[{
+    "name": "bench_press",
+    "weight": 1,
+    "activations": [{
+        "muscle": "upper_chest",
+        "intensityPerRep": 2.5
       },
       {
-        "muscle" : "middle_chest",
-        "intensityPerRep" : 10
+        "muscle": "middle_chest",
+        "intensityPerRep": 3
       },
       {
-        "muscle" : "lower_chest",
-        "intensityPerRep" : 3
+        "muscle": "lower_chest",
+        "intensityPerRep": 2.5
       },
       {
-        "muscle" : "triceps",
-        "intensityPerRep" : 4
+        "muscle": "triceps",
+        "intensityPerRep": 1.5
+      },
+      {
+        "muscle": "front_delt",
+        "intensityPerRep": 2.5
       }
     ],
-    "secondsPerRep" : 5,
-    "sets" : [
+    "secondsPerRep": 5,
+    "sets": [
       3,
       4,
       5
     ],
-    "reps" : [
+    "reps": [
       6,
       8,
       10
     ],
-    "tags" : [
+    "tags": [
       "big_three"
     ]
   },
   {
-    "name" : "incline_bench_press",
-    "weight" : 1,
-    "activations" : [
-      {
-        "muscle" : "upper_chest",
-        "intensityPerRep" : 10
+    "name": "incline_bench_press",
+    "weight": 1,
+    "activations": [{
+        "muscle": "upper_chest",
+        "intensityPerRep": 3
       },
       {
-        "muscle" : "middle_chest",
-        "intensityPerRep" : 3
+        "muscle": "middle_chest",
+        "intensityPerRep": 1.5
       },
       {
-        "muscle" : "lower_chest",
-        "intensityPerRep" : 2
+        "muscle": "lower_chest",
+        "intensityPerRep": 1.5
       },
       {
-        "muscle" : "triceps",
-        "intensityPerRep" : 4
+        "muscle": "triceps",
+        "intensityPerRep": 1.5
+      },
+      {
+        "muscle": "front_delt",
+        "intensityPerRep": 3
       }
     ],
-    "secondsPerRep" : 5,
-    "sets" : [
+    "secondsPerRep": 5,
+    "sets": [
       3,
       4,
       5
     ],
-    "reps" : [
+    "reps": [
       6,
       8,
       10
     ],
-    "tags" : [
+    "tags": [
       "big_three"
     ]
   },
   {
-    "name" : "decline_bench_press",
-    "weight" : 1,
-    "activations" : [
-      {
-        "muscle" : "upper_chest",
-        "intensityPerRep" : 2
+    "name": "decline_bench_press",
+    "weight": 1,
+    "activations": [{
+        "muscle": "upper_chest",
+        "intensityPerRep": 1.5
       },
       {
-        "muscle" : "middle_chest",
-        "intensityPerRep" : 3
+        "muscle": "middle_chest",
+        "intensityPerRep": 1.5
       },
       {
-        "muscle" : "lower_chest",
-        "intensityPerRep" : 10
+        "muscle": "lower_chest",
+        "intensityPerRep": 3
       },
       {
-        "muscle" : "triceps",
-        "intensityPerRep" : 4
+        "muscle": "triceps",
+        "intensityPerRep": 1.5
+      },
+      {
+        "muscle": "front_delt",
+        "intensityPerRep": 1.5
       }
     ],
-    "secondsPerRep" : 5,
-    "sets" : [
+    "secondsPerRep": 5,
+    "sets": [
       3,
       4,
       5
     ],
-    "reps" : [
+    "reps": [
       6,
       8,
       10
     ],
-    "tags" : [
+    "tags": [
       "big_three"
     ]
   },
   {
-    "name" : "dumbbell_fly",
-    "weight" : 1,
-    "activations" : [
+    "name": "dumbbell_fly",
+    "weight": 1,
+    "activations": [{
+        "muscle": "upper_chest",
+        "intensityPerRep": 2
+      },
       {
-        "muscle" : "middle_chest",
-        "intensityPerRep" : 6
+        "muscle": "middle_chest",
+        "intensityPerRep": 2.5
+      },
+      {
+        "muscle": "lower_chest",
+        "intensityPerRep": 1.5
+      },
+      {
+        "muscle": "biceps",
+        "intensityPerRep": 2.5
+      },
+      {
+        "muscle": "front_delt",
+        "intensityPerRep": 1.5
       }
     ],
-    "secondsPerRep" : 5,
-    "sets" : [
+    "secondsPerRep": 5,
+    "sets": [
       3,
       4,
       5
     ],
-    "reps" : [
+    "reps": [
       6,
       8,
       10
     ],
-    "tags" : [
+    "tags": [
       "standard"
     ]
   },
   {
-    "name" : "close_grip_bench_press",
-    "weight" : 1,
-    "activations" : [
-      {
-        "muscle" : "triceps",
-        "intensityPerRep" : 8
+    "name": "close_grip_bench_press",
+    "weight": 1,
+    "activations": [{
+        "muscle": "upper_chest",
+        "intensityPerRep": 3
       },
       {
-        "muscle" : "middle_chest",
-        "intensityPerRep" : 4
+        "muscle": "middle_chest",
+        "intensityPerRep": 3.5
+      },
+      {
+        "muscle": "lower_chest",
+        "intensityPerRep": 3
+      },
+      {
+        "muscle": "triceps",
+        "intensityPerRep": 3
       }
     ],
-    "secondsPerRep" : 5,
-    "sets" : [
+    "secondsPerRep": 5,
+    "sets": [
       3,
       4,
       5
     ],
-    "reps" : [
+    "reps": [
       6,
       8,
       10
     ],
-    "tags" : [
+    "tags": [
       "standard"
     ]
   },
   {
-    "name" : "push_up",
-    "weight" : 1,
-    "activations" : [
-      {
-        "muscle" : "middle_chest",
-        "intensityPerRep" : 3
+    "name": "push_up",
+    "weight": 1,
+    "activations": [{
+        "muscle": "upper_chest",
+        "intensityPerRep": 0.5
       },
       {
-        "muscle" : "triceps",
-        "intensityPerRep" : 2
+        "muscle": "middle_chest",
+        "intensityPerRep": 0.5
+      },
+      {
+        "muscle": "lower_chest",
+        "intensityPerRep": 0.5
+      },
+      {
+        "muscle": "triceps",
+        "intensityPerRep": 1
+      },
+      {
+        "muscle": "front_delt",
+        "intensityPerRep": 2.5
       }
     ],
-    "secondsPerRep" : 1,
-    "sets" : [
+    "secondsPerRep": 2,
+    "sets": [
       3,
-      4,
-      5
+      4
     ],
-    "reps" : [
+    "reps": [
       10,
       15,
       20
     ],
-    "tags" : [
+    "tags": [
       "bodyweight"
     ]
   },
   {
-    "name" : "tricep_extension",
-    "weight" : 1,
-    "activations" : [
-      {
-        "muscle" : "triceps",
-        "intensityPerRep" : 8
-      }
-    ],
-    "secondsPerRep" : 4,
-    "sets" : [
-      3,
-      4,
-      5
-    ],
-    "reps" : [
-      6,
-      8,
-      10
-    ],
-    "tags" : [
-      "standard"
-    ]
-  },
-  {
-    "name" : "skullcrusher",
-    "weight" : 1,
-    "activations" : [
-      {
-        "muscle" : "triceps",
-        "intensityPerRep" : 8
-      }
-    ],
-    "secondsPerRep" : 5,
-    "sets" : [
-      3,
-      4,
-      5
-    ],
-    "reps" : [
-      6,
-      8,
-      10
-    ],
-    "tags" : [
-      "standard"
-    ]
-  },
-  {
-    "name" : "diamond_push_up",
-    "weight" : 1,
-    "activations" : [
-      {
-        "muscle" : "triceps",
-        "intensityPerRep" : 8
-      }
-    ],
-    "secondsPerRep" : 5,
-    "sets" : [
-      3,
-      4,
-      5
-    ],
-    "reps" : [
-      6,
-      8,
-      10
-    ],
-    "tags" : [
-      "bodyweight"
-    ]
-  },
-  {
-    "name" : "dip",
-    "weight" : 1,
-    "activations" : [
-      {
-        "muscle" : "triceps",
-        "intensityPerRep" : 6
+    "name": "chest_dip",
+    "weight": 1,
+    "activations": [{
+        "muscle": "upper_chest",
+        "intensityPerRep": 1.5
       },
       {
-        "muscle" : "middle_chest",
-        "intensityPerRep" : 2
+        "muscle": "middle_chest",
+        "intensityPerRep": 2
+      },
+      {
+        "muscle": "lower_chest",
+        "intensityPerRep": 2.5
+      },
+      {
+        "muscle": "triceps",
+        "intensityPerRep": 2.5
+      },
+      {
+        "muscle": "front_delt",
+        "intensityPerRep": 1.5
+      },
+      {
+        "muscle": "lats",
+        "intensityPerRep": 0.5
       }
     ],
-    "secondsPerRep" : 5,
-    "sets" : [
+    "secondsPerRep": 3,
+    "sets": [
       3,
-      4,
-      5
+      4
     ],
-    "reps" : [
-      6,
+    "reps": [
       8,
-      10
+      10,
+      12
     ],
-    "tags" : [
+    "tags": [
       "bodyweight"
     ]
   },
   {
-    "name" : "sit_up",
-    "weight" : 1,
-    "activations" : [
-      {
-        "muscle" : "abs",
-        "intensityPerRep" : 2
-      }
-    ],
-    "secondsPerRep" : 2,
-    "sets" : [
+    "name": "tricep_extension",
+    "weight": 1,
+    "activations": [{
+      "muscle": "triceps",
+      "intensityPerRep": 6
+    }],
+    "secondsPerRep": 4,
+    "sets": [
       3,
       4,
       5
     ],
-    "reps" : [
+    "reps": [
+      6,
+      8,
+      10
+    ],
+    "tags": [
+      "standard"
+    ]
+  },
+  {
+    "name": "skullcrusher",
+    "weight": 1,
+    "activations": [{
+      "muscle": "triceps",
+      "intensityPerRep": 4
+    }],
+    "secondsPerRep": 5,
+    "sets": [
+      3,
+      4,
+      5
+    ],
+    "reps": [
+      6,
+      8,
+      10
+    ],
+    "tags": [
+      "standard"
+    ]
+  },
+  {
+    "name": "tricep_kickback",
+    "weight": 1,
+    "activations": [{
+      "muscle": "triceps",
+      "intensityPerRep": 7.5
+    }],
+    "secondsPerRep": 5,
+    "sets": [
+      3,
+      4,
+      5
+    ],
+    "reps": [
+      6,
+      8,
+      10
+    ],
+    "tags": [
+      "standard"
+    ]
+  },
+  {
+    "name": "diamond_push_up",
+    "weight": 1,
+    "activations": [{
+      "muscle": "triceps",
+      "intensityPerRep": 9
+    }],
+    "secondsPerRep": 5,
+    "sets": [
+      3,
+      4
+    ],
+    "reps": [
+      6,
+      8,
+      10
+    ],
+    "tags": [
+      "bodyweight"
+    ]
+  },
+  {
+    "name": "tricep_dip",
+    "weight": 1,
+    "activations": [{
+      "muscle": "triceps",
+      "intensityPerRep": 7.5
+    }],
+    "secondsPerRep": 3,
+    "sets": [
+      3,
+      4
+    ],
+    "reps": [
+      6,
+      8,
+      10
+    ],
+    "tags": [
+      "bodyweight"
+    ]
+  },
+  {
+    "name": "sit_up",
+    "weight": 1,
+    "activations": [{
+      "muscle": "abs",
+      "intensityPerRep": 2
+    }],
+    "secondsPerRep": 2,
+    "sets": [
+      3
+    ],
+    "reps": [
       10,
       15,
       20
     ],
-    "tags" : [
+    "tags": [
       "bodyweight"
     ]
   }

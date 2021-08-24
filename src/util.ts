@@ -1,7 +1,6 @@
 
 interface WeightedItem {
 	weight: number;
-	[propName: string]: any;
 }
 
 export function* randomSelector<T>(array: T[]): Generator<T> {
@@ -14,7 +13,7 @@ export function* randomSelector<T>(array: T[]): Generator<T> {
 	return;
 }
 
-export function* weightedSelector(array: WeightedItem[]): Generator<WeightedItem> {
+export function* weightedSelector<T extends WeightedItem>(array: T[]): Generator<T> {
 	let copy = array.slice();
 	let total = sum(array.map(x => x.weight));
 
