@@ -15,5 +15,14 @@
         "weight" : 0
       }
     ]
+  },
+  {
+    "name" : "core",
+    "muscles" : [
+      {
+        "name" : "core",
+        "weight" : 1
+      }
+    ]
   }
 ]

@@ -383,6 +383,9 @@
     "activations": [{
       "muscle": "abs",
       "intensityPerRep": 2
+    }, {
+      "muscle": "obliques",
+      "intensityPerRep": 1.5
     }],
     "secondsPerRep": 2,
     "sets": [
@@ -395,6 +398,274 @@
     ],
     "tags": [
       "bodyweight"
+    ]
+  },
+  {
+    "name": "cross_body_crunch",
+    "weight": 1,
+    "activations": [{
+      "muscle": "abs",
+      "intensityPerRep": 1
+    }, {
+      "muscle": "obliques",
+      "intensityPerRep": 2
+    }],
+    "secondsPerRep": 2,
+    "sets": [
+      3
+    ],
+    "reps": [
+      10,
+      15
+    ],
+    "tags": [
+      "bodyweight"
+    ]
+  },
+  {
+    "name": "plank",
+    "weight": 1,
+    "activations": [{
+      "muscle": "abs",
+      "intensityPerRep": 0.3
+    }, {
+      "muscle": "obliques",
+      "intensityPerRep": 0.4
+    }],
+    "secondsPerRep": 1,
+    "sets": [
+      3
+    ],
+    "reps": [
+      30,
+      45,
+      60
+    ],
+    "tags": [
+      "bodyweight"
+    ]
+  },
+  {
+    "name": "rkc_plank",
+    "weight": 1,
+    "activations": [{
+      "muscle": "abs",
+      "intensityPerRep": 1.2
+    }, {
+      "muscle": "obliques",
+      "intensityPerRep": 1.2
+    }],
+    "secondsPerRep": 1,
+    "sets": [
+      3
+    ],
+    "reps": [
+      30,
+      45,
+      60
+    ],
+    "tags": [
+      "bodyweight"
+    ]
+  },
+  {
+    "name": "side_plank",
+    "weight": 1,
+    "activations": [{
+      "muscle": "abs",
+      "intensityPerRep": 0.4
+    }, {
+      "muscle": "obliques",
+      "intensityPerRep": 0.8
+    }],
+    "secondsPerRep": 1,
+    "sets": [
+      3
+    ],
+    "reps": [
+      30,
+      45,
+      60
+    ],
+    "tags": [
+      "bodyweight"
+    ]
+  },
+  {
+    "name": "hollow_plank",
+    "weight": 1,
+    "activations": [{
+      "muscle": "abs",
+      "intensityPerRep": 0.6
+    }, {
+      "muscle": "obliques",
+      "intensityPerRep": 0.8
+    }],
+    "secondsPerRep": 1,
+    "sets": [
+      3
+    ],
+    "reps": [
+      30,
+      45,
+      60
+    ],
+    "tags": [
+      "bodyweight"
+    ]
+  },
+  {
+    "name": "landmine_twist",
+    "weight": 1,
+    "activations": [{
+      "muscle": "obliques",
+      "intensityPerRep": 2.5
+    }],
+    "secondsPerRep": 3,
+    "sets": [
+      3
+    ],
+    "reps": [
+      20,
+      24
+    ],
+    "tags": [
+      "bodyweight"
+    ]
+  },
+  {
+    "name": "hanging_leg_raise",
+    "weight": 1,
+    "activations": [{
+      "muscle": "abs",
+      "intensityPerRep": 3
+    }, {
+      "muscle": "obliques",
+      "intensityPerRep": 1.5
+    }],
+    "secondsPerRep": 2,
+    "sets": [
+      3
+    ],
+    "reps": [
+      10,
+      15
+    ],
+    "tags": [
+      "bodyweight"
+    ]
+  },
+  {
+    "name": "dragon_flag",
+    "weight": 1,
+    "activations": [{
+      "muscle": "abs",
+      "intensityPerRep": 3
+    }, {
+      "muscle": "obliques",
+      "intensityPerRep": 1.5
+    }],
+    "secondsPerRep": 5,
+    "sets": [
+      3
+    ],
+    "reps": [
+      10,
+      15,
+      20
+    ],
+    "tags": [
+      "bodyweight"
+    ]
+  },
+  {
+    "name": "ab_roll_out",
+    "weight": 1,
+    "activations": [{
+      "muscle": "abs",
+      "intensityPerRep": 5
+    }, {
+      "muscle": "obliques",
+      "intensityPerRep": 5
+    }],
+    "secondsPerRep": 5,
+    "sets": [
+      3
+    ],
+    "reps": [
+      5,
+      10
+    ],
+    "tags": [
+      "bodyweight"
+    ]
+  },
+  {
+    "name": "lying_leg_lift",
+    "weight": 1,
+    "activations": [{
+      "muscle": "abs",
+      "intensityPerRep": 2
+    }, {
+      "muscle": "obliques",
+      "intensityPerRep": 2
+    }],
+    "secondsPerRep": 3,
+    "sets": [
+      3
+    ],
+    "reps": [
+      10,
+      15,
+      20
+    ],
+    "tags": [
+      "bodyweight"
+    ]
+  },
+  {
+    "name": "scissor_kick",
+    "weight": 1,
+    "activations": [{
+      "muscle": "abs",
+      "intensityPerRep": 0.1
+    }, {
+      "muscle": "obliques",
+      "intensityPerRep": 0.1
+    }],
+    "secondsPerRep": 0.5,
+    "sets": [
+      3
+    ],
+    "reps": [
+      10,
+      20,
+      30
+    ],
+    "tags": [
+      "bodyweight"
+    ]
+  },
+  {
+    "name": "russian_twist",
+    "weight": 1,
+    "activations": [{
+      "muscle": "abs",
+      "intensityPerRep": 1
+    }, {
+      "muscle": "obliques",
+      "intensityPerRep": 3.5
+    }],
+    "secondsPerRep": 2,
+    "sets": [
+      3
+    ],
+    "reps": [
+      10,
+      15
+    ],
+    "tags": [
+      "standard"
     ]
   }
 ]
