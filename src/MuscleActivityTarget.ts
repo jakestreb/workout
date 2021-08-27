@@ -1,6 +1,7 @@
 import * as targetRecords from './data/targets.json';
 import * as body from './data/body.json';
 import MuscleActivity from './MuscleActivity';
+import Reporter from './Reporter';
 import * as util from './util';
 
 interface MuscleRecord {
@@ -11,7 +12,7 @@ interface MuscleRecord {
 interface MuscleGroup {
 	name: string;
 	activity: number;
-	muscles: string[]
+	muscles: string[];
 }
 
 interface Muscle {
@@ -59,6 +60,8 @@ export default class MuscleActivityTarget {
 	private readonly _avoid: Set<string> = new Set();
 	private readonly _added: Set<string> = new Set();
 
+	private readonly _reporter: Reporter = new Reporter();
+
 	private readonly _lower_tolerance_multiplier: number = (this._intensity - INTENSITY_TOLERANCE) / this._intensity
 	private readonly _upper_tolerance_multiplier: number = (this._intensity + INTENSITY_TOLERANCE) / this._intensity
 
@@ -74,6 +77,7 @@ export default class MuscleActivityTarget {
 			this._added.add(muscle.name);
 			this._muscles.push(muscle);
 		}
+		this._reporter.setTarget(muscle.name, muscle.activity);
 	}
 
 	public addGroup(group: MuscleGroup) {
@@ -88,6 +92,7 @@ export default class MuscleActivityTarget {
 			});
 			this._groups.push(group);
 		}
+		this._reporter.setTarget(group.name, group.activity);
 	}
 
 	public allows(muscleActivity: MuscleActivity): boolean {
@@ -110,17 +115,24 @@ export default class MuscleActivityTarget {
 
 	public isSatisfiedBy(muscleActivity: MuscleActivity): boolean {
 		for (const m of this._muscles) {
+			this._reporter.record(m.name, m.activity);
 			if (!this._isWithinTolerances(muscleActivity.get(m.name), m.activity)) {
 				return false;
 			}
 		}
 		for (const g of this._groups) {
 			const actual = util.sum(g.muscles.map(name => muscleActivity.get(name)));
+			console.warn('actual', actual, g.muscles);
+			this._reporter.record(g.name, actual);
 			if (!this._isWithinTolerances(actual, g.activity)) {
 				return false;
 			}
 		}
 		return true;
+	}
+
+	public getDiscrepancies(): string[] {
+		return this._reporter.getDiscrepancies();
 	}
 
 	private _isWithinTolerances(activity: number, targetActivity: number): boolean {

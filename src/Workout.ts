@@ -6,7 +6,7 @@ import * as util from './util';
 export default class Workout {
 	public static* generator(name: string, intensity: number, timeMinutes: number) {
 		for (const routine of util.weightedSelector(routines)) {
-			const exercisePicker = new ExercisePicker(routine.tags, { name, intensity, timeMinutes });
+			const exercisePicker = new ExercisePicker(routine.tags, { name, intensity, time: timeMinutes * 60 });
 			const exercises = exercisePicker.pick();
 			if (exercises) {
 				yield new Workout(exercises);

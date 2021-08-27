@@ -1,12 +1,13 @@
 import Exercise from './Exercise';
 import MuscleActivityTarget from './MuscleActivityTarget';
 import MuscleActivity from './MuscleActivity';
+import Reporter from './Reporter';
 import * as util from './util';
 
 interface Target {
 	name: string;
 	intensity: number;
-	timeMinutes: number;
+	time: number;
 }
 
 const TRANSITION_TIME_S = 120;
@@ -21,12 +22,17 @@ export default class ExercisePicker {
 	private readonly _totalTime: number;
 	private readonly _activityTarget: MuscleActivityTarget;
 
+	private readonly _timeReporter: Reporter;
+
 	constructor(tags: string[], target: Target) {
 		this._tags = tags;
-		this._totalTime = target.timeMinutes * 60;
-		this._activityTarget = MuscleActivityTarget.fromTarget(target.name, target.intensity, this._totalTime);
+		this._totalTime = target.time;
+		this._activityTarget = MuscleActivityTarget.fromTarget(target.name, target.intensity, target.time);
 
 		this._generators = [Exercise.generator(this._tags[0], [])];
+
+		this._timeReporter = new Reporter();
+		this._timeReporter.setTarget('time', this._totalTime);
 	}
 
 	public pick(): Exercise[]|void {
@@ -45,7 +51,8 @@ export default class ExercisePicker {
 			}
 
 			if (this._index === 0) {
-				return;
+				const issue = this._getDiscrepancies()[0];
+				throw new Error(issue);
 			}
 
 			// If no exercises from current generator work, backtrack
@@ -88,12 +95,6 @@ export default class ExercisePicker {
 	}
 
 	private _checkTargets(): boolean {
-		// console.log('>', this._exercises.map(e => `${e.name} ${e.reps.toString()}`));
-		// console.log('>', MuscleActivity.combine(...this._exercises.map(e => e.muscleActivity)));
-		// console.log('>', util.sum(this._exercises.map(e => e.totalSeconds)) + this._transitionTime);
-		// console.log('T', this._activityTarget);
-		// console.log('T', this._totalTime);
-		// console.log('\n');
 		return this._checkTime() && this._checkFocus();
 	}
 
@@ -109,29 +110,27 @@ export default class ExercisePicker {
 		const allActivity = MuscleActivity.combine(...this._exercises.map(e => e.muscleActivity))
 
 		// Ensure the final focus is within tolerances
-		const isSuccessful = this._activityTarget.isSatisfiedBy(allActivity) && isLatestAllowed;
-		if (isSuccessful) {
-			// console.log('F >', this._exercises.map(e => `${e.name} ${e.reps.toString()}`));
-			// console.log(`F > ${allActivity} / ${this._activityTarget}`;
-		}
-		return isSuccessful;
+		return this._activityTarget.isSatisfiedBy(allActivity) && isLatestAllowed;
 	}
 
 	private _checkTime(): boolean {
 		const elapsedTime = util.sum(this._exercises.map(e => e.totalSeconds)) + this._transitionTime;
 		const isUnderTime = elapsedTime <= this._totalTime;
+		console.warn('elapsed', elapsedTime);
 
 		if (this._index < this._capacity) {
 			// Ensure the time is not over at any step
 			return isUnderTime;
 		}
 
+		this._timeReporter.record('time', elapsedTime);
+
 		// Ensure the final time is within 5 minutes of the requested, and not over
-		const isSuccessful = isUnderTime && (elapsedTime >= this._totalTime - MAX_LEFTOVER_TIME_S);
-		if (isSuccessful) {
-			// console.log('T >', this._exercises.map(e => `${e.name} ${e.reps.toString()}`));
-			// console.log(`T > ${elapsedTime} / ${this._totalTime}`);
-		}
-		return isSuccessful;
+		return isUnderTime && (elapsedTime >= this._totalTime - MAX_LEFTOVER_TIME_S);
+	}
+
+	private _getDiscrepancies(): string[] {
+		// todo: doesnt represent why it failed
+		return [...this._timeReporter.getDiscrepancies(), ...this._activityTarget.getDiscrepancies()];
 	}
 }
