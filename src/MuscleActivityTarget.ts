@@ -2,6 +2,7 @@ import * as targetRecords from './data/targets.json';
 import * as body from './data/body.json';
 import MuscleActivity from './MuscleActivity';
 import Reporter from './Reporter';
+import { Result } from './enums';
 import * as util from './util';
 
 interface MuscleRecord {
@@ -113,35 +114,40 @@ export default class MuscleActivityTarget {
 		return false;
 	}
 
-	public isSatisfiedBy(muscleActivity: MuscleActivity): boolean {
+	public isSatisfiedBy(muscleActivity: MuscleActivity): Result {
 		for (const m of this._muscles) {
 			this._reporter.record(m.name, m.activity);
-			if (!this._isWithinTolerances(muscleActivity.get(m.name), m.activity)) {
-				return false;
+			if (this._isBelowTolerance(muscleActivity.get(m.name), m.activity)) {
+				return Result.Incomplete;
+			}
+			if (this._isAboveTolerance(muscleActivity.get(m.name), m.activity)) {
+				return Result.Failed;
 			}
 		}
 		for (const g of this._groups) {
 			const actual = util.sum(g.muscles.map(name => muscleActivity.get(name)));
-			console.warn('actual', actual, g.muscles);
 			this._reporter.record(g.name, actual);
-			if (!this._isWithinTolerances(actual, g.activity)) {
-				return false;
+			if (this._isBelowTolerance(actual, g.activity)) {
+				return Result.Incomplete;
+			}
+			if (this._isAboveTolerance(actual, g.activity)) {
+				return Result.Failed;
 			}
 		}
-		return true;
+		this._reporter.reset();
+		return Result.Complete;
 	}
 
 	public getDiscrepancies(): string[] {
 		return this._reporter.getDiscrepancies();
 	}
 
-	private _isWithinTolerances(activity: number, targetActivity: number): boolean {
-		if (!activity) {
-			return false;
-		}
-		const low = targetActivity * this._lower_tolerance_multiplier;
-		const high = targetActivity * this._upper_tolerance_multiplier;
-		return activity >= low && activity <= high;
+	private _isBelowTolerance(activity: number, targetActivity: number): boolean {
+		return activity < targetActivity * this._lower_tolerance_multiplier;
+	}
+
+	private _isAboveTolerance(activity: number, targetActivity: number): boolean {
+		return activity > targetActivity * this._upper_tolerance_multiplier;
 	}
 }
 

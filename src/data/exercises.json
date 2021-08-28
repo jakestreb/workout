@@ -150,9 +150,7 @@
       8,
       10
     ],
-    "tags": [
-      "standard"
-    ]
+    "tags": []
   },
   {
     "name": "close_grip_bench_press",
@@ -185,9 +183,7 @@
       8,
       10
     ],
-    "tags": [
-      "standard"
-    ]
+    "tags": []
   },
   {
     "name": "push_up",
@@ -287,9 +283,7 @@
       8,
       10
     ],
-    "tags": [
-      "standard"
-    ]
+    "tags": []
   },
   {
     "name": "skullcrusher",
@@ -309,9 +303,7 @@
       8,
       10
     ],
-    "tags": [
-      "standard"
-    ]
+    "tags": []
   },
   {
     "name": "tricep_kickback",
@@ -331,9 +323,7 @@
       8,
       10
     ],
-    "tags": [
-      "standard"
-    ]
+    "tags": []
   },
   {
     "name": "diamond_push_up",
@@ -664,8 +654,6 @@
       10,
       15
     ],
-    "tags": [
-      "standard"
-    ]
+    "tags": []
   }
 ]

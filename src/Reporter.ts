@@ -23,6 +23,14 @@ export default class Reporter {
 		}
 	}
 
+	public reset(): void {
+		for (const key in this._entries) {
+			const entry = this._entries[key];
+			entry.min = -1;
+			entry.max = -1;
+		}
+	}
+
 	public setTarget(key: string, target: number): void {
 		const entry: NumericResult|{} = this._entries[key] || {};
 		this._entries[key] = { min: -1, max: -1, ...entry, target };

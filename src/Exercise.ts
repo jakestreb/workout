@@ -20,10 +20,10 @@ interface Activation {
 const REST_TIME_S = 60;
 
 export default class Exercise {
-	public static* generator(tag: string, previouslySelected: Exercise[]) {
+	public static* generator(previouslySelected: Exercise[] = [], tag?: string) {
 		const selectedNames = previouslySelected.map(e => e.name);
 		const filteredRecords: any[] = exerciseRecords.filter(e =>
-			!selectedNames.includes(e.name) && e.tags.includes(tag)
+			!selectedNames.includes(e.name) && (!tag || e.tags.includes(tag))
 		);
 
 		for (const exerciseRecord of util.weightedSelector(filteredRecords)) {
