@@ -36,28 +36,29 @@ export default class ExercisePicker {
 
 	public* pick(): Generator<Exercise[]> {
 		while (true) {
+			let status = Result.Failed;
+
 			// Try exercises from current generator until one works
 			const gen = this._generators[this._index];
 			let curr = gen.next();
-			let status = Result.Failed;
 			while (!curr.done && status === Result.Failed) {
 				status = this._addExercise(curr.value);
-				curr = gen.next();
+				if (status === Result.Failed) {
+					curr = gen.next();
+				}
 			}
 
 			// If the workout is complete, yield
 			if (status === Result.Complete) {
 				yield this._exercises;
 				this._timeReporter.reset();
-				status = Result.Failed;
-			}
-
-			if (this._index === 0) {
-				return;
 			}
 
 			// If no exercises from current generator work, backtrack
 			if (status === Result.Failed) {
+				if (this._index === 0) {
+					return;
+				}
 				this._removeExercise();
 			}
 		}
@@ -93,7 +94,16 @@ export default class ExercisePicker {
 	}
 
 	private _checkTargets(): Result {
-		return worstResult(this._checkTime(), this._checkFocus());
+		return worstResult(this._checkOrder(), this._checkTime(), this._checkFocus());
+	}
+
+	private _checkOrder(): Result {
+		for (let i = 1; i < this._exercises.length; i++) {
+			if (this._exercises[i].sortIndex < this._exercises[i - 1].sortIndex) {
+				return Result.Failed;
+			}
+		}
+		return Result.Complete;
 	}
 
 	private _checkFocus(): Result {
@@ -130,8 +140,8 @@ export default class ExercisePicker {
 function worstResult(...args: Result[]): Result {
 	let min = Infinity;
 	for (const arg of args) {
-		if (arg === 0) {
-			return 0;
+		if (arg === Result.Failed) {
+			return Result.Failed;
 		} else if (arg < min) {
 			min = arg;
 		}

@@ -39,6 +39,7 @@ export default class Exercise {
 	public readonly reps: number[];
 	public readonly totalReps: number;
 	public readonly totalSeconds: number;
+	public readonly totalActivationPerRep: number = 0;
 	public readonly muscleActivity: MuscleActivity = new MuscleActivity();
 
 	constructor(exerciseRecord: ExerciseRecord, reps: number[]) {
@@ -48,10 +49,15 @@ export default class Exercise {
 		const restSeconds = (this.reps.length - 1) * REST_TIME_S;
 		const activeSeconds = this.totalReps * exerciseRecord.secondsPerRep;
 		this.totalSeconds = restSeconds + activeSeconds;
+		this.totalActivationPerRep = util.sum(exerciseRecord.activations.map(a => a.intensityPerRep));
 
 		exerciseRecord.activations.forEach(a => {
 			this.muscleActivity.set(a.muscle, a.intensityPerRep * this.totalReps);
 		});
+	}
+
+	public get sortIndex(): number {
+		return -this.totalActivationPerRep;
 	}
 
 	public toString(): string {
