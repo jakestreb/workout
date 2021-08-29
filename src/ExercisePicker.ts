@@ -11,7 +11,7 @@ interface Target {
 	time: number;
 }
 
-const TRANSITION_TIME_S = 120;
+const TRANSITION_TIME_S = 180;
 const MAX_LEFTOVER_TIME_S = 5 * 60;
 
 export default class ExercisePicker {
@@ -36,17 +36,7 @@ export default class ExercisePicker {
 
 	public* pick(): Generator<Exercise[]> {
 		while (true) {
-			let status = Result.Failed;
-
-			// Try exercises from current generator until one works
-			const gen = this._generators[this._index];
-			let curr = gen.next();
-			while (!curr.done && status === Result.Failed) {
-				status = this._addExercise(curr.value);
-				if (status === Result.Failed) {
-					curr = gen.next();
-				}
-			}
+			const status = this._addExercise();
 
 			// If the workout is complete, yield
 			if (status === Result.Complete) {
@@ -76,16 +66,24 @@ export default class ExercisePicker {
 		return (this._index - 1) * TRANSITION_TIME_S;
 	}
 
-	// Returns true if add is successful, false if not
-	private _addExercise(exercise: Exercise): Result {
-		this._exercises.push(exercise);
-		const result = this._checkTargets();
-		if (result === Result.Failed) {
-			this._exercises.pop();
-		} else {
+	private _addExercise(): Result {
+		// Try exercises from current generator until one works
+		const gen = this._generators[this._index];
+
+		let curr = gen.next();
+		while (!curr.done) {
+			this._exercises.push(curr.value);
+			const status = this._checkTargets();
+			if (status === Result.Failed) {
+				this._exercises.pop();
+				curr = gen.next();
+				continue;
+			}
 			this._generators.push(Exercise.generator(this._exercises));
+			return status;
 		}
-		return result;
+
+		return Result.Failed;
 	}
 
 	private _removeExercise(): void {

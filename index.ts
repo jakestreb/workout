@@ -4,7 +4,7 @@ import Workout from './src/Workout';
 readline.emitKeypressEvents(process.stdin);
 
 let count = 0;
-const gen = Workout.generator('core', 5, 30);
+const gen = Workout.generator('chest_day', 5, 30);
 
 // process.stdin.on('keypress', (str, key) => {
 // 	if (key.name === 'enter') {

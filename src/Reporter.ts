@@ -41,9 +41,9 @@ export default class Reporter {
 		for (const key in this._entries) {
 			const entry = this._entries[key];
 			if (entry.target < entry.min) {
-				diffs.push(`${key}\nexpected: ${entry.target}\nsmallest: ${entry.min}\n`);
+				diffs.push(`${key}\nexpected: ${Math.round(entry.target)}\nsmallest: ${Math.round(entry.min)}\n`);
 			} else if (entry.target > entry.max) {
-				diffs.push(`${key}\nexpected: ${entry.target}\ngreatest: ${entry.max}\n`);
+				diffs.push(`${key}\nexpected: ${Math.round(entry.target)}\ngreatest: ${Math.round(entry.max)}\n`);
 			}
 		}
 		return diffs;
