@@ -30,4 +30,12 @@ export default class MuscleActivity {
 		});
 		return this;
 	}
+
+	public multiply(factor: number): MuscleActivity {
+		const m = new MuscleActivity();
+		this.keys().forEach(key => {
+			m.set(key, this.get(key) * factor);
+		});
+		return m;
+	}
 }

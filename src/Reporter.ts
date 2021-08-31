@@ -18,7 +18,7 @@ export default class Reporter {
 		if (num < result.min || result.min === -1) {
 			result.min = num;
 		}
-		if (num > result.max) {
+		if (num > result.max || result.max === -1) {
 			result.max = num;
 		}
 	}
@@ -40,7 +40,11 @@ export default class Reporter {
 		const diffs: string[] = [];
 		for (const key in this._entries) {
 			const entry = this._entries[key];
-			if (entry.target < entry.min) {
+			if (entry.min === -1 && entry.target === 0) {
+				continue;
+			} else if (entry.min === -1) {
+				diffs.push(`${key}\nexpected: ${Math.round(entry.target)}\nreceived none\n`);
+			} else if (entry.target < entry.min) {
 				diffs.push(`${key}\nexpected: ${Math.round(entry.target)}\nsmallest: ${Math.round(entry.min)}\n`);
 			} else if (entry.target > entry.max) {
 				diffs.push(`${key}\nexpected: ${Math.round(entry.target)}\ngreatest: ${Math.round(entry.max)}\n`);

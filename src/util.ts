@@ -1,3 +1,4 @@
+import { Result } from './enums';
 
 interface WeightedItem {
 	weight: number;
@@ -36,4 +37,20 @@ export function* weightedSelector<T extends WeightedItem>(array: T[]): Generator
 
 export function sum(array: number[]): number {
 	return array.reduce((a, b) => a + b, 0);
+}
+
+export function avg(array: number[]): number {
+	return sum(array) / array.length;
+}
+
+export function worstResult(...args: Result[]): Result {
+	let min = Infinity;
+	for (const arg of args) {
+		if (arg === Result.Failed) {
+			return Result.Failed;
+		} else if (arg < min) {
+			min = arg;
+		}
+	}
+	return min;
 }

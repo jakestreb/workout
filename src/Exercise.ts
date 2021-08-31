@@ -1,4 +1,5 @@
 import * as exerciseRecords from './data/exercises.json';
+import ExerciseSet from './ExerciseSet';
 import MuscleActivity from './MuscleActivity';
 import * as util from './util';
 
@@ -9,15 +10,12 @@ interface ExerciseRecord {
   	secondsPerRep: number;
   	sets: number[];
   	reps: number[];
-  	tags: string[];
 }
 
 interface Activation {
 	muscle: string;
 	intensityPerRep: number;
 }
-
-const REST_TIME_S = 60;
 
 export default class Exercise {
 	public static* generator(previouslySelected: Exercise[] = [], tag?: string) {
@@ -27,50 +25,61 @@ export default class Exercise {
 		);
 
 		for (const exerciseRecord of util.weightedSelector(filteredRecords)) {
-			const repPatterns = getRepPatterns(exerciseRecord);
-			for (const reps of util.randomSelector(repPatterns)) {
-				yield new Exercise(exerciseRecord as ExerciseRecord, reps);
-			}
+			yield new Exercise(exerciseRecord as ExerciseRecord);
 		}
 		return;
 	}
 
-	public readonly name: string;
-	public readonly reps: number[];
-	public readonly totalReps: number;
-	public readonly totalSeconds: number;
-	public readonly totalActivationPerRep: number = 0;
-	public readonly muscleActivity: MuscleActivity = new MuscleActivity();
+	public static restTime: number = 60;
+	public static transitionTime: number = 3 * 60;
 
-	constructor(exerciseRecord: ExerciseRecord, reps: number[]) {
+	public readonly name: string;
+	public readonly totalActivityPerRep: number;
+	public readonly secondsPerRep: number;
+	public readonly activityPerRep: MuscleActivity = new MuscleActivity();
+	public readonly timeEstimate: number;
+
+	private readonly _possibleSets: number[];
+	private readonly _possibleReps: number[];
+
+	constructor(exerciseRecord: ExerciseRecord) {
 		this.name = exerciseRecord.name;
-		this.reps = reps;
-		this.totalReps = util.sum(this.reps);
-		const restSeconds = (this.reps.length - 1) * REST_TIME_S;
-		const activeSeconds = this.totalReps * exerciseRecord.secondsPerRep;
-		this.totalSeconds = restSeconds + activeSeconds;
-		this.totalActivationPerRep = util.sum(exerciseRecord.activations.map(a => a.intensityPerRep));
+		this.totalActivityPerRep = util.sum(exerciseRecord.activations.map(a => a.intensityPerRep));
+		this.secondsPerRep = exerciseRecord.secondsPerRep;
+
+		this._possibleSets = exerciseRecord.sets;
+		this._possibleReps = exerciseRecord.reps;
+
+		const avgSets = util.avg(this._possibleSets);
+		this.timeEstimate = avgSets * util.avg(this._possibleReps) * this.secondsPerRep
+			+ (avgSets - 1) * Exercise.restTime;
 
 		exerciseRecord.activations.forEach(a => {
-			this.muscleActivity.set(a.muscle, a.intensityPerRep * this.totalReps);
+			this.activityPerRep.set(a.muscle, a.intensityPerRep);
 		});
 	}
 
 	public get sortIndex(): number {
-		return -this.totalActivationPerRep;
+		return -this.totalActivityPerRep;
+	}
+
+	public* generateSets(): Generator<ExerciseSet> {
+		for (const reps of util.randomSelector(getRepPatterns(this._possibleSets, this._possibleReps))) {
+			yield new ExerciseSet(this, reps);
+		}
 	}
 
 	public toString(): string {
-		return `${this.name} ${this.reps[0]}x${this.reps.length}`;
+		return `${this.name}`;
 	}
 }
 
-function getRepPatterns(exerciseRecord: ExerciseRecord): number[][] {
-	const result: number[][] = [];
-	exerciseRecord.reps.forEach((r: number) => {
-		exerciseRecord.sets.forEach((s: number) => {
-			result.push(Array(s).fill(r));
+function getRepPatterns(sets: number[], reps: number[]): number[][] {
+    const result: number[][] = [];
+    reps.forEach((r: number) => {
+        sets.forEach((s: number) => {
+        	result.push(Array(s).fill(r));
 		});
 	});
-	return result;
+    return result;
 }

@@ -2,7 +2,6 @@ import * as targetRecords from './data/targets.json';
 import * as body from './data/body.json';
 import MuscleActivity from './MuscleActivity';
 import Reporter from './Reporter';
-import { Result } from './enums';
 import * as util from './util';
 
 interface MuscleRecord {
@@ -114,28 +113,45 @@ export default class MuscleActivityTarget {
 		return false;
 	}
 
-	public isSatisfiedBy(muscleActivity: MuscleActivity): Result {
+	public isCoveredBy(muscleActivity: MuscleActivity): boolean {
 		for (const m of this._muscles) {
-			this._reporter.record(m.name, m.activity);
+			if (!muscleActivity.get(m.name)) {
+				return false;
+			}
+		}
+		for (const g of this._groups) {
+			// Check that all muscles in the group have some activation
+			g.muscles.forEach(name => {
+				if (!muscleActivity.get(name)) {
+					return false;
+				}
+			});
+		}
+		return true;
+	}
+
+	public isSatisfiedBy(muscleActivity: MuscleActivity): boolean {
+		for (const m of this._muscles) {
+			this._reporter.record(m.name, muscleActivity.get(m.name));
 			if (this._isBelowTolerance(muscleActivity.get(m.name), m.activity)) {
-				return Result.Incomplete;
+				return false;
 			}
 			if (this._isAboveTolerance(muscleActivity.get(m.name), m.activity)) {
-				return Result.Failed;
+				return false;
 			}
 		}
 		for (const g of this._groups) {
 			const actual = util.sum(g.muscles.map(name => muscleActivity.get(name)));
 			this._reporter.record(g.name, actual);
 			if (this._isBelowTolerance(actual, g.activity)) {
-				return Result.Incomplete;
+				return false;
 			}
 			if (this._isAboveTolerance(actual, g.activity)) {
-				return Result.Failed;
+				return false;
 			}
 		}
 		this._reporter.reset();
-		return Result.Complete;
+		return true;
 	}
 
 	public getDiscrepancies(): string[] {
@@ -176,5 +192,5 @@ function getChildren(name: string): string[] {
 	}
 
 	const record = searchBody(name);
-	return doGetChildren(record);
+	return record.children ? doGetChildren(record) : [];
 }

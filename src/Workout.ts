@@ -1,22 +1,37 @@
-import Exercise from './Exercise';
+import ExerciseSet from './ExerciseSet';
 import ExercisePicker from './ExercisePicker';
+import MuscleActivityTarget from './MuscleActivityTarget';
+import RepPicker from './RepPicker';
 
 export default class Workout {
+
+	public static maxLeftoverTime: number = 5 * 60;
+
 	public static* generator(name: string, intensity: number, timeMinutes: number) {
-		const exercisePicker = new ExercisePicker({ name, intensity, time: timeMinutes * 60 });
+		const time = timeMinutes * 60;
+
+		const activityTarget = MuscleActivityTarget.fromTarget(name, intensity, time);
+
+		const exercisePicker = new ExercisePicker(activityTarget, time);
+
 		for (const exercises of exercisePicker.pick()) {
-			yield new Workout(exercises);
+			// console.warn(`exercises: ${exercises}\n`);
+			const repPicker = new RepPicker(exercises, activityTarget, time);
+			for (const sets of repPicker.pick()) {
+				yield new Workout(sets);
+				break;
+			}
+			// console.log(repPicker.getDiscrepancies().join('\n'));
 		}
-		return exercisePicker.getDiscrepancies().join('\n');
 	}
 
-	public readonly exercises: Exercise[];
+	public readonly sets: ExerciseSet[];
 
-	constructor(exercises: Exercise[]) {
-		this.exercises = exercises;
+	constructor(sets: ExerciseSet[]) {
+		this.sets = sets;
 	}
 
 	public toString(): string {
-		return `${this.exercises.join('\n')}\n`;
+		return `${this.sets.join('\n')}\n`;
 	}
 }
