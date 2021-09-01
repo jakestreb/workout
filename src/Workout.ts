@@ -1,5 +1,5 @@
-import ExerciseSet from './ExerciseSet';
 import ExercisePicker from './pickers/ExercisePicker';
+import WorkoutSet from './WorkoutSet';
 import WorkoutTarget from './targets/WorkoutTarget';
 import RepPicker from './pickers/RepPicker';
 
@@ -10,19 +10,18 @@ export default class Workout {
 		const exercisePicker = new ExercisePicker(target);
 
 		for (const exercises of exercisePicker.pick()) {
-			// console.warn(`exercises: ${exercises}\n`);
 			const repPicker = new RepPicker(exercises, target);
 			for (const sets of repPicker.pick()) {
 				yield new Workout(sets);
 				break;
 			}
-			// console.log(repPicker.getDiscrepancies().join('\n'));
 		}
+		target.throw();
 	}
 
-	public readonly sets: ExerciseSet[];
+	public readonly sets: WorkoutSet[];
 
-	constructor(sets: ExerciseSet[]) {
+	constructor(sets: WorkoutSet[]) {
 		this.sets = sets;
 	}
 

@@ -35,20 +35,17 @@ export default class Reporter {
 		this._entries[key] = { min: -1, max: -1, ...entry, target };
 	}
 
-	public getDiscrepancies(): string[] {
-		const diffs: string[] = [];
+	public throw(): void {
 		for (const key in this._entries) {
 			const entry = this._entries[key];
-			if (entry.min === -1 && entry.target === 0) {
+			const expected = `Required ${key} near ${Math.round(entry.target)}`;
+			if (entry.min === -1) {
 				continue;
-			} else if (entry.min === -1) {
-				diffs.push(`${key}\nexpected: ${Math.round(entry.target)}\nreceived none\n`);
 			} else if (entry.target < entry.min) {
-				diffs.push(`${key}\nexpected: ${Math.round(entry.target)}\nsmallest: ${Math.round(entry.min)}\n`);
+				throw new Error(`${expected} and received at lowest ${Math.round(entry.min)}`);
 			} else if (entry.target > entry.max) {
-				diffs.push(`${key}\nexpected: ${Math.round(entry.target)}\ngreatest: ${Math.round(entry.max)}\n`);
+				throw new Error(`${expected} and received at highest ${Math.round(entry.max)}`);
 			}
 		}
-		return diffs;
 	}
 }

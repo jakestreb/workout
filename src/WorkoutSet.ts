@@ -1,6 +1,6 @@
 import Exercise from './Exercise';
 
-export default class ExerciseSet {
+export default class WorkoutSet {
 
 	public readonly exercise: Exercise;
 	public readonly reps: number[];

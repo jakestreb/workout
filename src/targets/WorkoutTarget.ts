@@ -1,5 +1,6 @@
 import MuscleActivity from '../MuscleActivity';
 import MuscleActivityTarget from './MuscleActivityTarget';
+import Reporter from '../Reporter';
 import { Result } from '../enums';
 
 export default class WorkoutTarget {
@@ -9,9 +10,13 @@ export default class WorkoutTarget {
 	public muscleActivityTarget: MuscleActivityTarget;
 	public timeTarget: number;
 
+	private _timeReporter: Reporter
+
 	constructor(targetName: string, intensity: number, timeSeconds: number) {
 		this.muscleActivityTarget = MuscleActivityTarget.fromTarget(targetName, intensity, timeSeconds);
 		this.timeTarget = timeSeconds;
+		this._timeReporter = new Reporter();
+		this._timeReporter.setTarget('time', timeSeconds);
 	}
 
 	public checkSingleFocus(muscleActivity: MuscleActivity): boolean {
@@ -29,6 +34,8 @@ export default class WorkoutTarget {
 	}
 
 	public checkTime(time: number, tolerance: number = 0): Result {
+		this._timeReporter.record('time', time);
+
 		const minTime = this.timeTarget - WorkoutTarget.maxLeftoverTime - tolerance;
 		const maxTime = this.timeTarget + tolerance;
 
@@ -38,5 +45,10 @@ export default class WorkoutTarget {
 			return Result.Complete;
 		}
 		return Result.Failed;
+	}
+
+	public throw(): void {
+		this._timeReporter.throw();
+		this.muscleActivityTarget.reporter.throw();
 	}
 }

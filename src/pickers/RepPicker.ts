@@ -1,12 +1,12 @@
 import Exercise from '../Exercise';
-import ExerciseSet from '../ExerciseSet';
 import MuscleActivity from '../MuscleActivity';
 import Picker from './Picker';
 import WorkoutTarget from '../targets/WorkoutTarget'
+import WorkoutSet from '../WorkoutSet';
 import { Result } from '../enums';
 import * as util from '../util';
 
-export default class RepPicker extends Picker<ExerciseSet> {
+export default class RepPicker extends Picker<WorkoutSet> {
 
 	private readonly _exercises: Exercise[];
 	private readonly _target: WorkoutTarget;
@@ -25,11 +25,11 @@ export default class RepPicker extends Picker<ExerciseSet> {
 		];
 	}
 
-	public get sets(): ExerciseSet[] {
+	public get sets(): WorkoutSet[] {
 		return this.items;
 	}
 
-	public buildGenerator(): Generator<ExerciseSet> {
+	public buildGenerator(): Generator<WorkoutSet> {
 		if (this.index < this._exercises.length) {
 			return this._exercises[this.index].generateSets();
 		}

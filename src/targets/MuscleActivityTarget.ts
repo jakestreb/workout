@@ -24,7 +24,7 @@ interface Muscle {
 const INTENSITY_TOLERANCE = 1;
 
 const AVG_WORKOUT_REPS = 250;
-const AVG_WORKOUT_TIME_S = 60 * 45;
+const AVG_WORKOUT_TIME_S = 45 * 60;
 
 export default class MuscleActivityTarget {
 
@@ -53,14 +53,14 @@ export default class MuscleActivityTarget {
 		return activityTarget;
 	}
 
+	public readonly reporter: Reporter = new Reporter();
+
 	private readonly _muscles: Muscle[] = [];
 	private readonly _groups: MuscleGroup[] = [];
 
 	// Sets contain muscle names (no groups)
 	private readonly _avoid: Set<string> = new Set();
 	private readonly _added: Set<string> = new Set();
-
-	private readonly _reporter: Reporter = new Reporter();
 
 	private readonly _lower_tolerance_multiplier: number = (this._intensity - INTENSITY_TOLERANCE) / this._intensity
 	private readonly _upper_tolerance_multiplier: number = (this._intensity + INTENSITY_TOLERANCE) / this._intensity
@@ -77,7 +77,7 @@ export default class MuscleActivityTarget {
 			this._added.add(muscle.name);
 			this._muscles.push(muscle);
 		}
-		this._reporter.setTarget(muscle.name, muscle.activity);
+		this.reporter.setTarget(muscle.name, muscle.activity);
 	}
 
 	public addGroup(group: MuscleGroup) {
@@ -92,7 +92,7 @@ export default class MuscleActivityTarget {
 			});
 			this._groups.push(group);
 		}
-		this._reporter.setTarget(group.name, group.activity);
+		this.reporter.setTarget(group.name, group.activity);
 	}
 
 	public allows(muscleActivity: MuscleActivity): boolean {
@@ -132,7 +132,7 @@ export default class MuscleActivityTarget {
 
 	public isSatisfiedBy(muscleActivity: MuscleActivity): boolean {
 		for (const m of this._muscles) {
-			this._reporter.record(m.name, muscleActivity.get(m.name));
+			this.reporter.record(m.name, muscleActivity.get(m.name));
 			if (this._isBelowTolerance(muscleActivity.get(m.name), m.activity)) {
 				return false;
 			}
@@ -142,7 +142,7 @@ export default class MuscleActivityTarget {
 		}
 		for (const g of this._groups) {
 			const actual = util.sum(g.muscles.map(name => muscleActivity.get(name)));
-			this._reporter.record(g.name, actual);
+			this.reporter.record(g.name, actual);
 			if (this._isBelowTolerance(actual, g.activity)) {
 				return false;
 			}
@@ -150,12 +150,8 @@ export default class MuscleActivityTarget {
 				return false;
 			}
 		}
-		this._reporter.reset();
+		this.reporter.reset();
 		return true;
-	}
-
-	public getDiscrepancies(): string[] {
-		return this._reporter.getDiscrepancies();
 	}
 
 	private _isBelowTolerance(activity: number, targetActivity: number): boolean {

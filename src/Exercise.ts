@@ -1,6 +1,6 @@
 import * as exerciseRecords from './data/exercises.json';
-import ExerciseSet from './ExerciseSet';
 import MuscleActivity from './MuscleActivity';
+import WorkoutSet from './WorkoutSet';
 import * as util from './util';
 
 interface ExerciseRecord {
@@ -63,9 +63,9 @@ export default class Exercise {
 		return -this.totalActivityPerRep;
 	}
 
-	public* generateSets(): Generator<ExerciseSet> {
+	public* generateSets(): Generator<WorkoutSet> {
 		for (const reps of util.randomSelector(getRepPatterns(this._possibleSets, this._possibleReps))) {
-			yield new ExerciseSet(this, reps);
+			yield new WorkoutSet(this, reps);
 		}
 	}
 
