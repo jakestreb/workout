@@ -1,4 +1,3 @@
-
 export default class MuscleActivity {
 
 	public static combine(...args: MuscleActivity[]): MuscleActivity {

@@ -1,8 +1,8 @@
-import * as targetRecords from './data/targets.json';
-import * as body from './data/body.json';
-import MuscleActivity from './MuscleActivity';
-import Reporter from './Reporter';
-import * as util from './util';
+import * as targetRecords from '../data/targets.json';
+import * as body from '../data/body.json';
+import MuscleActivity from '../MuscleActivity';
+import Reporter from '../Reporter';
+import * as util from '../util';
 
 interface MuscleRecord {
 	name: string;
@@ -113,7 +113,7 @@ export default class MuscleActivityTarget {
 		return false;
 	}
 
-	public isCoveredBy(muscleActivity: MuscleActivity): boolean {
+	public hasSameMuscles(muscleActivity: MuscleActivity): boolean {
 		for (const m of this._muscles) {
 			if (!muscleActivity.get(m.name)) {
 				return false;

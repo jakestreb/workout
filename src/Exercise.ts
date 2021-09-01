@@ -18,10 +18,10 @@ interface Activation {
 }
 
 export default class Exercise {
-	public static* generator(previouslySelected: Exercise[] = [], tag?: string) {
+	public static* generator(previouslySelected: Exercise[] = []) {
 		const selectedNames = previouslySelected.map(e => e.name);
 		const filteredRecords: any[] = exerciseRecords.filter(e =>
-			!selectedNames.includes(e.name) && (!tag || e.tags.includes(tag))
+			!selectedNames.includes(e.name)
 		);
 
 		for (const exerciseRecord of util.weightedSelector(filteredRecords)) {

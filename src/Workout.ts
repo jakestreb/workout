@@ -1,22 +1,17 @@
 import ExerciseSet from './ExerciseSet';
-import ExercisePicker from './ExercisePicker';
-import MuscleActivityTarget from './MuscleActivityTarget';
-import RepPicker from './RepPicker';
+import ExercisePicker from './pickers/ExercisePicker';
+import WorkoutTarget from './targets/WorkoutTarget';
+import RepPicker from './pickers/RepPicker';
 
 export default class Workout {
 
-	public static maxLeftoverTime: number = 5 * 60;
-
 	public static* generator(name: string, intensity: number, timeMinutes: number) {
-		const time = timeMinutes * 60;
-
-		const activityTarget = MuscleActivityTarget.fromTarget(name, intensity, time);
-
-		const exercisePicker = new ExercisePicker(activityTarget, time);
+		const target = new WorkoutTarget(name, intensity, timeMinutes * 60);
+		const exercisePicker = new ExercisePicker(target);
 
 		for (const exercises of exercisePicker.pick()) {
 			// console.warn(`exercises: ${exercises}\n`);
-			const repPicker = new RepPicker(exercises, activityTarget, time);
+			const repPicker = new RepPicker(exercises, target);
 			for (const sets of repPicker.pick()) {
 				yield new Workout(sets);
 				break;

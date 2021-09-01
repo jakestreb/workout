@@ -1,4 +1,3 @@
-
 interface NumericResult {
 	target: number;
 	min: number;

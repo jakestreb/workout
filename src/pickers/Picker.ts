@@ -1,4 +1,4 @@
-import { Result } from './enums';
+import { Result } from '../enums';
 
 export default abstract class Picker<T> {
 
@@ -10,13 +10,17 @@ export default abstract class Picker<T> {
 
 	}
 
+	public abstract get checks(): (() => Result)[];
+
 	public get index() {
 		return this.items.length;
 	}
 
 	public abstract buildGenerator(): Generator<T>;
 
-	public abstract checkProgress(): Result;
+	public checkProgress(): Result {
+		return checkAll(...this.checks);
+	}
 
 	public* pick(): Generator<T[]> {
 		this._generators.push(this.buildGenerator());
@@ -62,4 +66,18 @@ export default abstract class Picker<T> {
 		this.items.pop();
 		this._generators.pop();
 	}
+}
+
+
+export function checkAll(...args: (() => Result)[]): Result {
+	let min = Infinity;
+	for (const arg of args) {
+		const argResult = arg();
+		if (argResult === Result.Failed) {
+			return Result.Failed;
+		} else if (argResult < min) {
+			min = argResult;
+		}
+	}
+	return min;
 }
