@@ -2,12 +2,14 @@ interface WeightedItem {
 	weight: number;
 }
 
-export function* randomSelector<T>(array: T[]): Generator<T> {
+export function* randomSelector<T>(array: T[], options = { infinite: false }): Generator<T> {
 	let copy = array.slice();
 	while (copy.length > 0) {
 		const r = Math.floor(Math.random() * copy.length);
 		yield copy[r];
-		copy.splice(r, 1);
+		if (!options.infinite) {
+			copy.splice(r, 1);
+		}
 	}
 	return;
 }
@@ -39,4 +41,15 @@ export function sum(array: number[]): number {
 
 export function avg(array: number[]): number {
 	return sum(array) / array.length;
+}
+
+export function overlapping<T>(a: T[], b: T[]): T[] {
+	const result: T[] = [];
+	const aSet = new Set(a);
+	b.forEach(val => {
+		if (aSet.has(val)) {
+			result.push(val);
+		}
+	});
+	return result;
 }

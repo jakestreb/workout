@@ -1,3 +1,5 @@
+import * as util from './util';
+
 export default class MuscleActivity {
 
 	public static combine(...args: MuscleActivity[]): MuscleActivity {
@@ -21,6 +23,10 @@ export default class MuscleActivity {
 
 	public keys() {
 		return Object.keys(this._activity);
+	}
+
+	public total() {
+		return util.sum(this.keys().map(k => this.get(k)));
 	}
 
 	public add(muscleActivity: MuscleActivity): MuscleActivity {

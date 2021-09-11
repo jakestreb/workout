@@ -1,9 +1,10 @@
 import * as readline from 'readline';
-import Workout from './src/Workout';
+import WorkoutGenerator from './src/WorkoutGenerator';
 
 readline.emitKeypressEvents(process.stdin);
 
-const gen = Workout.generator('chest_day', 5, 30);
+const wg = new WorkoutGenerator('chest_day', 7, 30);
+const gen = wg.generate();
 
 process.stdin.on('keypress', (str, key) => {
 	if (key.name === 'enter') {
@@ -14,6 +15,7 @@ process.stdin.on('keypress', (str, key) => {
 		}
 	}
 });
+
 console.log('ENTER to generate');
 
 // let count = 0;

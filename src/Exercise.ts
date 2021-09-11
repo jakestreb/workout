@@ -18,53 +18,69 @@ interface Activation {
 }
 
 export default class Exercise {
-	public static* generator(previouslySelected: Exercise[] = []) {
-		const selectedNames = previouslySelected.map(e => e.name);
+	public static* generator(exclude: string[] = []) {
 		const filteredRecords: any[] = exerciseRecords.filter(e =>
-			!selectedNames.includes(e.name)
+			!exclude.includes(e.name)
 		);
 
 		for (const exerciseRecord of util.weightedSelector(filteredRecords)) {
 			yield new Exercise(exerciseRecord as ExerciseRecord);
 		}
-		return;
 	}
 
 	public static restTime: number = 60;
 	public static transitionTime: number = 3 * 60;
 
 	public readonly name: string;
-	public readonly totalActivityPerRep: number;
-	public readonly secondsPerRep: number;
-	public readonly activityPerRep: MuscleActivity = new MuscleActivity();
-	public readonly timeEstimate: number;
 
+	private readonly _secondsPerRep: number;
+	private readonly _activityPerRep: MuscleActivity = new MuscleActivity();
 	private readonly _possibleSets: number[];
 	private readonly _possibleReps: number[];
 
 	constructor(exerciseRecord: ExerciseRecord) {
 		this.name = exerciseRecord.name;
-		this.totalActivityPerRep = util.sum(exerciseRecord.activations.map(a => a.intensityPerRep));
-		this.secondsPerRep = exerciseRecord.secondsPerRep;
 
+		this._secondsPerRep = exerciseRecord.secondsPerRep;
 		this._possibleSets = exerciseRecord.sets;
 		this._possibleReps = exerciseRecord.reps;
 
-		const avgSets = util.avg(this._possibleSets);
-		this.timeEstimate = avgSets * util.avg(this._possibleReps) * this.secondsPerRep
-			+ (avgSets - 1) * Exercise.restTime;
-
 		exerciseRecord.activations.forEach(a => {
-			this.activityPerRep.set(a.muscle, a.intensityPerRep);
+			this._activityPerRep.set(a.muscle, a.intensityPerRep);
 		});
 	}
 
+	public get names(): string[] {
+		return [this.name];
+	}
+
+	public get possibleSets(): number[] {
+		return this._possibleSets;
+	}
+
+	public get possibleReps(): number[] {
+		return this._possibleReps;
+	}
+
+	public get timeEstimate(): number {
+		const avgSets = util.avg(this.possibleSets);
+		return avgSets * util.avg(this.possibleReps) * this._secondsPerRep + (avgSets - 1) * Exercise.restTime;
+	}
+
+	public get activityPerRep(): MuscleActivity {
+		return this._activityPerRep;
+	}
+
 	public get sortIndex(): number {
-		return -this.totalActivityPerRep;
+		return -this._activityPerRep.total();
+	}
+
+	public getTime(sets: number, reps: number) {
+		return reps * sets * this._secondsPerRep + (sets - 1) * Exercise.restTime;
 	}
 
 	public* generateSets(): Generator<WorkoutSet> {
-		for (const reps of util.randomSelector(getRepPatterns(this._possibleSets, this._possibleReps))) {
+		for (const reps of util.randomSelector(getRepPatterns(this.possibleSets, this.possibleReps))) {
 			yield new WorkoutSet(this, reps);
 		}
 	}

@@ -1,4 +1,5 @@
 import Exercise from '../Exercise';
+import ExercisePair from '../ExercisePair';
 import MuscleActivity from '../MuscleActivity';
 import Picker from './Picker';
 import WorkoutTarget from '../targets/WorkoutTarget';
@@ -30,7 +31,11 @@ export default class ExercisePicker extends Picker<Exercise> {
 	}
 
 	public buildGenerator(): Generator<Exercise> {
-		return Exercise.generator(this.exercises);
+		const selected: string[] = [];
+		this.exercises.forEach(e => {
+			selected.push(...e.names);
+		});
+		return anyGenerator(selected);
 	}
 
 	private get _transitionTime() {
@@ -63,5 +68,21 @@ export default class ExercisePicker extends Picker<Exercise> {
 			return this._target.checkFocusMuscles(activityPerRep) ? Result.Complete : Result.Incomplete;
 		}
 		return Result.Failed;
+	}
+}
+
+function* anyGenerator(previouslySelected: string[] = []): Generator<Exercise> {
+	const gens: Generator<Exercise>[] = [
+		Exercise.generator(previouslySelected),
+		ExercisePair.generator(previouslySelected)
+	];
+	while (gens.length > 0) {
+		const index = Math.floor(Math.random() * gens.length);
+		const curr = gens[index].next();
+		if (curr.done) {
+			gens.splice(index, 1);
+			continue;
+		}
+		yield curr.value;
 	}
 }
