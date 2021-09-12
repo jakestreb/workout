@@ -1,4 +1,4 @@
-import { Result } from '../enums';
+import { Result } from '../global/enums';
 
 export default abstract class Picker<T> {
 

@@ -4,7 +4,7 @@ import Picker from './Picker';
 import WorkoutTarget from '../targets/WorkoutTarget'
 import Workout from '../Workout';
 import WorkoutSet from '../WorkoutSet';
-import { Result } from '../enums';
+import { Result } from '../global/enums';
 
 export default class RepPicker extends Picker<WorkoutSet> {
 

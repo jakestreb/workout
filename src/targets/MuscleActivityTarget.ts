@@ -2,7 +2,7 @@ import * as targetRecords from '../data/targets.json';
 import * as body from '../data/body.json';
 import MuscleActivity from '../MuscleActivity';
 import Reporter from '../Reporter';
-import * as util from '../util';
+import * as util from '../global/util';
 
 interface MuscleRecord {
 	name: string;

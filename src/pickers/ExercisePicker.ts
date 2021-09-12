@@ -3,8 +3,8 @@ import ExercisePair from '../ExercisePair';
 import MuscleActivity from '../MuscleActivity';
 import Picker from './Picker';
 import WorkoutTarget from '../targets/WorkoutTarget';
-import { Result } from '../enums';
-import * as util from '../util';
+import { Result } from '../global/enums';
+import * as util from '../global/util';
 
 export default class ExercisePicker extends Picker<Exercise> {
 

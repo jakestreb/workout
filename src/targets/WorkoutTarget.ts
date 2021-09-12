@@ -1,7 +1,7 @@
 import MuscleActivity from '../MuscleActivity';
 import MuscleActivityTarget from './MuscleActivityTarget';
 import Reporter from '../Reporter';
-import { Result } from '../enums';
+import { Result } from '../global/enums';
 
 export default class WorkoutTarget {
 

@@ -1,7 +1,7 @@
 import * as exerciseRecords from './data/exercises.json';
 import Exercise from './Exercise';
 import MuscleActivity from './MuscleActivity';
-import * as util from './util';
+import * as util from './global/util';
 
 interface ExerciseRecord {
 	name: string;

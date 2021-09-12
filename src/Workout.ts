@@ -1,6 +1,6 @@
 import Exercise from './Exercise';
 import WorkoutSet from './WorkoutSet';
-import * as util from './util';
+import * as util from './global/util';
 
 export default class Workout {
 
