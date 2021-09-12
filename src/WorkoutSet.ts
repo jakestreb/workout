@@ -1,4 +1,5 @@
 import Exercise from './Exercise';
+import * as util from './util';
 
 export default class WorkoutSet {
 
@@ -19,9 +20,6 @@ export default class WorkoutSet {
 	}
 
 	public toString(): string {
-		const min = Math.floor(this.time / 60);
-		let s = `0${Math.floor(this.time % 60)}`;
-		s = s.slice(s.length - 2);
-		return `${this.exercise} ${this.reps.length}x${this.reps[0]} (${min}:${s})`;
+		return `${this.exercise} ${this.reps.length}x${this.reps[0]} (${util.timeString(this.time)})`;
 	}
 }

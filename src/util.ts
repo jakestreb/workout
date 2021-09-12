@@ -53,3 +53,10 @@ export function overlapping<T>(a: T[], b: T[]): T[] {
 	});
 	return result;
 }
+
+export function timeString(timeSeconds: number): string {
+	const min = Math.floor(timeSeconds / 60);
+	let s = `0${Math.floor(timeSeconds % 60)}`;
+	s = s.slice(s.length - 2);
+	return `${min}:${s}`;
+}

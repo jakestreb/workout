@@ -2,9 +2,9 @@ import Exercise from '../Exercise';
 import MuscleActivity from '../MuscleActivity';
 import Picker from './Picker';
 import WorkoutTarget from '../targets/WorkoutTarget'
+import Workout from '../Workout';
 import WorkoutSet from '../WorkoutSet';
 import { Result } from '../enums';
-import * as util from '../util';
 
 export default class RepPicker extends Picker<WorkoutSet> {
 
@@ -43,16 +43,9 @@ export default class RepPicker extends Picker<WorkoutSet> {
 		return super.checkProgress();
 	}
 
-	private get _transitionTime() {
-		return (this._exercises.length - 1) * Exercise.transitionTime;
-	}
-
-	private get _totalTime() {
-		return util.sum(this.sets.map(s => s.time)) + this._transitionTime;
-	}
-
 	private _checkTime(): Result {
-		if (this._target.checkTime(this._totalTime)) {
+		const w = new Workout(this.sets);
+		if (this._target.checkTime(w.time) === Result.Complete) {
 			return Result.Complete;
 		}
 		return Result.Failed;
