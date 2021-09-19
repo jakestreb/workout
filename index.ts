@@ -1,14 +1,19 @@
 import * as readline from 'readline';
-import WorkoutGenerator from './src/WorkoutGenerator';
+import LookaheadGenerator from './src/generators/LookaheadGenerator';
 
 readline.emitKeypressEvents(process.stdin);
 
-const wg = new WorkoutGenerator('chest_day', 7, 30);
-const gen = wg.generate();
+const wg = new LookaheadGenerator({
+	name: 'chest_day',
+	intensity: 7,
+	timeMinutes: 30
+});
 
-process.stdin.on('keypress', (str, key) => {
+const gen = wg.lookaheadGenerate();
+
+process.stdin.on('keypress', async (str, key) => {
 	if (key.name === 'enter') {
-		const curr = gen.next();
+		const curr = await gen.next();
 		console.log(`${curr.value}`);
 		if (curr.done) {
 			process.exit(0);
@@ -17,14 +22,3 @@ process.stdin.on('keypress', (str, key) => {
 });
 
 console.log('ENTER to generate');
-
-// let count = 0;
-// while (true) {
-// 	count += 1;
-// 	const curr = gen.next();
-// 	console.log(count);
-// 	console.log(`${curr.value}`);
-// 	if (curr.done) {
-// 		process.exit(0);
-// 	}
-// }

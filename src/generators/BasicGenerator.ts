@@ -1,13 +1,19 @@
-import ExercisePicker from './pickers/ExercisePicker';
-import Workout from './Workout';
-import WorkoutTarget from './targets/WorkoutTarget';
-import RepPicker from './pickers/RepPicker';
+import ExercisePicker from '../pickers/ExercisePicker';
+import Workout from '../Workout';
+import WorkoutTarget from '../targets/WorkoutTarget';
+import RepPicker from '../pickers/RepPicker';
 
-export default class WorkoutGenerator {
+interface GeneratorArg {
+	name: string;
+	intensity: number;
+	timeMinutes: number;
+}
 
-	public readonly target: WorkoutTarget;
+export default class BasicGenerator {
 
-	constructor(name: string, intensity: number, timeMinutes: number) {
+	public target: WorkoutTarget;
+
+	constructor({ name, intensity, timeMinutes }: GeneratorArg) {
 		this.target = new WorkoutTarget(name, intensity, timeMinutes * 60);
 	}
 

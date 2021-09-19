@@ -60,3 +60,9 @@ export function timeString(timeSeconds: number): string {
 	s = s.slice(s.length - 2);
 	return `${min}:${s}`;
 }
+
+export async function sleep(ms: number): Promise<void> {
+	return new Promise(resolve => {
+		setTimeout(resolve, ms);
+	});
+}
