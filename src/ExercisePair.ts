@@ -69,8 +69,8 @@ export default class ExercisePair extends Exercise {
 
 	public getTime(sets: number, reps: number) {
 		return super.getTime(sets, reps) + this.second.getTime(sets, reps)
-			+ (sets * 2 - 1) * ExercisePair.swapTime
-			- ((sets - 1) * 2) * Exercise.restTime;
+			+ ((sets - 1) * 2) * (ExercisePair.swapTime - Exercise.restTime)
+			+ ExercisePair.swapTime;
 	}
 
 	public toString(): string {
