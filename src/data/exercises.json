@@ -32,8 +32,7 @@
       6,
       8,
       10
-    ],
-    "variations": []
+    ]
   },
   {
     "name": "incline_bench_press",
@@ -69,8 +68,7 @@
       6,
       8,
       10
-    ],
-    "variations": []
+    ]
   },
   {
     "name": "decline_bench_press",
@@ -106,8 +104,7 @@
       6,
       8,
       10
-    ],
-    "variations": []
+    ]
   },
   {
     "name": "dumbbell_fly",
@@ -143,8 +140,7 @@
       6,
       8,
       10
-    ],
-    "variations": []
+    ]
   },
   {
     "name": "close_grip_bench_press",
@@ -176,8 +172,7 @@
       6,
       8,
       10
-    ],
-    "variations": []
+    ]
   },
   {
     "name": "push_up",
@@ -212,8 +207,7 @@
       10,
       15,
       20
-    ],
-    "variations": []
+    ]
   },
   {
     "name": "chest_dip",
@@ -252,8 +246,193 @@
       8,
       10,
       12
+    ]
+  },
+  {
+    "name": "barbell_overhead_press",
+    "weight": 1,
+    "activations": [
+      {
+        "muscle": "upper_chest",
+        "intensityPerRep": 1.5
+      },
+      {
+        "muscle": "middle_chest",
+        "intensityPerRep": 0.5
+      },
+      {
+        "muscle": "front_delt",
+        "intensityPerRep": 3
+      },
+      {
+        "muscle": "middle_delt",
+        "intensityPerRep": 2.5
+      },
+      {
+        "muscle": "rear_delt",
+        "intensityPerRep": 1
+      },
+      {
+        "muscle": "triceps",
+        "intensityPerRep": 2
+      }
     ],
-    "variations": []
+    "secondsPerRep": 3,
+    "sets": [
+      3,
+      4,
+      5
+    ],
+    "reps": [
+      6,
+      8,
+      10,
+      12
+    ]
+  },
+  {
+    "name": "dumbbell_overhead_press",
+    "weight": 1,
+    "activations": [
+      {
+        "muscle": "upper_chest",
+        "intensityPerRep": 1.5
+      },
+      {
+        "muscle": "middle_chest",
+        "intensityPerRep": 0.5
+      },
+      {
+        "muscle": "front_delt",
+        "intensityPerRep": 3.5
+      },
+      {
+        "muscle": "middle_delt",
+        "intensityPerRep": 3
+      },
+      {
+        "muscle": "rear_delt",
+        "intensityPerRep": 1.5
+      },
+      {
+        "muscle": "triceps",
+        "intensityPerRep": 3
+      }
+    ],
+    "secondsPerRep": 6,
+    "sets": [
+      3,
+      4,
+      5
+    ],
+    "reps": [
+      6,
+      8,
+      10,
+      12
+    ]
+  },
+  {
+    "name": "front_raise",
+    "weight": 1,
+    "activations": [
+      {
+        "muscle": "upper_chest",
+        "intensityPerRep": 1
+      },
+      {
+        "muscle": "front_delt",
+        "intensityPerRep": 3
+      },
+      {
+        "muscle": "middle_delt",
+        "intensityPerRep": 1
+      },
+      {
+        "muscle": "rear_delt",
+        "intensityPerRep": 0.5
+      }
+    ],
+    "secondsPerRep": 2,
+    "sets": [
+      3,
+      4
+    ],
+    "reps": [
+      10,
+      12,
+      15
+    ]
+  },
+  {
+    "name": "lateral_raise",
+    "weight": 1,
+    "activations": [
+      {
+        "muscle": "front_delt",
+        "intensityPerRep": 1
+      },
+      {
+        "muscle": "middle_delt",
+        "intensityPerRep": 3
+      },
+      {
+        "muscle": "rear_delt",
+        "intensityPerRep": 1.5
+      }
+    ],
+    "secondsPerRep": 2,
+    "sets": [
+      3,
+      4,
+      5
+    ],
+    "reps": [
+      6,
+      8,
+      10
+    ]
+  },
+  {
+    "name": "arnold_press",
+    "weight": 1,
+    "activations": [
+      {
+        "muscle": "upper_chest",
+        "intensityPerRep": 1.5
+      },
+      {
+        "muscle": "middle_chest",
+        "intensityPerRep": 0.5
+      },
+      {
+        "muscle": "front_delt",
+        "intensityPerRep": 4
+      },
+      {
+        "muscle": "middle_delt",
+        "intensityPerRep": 3.5
+      },
+      {
+        "muscle": "rear_delt",
+        "intensityPerRep": 2
+      },
+      {
+        "muscle": "triceps",
+        "intensityPerRep": 4
+      }
+    ],
+    "secondsPerRep": 3,
+    "sets": [
+      3,
+      4,
+      5
+    ],
+    "reps": [
+      6,
+      8,
+      10
+    ]
   },
   {
     "name": "tricep_extension",
@@ -272,8 +451,7 @@
       8,
       10,
       12
-    ],
-    "variations": []
+    ]
   },
   {
     "name": "skullcrusher",
@@ -292,8 +470,7 @@
       8,
       10,
       12
-    ],
-    "variations": []
+    ]
   },
   {
     "name": "tricep_kickback",
@@ -312,8 +489,7 @@
       8,
       10,
       12
-    ],
-    "variations": []
+    ]
   },
   {
     "name": "diamond_push_up",
@@ -331,8 +507,7 @@
       6,
       8,
       10
-    ],
-    "variations": []
+    ]
   },
   {
     "name": "tricep_dip",
@@ -350,8 +525,7 @@
       6,
       8,
       10
-    ],
-    "variations": []
+    ]
   },
   {
     "name": "sit_up",
@@ -371,8 +545,7 @@
       10,
       15,
       20
-    ],
-    "variations": []
+    ]
   },
   {
     "name": "cross_body_crunch",
@@ -391,8 +564,7 @@
     "reps": [
       10,
       15
-    ],
-    "variations": []
+    ]
   },
   {
     "name": "plank",
@@ -412,8 +584,7 @@
       30,
       45,
       60
-    ],
-    "variations": []
+    ]
   },
   {
     "name": "rkc_plank",
@@ -433,8 +604,7 @@
       30,
       45,
       60
-    ],
-    "variations": []
+    ]
   },
   {
     "name": "side_plank",
@@ -454,8 +624,7 @@
       30,
       45,
       60
-    ],
-    "variations": []
+    ]
   },
   {
     "name": "hollow_plank",
@@ -475,8 +644,7 @@
       30,
       45,
       60
-    ],
-    "variations": []
+    ]
   },
   {
     "name": "landmine_twist",
@@ -492,8 +660,7 @@
     "reps": [
       20,
       24
-    ],
-    "variations": []
+    ]
   },
   {
     "name": "hanging_leg_raise",
@@ -512,8 +679,7 @@
     "reps": [
       10,
       15
-    ],
-    "variations": []
+    ]
   },
   {
     "name": "dragon_flag",
@@ -533,8 +699,7 @@
       10,
       15,
       20
-    ],
-    "variations": []
+    ]
   },
   {
     "name": "ab_roll_out",
@@ -553,8 +718,7 @@
     "reps": [
       5,
       10
-    ],
-    "variations": []
+    ]
   },
   {
     "name": "lying_leg_lift",
@@ -574,8 +738,7 @@
       10,
       15,
       20
-    ],
-    "variations": []
+    ]
   },
   {
     "name": "scissor_kick",
@@ -595,8 +758,7 @@
       10,
       20,
       30
-    ],
-    "variations": []
+    ]
   },
   {
     "name": "russian_twist",
@@ -615,7 +777,798 @@
     "reps": [
       10,
       15
+    ]
+  },
+  {
+    "name": "deadlift",
+    "weight": 1,
+    "activations": [{
+      "muscle": "traps",
+      "intensityPerRep": 2
+    }, {
+      "muscle": "lats",
+      "intensityPerRep": 2
+    }, {
+      "muscle": "erectors",
+      "intensityPerRep": 2.5
+    }, {
+      "muscle": "rhomboids",
+      "intensityPerRep": 1
+    }, {
+      "muscle": "glutes",
+      "intensityPerRep": 3
+    }, {
+      "muscle": "quads",
+      "intensityPerRep": 2.5
+    }, {
+      "muscle": "hamstrings",
+      "intensityPerRep": 2.5
+    }, {
+      "muscle": "inner_thighs",
+      "intensityPerRep": 1.5
+    }, {
+      "muscle": "forearms",
+      "intensityPerRep": 1.5
+    }],
+    "secondsPerRep": 4,
+    "sets": [
+      3,
+      4,
+      5
     ],
-    "variations": []
+    "reps": [
+      6,
+      8,
+      10
+    ]
+  },
+  {
+    "name": "landmine_deadlift",
+    "weight": 1,
+    "activations": [{
+      "muscle": "traps",
+      "intensityPerRep": 1.5
+    }, {
+      "muscle": "lats",
+      "intensityPerRep": 1.5
+    }, {
+      "muscle": "erectors",
+      "intensityPerRep": 2
+    }, {
+      "muscle": "rhomboids",
+      "intensityPerRep": 1
+    }, {
+      "muscle": "glutes",
+      "intensityPerRep": 2.5
+    }, {
+      "muscle": "quads",
+      "intensityPerRep": 2
+    }, {
+      "muscle": "hamstrings",
+      "intensityPerRep": 2
+    }, {
+      "muscle": "inner_thighs",
+      "intensityPerRep": 1
+    }, {
+      "muscle": "forearms",
+      "intensityPerRep": 1
+    }],
+    "secondsPerRep": 3,
+    "sets": [
+      3,
+      4,
+      5
+    ],
+    "reps": [
+      6,
+      8,
+      10
+    ]
+  },
+  {
+    "name": "dumbbell_row",
+    "weight": 1,
+    "activations": [{
+      "muscle": "traps",
+      "intensityPerRep": 3
+    }, {
+      "muscle": "lats",
+      "intensityPerRep": 2
+    }, {
+      "muscle": "erectors",
+      "intensityPerRep": 1.5
+    }, {
+      "muscle": "rhomboids",
+      "intensityPerRep": 2
+    }],
+    "secondsPerRep": 6,
+    "sets": [
+      3,
+      4,
+      5
+    ],
+    "reps": [
+      8,
+      10,
+      12
+    ]
+  },
+  {
+    "name": "barbell_row",
+    "weight": 1,
+    "activations": [{
+      "muscle": "traps",
+      "intensityPerRep": 2.5
+    }, {
+      "muscle": "lats",
+      "intensityPerRep": 1.5
+    }, {
+      "muscle": "erectors",
+      "intensityPerRep": 3
+    }, {
+      "muscle": "rhomboids",
+      "intensityPerRep": 1.5
+    }],
+    "secondsPerRep": 3,
+    "sets": [
+      3,
+      4,
+      5
+    ],
+    "reps": [
+      6,
+      8,
+      10
+    ]
+  },
+  {
+    "name": "t_bar_row",
+    "weight": 1,
+    "activations": [{
+      "muscle": "traps",
+      "intensityPerRep": 2.5
+    }, {
+      "muscle": "lats",
+      "intensityPerRep": 1.5
+    }, {
+      "muscle": "erectors",
+      "intensityPerRep": 3
+    }, {
+      "muscle": "rhomboids",
+      "intensityPerRep": 1.5
+    }],
+    "secondsPerRep": 3,
+    "sets": [
+      3,
+      4,
+      5
+    ],
+    "reps": [
+      6,
+      8,
+      10
+    ]
+  },
+  {
+    "name": "trx_row",
+    "weight": 1,
+    "activations": [{
+      "muscle": "traps",
+      "intensityPerRep": 1.5
+    }, {
+      "muscle": "lats",
+      "intensityPerRep": 1
+    }, {
+      "muscle": "erectors",
+      "intensityPerRep": 2
+    }, {
+      "muscle": "rhomboids",
+      "intensityPerRep": 1.5
+    }],
+    "secondsPerRep": 2,
+    "sets": [
+      3
+    ],
+    "reps": [
+      10,
+      15,
+      20
+    ]
+  },
+  {
+    "name": "inverted_row",
+    "weight": 1,
+    "activations": [{
+      "muscle": "traps",
+      "intensityPerRep": 2.5
+    }, {
+      "muscle": "lats",
+      "intensityPerRep": 1.5
+    }, {
+      "muscle": "erectors",
+      "intensityPerRep": 2
+    }, {
+      "muscle": "rhomboids",
+      "intensityPerRep": 1
+    }],
+    "secondsPerRep": 2,
+    "sets": [
+      3
+    ],
+    "reps": [
+      10,
+      15,
+      20
+    ]
+  },
+  {
+    "name": "chin_up",
+    "weight": 1,
+    "activations": [{
+      "muscle": "traps",
+      "intensityPerRep": 1.5
+    }, {
+      "muscle": "lats",
+      "intensityPerRep": 3
+    }, {
+      "muscle": "erectors",
+      "intensityPerRep": 1.5
+    }, {
+      "muscle": "rhomboids",
+      "intensityPerRep": 1
+    }, {
+      "muscle": "biceps",
+      "intensityPerRep": 4
+    }, {
+      "muscle": "abs",
+      "intensityPerRep": 3
+    }],
+    "secondsPerRep": 2,
+    "sets": [
+      3
+    ],
+    "reps": [
+      5,
+      8,
+      10
+    ]
+  },
+  {
+    "name": "pull_up",
+    "weight": 1,
+    "activations": [{
+      "muscle": "traps",
+      "intensityPerRep": 2
+    }, {
+      "muscle": "lats",
+      "intensityPerRep": 3
+    }, {
+      "muscle": "erectors",
+      "intensityPerRep": 1.5
+    }, {
+      "muscle": "rhomboids",
+      "intensityPerRep": 1
+    }, {
+      "muscle": "biceps",
+      "intensityPerRep": 3
+    }, {
+      "muscle": "abs",
+      "intensityPerRep": 4
+    }],
+    "secondsPerRep": 2,
+    "sets": [
+      3
+    ],
+    "reps": [
+      5,
+      8,
+      10
+    ]
+  },
+  {
+    "name": "squat",
+    "weight": 1,
+    "activations": [{
+      "muscle": "erectors",
+      "intensityPerRep": 2.5
+    }, {
+      "muscle": "glutes",
+      "intensityPerRep": 4
+    }, {
+      "muscle": "quads",
+      "intensityPerRep": 3.5
+    }, {
+      "muscle": "hamstrings",
+      "intensityPerRep": 3.5
+    }, {
+      "muscle": "inner_thighs",
+      "intensityPerRep": 1.5
+    }, {
+      "muscle": "calves",
+      "intensityPerRep": 1.5
+    }],
+    "secondsPerRep": 4,
+    "sets": [
+      3,
+      4,
+      5
+    ],
+    "reps": [
+      6,
+      8,
+      10
+    ]
+  },
+  {
+    "name": "goblet_squat",
+    "weight": 1,
+    "activations": [{
+      "muscle": "erectors",
+      "intensityPerRep": 0.5
+    }, {
+      "muscle": "glutes",
+      "intensityPerRep": 1
+    }, {
+      "muscle": "quads",
+      "intensityPerRep": 1
+    }, {
+      "muscle": "hamstrings",
+      "intensityPerRep": 1
+    }, {
+      "muscle": "inner_thighs",
+      "intensityPerRep": 0.5
+    }, {
+      "muscle": "calves",
+      "intensityPerRep": 0.5
+    }],
+    "secondsPerRep": 2,
+    "sets": [
+      3
+    ],
+    "reps": [
+      10,
+      15,
+      20
+    ]
+  },
+  {
+    "name": "kettlebell_pistol_squat",
+    "weight": 1,
+    "activations": [{
+      "muscle": "erectors",
+      "intensityPerRep": 0.5
+    }, {
+      "muscle": "glutes",
+      "intensityPerRep": 1
+    }, {
+      "muscle": "quads",
+      "intensityPerRep": 1
+    }, {
+      "muscle": "hamstrings",
+      "intensityPerRep": 1
+    }, {
+      "muscle": "inner_thighs",
+      "intensityPerRep": 0.5
+    }, {
+      "muscle": "calves",
+      "intensityPerRep": 0.5
+    }],
+    "secondsPerRep": 5,
+    "sets": [
+      3
+    ],
+    "reps": [
+      10,
+      15,
+      20
+    ]
+  },
+  {
+    "name": "landmine_squat",
+    "weight": 1,
+    "activations": [{
+      "muscle": "erectors",
+      "intensityPerRep": 1.5
+    }, {
+      "muscle": "glutes",
+      "intensityPerRep": 2.5
+    }, {
+      "muscle": "quads",
+      "intensityPerRep": 2
+    }, {
+      "muscle": "hamstrings",
+      "intensityPerRep": 2
+    }, {
+      "muscle": "inner_thighs",
+      "intensityPerRep": 1.5
+    }, {
+      "muscle": "calves",
+      "intensityPerRep": 1
+    }],
+    "secondsPerRep": 3,
+    "sets": [
+      3
+    ],
+    "reps": [
+      10,
+      15,
+      20
+    ]
+  },
+  {
+    "name": "weighted_lunge",
+    "weight": 1,
+    "activations": [{
+      "muscle": "erectors",
+      "intensityPerRep": 2
+    }, {
+      "muscle": "glutes",
+      "intensityPerRep": 3
+    }, {
+      "muscle": "quads",
+      "intensityPerRep": 2.5
+    }, {
+      "muscle": "hamstrings",
+      "intensityPerRep": 2.5
+    }, {
+      "muscle": "inner_thighs",
+      "intensityPerRep": 1.5
+    }, {
+      "muscle": "calves",
+      "intensityPerRep": 1.5
+    }],
+    "secondsPerRep": 6,
+    "sets": [
+      3,
+      4
+    ],
+    "reps": [
+      10,
+      12,
+      15
+    ]
+  },
+  {
+    "name": "kettlebell_swing",
+    "weight": 1,
+    "activations": [{
+      "muscle": "erectors",
+      "intensityPerRep": 1
+    }, {
+      "muscle": "glutes",
+      "intensityPerRep": 2
+    }, {
+      "muscle": "quads",
+      "intensityPerRep": 1
+    }, {
+      "muscle": "hamstrings",
+      "intensityPerRep": 1
+    }, {
+      "muscle": "inner_thighs",
+      "intensityPerRep": 0.5
+    }, {
+      "muscle": "biceps",
+      "intensityPerRep": 0.5
+    }],
+    "secondsPerRep": 2,
+    "sets": [
+      3,
+      4
+    ],
+    "reps": [
+      15,
+      20,
+      30
+    ]
+  },
+  {
+    "name": "kettlebell_snatch",
+    "weight": 1,
+    "activations": [{
+      "muscle": "erectors",
+      "intensityPerRep": 2
+    }, {
+      "muscle": "glutes",
+      "intensityPerRep": 1.5
+    }, {
+      "muscle": "quads",
+      "intensityPerRep": 1
+    }, {
+      "muscle": "hamstrings",
+      "intensityPerRep": 1
+    }, {
+      "muscle": "inner_thighs",
+      "intensityPerRep": 0.5
+    }, {
+      "muscle": "biceps",
+      "intensityPerRep": 0.5
+    }, {
+      "muscle": "obliques",
+      "intensityPerRep": 1
+    }],
+    "secondsPerRep": 3,
+    "sets": [
+      3,
+      4
+    ],
+    "reps": [
+      15,
+      20,
+      30
+    ]
+  },
+  {
+    "name": "good_morning",
+    "weight": 1,
+    "activations": [{
+      "muscle": "erectors",
+      "intensityPerRep": 3
+    }, {
+      "muscle": "glutes",
+      "intensityPerRep": 4.5
+    }, {
+      "muscle": "quads",
+      "intensityPerRep": 3.5
+    }, {
+      "muscle": "hamstrings",
+      "intensityPerRep": 1.5
+    }, {
+      "muscle": "inner_thighs",
+      "intensityPerRep": 0.5
+    }],
+    "secondsPerRep": 4,
+    "sets": [
+      3,
+      4,
+      5
+    ],
+    "reps": [
+      8,
+      10,
+      12
+    ]
+  },
+  {
+    "name": "standing_calf_raises",
+    "weight": 1,
+    "activations": [{
+      "muscle": "calves",
+      "intensityPerRep": 4
+    }],
+    "secondsPerRep": 1.5,
+    "sets": [
+      3,
+      4
+    ],
+    "reps": [
+      15,
+      20,
+      25
+    ]
+  },
+  {
+    "name": "leg_extension_iso_hold",
+    "weight": 1,
+    "activations": [{
+      "muscle": "quads",
+      "intensityPerRep": 0.5
+    }],
+    "secondsPerRep": 1,
+    "sets": [
+      3
+    ],
+    "reps": [
+      10,
+      15,
+      20
+    ]
+  },
+  {
+    "name": "lunge",
+    "weight": 1,
+    "activations": [{
+      "muscle": "erectors",
+      "intensityPerRep": 0.5
+    }, {
+      "muscle": "glutes",
+      "intensityPerRep": 1
+    }, {
+      "muscle": "quads",
+      "intensityPerRep": 0.5
+    }, {
+      "muscle": "hamstrings",
+      "intensityPerRep": 0.5
+    }, {
+      "muscle": "inner_thighs",
+      "intensityPerRep": 0.5
+    }, {
+      "muscle": "calves",
+      "intensityPerRep": 0.5
+    }],
+    "secondsPerRep": 4,
+    "sets": [
+      3,
+      4
+    ],
+    "reps": [
+      10,
+      12,
+      15
+    ]
+  },
+  {
+    "name": "wall_sit",
+    "weight": 1,
+    "activations": [{
+      "muscle": "quads",
+      "intensityPerRep": 0.5
+    }, {
+      "muscle": "hamstrings",
+      "intensityPerRep": 0.3
+    }, {
+      "muscle": "calves",
+      "intensityPerRep": 0.1
+    }, {
+      "muscle": "abs",
+      "intensityPerRep": 0.3
+    }],
+    "secondsPerRep": 1,
+    "sets": [
+      3
+    ],
+    "reps": [
+      20,
+      40,
+      60
+    ]
+  },
+  {
+    "name": "barbell_curl",
+    "weight": 1,
+    "activations": [{
+      "muscle": "biceps",
+      "intensityPerRep": 3
+    }, {
+      "muscle": "forearms",
+      "intensityPerRep": 1
+    }],
+    "secondsPerRep": 2,
+    "sets": [
+      3,
+      4
+    ],
+    "reps": [
+      10,
+      12,
+      15
+    ]
+  },
+  {
+    "name": "dumbbell_curl",
+    "weight": 1,
+    "activations": [{
+      "muscle": "biceps",
+      "intensityPerRep": 3.5
+    }, {
+      "muscle": "forearms",
+      "intensityPerRep": 1.5
+    }],
+    "secondsPerRep": 4,
+    "sets": [
+      3,
+      4
+    ],
+    "reps": [
+      10,
+      12,
+      15
+    ]
+  },
+  {
+    "name": "hammer_curl",
+    "weight": 1,
+    "activations": [{
+      "muscle": "biceps",
+      "intensityPerRep": 3.5
+    }, {
+      "muscle": "forearms",
+      "intensityPerRep": 1.5
+    }],
+    "secondsPerRep": 2,
+    "sets": [
+      3,
+      4
+    ],
+    "reps": [
+      10,
+      12,
+      15
+    ]
+  },
+  {
+    "name": "reverse_curl",
+    "weight": 1,
+    "activations": [{
+      "muscle": "biceps",
+      "intensityPerRep": 3
+    }, {
+      "muscle": "forearms",
+      "intensityPerRep": 1
+    }],
+    "secondsPerRep": 2,
+    "sets": [
+      3,
+      4
+    ],
+    "reps": [
+      10,
+      12,
+      15
+    ]
+  },
+  {
+    "name": "zottman_curl",
+    "weight": 1,
+    "activations": [{
+      "muscle": "biceps",
+      "intensityPerRep": 3.5
+    }, {
+      "muscle": "forearms",
+      "intensityPerRep": 1.5
+    }],
+    "secondsPerRep": 2,
+    "sets": [
+      3,
+      4
+    ],
+    "reps": [
+      10,
+      12,
+      15
+    ]
+  },
+  {
+    "name": "curl_to_press",
+    "weight": 1,
+    "activations": [{
+      "muscle": "biceps",
+      "intensityPerRep": 3.5
+    }, {
+      "muscle": "forearms",
+      "intensityPerRep": 1.5
+    }, {
+      "muscle": "triceps",
+      "intensityPerRep": 1.5
+    }, {
+      "muscle": "front_delt",
+      "intensityPerRep": 2
+    }],
+    "secondsPerRep": 4,
+    "sets": [
+      3,
+      4
+    ],
+    "reps": [
+      10,
+      12,
+      15
+    ]
+  },
+  {
+    "name": "plate_grips",
+    "weight": 1,
+    "activations": [{
+      "muscle": "forearms",
+      "intensityPerRep": 0.5
+    }],
+    "secondsPerRep": 1,
+    "sets": [
+      3
+    ],
+    "reps": [
+      30,
+      40,
+      60
+    ]
   }
 ]

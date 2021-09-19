@@ -19,13 +19,13 @@
       "name" : "back",
       "children" : [
         {
-          "name" : "erectors"
+          "name" : "traps"
         },
         {
           "name" : "lats"
         },
         {
-          "name" : "traps"
+          "name" : "erectors"
         },
         {
           "name" : "rhomboids"
@@ -81,7 +81,7 @@
           "name" : "quads"
         },
         {
-          "name" : "inner_thigh"
+          "name" : "inner_thighs"
         },
         {
           "name" : "hamstrings"
