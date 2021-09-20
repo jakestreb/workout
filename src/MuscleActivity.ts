@@ -18,7 +18,7 @@ export default class MuscleActivity {
 	}
 
 	public get(muscleName: string) {
-		return this._activity[muscleName];
+		return this._activity[muscleName] || 0;
 	}
 
 	public keys() {
