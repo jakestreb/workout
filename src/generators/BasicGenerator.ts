@@ -18,6 +18,7 @@ export default class BasicGenerator {
 	}
 
 	public* generate() {
+		console.warn('called generate');
 		const exercisePicker = new ExercisePicker(this.target);
 
 		for (const exercises of exercisePicker.pick()) {

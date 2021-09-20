@@ -1,6 +1,6 @@
-import * as exerciseRecords from './data/exercises.json';
 import MuscleActivity from './MuscleActivity';
 import WorkoutSet from './WorkoutSet';
+import WorkoutTarget from './targets/WorkoutTarget';
 import * as util from './global/util';
 
 interface ExerciseRecord {
@@ -18,13 +18,11 @@ interface Activation {
 }
 
 export default class Exercise {
-	public static* generator(exclude: string[] = []) {
-		const filteredRecords: any[] = exerciseRecords.filter(e =>
-			!exclude.includes(e.name)
-		);
-
-		for (const exerciseRecord of util.weightedSelector(filteredRecords)) {
-			yield new Exercise(exerciseRecord as ExerciseRecord);
+	public static* generator(target: WorkoutTarget, exclude: string[] = []) {
+		for (const exerciseRecord of target.exerciseRecords) {
+			if (!exclude.includes(exerciseRecord.name)) {
+				yield new Exercise(exerciseRecord);
+			}
 		}
 	}
 

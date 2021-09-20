@@ -1,7 +1,10 @@
+import * as exerciseRecords from '../data/exercises.json';
+import Exercise from '../Exercise';
 import MuscleActivity from '../MuscleActivity';
 import MuscleActivityTarget from './MuscleActivityTarget';
 import Reporter from '../Reporter';
 import { Result } from '../global/enums';
+import * as util from '../global/util';
 
 export default class WorkoutTarget {
 
@@ -11,16 +14,20 @@ export default class WorkoutTarget {
 	public timeTarget: number;
 
 	private _timeReporter: Reporter
+	private _possibleExercises: any[] = [];
 
 	constructor(targetName: string, intensity: number, timeSeconds: number) {
 		this.muscleActivityTarget = MuscleActivityTarget.fromTarget(targetName, intensity, timeSeconds);
+
 		this.timeTarget = timeSeconds;
 		this._timeReporter = new Reporter();
 		this._timeReporter.setTarget('time', timeSeconds);
+
+		this._initPossibleExercises();
 	}
 
-	public checkSingleFocus(muscleActivity: MuscleActivity): boolean {
-		return this.muscleActivityTarget.allows(muscleActivity) && this.muscleActivityTarget.overlaps(muscleActivity);
+	public get exerciseRecords() {
+		return this._possibleExercises;
 	}
 
 	// Checks that the focus is in the right muscles
@@ -50,5 +57,16 @@ export default class WorkoutTarget {
 	public throw(): void {
 		this._timeReporter.throw();
 		this.muscleActivityTarget.reporter.throw();
+	}
+
+	private _initPossibleExercises(): void {
+		for (const e of util.weightedSelector(exerciseRecords)) {
+			const exercise = new Exercise(e);
+			const allows = this.muscleActivityTarget.allows(exercise.activityPerRep);
+			const overlaps = this.muscleActivityTarget.overlaps(exercise.activityPerRep);
+			if (allows && overlaps) {
+				this._possibleExercises.push(e);
+			}
+		}
 	}
 }

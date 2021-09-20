@@ -1,6 +1,6 @@
-import * as exerciseRecords from './data/exercises.json';
 import Exercise from './Exercise';
 import MuscleActivity from './MuscleActivity';
+import WorkoutTarget from './targets/WorkoutTarget';
 import * as util from './global/util';
 
 interface ExerciseRecord {
@@ -21,14 +21,13 @@ export default class ExercisePair extends Exercise {
 
 	public static swapTime: number = 80;
 
-	public static* generator(exclude: string[] = []) {
-		const filteredRecords: any[] = exerciseRecords.filter(e =>
-			!exclude.includes(e.name)
-		);
-
-		for (const recordA of util.weightedSelector(filteredRecords)) {
-			for (const recordB of util.weightedSelector(filteredRecords)) {
-				if (recordA.name === recordB.name) {
+	public static* generator(target: WorkoutTarget, exclude: string[] = []) {
+		for (const recordA of util.weightedSelector(target.exerciseRecords)) {
+			if (exclude.includes(recordA.name)) {
+				continue;
+			}
+			for (const recordB of util.weightedSelector(target.exerciseRecords)) {
+				if (recordA.name === recordB.name || exclude.includes(recordB.name)) {
 					continue;
 				}
 				const pair = new ExercisePair(recordA, recordB);

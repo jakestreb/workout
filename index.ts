@@ -4,7 +4,7 @@ import LookaheadGenerator from './src/generators/LookaheadGenerator';
 readline.emitKeypressEvents(process.stdin);
 
 const wg = new LookaheadGenerator({
-	name: 'chest_day',
+	name: 'back_day',
 	intensity: 7,
 	timeMinutes: 30
 });

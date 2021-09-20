@@ -35,7 +35,7 @@ export default class ExercisePicker extends Picker<Exercise> {
 		this.exercises.forEach(e => {
 			selected.push(...e.names);
 		});
-		return anyGenerator(selected);
+		return anyGenerator(this._target, selected);
 	}
 
 	private get _transitionTime() {
@@ -60,21 +60,16 @@ export default class ExercisePicker extends Picker<Exercise> {
 	}
 
 	private _checkFocus(): Result {
-		const latestActivity = this.exercises[this.exercises.length - 1].activityPerRep;
+		const activityPerRep = MuscleActivity.combine(...this.exercises.map(e => e.activityPerRep));
 
-		if (this._target.checkSingleFocus(latestActivity)) {
-			const activityPerRep = MuscleActivity.combine(...this.exercises.map(e => e.activityPerRep));
-
-			return this._target.checkFocusMuscles(activityPerRep) ? Result.Complete : Result.Incomplete;
-		}
-		return Result.Failed;
+		return this._target.checkFocusMuscles(activityPerRep) ? Result.Complete : Result.Incomplete;
 	}
 }
 
-function* anyGenerator(previouslySelected: string[] = []): Generator<Exercise> {
+function* anyGenerator(target: WorkoutTarget, previouslySelected: string[] = []): Generator<Exercise> {
 	const gens: Generator<Exercise>[] = [
-		Exercise.generator(previouslySelected),
-		ExercisePair.generator(previouslySelected)
+		Exercise.generator(target, previouslySelected),
+		ExercisePair.generator(target, previouslySelected)
 	];
 	while (gens.length > 0) {
 		const index = Math.floor(Math.random() * gens.length);

@@ -9,10 +9,28 @@
       {
         "name": "triceps",
         "weight": 1
+      }
+    ]
+  },
+  {
+    "name" : "back_day",
+    "muscles" : [
+      {
+        "name" : "back",
+        "weight" : 2
       },
       {
-        "name" : "core",
-        "weight" : 0
+        "name": "biceps",
+        "weight": 1
+      }
+    ]
+  },
+  {
+    "name" : "leg_day",
+    "muscles" : [
+      {
+        "name" : "legs",
+        "weight" : 1
       }
     ]
   },
