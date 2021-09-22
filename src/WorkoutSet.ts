@@ -1,4 +1,5 @@
 import Exercise from './Exercise';
+import MuscleActivity from './MuscleActivity';
 import * as util from './global/util';
 
 export default class WorkoutSet {
@@ -13,6 +14,10 @@ export default class WorkoutSet {
 
 	public get totalReps(): number {
 		return this.reps[0] * this.reps.length;
+	}
+
+	public get activity(): MuscleActivity {
+		return this.exercise.activityPerRep.multiply(this.totalReps);
 	}
 
 	public get time(): number {

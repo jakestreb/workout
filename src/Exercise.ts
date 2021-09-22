@@ -65,12 +65,16 @@ export default class Exercise {
 		return avgSets * util.avg(this.possibleReps) * this._secondsPerRep + (avgSets - 1) * Exercise.restTime;
 	}
 
+	public get repEstimate(): number {
+		return util.avg(this.possibleSets) * util.avg(this.possibleReps);
+	}
+
 	public get activityPerRep(): MuscleActivity {
 		return this._activityPerRep;
 	}
 
 	public get sortIndex(): number {
-		return -this._activityPerRep.total();
+		return -this._activityPerRep.total * this.repEstimate;
 	}
 
 	public getTime(sets: number, reps: number) {

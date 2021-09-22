@@ -2,6 +2,7 @@ import * as targetRecords from '../data/targets.json';
 import * as body from '../data/body.json';
 import MuscleActivity from '../MuscleActivity';
 import Reporter from '../Reporter';
+import Workout from '../Workout';
 import * as util from '../global/util';
 
 interface MuscleRecord {
@@ -20,14 +21,9 @@ interface Muscle {
 	activity: number;
 }
 
-// Allowed intensity difference when determining if muscle activity is similar
-const INTENSITY_TOLERANCE = 1;
-
-const AVG_WORKOUT_REPS = 250;
-const AVG_WORKOUT_TIME_S = 45 * 60;
+const intensityTolerance = 1;
 
 export default class MuscleActivityTarget {
-
 	// Creates all component targets
 	static fromTarget(targetName: string, intensity: number, timeSeconds: number) {
 		const targetRecord = targetRecords.find(t => t.name === targetName);
@@ -39,9 +35,9 @@ export default class MuscleActivityTarget {
 
 		targetRecord.muscles.forEach(m => {
 			const name = m.name;
-			const relativeWeight = m.weight / totalWeight;
-			const relativeTime = timeSeconds / AVG_WORKOUT_TIME_S;
-			const activity = relativeWeight * relativeTime * intensity * AVG_WORKOUT_REPS;
+			const muscleScaler = m.weight / totalWeight;
+			const timeScaler = timeSeconds / Workout.avgTime;
+			const activity = muscleScaler * timeScaler * Workout.intensityScaler * intensity;
 			const muscles: string[] = getChildren(name);
 			if (muscles.length > 0) {
 				activityTarget.addGroup({ name, activity, muscles });
@@ -61,9 +57,6 @@ export default class MuscleActivityTarget {
 	// Sets contain muscle names (no groups)
 	private readonly _avoid: Set<string> = new Set();
 	private readonly _added: Set<string> = new Set();
-
-	private readonly _lower_tolerance_multiplier: number = (this._intensity - INTENSITY_TOLERANCE) / this._intensity
-	private readonly _upper_tolerance_multiplier: number = (this._intensity + INTENSITY_TOLERANCE) / this._intensity
 
 	constructor(private _intensity: number) {
 
@@ -133,20 +126,18 @@ export default class MuscleActivityTarget {
 	public isSatisfiedBy(muscleActivity: MuscleActivity): boolean {
 		for (const m of this._muscles) {
 			this.reporter.record(m.name, muscleActivity.get(m.name));
-			if (this._isBelowTolerance(muscleActivity.get(m.name), m.activity)) {
-				return false;
-			}
-			if (this._isAboveTolerance(muscleActivity.get(m.name), m.activity)) {
+			const belowTolerance = muscleActivity.get(m.name) < this._lowerTolerance(m.activity);
+			const aboveTolerance = muscleActivity.get(m.name) > this._upperTolerance(m.activity);
+			if (belowTolerance || aboveTolerance) {
 				return false;
 			}
 		}
 		for (const g of this._groups) {
 			const actual = util.sum(g.muscles.map(name => muscleActivity.get(name)));
 			this.reporter.record(g.name, actual);
-			if (this._isBelowTolerance(actual, g.activity)) {
-				return false;
-			}
-			if (this._isAboveTolerance(actual, g.activity)) {
+			const belowTolerance = actual < this._lowerTolerance(g.activity);
+			const aboveTolerance = actual > this._upperTolerance(g.activity);
+			if (belowTolerance || aboveTolerance) {
 				return false;
 			}
 		}
@@ -154,12 +145,12 @@ export default class MuscleActivityTarget {
 		return true;
 	}
 
-	private _isBelowTolerance(activity: number, targetActivity: number): boolean {
-		return activity < targetActivity * this._lower_tolerance_multiplier;
+	private _lowerTolerance(activity: number): number {
+		return activity * (this._intensity - intensityTolerance) / this._intensity;
 	}
 
-	private _isAboveTolerance(activity: number, targetActivity: number): boolean {
-		return activity > targetActivity * this._upper_tolerance_multiplier;
+	private _upperTolerance(activity: number): number {
+		return activity * (this._intensity + intensityTolerance) / this._intensity;
 	}
 }
 

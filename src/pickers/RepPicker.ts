@@ -52,9 +52,7 @@ export default class RepPicker extends Picker<WorkoutSet> {
 	}
 
 	private _checkFocus(): Result {
-		const activity = MuscleActivity.combine(
-			...this.sets.map(s => s.exercise.activityPerRep.multiply(s.totalReps))
-		);
+		const activity = MuscleActivity.combine(...this.sets.map(s => s.activity));
 		return this._target.checkFocus(activity) ? Result.Complete : Result.Failed;
 	}
 }
