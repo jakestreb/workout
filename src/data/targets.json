@@ -17,11 +17,15 @@
     "muscles" : [
       {
         "name" : "back",
-        "weight" : 2
+        "weight" : 4
       },
       {
         "name": "biceps",
         "weight": 1
+      },
+      {
+        "name": "chest",
+        "weight": 0
       }
     ]
   },

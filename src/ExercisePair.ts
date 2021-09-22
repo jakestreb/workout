@@ -22,12 +22,17 @@ export default class ExercisePair extends Exercise {
 	public static swapTime: number = 80;
 
 	public static* generator(target: WorkoutTarget, exclude: string[] = []) {
-		for (const recordA of util.weightedSelector(target.exerciseRecords)) {
+		const viableExercises = target.exerciseRecords
+			.filter(e => e.supersetGroups && e.supersetGroups.length > 0);
+		for (const recordA of util.weightedSelector(viableExercises)) {
 			if (exclude.includes(recordA.name)) {
 				continue;
 			}
-			for (const recordB of util.weightedSelector(target.exerciseRecords)) {
+			for (const recordB of util.weightedSelector(viableExercises)) {
 				if (recordA.name === recordB.name || exclude.includes(recordB.name)) {
+					continue;
+				}
+				if (!haveSharedValue(recordA.supersetGroups, recordB.supersetGroups)) {
 					continue;
 				}
 				const pair = new ExercisePair(recordA, recordB);
@@ -75,4 +80,9 @@ export default class ExercisePair extends Exercise {
 	public toString(): string {
 		return `${this.name} x ${this.second.name}`;
 	}
+}
+
+function haveSharedValue(a: string[] = [], b: string[] = []): boolean {
+	const set = new Set([...a, ...b]);
+	return set.size < a.length + b.length;
 }
