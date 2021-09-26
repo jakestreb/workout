@@ -2,6 +2,7 @@ import MuscleActivity from './MuscleActivity';
 import WorkoutSet from './WorkoutSet';
 import WorkoutTarget from './targets/WorkoutTarget';
 import * as util from './global/util';
+import * as records from './data/records.json';
 
 interface ExerciseRecord {
 	name: string;
@@ -79,6 +80,16 @@ export default class Exercise {
 
 	public getTime(sets: number, reps: number) {
 		return reps * sets * this._secondsPerRep + (sets - 1) * Exercise.restTime;
+	}
+
+	public getRecords(users: string[]): string {
+		let exerciseRecords: string = '';
+		users.forEach(u => {
+			const userRecords: { [exercise: string]: number } = (records as any)[u];
+			if (!userRecords) { throw new Error(`User ${u} not found`); }
+			exerciseRecords += `${u}: ${userRecords[this.name] || '?'} lbs\n`;
+		});
+		return exerciseRecords;
 	}
 
 	public* generateSets(): Generator<WorkoutSet> {

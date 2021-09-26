@@ -1,0 +1,41 @@
+{
+	"Kelci": {
+		"bench_press": 65,
+		"deadlift": 75,
+		"overhead_press": 45,
+		"squat": 95,
+		"dumbbell_row": 20
+	},
+	"Michael": {
+		"bench_press": 125,
+		"deadlift": 185,
+		"overhead_press": 65,
+		"squat": 225
+	},
+	"Vini": {
+		"bench_press": 105,
+		"deadlift": 185,
+		"overhead_press": 55,
+		"squat": 135,
+		"barbell_row": 95
+	},
+	"Jake": {
+		"bench_press": 225,
+		"deadlift": 245,
+		"overhead_press": 95,
+		"squat": 225,
+		"barbell_row": 135
+	},
+	"Yudhi": {
+		"bench_press": 75,
+		"deadlift": 185,
+		"overhead_press": 55,
+		"squat": 95,
+		"barbell_row": 65
+	},
+	"Spader": {
+		"deadlift": 255,
+		"overhead_press": 115,
+		"barbell_row": 135
+	}
+}

@@ -4,7 +4,7 @@ import WorkoutTerminal from './src/terminal/WorkoutTerminal';
 
 // readline.emitKeypressEvents(process.stdin);
 
-const t = new WorkoutTerminal();
+const t = new WorkoutTerminal(['Kelci', 'Michael', 'Vini', 'Jake', 'Yudhi']);
 
 const wg = new BasicGenerator({
 	name: 'leg_day',
@@ -26,8 +26,7 @@ process.stdin.on('data', async (key) => {
 		if (curr.done) {
 			process.exit(0);
 		}
-		t.showWorkout(curr.value);
-		t.showMuscles(curr.value.activity);
+		t.update(curr.value);
 	}
 });
 

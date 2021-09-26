@@ -13,12 +13,20 @@ export default class SelectColumnList extends ColumnList {
 		return super.renderItem(item, index);
 	}
 
+	public update(items: string[]) {
+		this.items = items;
+		this.emit('hover', this.selectedIndex);
+		this.updatePing();
+	}
+
 	public addKeyBindings() {
 		process.stdin.on('data', async (key) => {
 			if (key === '\u001B[A') { // up
 				this._decreaseIndex();
+				this.emit('hover', this.selectedIndex);
 			} else if (key === '\u001B[B') { // down
 				this._increaseIndex();
+				this.emit('hover', this.selectedIndex);
 			} else if (key === '\u000D') { // enter
 				this.emit('select', this.selectedIndex);
 			}

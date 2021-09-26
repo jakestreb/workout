@@ -2,6 +2,7 @@ import Exercise from './Exercise';
 import MuscleActivity from './MuscleActivity';
 import WorkoutTarget from './targets/WorkoutTarget';
 import * as util from './global/util';
+import * as records from './data/records.json';
 
 interface ExerciseRecord {
 	name: string;
@@ -75,6 +76,18 @@ export default class ExercisePair extends Exercise {
 		return super.getTime(sets, reps) + this.second.getTime(sets, reps)
 			+ ((sets - 1) * 2) * (ExercisePair.swapTime - Exercise.restTime)
 			+ ExercisePair.swapTime;
+	}
+
+	public getRecords(users: string[]) {
+		let exerciseRecords: string = '';
+		users.forEach(u => {
+			const userRecords: { [exercise: string]: number } = (records as any)[u];
+			if (!userRecords) { throw new Error(`User ${u} not found`); }
+			const firstRecord = userRecords[this.name] || '?';
+			const secondRecord = userRecords[this.second.name] || '?';
+			exerciseRecords  += `${u}: ${firstRecord} / ${secondRecord} lbs\n`;
+		});
+		return exerciseRecords;
 	}
 
 	public toString(): string {
