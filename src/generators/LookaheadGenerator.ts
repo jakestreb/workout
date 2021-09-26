@@ -9,7 +9,7 @@ export default class LookaheadGenerator extends BasicGenerator {
 	private _child: child.ChildProcess;
 	private _workouts: Workout[] = [];
 	private _exited: boolean = false;
-	private _msgCount: number = 0;
+	// private _msgCount: number = 0;
 
 	constructor(arg: any) {
 		super(arg);
@@ -39,15 +39,15 @@ export default class LookaheadGenerator extends BasicGenerator {
 
 		this._child.on('message', (msg) => {
 			this._workouts.push(msg);
-			this._msgCount += 1;
-			if (this._msgCount % 100 === 0) {
-				console.log(this._msgCount);
-			}
+			// this._msgCount += 1;
+			// if (this._msgCount % 100 === 0) {
+			// 	console.log(this._msgCount);
+			// }
 		});
 
 		this._child.on('exit', () => {
 			this._exited = true;
-			console.log('DONE');
+			// console.log('DONE');
 		});
 
 		this._child.on('error', (err) => {
