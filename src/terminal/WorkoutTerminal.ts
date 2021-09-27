@@ -29,7 +29,7 @@ export default class WorkoutTerminal extends Terminal {
 	private _updateWorkout(w: Workout) {
 		this.workout = w;
 		if (!this.workoutComponent) {
-			this.workoutComponent = new SelectColumnList(0.1, 0.1);
+			this.workoutComponent = new SelectColumnList(0.1, 0.2);
 			this.add(this.workoutComponent);
 			this.workoutComponent.on('select', index => {
 				this._toggleLock(this.workout.sets[index]);
@@ -43,13 +43,13 @@ export default class WorkoutTerminal extends Terminal {
 		}
 		this.workoutComponent.update(w.sets.map(s => {
 			const lock = this._isLocked(s) ? '>' : ' ';
-			return `${lock} ${s}`;
+			return ` ${lock} ${s}   `;
 		}));
 	}
 
 	private _updateMuscles(a: MuscleActivity) {
 		if (!this.muscleComponent) {
-			this.muscleComponent = new ColumnList(0.6, 0.1);
+			this.muscleComponent = new ColumnList(0.6, 0.2);
 			this.add(this.muscleComponent);
 		}
 		this.muscleComponent.update(`${a}`.split('\n'));
@@ -60,7 +60,7 @@ export default class WorkoutTerminal extends Terminal {
 			this.recordComponent = new ColumnList(0.1, 0.5);
 			this.add(this.recordComponent);
 		}
-		this.recordComponent.update(e.getRecords(this.users).split('\n'));
+		this.recordComponent.update(e.getRecords(this.users).split('\n').map(x => `   ${x}   `));
 	}
 
 	private _toggleLock(s: WorkoutSet) {
