@@ -11,6 +11,7 @@ export default class ExercisePicker extends Picker<Exercise> {
 	private static _timeTolerance: number = 5 * 60;
 
 	private readonly _target: WorkoutTarget;
+	private _held: Set<string> = new Set();
 
 	constructor(target: WorkoutTarget) {
 		super();
@@ -20,6 +21,7 @@ export default class ExercisePicker extends Picker<Exercise> {
 
 	public get checks() {
 		return [
+			() => this._checkHeld(),
 			() => this._checkOrder(),
 			() => this._checkTime(),
 			() => this._checkFocus()
@@ -38,12 +40,22 @@ export default class ExercisePicker extends Picker<Exercise> {
 		return anyGenerator(this._target, selected);
 	}
 
+	public hold(exercises: string[]): void {
+		this._held = new Set(exercises);
+	}
+
 	private get _transitionTime() {
 		return (this.index - 1) * Exercise.transitionTime;
 	}
 
 	private get _timeEstimate() {
 		return util.sum(this.exercises.map(e => e.timeEstimate)) + this._transitionTime;
+	}
+
+	private _checkHeld(): Result {
+		const held = new Set(this._held);
+		this.exercises.forEach(e => { held.delete(e.name); });
+		return held.size > 0 ? Result.Incomplete : Result.Complete;
 	}
 
 	private _checkOrder(): Result {

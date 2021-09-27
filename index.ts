@@ -1,8 +1,5 @@
-// import * as readline from 'readline';
 import BasicGenerator from './src/generators/BasicGenerator';
 import WorkoutTerminal from './src/terminal/WorkoutTerminal';
-
-// readline.emitKeypressEvents(process.stdin);
 
 const t = new WorkoutTerminal(['Kelci', 'Michael', 'Vini', 'Jake', 'Yudhi']);
 
@@ -22,13 +19,15 @@ process.stdin.on('data', async (key) => {
 		t.end();
 		process.exit();
 	} else if (key === 'g') {
-		const curr = await gen.next();
+		const curr = await gen.next(t.locked);
 		if (curr.done) {
 			process.exit(0);
 		}
 		t.update(curr.value);
 	}
 });
+
+console.log('"g" to generate');
 
 // function fixedHex(number: number, length: number){
 //     var str = number.toString(16).toUpperCase();
@@ -51,5 +50,3 @@ process.stdin.on('data', async (key) => {
 
 //     return result;
 // }
-
-console.log('"g" to generate');

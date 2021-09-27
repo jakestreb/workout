@@ -2,7 +2,6 @@ import ColumnList from './ColumnList';
 import Exercise from '../Exercise';
 import SelectColumnList from './SelectColumnList';
 import Terminal from './Terminal';
-import MuscleActivity from '../MuscleActivity';
 import Workout from '../Workout';
 import WorkoutSet from '../WorkoutSet';
 
@@ -20,10 +19,14 @@ export default class WorkoutTerminal extends Terminal {
 		super();
 	}
 
+	public get locked() {
+		return Array.from(this._locked);
+	}
+
 	public update(w: Workout) {
 		this.workout = w;
 		this._updateWorkout(w);
-		this._updateMuscles(w.activity);
+		this._updateMuscles(w);
 	}
 
 	private _updateWorkout(w: Workout) {
@@ -47,12 +50,13 @@ export default class WorkoutTerminal extends Terminal {
 		}));
 	}
 
-	private _updateMuscles(a: MuscleActivity) {
+	private _updateMuscles(w: Workout) {
 		if (!this.muscleComponent) {
 			this.muscleComponent = new ColumnList(0.6, 0.2);
 			this.add(this.muscleComponent);
 		}
-		this.muscleComponent.update(`${a}`.split('\n'));
+		const muscles = `intensity: ${w.intensity.toFixed(1)}\n\n${w.activity}`.split('\n');
+		this.muscleComponent.update(muscles);
 	}
 
 	private _updateRecords(e: Exercise) {

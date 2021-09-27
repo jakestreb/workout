@@ -17,13 +17,14 @@ export default class BasicGenerator {
 		this.target = new WorkoutTarget(name, intensity, timeMinutes * 60);
 	}
 
-	public* generate() {
+	public* generate(): Generator<Workout, void, string[]> {
 		const exercisePicker = new ExercisePicker(this.target);
 
 		for (const exercises of exercisePicker.pick()) {
 			const repPicker = new RepPicker(exercises, this.target);
 			for (const sets of repPicker.pick()) {
-				yield new Workout(sets);
+				const holdExercises = yield new Workout(sets);
+				exercisePicker.hold(holdExercises);
 				break;
 			}
 		}
