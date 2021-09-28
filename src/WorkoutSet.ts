@@ -1,6 +1,5 @@
 import Exercise from './exercises/Exercise';
 import MuscleActivity from './MuscleActivity';
-import * as util from './global/util';
 
 export default class WorkoutSet {
 
@@ -25,6 +24,10 @@ export default class WorkoutSet {
 	}
 
 	public toString(): string {
-		return `${this.exercise} ${this.reps.length}x${this.reps[0]} (${util.timeString(this.time)})`;
+		return `${this.exercise} ${this.reps.length}x${this.reps[0]}`;
+	}
+
+	public repString(): string {
+		return `${this.reps.length}x${this.reps[0]}`;
 	}
 }

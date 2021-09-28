@@ -25,7 +25,9 @@ export default abstract class Component extends EventEmitter {
 		this.y = Math.round(this._vPos * rows);
 	}
 
-	public abstract addToCharMap(charMap: string[][]): void;
+	public addKeyBindings(): void {
 
-	public abstract addKeyBindings(): void;
+	}
+
+	public abstract addToCharMap(charMap: string[][]): void;
 }

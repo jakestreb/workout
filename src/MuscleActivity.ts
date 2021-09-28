@@ -50,4 +50,14 @@ export default class MuscleActivity {
 			.map(key => `${key}: ${this.get(key)}`)
 			.join('\n');
 	}
+
+	public compareString(ma: MuscleActivity): string {
+		return this.keys
+			.sort((a, b) => this.get(b) - this.get(a))
+			.map(key => {
+				const compare = ma.get(key) ? ` / ${ma.get(key).toFixed(0)}` : '';
+				return `${key}: ${this.get(key).toFixed(0)}${compare}`;
+			})
+			.join('\n');
+	}
 }

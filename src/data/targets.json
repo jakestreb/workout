@@ -1,5 +1,14 @@
 [
   {
+    "name" : "all",
+    "muscles" : [
+      {
+        "name" : "body",
+        "weight" : 1
+      }
+    ]
+  },
+  {
     "name" : "chest_day",
     "muscles" : [
       {

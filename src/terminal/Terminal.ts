@@ -5,6 +5,8 @@ export default class Terminal extends EventEmitter {
 
 	private _components: Component[] = [];
 
+	private _firstPrint: boolean = true;
+
 	constructor() {
 		super();
 		process.stdout.on('resize', () => {
@@ -33,8 +35,11 @@ export default class Terminal extends EventEmitter {
 
 	private _print(charMap: string[][]) {
 		const printString = charMap.map(row => row.join('')).join('\n');
+		if (!this._firstPrint) {
+			(process.stdout as any).cursorTo(0, 0);
+		}
 		process.stdout.write(printString);
-		(process.stdout as any).cursorTo(0, 0);
+		this._firstPrint = false;
 	}
 }
 

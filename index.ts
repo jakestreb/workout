@@ -3,7 +3,6 @@ import WorkoutTerminal from './src/terminal/WorkoutTerminal';
 import * as util from './src/global/util';
 
 let started = false;
-let done = false;
 
 const wg = new LookaheadGenerator({
 	name: 'back_day',
@@ -16,9 +15,6 @@ const gen = wg.generate();
 const t = new WorkoutTerminal(['Kelci', 'Michael', 'Vini', 'Jake', 'Yudhi']);
 
 wg.start();
-wg.on('done', () => {
-	done = true;
-});
 
 t.on('lock', (locked) => {
 	wg.hold(locked);
@@ -48,9 +44,6 @@ process.stdin.on('data', async (key) => {
 util.forever(() => {
 	if (started) {
 		t.updateGeneratedCounts(wg.generatedCount, wg.filteredCount);
-	}
-	if (done) {
-		return true;
 	}
 }, 100);
 
