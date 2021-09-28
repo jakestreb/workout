@@ -19,7 +19,7 @@ export default class Terminal {
 		this._print(charMap);
 	}
 
-	public end(): void {
+	public kill(): void {
 		(process.stdout as any).cursorTo(0, process.stdout.rows!);
 	}
 

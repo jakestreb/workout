@@ -1,5 +1,5 @@
 import * as exerciseRecords from '../data/exercises.json';
-import Exercise from '../Exercise';
+import Exercise from '../exercises/Exercise';
 import MuscleActivity from '../MuscleActivity';
 import MuscleActivityTarget from './MuscleActivityTarget';
 import Reporter from '../Reporter';

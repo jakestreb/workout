@@ -1,8 +1,8 @@
 import Exercise from './Exercise';
-import MuscleActivity from './MuscleActivity';
-import WorkoutTarget from './targets/WorkoutTarget';
-import * as util from './global/util';
-import * as records from './data/records.json';
+import MuscleActivity from '../MuscleActivity';
+import WorkoutTarget from '../targets/WorkoutTarget';
+import * as util from '../global/util';
+import * as records from '../data/records.json';
 
 interface ExerciseRecord {
 	name: string;

@@ -15,6 +15,7 @@ export default class SelectColumnList extends ColumnList {
 
 	public update(items: string[]) {
 		this.items = items;
+		this.selectedIndex = Math.min(this.selectedIndex, this.items.length - 1);
 		this.emit('hover', this.selectedIndex);
 		this.updatePing();
 	}

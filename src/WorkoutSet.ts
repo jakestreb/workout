@@ -1,4 +1,4 @@
-import Exercise from './Exercise';
+import Exercise from './exercises/Exercise';
 import MuscleActivity from './MuscleActivity';
 import * as util from './global/util';
 

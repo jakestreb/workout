@@ -23,8 +23,7 @@ export default class BasicGenerator {
 		for (const exercises of exercisePicker.pick()) {
 			const repPicker = new RepPicker(exercises, this.target);
 			for (const sets of repPicker.pick()) {
-				const holdExercises = yield new Workout(sets);
-				exercisePicker.hold(holdExercises);
+				yield new Workout(sets);
 				break;
 			}
 		}

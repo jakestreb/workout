@@ -66,3 +66,22 @@ export async function sleep(ms: number): Promise<void> {
 		setTimeout(resolve, ms);
 	});
 }
+
+export function setEquals<T>(a: Set<T>, b: Set<T>): boolean {
+    if (a.size !== b.size) {
+    	return false;
+    }
+    for (const itemA of a) {
+    	if (!b.has(itemA)) {
+    		return false;
+    	}
+    }
+    return true;
+}
+
+export function forever(callback: () => any, sleep: number = 0) {
+	const kill = callback();
+	if (!kill) {
+    	setTimeout(() => forever(callback, sleep), sleep);
+    }
+}

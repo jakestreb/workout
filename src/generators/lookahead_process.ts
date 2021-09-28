@@ -1,20 +1,15 @@
-// import * as process from 'process';
 import BasicGenerator from './BasicGenerator';
+import * as util from '../global/util';
 
 process.on('message', (arg) => {
 	const bg = new BasicGenerator(arg);
 	const gen = bg.generate();
 
-	forever(() => {
+	util.forever(() => {
 		const curr = gen.next();
-		process.send!(`${curr.value}`);
 		if (curr.done) {
 			process.exit(0);
 		}
+		process.send!(curr.value);
 	});
 });
-
-function forever(callback: () => any) {
-	callback();
-    setTimeout(() => forever(callback), 0);
-}

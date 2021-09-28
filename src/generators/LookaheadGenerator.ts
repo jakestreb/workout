@@ -1,36 +1,35 @@
 import * as child from 'child_process';
 import Workout from '../Workout';
-import BasicGenerator from './BasicGenerator';
+import WorkoutSet from '../WorkoutSet';
 import * as util from '../global/util';
+import exerciseFromObject from '../exercises/fromObject';
+import * as EventEmitter from 'events';
 
-export default class LookaheadGenerator extends BasicGenerator {
+export default class LookaheadGenerator extends EventEmitter {
 
 	private _buildArg: any;
 	private _child: child.ChildProcess;
+
 	private _workouts: Workout[] = [];
-	private _exited: boolean = false;
-	// private _msgCount: number = 0;
+	private _filtered: Workout[] = [];
+	private _held: Set<string> = new Set();
+
+	private _started: boolean = false;
 
 	constructor(arg: any) {
-		super(arg);
+		super();
 		this._buildArg = arg;
 	}
 
-	public async* lookaheadGenerate(): AsyncGenerator<Workout> {
-		this._setupChild();
-
-		while (!this._exited || this._workouts.length > 0) {
-			if (this._workouts.length === 0) {
-				await util.sleep(50);
-				continue;
-			}
-			const r = Math.floor(Math.random() * this._workouts.length);
-			const [val] = this._workouts.splice(r, 1);
-			yield val;
-		}
+	public get generatedCount(): number {
+		return this._workouts.length;
 	}
 
-	private _setupChild() {
+	public get filteredCount(): number {
+		return this._filtered.length;
+	}
+
+	public start(): void {
 		if (this._child) {
 			return;
 		}
@@ -38,23 +37,62 @@ export default class LookaheadGenerator extends BasicGenerator {
 		this._child = child.fork('./src/generators/lookahead_process.ts');
 
 		this._child.on('message', (msg) => {
-			this._workouts.push(msg);
-			// this._msgCount += 1;
-			// if (this._msgCount % 100 === 0) {
-			// 	console.log(this._msgCount);
-			// }
+			const sets: WorkoutSet[] = msg.sets.map((s: any) => {
+				const exercise = exerciseFromObject(s.exercise);
+				return new WorkoutSet(exercise, s.reps);
+			});
+			const w = new Workout(sets);
+			this._workouts.push(w);
+			if (this._isFilitered(w)) {
+				this._filtered.push(w);
+			}
 		});
 
 		this._child.on('exit', () => {
-			this._exited = true;
-			// console.log('DONE');
+			this.emit('done');
 		});
 
 		this._child.on('error', (err) => {
-			this._exited = true;
 			throw err;
 		});
 
 		this._child.send(this._buildArg);
+
+		this._started = true;
+	}
+
+	public kill(): void {
+		this._child.kill();
+	}
+
+	public async* generate(): AsyncGenerator<Workout|null, void, string[]> {
+		if (!this._started) {
+			throw new Error('generate() cannot be called before start()');
+		}
+
+		while (true) {
+			if (this._workouts.length === 0) {
+				// Wait for first workout
+				await util.sleep(50);
+				continue;
+			}
+			let val = null;
+			if (this._filtered.length > 0) {
+				const r = Math.floor(Math.random() * this._filtered.length);
+				[val] = this._filtered.splice(r, 1);
+			}
+			const holdExercises = yield val;
+			const hold = new Set(holdExercises);
+			if (!util.setEquals(hold, this._held)) {
+				this._held = hold;
+				this._filtered = this._workouts.filter(w => this._isFilitered(w));
+			}
+		}
+	}
+
+	private _isFilitered(w: Workout) {
+		const held = new Set(this._held);
+		w.sets.forEach(s => { held.delete(`${s.exercise}`); });
+		return held.size === 0;
 	}
 }

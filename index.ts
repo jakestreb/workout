@@ -1,12 +1,21 @@
-import BasicGenerator from './src/generators/BasicGenerator';
+import LookaheadGenerator from './src/generators/LookaheadGenerator';
 import WorkoutTerminal from './src/terminal/WorkoutTerminal';
+import * as util from './src/global/util';
+
+let started = false;
+let done = false;
 
 const t = new WorkoutTerminal(['Kelci', 'Michael', 'Vini', 'Jake', 'Yudhi']);
 
-const wg = new BasicGenerator({
-	name: 'leg_day',
+const wg = new LookaheadGenerator({
+	name: 'back_day',
 	intensity: 6,
 	timeMinutes: 30
+});
+
+wg.start();
+wg.on('done', () => {
+	done = true;
 });
 
 const gen = wg.generate();
@@ -16,37 +25,29 @@ process.stdin.resume();
 process.stdin.setEncoding('utf8');
 process.stdin.on('data', async (key) => {
 	if (key === '\u0003') { // ctrl-c
-		t.end();
+		wg.kill();
+		t.kill();
 		process.exit();
 	} else if (key === 'g') {
+		started = true;
 		const curr = await gen.next(t.locked);
 		if (curr.done) {
-			process.exit(0);
+			process.exit();
 		}
-		t.update(curr.value);
+		if (curr.value) {
+			t.update(curr.value);
+			t.updateGeneratedCounts(wg.generatedCount, wg.filteredCount);
+		}
 	}
 });
 
-console.log('"g" to generate');
+util.forever(() => {
+	if (started) {
+		t.updateGeneratedCounts(wg.generatedCount, wg.filteredCount);
+	}
+	if (done) {
+		return true;
+	}
+}, 100);
 
-// function fixedHex(number: number, length: number){
-//     var str = number.toString(16).toUpperCase();
-//     while(str.length < length)
-//         str = "0" + str;
-//     return str;
-// }
-
-// /* Creates a unicode literal based on the string */
-// function unicodeLiteral(str: string){
-//     var i;
-//     var result = "";
-//     for( i = 0; i < str.length; ++i){
-//         /* You should probably replace this by an isASCII test */
-//         if(str.charCodeAt(i) > 126 || str.charCodeAt(i) < 32)
-//             result += "\\u" + fixedHex(str.charCodeAt(i),4);
-//         else
-//             result += str[i];
-//     }
-
-//     return result;
-// }
+console.log('> "g" to generate');
