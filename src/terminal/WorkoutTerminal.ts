@@ -49,6 +49,7 @@ export default class WorkoutTerminal extends Terminal {
 			this.workoutComponent.on('select', index => {
 				this._toggleLock(this.workout.sets[index]);
 				this._updateWorkout(this.workout);
+				this.emit('lock', this._locked);
 				this.updateDisplay();
 			});
 			this.workoutComponent.on('hover', index => {

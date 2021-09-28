@@ -5,20 +5,24 @@ import * as util from './src/global/util';
 let started = false;
 let done = false;
 
-const t = new WorkoutTerminal(['Kelci', 'Michael', 'Vini', 'Jake', 'Yudhi']);
-
 const wg = new LookaheadGenerator({
 	name: 'back_day',
 	intensity: 6,
 	timeMinutes: 30
 });
 
+const gen = wg.generate();
+
+const t = new WorkoutTerminal(['Kelci', 'Michael', 'Vini', 'Jake', 'Yudhi']);
+
 wg.start();
 wg.on('done', () => {
 	done = true;
 });
 
-const gen = wg.generate();
+t.on('lock', (locked) => {
+	wg.hold(locked);
+});
 
 process.stdin.setRawMode!(true);
 process.stdin.resume();
@@ -30,7 +34,7 @@ process.stdin.on('data', async (key) => {
 		process.exit();
 	} else if (key === 'g') {
 		started = true;
-		const curr = await gen.next(t.locked);
+		const curr = await gen.next();
 		if (curr.done) {
 			process.exit();
 		}

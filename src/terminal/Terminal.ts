@@ -1,10 +1,12 @@
 import Component from './Component';
+import * as EventEmitter from 'events';
 
-export default class Terminal {
+export default class Terminal extends EventEmitter {
 
 	private _components: Component[] = [];
 
 	constructor() {
+		super();
 		process.stdout.on('resize', () => {
 			this._components.map(c => c.onResize());
 			this.updateDisplay();

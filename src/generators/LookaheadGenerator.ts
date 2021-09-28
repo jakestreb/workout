@@ -65,7 +65,7 @@ export default class LookaheadGenerator extends EventEmitter {
 		this._child.kill();
 	}
 
-	public async* generate(): AsyncGenerator<Workout|null, void, string[]> {
+	public async* generate(): AsyncGenerator<Workout|null> {
 		if (!this._started) {
 			throw new Error('generate() cannot be called before start()');
 		}
@@ -81,13 +81,13 @@ export default class LookaheadGenerator extends EventEmitter {
 				const r = Math.floor(Math.random() * this._filtered.length);
 				[val] = this._filtered.splice(r, 1);
 			}
-			const holdExercises = yield val;
-			const hold = new Set(holdExercises);
-			if (!util.setEquals(hold, this._held)) {
-				this._held = hold;
-				this._filtered = this._workouts.filter(w => this._isFilitered(w));
-			}
+			yield val;
 		}
+	}
+
+	public hold(exercises: Set<string>) {
+		this._held = new Set(exercises);
+		this._filtered = this._workouts.filter(w => this._isFilitered(w));
 	}
 
 	private _isFilitered(w: Workout) {

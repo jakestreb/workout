@@ -17,7 +17,7 @@ export default class BasicGenerator {
 		this.target = new WorkoutTarget(name, intensity, timeMinutes * 60);
 	}
 
-	public* generate(): Generator<Workout, void, string[]> {
+	public* generate(): Generator<Workout> {
 		const exercisePicker = new ExercisePicker(this.target);
 
 		for (const exercises of exercisePicker.pick()) {
