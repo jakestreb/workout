@@ -56,7 +56,7 @@ export default class MuscleActivity {
 			.sort((a, b) => this.get(b) - this.get(a))
 			.map(key => {
 				const compare = ma.get(key) ? ` / ${ma.get(key).toFixed(0)}` : '';
-				return `${key}: ${this.get(key).toFixed(0)}${compare}`;
+				return `${key} ${this.get(key).toFixed(0)}${compare}`;
 			})
 			.join('\n');
 	}

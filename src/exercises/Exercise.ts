@@ -83,13 +83,13 @@ export default class Exercise {
 	}
 
 	public getRecords(users: string[]): string {
-		let exerciseRecords: string = '';
-		users.forEach(u => {
+		const recordStrs = users.map(u => {
 			const userRecords: { [exercise: string]: number } = (records as any)[u];
 			if (!userRecords) { throw new Error(`User ${u} not found`); }
-			exerciseRecords += `${u}: ${userRecords[this.name] || '?'} lbs\n`;
+			const val = userRecords[this.name] ? `${userRecords[this.name]} lbs` : '?';
+			return `${u} ${val}`;
 		});
-		return exerciseRecords;
+		return recordStrs.join('\n');
 	}
 
 	public* generateSets(): Generator<WorkoutSet> {

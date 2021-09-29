@@ -79,15 +79,15 @@ export default class ExercisePair extends Exercise {
 	}
 
 	public getRecords(users: string[]) {
-		let exerciseRecords: string = '';
-		users.forEach(u => {
+		const recordStrs = users.map(u => {
 			const userRecords: { [exercise: string]: number } = (records as any)[u];
 			if (!userRecords) { throw new Error(`User ${u} not found`); }
-			const firstRecord = userRecords[this.name] || '?';
-			const secondRecord = userRecords[this.second.name] || '?';
-			exerciseRecords  += `${u}: ${firstRecord} / ${secondRecord} lbs\n`;
+			const first = userRecords[this.name];
+			const second = userRecords[this.second.name];
+			const val = first || second ? `${first} / ${second} lbs` : '?';
+			return `${u} ${val}`;
 		});
-		return exerciseRecords;
+		return recordStrs.join('\n');
 	}
 
 	public toString(): string {

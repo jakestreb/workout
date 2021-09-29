@@ -15,6 +15,9 @@
         "name" : "chest",
         "weight" : 2
       },
+      { "name": "shoulders",
+        "weight": 2
+      },
       {
         "name": "triceps",
         "weight": 1

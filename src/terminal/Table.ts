@@ -6,6 +6,8 @@ export default class Table extends Component {
 	public xSpacing: number = 2;
 	public ySpacing: number = 0;
 
+	public minWidth: number = 35;
+
 	public get rows(): number {
 		return this.items.length;
 	}
@@ -30,6 +32,10 @@ export default class Table extends Component {
 
 	public rowToString(row: string[]): string {
 		const rowItems = row.map((s, i) => extendTo(s, this.columnWidth(i), i > 0));
+		const width = rowItems[0].length + rowItems[1].length + this.xSpacing;
+		if (width < this.minWidth) {
+			rowItems[0] += new Array(this.minWidth - width).fill(' ').join('');
+		}
 		const rowStr = rowItems.join(new Array(this.xSpacing).fill(' ').join(''));
 		return rowStr;
 	}
