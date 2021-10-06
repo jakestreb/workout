@@ -6,9 +6,9 @@ let started = false;
 let done = false;
 
 const wg = new LookaheadGenerator({
-	name: 'chest_day',
-	intensity: 6,
-	timeMinutes: 30
+	name: 'core',
+	intensity: 5,
+	timeMinutes: 15
 });
 
 const gen = wg.generate();
