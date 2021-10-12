@@ -2,6 +2,10 @@ workout generator
 
 references:
 
+weight ratios - https://exrx.net/Testing/WeightLifting/StrengthStandards
+male - used 181 lbs novice
+female - used 148 lbs novice
+
 chest - https://minds.wisconsin.edu/handle/1793/62857
 
 bench press / incline bench press - https://www.mdpi.com/1660-4601/17/19/7339/pdf
