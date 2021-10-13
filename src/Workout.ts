@@ -8,6 +8,13 @@ export default class Workout {
 	public static avgTime = 45 * 60;
 	public static intensityScaler = 250;
 
+	public static combine(...args: Workout[]): Workout {
+		return args.reduce((a, b) => {
+			a.sets.push(...b.sets);
+			return a;
+		}, new Workout([]));
+	}
+
 	public readonly sets: WorkoutSet[];
 
 	constructor(sets: WorkoutSet[]) {

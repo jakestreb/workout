@@ -1,11 +1,11 @@
-import LookaheadGenerator from './src/generators/LookaheadGenerator';
+import WorkoutGenerator from './src/generators/WorkoutGenerator';
 import WorkoutTerminal from './src/terminal/WorkoutTerminal';
 import * as util from './src/global/util';
 
 let started = false;
 let done = false;
 
-const wg = new LookaheadGenerator({
+const wg = new WorkoutGenerator({
 	name: 'back_day',
 	intensity: 6,
 	timeMinutes: 30
@@ -15,11 +15,9 @@ const gen = wg.generate();
 
 const t = new WorkoutTerminal(['Kelci', 'Michael', 'Vini', 'Jake', 'Yudhi']);
 
-wg.start();
-
-wg.on('done', () => {
-	done = true;
-});
+// wg.on('done', () => {
+// 	done = true;
+// });
 
 t.on('lock', (locked) => {
 	wg.hold(locked);

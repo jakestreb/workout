@@ -1,20 +1,18 @@
 import ExercisePicker from '../pickers/ExercisePicker';
+import LookaheadGenerator from './LookaheadGenerator';
 import Workout from '../Workout';
-import WorkoutTarget from '../targets/WorkoutTarget';
+import WorkoutPhaseTarget from '../targets/WorkoutPhaseTarget';
 import RepPicker from '../pickers/RepPicker';
 
-interface GeneratorArg {
-	name: string;
-	intensity: number;
-	timeMinutes: number;
-}
+const FILE_PATH = './src/generators/gen_phase_process.ts';
 
-export default class BasicGenerator {
+export default class PhaseGenerator extends LookaheadGenerator {
 
-	public target: WorkoutTarget;
+	public target: WorkoutPhaseTarget;
 
-	constructor({ name, intensity, timeMinutes }: GeneratorArg) {
-		this.target = new WorkoutTarget(name, intensity, timeMinutes * 60);
+	constructor({ muscles, intensity, timeMinutes }: Target) {
+		super({ muscles, intensity, timeMinutes }, FILE_PATH);
+		this.target = new WorkoutPhaseTarget(muscles, intensity, timeMinutes * 60);
 	}
 
 	public* generate(): Generator<Workout> {

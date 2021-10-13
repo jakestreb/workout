@@ -1,8 +1,8 @@
-import BasicGenerator from './BasicGenerator';
+import PhaseGenerator from './PhaseGenerator';
 import * as util from '../global/util';
 
-process.on('message', (arg) => {
-	const bg = new BasicGenerator(arg);
+process.on('message', (target) => {
+	const bg = new PhaseGenerator(target);
 	const gen = bg.generate();
 
 	util.forever(() => {

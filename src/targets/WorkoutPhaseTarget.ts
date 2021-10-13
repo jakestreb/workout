@@ -6,7 +6,7 @@ import Reporter from '../Reporter';
 import { Result } from '../global/enums';
 import * as util from '../global/util';
 
-export default class WorkoutTarget {
+export default class WorkoutPhaseTarget {
 
 	public static maxLeftoverTime: number = 5 * 60;
 
@@ -16,12 +16,12 @@ export default class WorkoutTarget {
 	private _timeReporter: Reporter
 	private _possibleExercises: any[] = [];
 
-	constructor(targetName: string, intensity: number, timeSeconds: number) {
-		this.muscleActivityTarget = MuscleActivityTarget.fromTarget(targetName, intensity, timeSeconds);
+	constructor(muscles: string[], intensity: number, time: number) {
+		this.muscleActivityTarget = MuscleActivityTarget.fromMuscles(muscles, intensity, time);
 
-		this.timeTarget = timeSeconds;
+		this.timeTarget = time;
 		this._timeReporter = new Reporter();
-		this._timeReporter.setTarget('time', timeSeconds);
+		this._timeReporter.setTarget('time', time);
 
 		this._initPossibleExercises();
 	}
@@ -31,19 +31,19 @@ export default class WorkoutTarget {
 	}
 
 	// Checks that the focus is in the right muscles
-	public checkFocusMuscles(muscleActivity: MuscleActivity): boolean {
+	public checkFocusMuscles(muscleActivity: MuscleActivity, phase: number): boolean {
 		return this.muscleActivityTarget.hasSameMuscles(muscleActivity);
 	}
 
 	// Checks that the focus is in the right muscles and is the right magnitude
-	public checkFocus(muscleActivity: MuscleActivity): boolean {
+	public checkFocus(muscleActivity: MuscleActivity, phase: number): boolean {
 		return this.muscleActivityTarget.isSatisfiedBy(muscleActivity);
 	}
 
 	public checkTime(time: number, tolerance: number = 0): Result {
 		this._timeReporter.record('time', time);
 
-		const minTime = this.timeTarget - WorkoutTarget.maxLeftoverTime - tolerance;
+		const minTime = this.timeTarget - WorkoutPhaseTarget.maxLeftoverTime - tolerance;
 		const maxTime = this.timeTarget + tolerance;
 
 		if (time < minTime) {
@@ -62,9 +62,8 @@ export default class WorkoutTarget {
 	private _initPossibleExercises(): void {
 		for (const e of util.weightedSelector(exerciseRecords)) {
 			const exercise = new Exercise(e);
-			const allows = this.muscleActivityTarget.allows(exercise.activityPerRep);
 			const overlaps = this.muscleActivityTarget.overlaps(exercise.activityPerRep);
-			if (allows && overlaps) {
+			if (overlaps) {
 				this._possibleExercises.push(e);
 			}
 		}
