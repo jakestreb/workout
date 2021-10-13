@@ -11,9 +11,9 @@
 		"deadlift": 185,
 		"overhead_press": 65,
 		"squat": 225,
-		"good_morning": 85,
+		"good_morning": 95,
 		"kettlebell_swing": 45,
-		"standing_calf_raises": 135
+		"standing_barbell_calf_raises": 135
 	},
 	"Vini": {
 		"bench_press": 105,
@@ -28,9 +28,9 @@
 		"overhead_press": 95,
 		"squat": 275,
 		"barbell_row": 135,
-		"good_morning": 85,
+		"good_morning": 95,
 		"kettlebell_swing": 45,
-		"standing_calf_raises": 135
+		"standing_barbell_calf_raises": 135
 	},
 	"Yudhi": {
 		"bench_press": 75,
@@ -40,11 +40,6 @@
 		"barbell_row": 65,
 		"good_morning": 85,
 		"kettlebell_swing": 45,
-		"standing_calf_raises": 135
+		"standing_barbell_calf_raises": 135
 	},
-	"Spader": {
-		"deadlift": 255,
-		"overhead_press": 115,
-		"barbell_row": 135
-	}
 }

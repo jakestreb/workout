@@ -1455,7 +1455,7 @@
     "femaleWeightRatio": 70
   },
   {
-    "name": "standing_calf_raises",
+    "name": "standing_barbell_calf_raises",
     "weight": 1,
     "activations": [{
       "muscle": "calves",
