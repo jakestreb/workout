@@ -5,9 +5,9 @@ import * as util from '../global/util';
 import exerciseFromObject from '../exercises/fromObject';
 import * as EventEmitter from 'events';
 
-export default class LookaheadGenerator extends EventEmitter {
+export default abstract class LookaheadGenerator extends EventEmitter {
 
-	private _target: Target;
+	private _buildArg: any;
 	private _path: string;
 
 	private _child: child.ChildProcess;
@@ -18,10 +18,10 @@ export default class LookaheadGenerator extends EventEmitter {
 
 	private _started: boolean = false;
 
-	constructor(target: Target, path: string) {
+	constructor(buildArg: any, path: string) {
 		super();
+		this._buildArg = buildArg;
 		this._path = path;
-		this._target = target;
 	}
 
 	public get generatedCount(): number {
@@ -94,7 +94,7 @@ export default class LookaheadGenerator extends EventEmitter {
 			throw err;
 		});
 
-		this._child.send(this._target);
+		this._child.send(this._buildArg);
 
 		this._started = true;
 	}

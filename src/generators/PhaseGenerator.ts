@@ -4,14 +4,14 @@ import Workout from '../Workout';
 import WorkoutPhaseTarget from '../targets/WorkoutPhaseTarget';
 import RepPicker from '../pickers/RepPicker';
 
-const FILE_PATH = './src/generators/gen_phase_process.ts';
+const PATH = './src/generators/gen_phase_process.ts';
 
 export default class PhaseGenerator extends LookaheadGenerator {
 
 	public target: WorkoutPhaseTarget;
 
 	constructor({ muscles, intensity, timeMinutes }: Target) {
-		super({ muscles, intensity, timeMinutes }, FILE_PATH);
+		super({ muscles, intensity, timeMinutes }, PATH);
 		this.target = new WorkoutPhaseTarget(muscles, intensity, timeMinutes * 60);
 	}
 
