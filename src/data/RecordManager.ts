@@ -24,7 +24,13 @@ interface RecordBasics {
   repsCompleted: number
 }
 
-export class RecordManager {
+interface User {
+  name: string,
+  experience: string,
+  primaryFocus: string
+}
+
+export default class RecordManager {
   private _db: sqlite3.Database;
 
   constructor() {
@@ -65,6 +71,11 @@ export class RecordManager {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  public async addUser(arg: User): Promise<void> {
+    await this._run('INSERT INTO users (name, experience, primary_focus) VALUES (?, ?, ?)',
+      [arg.name, arg.experience, arg.primaryFocus]);
   }
 
   public async addWorkout(arg: WorkoutRecord): Promise<void> {

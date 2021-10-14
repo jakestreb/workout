@@ -1,60 +1,78 @@
 [
   {
-    "name" : "all",
-    "muscles" : [
-      {
-        "name" : "body",
-        "weight" : 1
-      }
-    ]
-  },
-  {
     "name" : "chest_day",
-    "muscles" : [
+    "phases" : [
       {
-        "name" : "chest",
-        "weight" : 2
-      },
-      { "name": "shoulders",
-        "weight": 2
+        "muscles" : ["chest", "shoulders", "triceps"],
+        "weight" : 5
       },
       {
-        "name": "triceps",
-        "weight": 1
+        "muscles" : ["abs"],
+        "weight" : 1
       }
     ]
   },
   {
     "name" : "back_day",
-    "muscles" : [
+    "phases" : [
       {
-        "name" : "back",
-        "weight" : 4
+        "muscles" : ["back", "biceps"],
+        "weight" : 5
       },
       {
-        "name": "biceps",
-        "weight": 1
-      },
-      {
-        "name": "chest",
-        "weight": 0
-      }
-    ]
-  },
-  {
-    "name" : "leg_day",
-    "muscles" : [
-      {
-        "name" : "legs",
+        "muscles" : ["abs"],
         "weight" : 1
       }
     ]
   },
   {
-    "name" : "core",
-    "muscles" : [
+    "name" : "leg_day",
+    "phases" : [
       {
-        "name" : "core",
+        "muscles" : ["legs"],
+        "weight" : 5
+      },
+      {
+        "muscles" : ["abs"],
+        "weight" : 1
+      }
+    ]
+  },
+  {
+    "name" : "arm_day",
+    "phases" : [
+      {
+        "muscles" : ["triceps", "biceps"],
+        "weight" : 5
+      },
+      {
+        "muscles" : ["abs"],
+        "weight" : 1
+      }
+    ]
+  },
+  {
+    "name" : "chest_back_day",
+    "phases" : [
+      {
+        "muscles" : ["chest", "back"],
+        "weight" : 5
+      },
+      {
+        "muscles" : ["abs"],
+        "weight" : 1
+      }
+    ]
+  },
+  {
+    "name" : "shoulder_day",
+    "phases" : [
+      {
+        "muscles" : ["shoulders"],
+        "weight" : 5
+      },
+      {
+        "muscles" : ["abs"],
         "weight" : 1
       }
     ]

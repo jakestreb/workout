@@ -1,4 +1,4 @@
-import * as targetRecords from '../data/new_targets.json';
+import * as targetRecords from '../data/targets.json';
 import PhaseGenerator from './PhaseGenerator';
 import Workout from '../Workout';
 import * as util from '../global/util';
@@ -8,7 +8,9 @@ export default class WorkoutGenerator {
 	public phaseGens: PhaseGenerator[] = [];
 	public phaseIndex: number = 0;
 
-	constructor({ name, intensity, timeMinutes }: any) {
+	constructor({ intensity, timeMinutes }: any) {
+		// TODO: Add name picker
+		const name = 'chest_day';
 		const targetRecord = targetRecords.find(t => t.name === name);
 		if (!targetRecord) { throw new Error('Target not found'); }
 
