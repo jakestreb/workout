@@ -8,9 +8,10 @@
 	},
 	"Michael": {
 		"bench_press": 125,
-		"deadlift": 185,
+		"deadlift": 205,
 		"overhead_press": 65,
 		"squat": 225,
+		"barbell_row": 95,
 		"good_morning": 95,
 		"kettlebell_swing": 45,
 		"standing_barbell_calf_raises": 135
@@ -41,5 +42,5 @@
 		"good_morning": 85,
 		"kettlebell_swing": 45,
 		"standing_barbell_calf_raises": 135
-	},
+	}
 }

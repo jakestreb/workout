@@ -17,7 +17,7 @@ export default class WorkoutPhaseTarget {
 	private _possibleExercises: any[] = [];
 
 	constructor(muscles: string[], intensity: number, time: number) {
-		this.muscleActivityTarget = MuscleActivityTarget.fromMuscles(muscles, intensity, time);
+		this.muscleActivityTarget = new MuscleActivityTarget(muscles, intensity, time);
 
 		this.timeTarget = time;
 		this._timeReporter = new Reporter();
