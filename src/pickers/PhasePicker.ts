@@ -33,6 +33,13 @@ export default class PhasePicker extends Picker<Workout> {
 	}
 
 	private _checkRepeatExercises(): Result {
-		// TODO
+		const all: string[] = [];
+		this.phases.forEach(p => {
+			p.sets.forEach(s => {
+				all.push(s.exercise.name);
+			});
+		});
+		const unique = new Set(all);
+		return unique.size < all.length ? Result.Failed : Result.Complete;
 	}
 }
