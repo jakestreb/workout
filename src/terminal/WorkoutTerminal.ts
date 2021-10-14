@@ -4,6 +4,7 @@ import Table from './Table';
 import Terminal from './Terminal';
 import Workout from '../Workout';
 import WorkoutSet from '../WorkoutSet';
+import WorkoutGenerator from '../generators/WorkoutGenerator';
 import * as util from '../global/util';
 
 export default class WorkoutTerminal extends Terminal {
@@ -18,8 +19,37 @@ export default class WorkoutTerminal extends Terminal {
 	public workoutComponent: SelectTable;
 	public dataComponent: Table;
 
-	constructor(public users: string[]) {
+	constructor(public workoutGenerator: WorkoutGenerator, public users: string[]) {
 		super();
+	}
+
+	public start() {
+		const gen = this.workoutGenerator.generate();
+
+		process.stdin.setRawMode!(true);
+		process.stdin.resume();
+		process.stdin.setEncoding('utf8');
+		process.stdin.on('data', async (key) => {
+			if (key === '\u0003') { // ctrl-c
+				this.workoutGenerator.kill();
+				this.kill();
+				process.exit();
+			} else if (key === 'g') {
+				const curr = await gen.next();
+				if (curr.done) {
+					process.exit();
+				}
+				if (curr.value) {
+					this.update(curr.value);
+				}
+			}
+		});
+
+		util.forever(() => {
+			this._updateData();
+		}, 500);
+
+		console.log('> "g" to generate');
 	}
 
 	public get locked(): Set<string> {
@@ -32,19 +62,12 @@ export default class WorkoutTerminal extends Terminal {
 		this._updateData();
 	}
 
-	public updateGeneratedCounts(total: number, filtered: number, isDone: boolean): void {
-		this.totalGenerated = total;
-		this.remainingGenerated = filtered;
-		this.isDone = isDone;
-		this._updateData();
-	}
-
 	private _updateWorkout() {
 		if (!this.workoutComponent) {
 			this.workoutComponent = new SelectTable(0.1, 0.1);
 			this.add(this.workoutComponent);
 			this.workoutComponent.on('select', index => {
-				this.emit('lock', this.locked);
+				this.workoutGenerator.hold(this.locked);
 				this._updateData();
 			});
 			this.workoutComponent.on('hover', index => {
@@ -95,9 +118,10 @@ export default class WorkoutTerminal extends Terminal {
 	}
 
 	private get _generatorData(): string[][] {
+		const wg = this.workoutGenerator;
 		return [
-			[`generated${this.isDone ? ' all' : ''}`, `${this.totalGenerated}`],
-			['remaining', `${this.remainingGenerated}`]
+			[`generated${wg.isDone ? ' all' : ''}`, `${wg.generatedCount}`],
+			['remaining', `${wg.filteredCount}`]
 		];
 	}
 }

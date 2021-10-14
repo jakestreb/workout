@@ -1,9 +1,8 @@
 import PhaseGenerator from './PhaseGenerator';
 import * as util from '../global/util';
 
-process.on('message', (target) => {
-	const bg = new PhaseGenerator(target);
-	const gen = bg.generate();
+process.on('message', (buildArg) => {
+	const gen = new PhaseGenerator(buildArg).generate();
 
 	util.forever(() => {
 		const curr = gen.next();

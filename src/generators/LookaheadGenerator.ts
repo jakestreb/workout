@@ -3,9 +3,10 @@ import Workout from '../Workout';
 import WorkoutSet from '../WorkoutSet';
 import * as util from '../global/util';
 import exerciseFromObject from '../exercises/fromObject';
-import * as EventEmitter from 'events';
 
-export default abstract class LookaheadGenerator extends EventEmitter {
+export default abstract class LookaheadGenerator {
+
+	public isDone: boolean = false;
 
 	private _buildArg: any;
 	private _path: string;
@@ -19,7 +20,6 @@ export default abstract class LookaheadGenerator extends EventEmitter {
 	private _started: boolean = false;
 
 	constructor(buildArg: any, path: string) {
-		super();
 		this._buildArg = buildArg;
 		this._path = path;
 	}
@@ -87,7 +87,7 @@ export default abstract class LookaheadGenerator extends EventEmitter {
 		});
 
 		this._child.on('exit', () => {
-			this.emit('done');
+			this.isDone = true;
 		});
 
 		this._child.on('error', (err) => {

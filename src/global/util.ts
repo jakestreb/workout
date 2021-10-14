@@ -79,8 +79,8 @@ export function setEquals<T>(a: Set<T>, b: Set<T>): boolean {
     return true;
 }
 
-export function forever(callback: () => any, sleep: number = 0) {
-	const kill = callback();
+export async function forever(callback: () => any, sleep: number = 0) {
+	const kill = await callback();
 	if (!kill) {
     	setTimeout(() => forever(callback, sleep), sleep);
     }

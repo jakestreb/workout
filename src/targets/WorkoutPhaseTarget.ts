@@ -31,12 +31,12 @@ export default class WorkoutPhaseTarget {
 	}
 
 	// Checks that the focus is in the right muscles
-	public checkFocusMuscles(muscleActivity: MuscleActivity, phase: number): boolean {
+	public checkFocusMuscles(muscleActivity: MuscleActivity): boolean {
 		return this.muscleActivityTarget.hasSameMuscles(muscleActivity);
 	}
 
 	// Checks that the focus is in the right muscles and is the right magnitude
-	public checkFocus(muscleActivity: MuscleActivity, phase: number): boolean {
+	public checkFocus(muscleActivity: MuscleActivity): boolean {
 		return this.muscleActivityTarget.isSatisfiedBy(muscleActivity);
 	}
 

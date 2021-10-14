@@ -4,6 +4,16 @@ declare global {
 		intensity: number;
 		timeMinutes: number;
 	}
+
+	interface TargetRecord {
+		name: string;
+		phases: TargetRecordPhase[];
+	}
+
+	interface TargetRecordPhase {
+		muscles: string[];
+		weight: number;
+	}
 }
 
 export {};
