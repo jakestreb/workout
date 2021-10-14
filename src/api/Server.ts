@@ -11,7 +11,7 @@ interface SessionStore {
 
 export default class Server {
 
-	public static port: number = 3000;
+	public readonly port: number = 3000;
 
 	public app: express.Application = express();
 	public recordManager: RecordManager;
@@ -36,7 +36,7 @@ export default class Server {
 			next();
 		});
 		this.endpoints.forEach(endpoint => { endpoint.attach(this.app); });
-		this.app.listen(Server.port);
+		this.app.listen(this.port);
 	}
 
 	private _getSession(userId: number) {

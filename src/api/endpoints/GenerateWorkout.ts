@@ -7,8 +7,12 @@ export default class GenerateWorkout extends GetEndpoint {
 	}
 
 	public async controller(session: Session, query: any): Promise<Object> {
-		const { intensity, timeMinutes } = query;
-		const workout = await session.getNextWorkout({ intensity, timeMinutes });
+		const { name, intensity, timeMinutes } = query;
+		const workout = await session.getNextWorkout({ name, intensity, timeMinutes });
 		return workout;
+	}
+
+	public call(name: string, intensity: number, timeMinutes: number) {
+		return this.makeRequest({ name, intensity, timeMinutes });
 	}
 }

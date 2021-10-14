@@ -2,6 +2,9 @@ import * as express from 'express';
 import Session from './Session';
 
 export default abstract class Endpoint {
+
+	public readonly baseUrl: string = 'localhost:3000';
+
 	constructor(public path: string) {
 
 	}
@@ -9,6 +12,8 @@ export default abstract class Endpoint {
 	public abstract attach(app: express.Application): void;
 
 	public abstract controller(session: Session, query: any, body: any): Promise<any>;
+
+	public abstract makeRequest(query: any, body: any): Promise<void>;
 
 	public async handler(req: express.Request, res: express.Response): Promise<void> {
 		console.log(`Called: ${this.path}`, req.query, req.body);

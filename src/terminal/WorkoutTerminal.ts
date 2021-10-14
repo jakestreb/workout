@@ -9,6 +9,9 @@ import * as util from '../global/util';
 
 export default class WorkoutTerminal extends Terminal {
 
+	public workoutGenerator: WorkoutGenerator;
+	public users: string[];
+
 	public workout: Workout;
 	public hovered: WorkoutSet;
 
@@ -19,8 +22,10 @@ export default class WorkoutTerminal extends Terminal {
 	public workoutComponent: SelectTable;
 	public dataComponent: Table;
 
-	constructor(public workoutGenerator: WorkoutGenerator, public users: string[]) {
+	constructor(genTarget: any, users: string[]) {
 		super();
+		this.workoutGenerator = new WorkoutGenerator(genTarget);
+		this.users = users;
 	}
 
 	public start() {
