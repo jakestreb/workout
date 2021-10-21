@@ -3,9 +3,9 @@ import Session from '../Session';
 import Workout from '../../Workout';
 
 export default class GenerateNext extends GetEndpoint {
-	public static async call(hold: string[]): Promise<Workout> {
+	public static async call(hold: string[]): Promise<Workout|null> {
 		const result = await new GenerateNext().call({ hold });
-		const workout = Workout.fromJsonObject(result);
+		const workout: Workout|null = result ? Workout.fromJsonObject(result) : null;
 		return workout;
 	}
 

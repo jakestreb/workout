@@ -49,10 +49,9 @@ export default class WorkoutTerminal extends Terminal {
 				}
 			} else if (key === 'g') {
 				const workout = await api.GenerateNext.call(this.locked);
-				if (!workout) {
-					process.exit();
+				if (workout) {
+					this.update(workout);
 				}
-				this.update(workout);
 			}
 		});
 

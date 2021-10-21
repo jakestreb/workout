@@ -1,7 +1,6 @@
 import * as child from 'child_process';
 import Workout from '../Workout';
 import WorkoutSet from '../WorkoutSet';
-import * as util from '../global/util';
 import exerciseFromObject from '../exercises/fromJsonObject';
 
 export default abstract class LookaheadGenerator {
@@ -43,16 +42,14 @@ export default abstract class LookaheadGenerator {
 		this._filtered = this._results.filter(w => this._isFilitered(w));
 	}
 
-	public async* lookaheadGenerate(): AsyncGenerator<Workout|null> {
+	public* lookaheadGenerate(): Generator<Workout|null> {
 		if (!this._started) {
 			this._start();
 		}
 
 		while (true) {
 			if (this._results.length === 0) {
-				// Wait for first workout
-				await util.sleep(50);
-				continue;
+				yield null
 			}
 			let val = null;
 			if (this._filtered.length > 0) {

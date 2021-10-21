@@ -9,7 +9,7 @@ export default class Session {
 	public recordManager: RecordManager;
 	public workoutGenerator: WorkoutGenerator;
 
-	public gen: AsyncGenerator<Workout|null>|null;
+	public gen: Generator<Workout|null>|null;
 
 	constructor(userId: number, recordManager: RecordManager) {
 		this.userId = userId;
@@ -26,12 +26,12 @@ export default class Session {
 		this.gen = null;
 	}
 
-	public async getNextWorkout(hold: string[]): Promise<Workout> {
+	public getNextWorkout(hold: string[]): Promise<Workout> {
 		if (!this.gen) {
 			throw new Error('Generator not started');
 		}
-		const result = await this.gen.next();
-		return result.value;
+		const { value } = this.gen.next();
+		return value;
 	}
 
 	public async getProgress(): Promise<GeneratorProgress> {
