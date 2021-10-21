@@ -1,6 +1,5 @@
 import MuscleActivity from '../MuscleActivity';
-import WorkoutSet from '../WorkoutSet';
-import WorkoutPhaseTarget from '../targets/WorkoutPhaseTarget';
+import type WorkoutPhaseTarget from '../targets/WorkoutPhaseTarget';
 import * as util from '../global/util';
 import * as records from '../data/records.json';
 
@@ -92,9 +91,9 @@ export default class Exercise {
 		return recordStrs.join('\n');
 	}
 
-	public* generateSets(): Generator<WorkoutSet> {
+	public* generateRepPatterns(): Generator<number[]> {
 		for (const reps of util.randomSelector(getRepPatterns(this.possibleSets, this.possibleReps))) {
-			yield new WorkoutSet(this, reps);
+			yield reps;
 		}
 	}
 

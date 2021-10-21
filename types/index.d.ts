@@ -14,6 +14,12 @@ declare global {
 		muscles: string[];
 		weight: number;
 	}
+
+	interface GeneratorProgress {
+		generated: number,
+		filtered: number,
+		isDone: boolean,
+	}
 }
 
 export {};

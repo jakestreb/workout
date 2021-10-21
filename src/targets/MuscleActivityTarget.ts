@@ -1,5 +1,5 @@
 import * as body from '../data/body.json';
-import MuscleActivity from '../MuscleActivity';
+import type MuscleActivity from '../MuscleActivity';
 import Reporter from '../Reporter';
 import Workout from '../Workout';
 

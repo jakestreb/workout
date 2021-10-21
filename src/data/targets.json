@@ -4,7 +4,7 @@
     "phases" : [
       {
         "muscles" : ["chest", "shoulders", "triceps"],
-        "weight" : 5
+        "weight" : 3
       },
       {
         "muscles" : ["abs"],
@@ -30,7 +30,7 @@
     "phases" : [
       {
         "muscles" : ["legs"],
-        "weight" : 5
+        "weight" : 3
       },
       {
         "muscles" : ["abs"],
@@ -43,7 +43,7 @@
     "phases" : [
       {
         "muscles" : ["triceps", "biceps"],
-        "weight" : 5
+        "weight" : 3
       },
       {
         "muscles" : ["abs"],
@@ -56,7 +56,7 @@
     "phases" : [
       {
         "muscles" : ["chest", "back"],
-        "weight" : 5
+        "weight" : 3
       },
       {
         "muscles" : ["abs"],
@@ -69,7 +69,7 @@
     "phases" : [
       {
         "muscles" : ["shoulders"],
-        "weight" : 5
+        "weight" : 3
       },
       {
         "muscles" : ["abs"],

@@ -1,7 +1,13 @@
-import Exercise from './exercises/Exercise';
-import MuscleActivity from './MuscleActivity';
+import type Exercise from './exercises/Exercise';
+import type MuscleActivity from './MuscleActivity';
+import fromJsonObject from './exercises/fromJsonObject';
 
 export default class WorkoutSet {
+
+	public static fromJsonObject(obj: any): WorkoutSet {
+		const exercise = fromJsonObject(obj.exercise);
+		return new WorkoutSet(exercise, obj.reps);
+	}
 
 	public readonly exercise: Exercise;
 	public readonly reps: number[];

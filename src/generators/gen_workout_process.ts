@@ -4,8 +4,8 @@ import * as util from '../global/util';
 process.on('message', (buildArg) => {
 	const gen = new WorkoutGenerator(buildArg).generate();
 
-	util.forever(async () => {
-		const curr = await gen.next();
+	util.forever(() => {
+		const curr = gen.next();
 		if (curr.done) {
 			process.exit(0);
 		}

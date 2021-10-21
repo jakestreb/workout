@@ -31,7 +31,7 @@ export default class RepPicker extends Picker<WorkoutSet> {
 
 	public buildGenerator(): Generator<WorkoutSet> {
 		if (this.index < this._exercises.length) {
-			return this._exercises[this.index].generateSets();
+			return generateSets(this._exercises[this.index]);
 		}
 		return generateNothing();
 	}
@@ -54,6 +54,12 @@ export default class RepPicker extends Picker<WorkoutSet> {
 	private _checkFocus(): Result {
 		const activity = MuscleActivity.combine(...this.sets.map(s => s.activity));
 		return this._target.checkFocus(activity) ? Result.Complete : Result.Failed;
+	}
+}
+
+function* generateSets(exercise: Exercise) {
+	for (const pattern of exercise.generateRepPatterns()) {
+		yield new WorkoutSet(exercise, pattern);
 	}
 }
 

@@ -6,6 +6,13 @@ import RepPicker from '../pickers/RepPicker';
 
 const PATH = './src/generators/gen_phase_process.ts';
 
+// TODO: Why is this needed?
+interface Target {
+	muscles: string[];
+	intensity: number;
+	timeMinutes: number;
+}
+
 export default class PhaseGenerator extends LookaheadGenerator {
 
 	public target: WorkoutPhaseTarget;

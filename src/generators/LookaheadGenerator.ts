@@ -2,7 +2,7 @@ import * as child from 'child_process';
 import Workout from '../Workout';
 import WorkoutSet from '../WorkoutSet';
 import * as util from '../global/util';
-import exerciseFromObject from '../exercises/fromObject';
+import exerciseFromObject from '../exercises/fromJsonObject';
 
 export default abstract class LookaheadGenerator {
 
@@ -33,7 +33,9 @@ export default abstract class LookaheadGenerator {
 	}
 
 	public kill(): void {
-		this._child.kill();
+		if (this._child) {
+			this._child.kill();
+		}
 	}
 
 	public hold(exercises: Set<string>) {

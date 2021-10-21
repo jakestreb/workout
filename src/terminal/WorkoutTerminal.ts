@@ -4,61 +4,69 @@ import Table from './Table';
 import Terminal from './Terminal';
 import Workout from '../Workout';
 import WorkoutSet from '../WorkoutSet';
-import WorkoutGenerator from '../generators/WorkoutGenerator';
+import { api } from '../api/endpoints';
+import Server from '../api/Server';
 import * as util from '../global/util';
 
 export default class WorkoutTerminal extends Terminal {
 
-	public workoutGenerator: WorkoutGenerator;
 	public users: string[];
 
 	public workout: Workout;
 	public hovered: WorkoutSet;
 
-	public totalGenerated: number;
-	public remainingGenerated: number;
-	public isDone: boolean = false;
+	public progress: GeneratorProgress;
 
 	public workoutComponent: SelectTable;
 	public dataComponent: Table;
 
-	constructor(genTarget: any, users: string[]) {
+	private _target: any;
+
+	constructor(target: any, users: string[]) {
 		super();
-		this.workoutGenerator = new WorkoutGenerator(genTarget);
 		this.users = users;
+		this._target = target;
 	}
 
-	public start() {
-		const gen = this.workoutGenerator.generate();
+	public async start() {
+		new Server().start();
+
+		await api.StartGenerator.call(this._target.name, this._target.intensity, this._target.timeMinutes);
+		this._pollProgress();
 
 		process.stdin.setRawMode!(true);
 		process.stdin.resume();
 		process.stdin.setEncoding('utf8');
 		process.stdin.on('data', async (key) => {
 			if (key === '\u0003') { // ctrl-c
-				this.workoutGenerator.kill();
-				this.kill();
-				process.exit();
-			} else if (key === 'g') {
-				const curr = await gen.next();
-				if (curr.done) {
+				try {
+					await api.StopGenerator.call();
+					this.kill();
+				} catch (err) {
+					console.error(err);
+				} finally {
 					process.exit();
 				}
-				if (curr.value) {
-					this.update(curr.value);
+			} else if (key === 'g') {
+				const workout = await api.GenerateNext.call(this.locked);
+				if (!workout) {
+					process.exit();
 				}
+				this.update(workout);
 			}
 		});
 
 		util.forever(() => {
-			this._updateData();
+			if (this.workout) {
+				this._updateData();
+			}
 		}, 500);
 
 		console.log('> "g" to generate');
 	}
 
-	public get locked(): Set<string> {
-		return this.workoutComponent ? this.workoutComponent.selectedKeys : new Set();
+	public get locked(): string[] {
+		return this.workoutComponent ? Array.from(this.workoutComponent.selectedKeys) : [];
 	}
 
 	public update(w: Workout) {
@@ -72,7 +80,6 @@ export default class WorkoutTerminal extends Terminal {
 			this.workoutComponent = new SelectTable(0.1, 0.1);
 			this.add(this.workoutComponent);
 			this.workoutComponent.on('select', index => {
-				this.workoutGenerator.hold(this.locked);
 				this._updateData();
 			});
 			this.workoutComponent.on('hover', index => {
@@ -99,6 +106,11 @@ export default class WorkoutTerminal extends Terminal {
 		]);
 	}
 
+	private async _pollProgress() {
+		this.progress = await api.GetProgress.call();
+		setTimeout(() => this._pollProgress(), 100);
+	}
+
 	private get _basicData(): string[][] {
 		const w = this.workout;
 		return [
@@ -110,7 +122,7 @@ export default class WorkoutTerminal extends Terminal {
 	private get _muscleData(): string[][] {
 		const w = this.workout;
 		const selected = MuscleActivity.combine(...this.workout.sets
-			.filter(s => this.locked.has(`${s.exercise}`))
+			.filter(s => this.locked.includes(`${s.exercise}`))
 			.map(s => s.activity));
 		const compareStrs = w.activity.compareString(selected).split('\n');
 		return compareStrs.map(s => s.split(' '));
@@ -123,10 +135,10 @@ export default class WorkoutTerminal extends Terminal {
 	}
 
 	private get _generatorData(): string[][] {
-		const wg = this.workoutGenerator;
+		const p = this.progress;
 		return [
-			[`generated${wg.isDone ? ' all' : ''}`, `${wg.generatedCount}`],
-			['remaining', `${wg.filteredCount}`]
+			[`generated${p.isDone ? ' all' : ''}`, `${p.generated}`],
+			['remaining', `${p.filtered}`]
 		];
 	}
 }

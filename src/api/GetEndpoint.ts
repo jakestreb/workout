@@ -2,6 +2,7 @@ import Endpoint from './Endpoint';
 import Session from './Session';
 import axios from 'axios';
 import * as express from 'express';
+import * as qs from 'qs';
 
 export default abstract class GetEndpoint extends Endpoint {
 	constructor(path: string) {
@@ -12,9 +13,16 @@ export default abstract class GetEndpoint extends Endpoint {
 		app.get(this.path, (req: express.Request, res: express.Response) => this.handler(req, res));
 	}
 
-	public async makeRequest(query: any): Promise<void> {
-		await axios.get('/login', { params: query, baseURL: this.baseUrl });
+	public async call(query: any): Promise<any> {
+		const result = await axios.get(this.path, {
+			params: query,
+			baseURL: this.baseUrl,
+			paramsSerializer: params => qs.stringify(params),
+		});
+		return result.data;
 	}
 
-	public abstract controller(session: Session, query: any, body: any): Promise<Object>;
+	public controller(session: Session, query: any, body: any): Promise<Object> {
+		return Promise.resolve({});
+	}
 }

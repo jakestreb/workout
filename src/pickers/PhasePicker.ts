@@ -3,6 +3,13 @@ import Picker from './Picker';
 import Workout from '../Workout';
 import { Result } from '../global/enums';
 
+// TODO: Why is this needed?
+interface Target {
+	muscles: string[];
+	intensity: number;
+	timeMinutes: number;
+}
+
 export default class PhasePicker extends Picker<Workout> {
 
 	private _phaseTargets: Target[];
@@ -25,7 +32,10 @@ export default class PhasePicker extends Picker<Workout> {
 	}
 
 	public buildGenerator(): Generator<Workout> {
-		return new PhaseGenerator(this._phaseTargets[this.index]).generate();
+		if (this.index < this._phaseTargets.length) {
+			return new PhaseGenerator(this._phaseTargets[this.index]).lookaheadGenerate();
+		}
+		return generateNothing();
 	}
 
 	private _checkLength(): Result {
@@ -42,4 +52,8 @@ export default class PhasePicker extends Picker<Workout> {
 		const unique = new Set(all);
 		return unique.size < all.length ? Result.Failed : Result.Complete;
 	}
+}
+
+function* generateNothing() {
+	return
 }

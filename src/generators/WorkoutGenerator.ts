@@ -6,6 +6,13 @@ import * as util from '../global/util';
 
 const PATH = './src/generators/gen_workout_process.ts';
 
+// TODO: Why is this needed?
+interface Target {
+	muscles: string[];
+	intensity: number;
+	timeMinutes: number;
+}
+
 export default class WorkoutGenerator extends LookaheadGenerator {
 
 	private _phaseTargets: Target[];
@@ -25,24 +32,12 @@ export default class WorkoutGenerator extends LookaheadGenerator {
 		});
 	}
 
-	public async* generate(): AsyncGenerator<Workout> {
+	public* generate(): Generator<Workout> {
 		const phasePicker = new PhasePicker(this._phaseTargets);
 
 		for (const phases of phasePicker.pick()) {
 			yield Workout.combine(...phases);
 			break;
 		}
-	}
-
-	public kill(): void {
-		// TODO
-	}
-
-	public hold(exercises: Set<string>): void {
-		// TODO
-	}
-
-	public throw(): void {
-		// TODO
 	}
 }

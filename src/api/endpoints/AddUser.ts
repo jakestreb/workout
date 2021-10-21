@@ -2,6 +2,10 @@ import PostEndpoint from '../PostEndpoint';
 import Session from '../Session';
 
 export default class AddUser extends PostEndpoint {
+	public static call(name: string, experience: string, primaryFocus: string): Promise<void> {
+		return new AddUser().call(null, { name, experience, primaryFocus });
+	}
+
 	constructor() {
 		super('/user');
 	}
@@ -9,9 +13,5 @@ export default class AddUser extends PostEndpoint {
 	public async controller(session: Session, query: any, body: any): Promise<void> {
 		const { name, experience, primaryFocus } = body;
 		await session.recordManager.addUser({ name, experience, primaryFocus });
-	}
-
-	public call(name: string, experience: string, primaryFocus: string) {
-		return this.makeRequest(null, { name, experience, primaryFocus });
 	}
 }

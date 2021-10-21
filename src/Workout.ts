@@ -15,6 +15,11 @@ export default class Workout {
 		}, new Workout([]));
 	}
 
+	public static fromJsonObject(obj: any): Workout {
+		const sets: WorkoutSet[] = obj.sets.map((s: any) => WorkoutSet.fromJsonObject(s));
+		return new Workout(sets);
+	}
+
 	public readonly sets: WorkoutSet[];
 
 	constructor(sets: WorkoutSet[]) {
