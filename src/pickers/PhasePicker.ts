@@ -33,7 +33,7 @@ export default class PhasePicker extends Picker<Workout> {
 
 	public buildGenerator(): Generator<Workout> {
 		if (this.index < this._phaseTargets.length) {
-			return new PhaseGenerator(this._phaseTargets[this.index]).lookaheadGenerate();
+			return new PhaseGenerator(this._phaseTargets[this.index]).generate();
 		}
 		return generateNothing();
 	}

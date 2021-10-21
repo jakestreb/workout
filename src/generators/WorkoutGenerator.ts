@@ -37,7 +37,6 @@ export default class WorkoutGenerator extends LookaheadGenerator {
 
 		for (const phases of phasePicker.pick()) {
 			yield Workout.combine(...phases);
-			break;
 		}
 	}
 }
