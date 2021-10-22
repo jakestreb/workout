@@ -14,7 +14,7 @@ import WorkoutTerminal from './src/terminal/WorkoutTerminal';
 // });
 
 const t = new WorkoutTerminal(
-	{ name: 'back_day', intensity: 6, timeMinutes: 45 },
+	{ name: 'back_day', intensity: 5, timeMinutes: 45 },
 	['Kelci', 'Michael', 'Vini', 'Jake', 'Yudhi']
 );
 t.start();

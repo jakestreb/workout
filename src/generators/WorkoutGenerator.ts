@@ -32,11 +32,11 @@ export default class WorkoutGenerator extends LookaheadGenerator {
 		});
 	}
 
-	public* generate(): Generator<Workout> {
+	public* generate(): Generator<Workout|null> {
 		const phasePicker = new PhasePicker(this._phaseTargets);
 
 		for (const phases of phasePicker.pick()) {
-			yield Workout.combine(...phases);
+			yield phases ? Workout.combine(...phases) : null;
 		}
 	}
 }

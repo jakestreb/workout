@@ -64,5 +64,5 @@ function* generateSets(exercise: Exercise) {
 }
 
 function* generateNothing() {
-	return
+	return;
 }

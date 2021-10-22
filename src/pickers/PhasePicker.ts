@@ -31,9 +31,9 @@ export default class PhasePicker extends Picker<Workout> {
 		return this.items;
 	}
 
-	public buildGenerator(): Generator<Workout> {
+	public buildGenerator(): Generator<Workout|null> {
 		if (this.index < this._phaseTargets.length) {
-			return new PhaseGenerator(this._phaseTargets[this.index]).generate();
+			return new PhaseGenerator(this._phaseTargets[this.index]).lookaheadGenerate();
 		}
 		return generateNothing();
 	}
@@ -50,10 +50,11 @@ export default class PhasePicker extends Picker<Workout> {
 			});
 		});
 		const unique = new Set(all);
-		return unique.size < all.length ? Result.Failed : Result.Complete;
+		const result = unique.size < all.length ? Result.Failed : Result.Complete;
+		return result;
 	}
 }
 
 function* generateNothing() {
-	return
+	return;
 }

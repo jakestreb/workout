@@ -4,7 +4,7 @@ export default abstract class Picker<T> {
 
 	public readonly items: T[] = [];
 
-	private readonly _generators: Generator<T>[] = [];
+	private readonly _generators: Generator<T|null>[] = [];
 
 	constructor() {
 
@@ -16,16 +16,20 @@ export default abstract class Picker<T> {
 		return this.items.length;
 	}
 
-	public abstract buildGenerator(): Generator<T>;
+	public abstract buildGenerator(): Generator<T|null>;
 
 	public checkProgress(): Result {
 		return checkAll(...this.checks);
 	}
 
-	public* pick(): Generator<T[]> {
+	public* pick(): Generator<T[]|null> {
 		this._generators.push(this.buildGenerator());
 		while (true) {
 			const status = this._add();
+
+			if (status === Result.Pending) {
+				yield null;
+			}
 
 			// If the status check is successful, yield
 			if (status === Result.Complete) {
@@ -48,6 +52,9 @@ export default abstract class Picker<T> {
 
 		let curr = gen.next();
 		while (!curr.done) {
+			if (!curr.value) {
+				return Result.Pending;
+			}
 			this.items.push(curr.value);
 			const status = this.checkProgress();
 			if (status === Result.Failed) {

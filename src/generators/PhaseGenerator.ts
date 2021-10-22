@@ -26,9 +26,9 @@ export default class PhaseGenerator extends LookaheadGenerator {
 		const exercisePicker = new ExercisePicker(this.target);
 
 		for (const exercises of exercisePicker.pick()) {
-			const repPicker = new RepPicker(exercises, this.target);
+			const repPicker = new RepPicker(exercises!, this.target);
 			for (const sets of repPicker.pick()) {
-				yield new Workout(sets);
+				yield new Workout(sets!);
 				break;
 			}
 		}

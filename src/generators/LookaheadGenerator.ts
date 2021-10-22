@@ -1,7 +1,5 @@
 import * as child from 'child_process';
 import Workout from '../Workout';
-import WorkoutSet from '../WorkoutSet';
-import exerciseFromObject from '../exercises/fromJsonObject';
 
 export default abstract class LookaheadGenerator {
 
@@ -74,11 +72,11 @@ export default abstract class LookaheadGenerator {
 		this._child = child.fork(this._path);
 
 		this._child.on('message', (msg) => {
-			const sets: WorkoutSet[] = msg.sets.map((s: any) => {
-				const exercise = exerciseFromObject(s.exercise);
-				return new WorkoutSet(exercise, s.reps);
-			});
-			const w = new Workout(sets);
+			if (!msg) {
+				return;
+			}
+
+			const w = Workout.fromJsonObject(msg);
 			this._results.push(w);
 			if (this._isFilitered(w)) {
 				this._filtered.push(w);
