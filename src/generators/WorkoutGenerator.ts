@@ -1,8 +1,8 @@
-import * as targetRecords from '../data/targets.json';
+import ExercisePicker from '../pickers/ExercisePicker';
 import LookaheadGenerator from './LookaheadGenerator';
-import PhasePicker from '../pickers/PhasePicker';
 import Workout from '../Workout';
-import * as util from '../global/util';
+import WorkoutTarget from '../targets/WorkoutTarget';
+import RepPicker from '../pickers/RepPicker';
 
 const PATH = './src/generators/gen_workout_process.ts';
 
@@ -15,28 +15,26 @@ interface Target {
 
 export default class WorkoutGenerator extends LookaheadGenerator {
 
-	private _phaseTargets: Target[];
+	public target: WorkoutTarget;
 
-	constructor({ name, intensity, timeMinutes }: any) {
-		super({ name, intensity, timeMinutes }, PATH);
-
-		// TODO: Add name picker
-		const targetRecord  = targetRecords.find(t => t.name === name);
-		if (!targetRecord) { throw new Error('Target not found'); }
-
-		const totalWeight = util.sum(targetRecord.phases.map(phase => phase.weight));
-
-		this._phaseTargets = targetRecord.phases.map(phase => {
-			const phaseTime = timeMinutes * (phase.weight / totalWeight);
-			return { muscles: phase.muscles, intensity, timeMinutes: phaseTime };
-		});
+	constructor({ muscles, intensity, timeMinutes }: Target) {
+		super({ muscles, intensity, timeMinutes }, PATH);
+		this.target = new WorkoutTarget(muscles, intensity, timeMinutes * 60);
 	}
 
-	public* generate(): Generator<Workout|null> {
-		const phasePicker = new PhasePicker(this._phaseTargets);
+	public* generate(): Generator<Workout> {
+		const exercisePicker = new ExercisePicker(this.target);
 
-		for (const phases of phasePicker.pick()) {
-			yield phases ? Workout.combine(...phases) : null;
+		for (const exercises of exercisePicker.pick()) {
+			const repPicker = new RepPicker(exercises!, this.target);
+			for (const sets of repPicker.pick()) {
+				yield new Workout(sets!);
+				break;
+			}
 		}
+	}
+
+	public throw(): void {
+		this.target.throw();
 	}
 }

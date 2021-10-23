@@ -1,7 +1,7 @@
 import Exercise from '../exercises/Exercise';
 import MuscleActivity from '../MuscleActivity';
 import Picker from './Picker';
-import WorkoutPhaseTarget from '../targets/WorkoutPhaseTarget'
+import WorkoutTarget from '../targets/WorkoutTarget'
 import Workout from '../Workout';
 import WorkoutSet from '../WorkoutSet';
 import { Result } from '../global/enums';
@@ -9,9 +9,9 @@ import { Result } from '../global/enums';
 export default class RepPicker extends Picker<WorkoutSet> {
 
 	private readonly _exercises: Exercise[];
-	private readonly _target: WorkoutPhaseTarget;
+	private readonly _target: WorkoutTarget;
 
-	constructor(exercises: Exercise[], target: WorkoutPhaseTarget) {
+	constructor(exercises: Exercise[], target: WorkoutTarget) {
 		super();
 
 		this._exercises = exercises;

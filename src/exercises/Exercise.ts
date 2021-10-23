@@ -1,5 +1,5 @@
 import MuscleActivity from '../MuscleActivity';
-import type WorkoutPhaseTarget from '../targets/WorkoutPhaseTarget';
+import type WorkoutTarget from '../targets/WorkoutTarget';
 import * as util from '../global/util';
 import * as records from '../data/records.json';
 
@@ -18,7 +18,7 @@ interface Activation {
 }
 
 export default class Exercise {
-	public static* generator(target: WorkoutPhaseTarget, exclude: string[] = []) {
+	public static* generator(target: WorkoutTarget, exclude: string[] = []) {
 		for (const exerciseRecord of target.exerciseRecords) {
 			if (!exclude.includes(exerciseRecord.name)) {
 				yield new Exercise(exerciseRecord);

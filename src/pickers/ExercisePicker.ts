@@ -2,7 +2,7 @@ import Exercise from '../exercises/Exercise';
 import ExercisePair from '../exercises/ExercisePair';
 import MuscleActivity from '../MuscleActivity';
 import Picker from './Picker';
-import WorkoutPhaseTarget from '../targets/WorkoutPhaseTarget';
+import WorkoutTarget from '../targets/WorkoutTarget';
 import { Result } from '../global/enums';
 import * as util from '../global/util';
 
@@ -10,9 +10,9 @@ export default class ExercisePicker extends Picker<Exercise> {
 
 	private static _timeTolerance: number = 5 * 60;
 
-	private readonly _target: WorkoutPhaseTarget;
+	private readonly _target: WorkoutTarget;
 
-	constructor(target: WorkoutPhaseTarget) {
+	constructor(target: WorkoutTarget) {
 		super();
 
 		this._target = target;
@@ -66,7 +66,7 @@ export default class ExercisePicker extends Picker<Exercise> {
 	}
 }
 
-function* anyGenerator(target: WorkoutPhaseTarget, previouslySelected: string[] = []): Generator<Exercise> {
+function* anyGenerator(target: WorkoutTarget, previouslySelected: string[] = []): Generator<Exercise> {
 	const gens: Generator<Exercise>[] = [
 		Exercise.generator(target, previouslySelected),
 		ExercisePair.generator(target, previouslySelected)

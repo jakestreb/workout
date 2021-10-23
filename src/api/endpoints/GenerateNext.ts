@@ -3,8 +3,8 @@ import Session from '../Session';
 import Workout from '../../Workout';
 
 export default class GenerateNext extends GetEndpoint {
-	public static async call(hold: string[]): Promise<Workout|null> {
-		const result = await new GenerateNext().call({ hold });
+	public static async call(index: number, hold: string[]): Promise<Workout|null> {
+		const result = await new GenerateNext().call({ index, hold });
 		const workout: Workout|null = result ? Workout.fromJsonObject(result) : null;
 		return workout;
 	}
@@ -14,8 +14,8 @@ export default class GenerateNext extends GetEndpoint {
 	}
 
 	public async controller(session: Session, query: any): Promise<Workout> {
-		const { hold } = query;
-		const workout = await session.getNextWorkout(hold);
+		const { index, hold } = query;
+		const workout = await session.getNextWorkout(index, hold);
 		return workout;
 	}
 }

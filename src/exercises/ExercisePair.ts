@@ -1,6 +1,6 @@
 import Exercise from './Exercise';
 import MuscleActivity from '../MuscleActivity';
-import WorkoutPhaseTarget from '../targets/WorkoutPhaseTarget';
+import WorkoutTarget from '../targets/WorkoutTarget';
 import * as util from '../global/util';
 import * as records from '../data/records.json';
 
@@ -22,7 +22,7 @@ export default class ExercisePair extends Exercise {
 
 	public static swapTime: number = 80;
 
-	public static* generator(target: WorkoutPhaseTarget, exclude: string[] = []) {
+	public static* generator(target: WorkoutTarget, exclude: string[] = []) {
 		const viableExercises = target.exerciseRecords
 			.filter(e => e.supersetGroups && e.supersetGroups.length > 0);
 		for (const recordA of util.weightedSelector(viableExercises)) {

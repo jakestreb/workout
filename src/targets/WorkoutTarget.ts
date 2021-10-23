@@ -6,7 +6,7 @@ import Reporter from '../Reporter';
 import { Result } from '../global/enums';
 import * as util from '../global/util';
 
-export default class WorkoutPhaseTarget {
+export default class WorkoutTarget {
 
 	public static maxLeftoverTime: number = 5 * 60;
 
@@ -43,7 +43,7 @@ export default class WorkoutPhaseTarget {
 	public checkTime(time: number, tolerance: number = 0): Result {
 		this._timeReporter.record('time', time);
 
-		const minTime = this.timeTarget - WorkoutPhaseTarget.maxLeftoverTime - tolerance;
+		const minTime = this.timeTarget - WorkoutTarget.maxLeftoverTime - tolerance;
 		const maxTime = this.timeTarget + tolerance;
 
 		if (time < minTime) {

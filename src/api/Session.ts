@@ -1,5 +1,5 @@
 import RecordManager from '../data/RecordManager';
-import WorkoutGenerator from '../generators/WorkoutGenerator';
+import MultiGenerator from '../generators/MultiGenerator';
 import Workout from '../Workout';
 
 export default class Session {
@@ -7,7 +7,7 @@ export default class Session {
 	public userId: number;
 
 	public recordManager: RecordManager;
-	public workoutGenerator: WorkoutGenerator;
+	public multiGenerator: MultiGenerator;
 
 	public gen: Generator<Workout|null>|null;
 
@@ -17,28 +17,29 @@ export default class Session {
 	}
 
 	public async startGenerator({ name, intensity, timeMinutes }: any): Promise<void> {
-		this.workoutGenerator = new WorkoutGenerator({ name, intensity, timeMinutes });
-		this.gen = this.workoutGenerator.lookaheadGenerate();
+		this.multiGenerator = new MultiGenerator({ name, intensity, timeMinutes });
+		this.gen = this.multiGenerator.generate();
 	}
 
 	public async stopGenerator(): Promise<void> {
-		this.workoutGenerator.kill();
+		this.multiGenerator.killAll();
 		this.gen = null;
 	}
 
-	public getNextWorkout(hold: string[]): Promise<Workout> {
+	public getNextWorkout(index: number, hold: string[]): Promise<Workout> {
 		if (!this.gen) {
 			throw new Error('Generator not started');
 		}
-		const { value } = this.gen.next();
+		const { value } = this.gen.next(index);
 		return value;
 	}
 
-	public async getProgress(): Promise<GeneratorProgress> {
+	public async getProgress(index: number): Promise<GeneratorProgress> {
+		const wg = this.multiGenerator.workoutGenerators[index];
 		return {
-			generated: this.workoutGenerator.generatedCount,
-			filtered: this.workoutGenerator.filteredCount,
-			isDone: this.workoutGenerator.isDone,
+			generated: wg.generatedCount,
+			filtered: wg.filteredCount,
+			isDone: wg.isDone,
 		};
 	}
 }

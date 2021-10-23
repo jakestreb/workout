@@ -5,15 +5,9 @@ import * as util from './global/util';
 
 export default class Workout {
 
+	// TODO: Change
 	public static avgTime = 45 * 60;
 	public static intensityScaler = 250;
-
-	public static combine(...args: Workout[]): Workout {
-		return args.reduce((a, b) => {
-			a.sets.push(...b.sets);
-			return a;
-		}, new Workout([]));
-	}
 
 	public static fromJsonObject(obj: any): Workout {
 		const sets: WorkoutSet[] = obj.sets.map((s: any) => WorkoutSet.fromJsonObject(s));
@@ -44,8 +38,6 @@ export default class Workout {
 	}
 
 	public toString(): string {
-		return `${this.sets.join('\n')}\n`
-			+ `(${this.intensity.toFixed(1)}) (${util.timeString(this.time)})\n\n`
-			+ `${this.activity}`;
+		return this.sets.join('\n');
 	}
 }

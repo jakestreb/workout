@@ -17,6 +17,8 @@ export default class WorkoutTerminal extends Terminal {
 
 	public progress: GeneratorProgress;
 
+	public genIndex: number = 0;
+
 	public workoutComponent: SelectTable;
 	public dataComponent: Table;
 
@@ -48,7 +50,7 @@ export default class WorkoutTerminal extends Terminal {
 					process.exit();
 				}
 			} else if (key === 'g') {
-				const workout = await api.GenerateNext.call(this.locked);
+				const workout = await api.GenerateNext.call(this.genIndex, this.locked);
 				if (workout) {
 					this.update(workout);
 				}
@@ -106,7 +108,7 @@ export default class WorkoutTerminal extends Terminal {
 	}
 
 	private async _pollProgress() {
-		this.progress = await api.GetProgress.call();
+		this.progress = await api.GetProgress.call(this.genIndex);
 		setTimeout(() => this._pollProgress(), 100);
 	}
 
