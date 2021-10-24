@@ -4,7 +4,7 @@ import Table from './Table';
 import Terminal from './Terminal';
 import Workout from '../Workout';
 import WorkoutSet from '../WorkoutSet';
-import { api } from '../server/endpoints';
+import api from '../server/endpoints';
 import Server from '../server/Server';
 import * as util from '../global/util';
 

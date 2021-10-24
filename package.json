@@ -5,9 +5,11 @@
   "main": "index",
   "typings": "types/index",
   "scripts": {
-    "start": "ts-node --files index.ts",
     "lint": "tslint -p tsconfig.json",
-    "lines": "git -C src grep ^ | wc -l"
+    "lines": "git -C src grep ^ | wc -l",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,7 @@
     "@types/express": "^4.17.13",
     "@types/madge": "^5.0.0",
     "@types/node": "^10.12.18",
+    "@types/react": "^17.0.31",
     "@types/sqlite3": "^3.1.7",
     "next": "^11.1.2",
     "ts-node": "^7.0.1",
@@ -34,8 +37,11 @@
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "madge": "^5.0.1",
+    "next": "^11.0.0",
     "npm": "^6.13.7",
     "qs": "^6.10.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "sqlite3": "^5.0.2",
     "uuidv4": "^6.2.12"
   }

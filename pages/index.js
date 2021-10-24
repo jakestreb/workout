@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import React from 'react'
-import { api } from '../../src/api/endpoints';
+import api from '../src/server/endpoints';
 
 export default class Home extends React.Component {
   render() {
@@ -219,10 +219,10 @@ export default class Home extends React.Component {
   }
 }
 
-// async function startGen() {
-//   await api.StartGenerator.call('back_day', 5, 45);
-//   await api.GenerateNext.call(this.genIndex, this.locked);
-// }
+async function startGen() {
+  await api.StartGenerator.call('back_day', 5, 45);
+  await api.GenerateNext.call(this.genIndex, this.locked);
+}
 
 // export async function getStaticProps() {
 //   // Get external data from the file system, API, DB, etc.
