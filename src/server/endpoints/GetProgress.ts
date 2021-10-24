@@ -1,5 +1,5 @@
 import GetEndpoint from './base_endpoints/GetEndpoint';
-import Session from '../Session';
+import type Session from '../Session';
 
 export default class GetProgress extends GetEndpoint {
 	public static call(index: number): Promise<GeneratorProgress> {

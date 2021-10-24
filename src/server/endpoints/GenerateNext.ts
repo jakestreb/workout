@@ -1,5 +1,5 @@
 import GetEndpoint from './base_endpoints/GetEndpoint';
-import Session from '../Session';
+import type Session from '../Session';
 import Workout from '../../Workout';
 
 export default class GenerateNext extends GetEndpoint {

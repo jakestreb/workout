@@ -1,4 +1,5 @@
-import WorkoutTerminal from './src/terminal/WorkoutTerminal';
+import Server from './src/server/Server';
+// import WorkoutTerminal from './src/terminal/WorkoutTerminal';
 // import * as madge from 'madge';
 
 // const config = {
@@ -13,8 +14,10 @@ import WorkoutTerminal from './src/terminal/WorkoutTerminal';
 // 	console.log(res.circular());
 // });
 
-const t = new WorkoutTerminal(
-	{ name: 'back_day', intensity: 5, timeMinutes: 45 },
-	['Kelci', 'Michael', 'Vini', 'Jake', 'Yudhi']
-);
-t.start();
+// const t = new WorkoutTerminal(
+// 	{ name: 'back_day', intensity: 5, timeMinutes: 45 },
+// 	['Kelci', 'Michael', 'Vini', 'Jake', 'Yudhi']
+// );
+// t.start();
+
+new Server().start();

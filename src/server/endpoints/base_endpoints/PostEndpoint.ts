@@ -13,7 +13,10 @@ export default abstract class PostEndpoint extends Endpoint {
 	}
 
 	public async call(query: any, body: any): Promise<void> {
-		await axios.post(this.path, body, { params: query, baseURL: this.baseUrl });
+		await axios.post(this.path, body, {
+			params: query,
+			baseURL: this.baseUrl,
+		});
 	}
 
 	public abstract controller(session: Session, query: any, body: any): Promise<void>;

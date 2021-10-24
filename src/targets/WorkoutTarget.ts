@@ -1,4 +1,4 @@
-import * as exerciseRecords from '../data/exercises.json';
+import exerciseRecords from '../data/exercises.json';
 import Exercise from '../exercises/Exercise';
 import MuscleActivity from '../MuscleActivity';
 import MuscleActivityTarget from './MuscleActivityTarget';

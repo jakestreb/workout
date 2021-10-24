@@ -1,5 +1,5 @@
 import PostEndpoint from './base_endpoints/PostEndpoint';
-import Session from '../Session';
+import type Session from '../Session';
 
 export default class StopGenerator extends PostEndpoint {
 	public static call(): Promise<void> {

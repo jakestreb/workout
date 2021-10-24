@@ -1,8 +1,9 @@
-import * as api from './api';
+import api from './endpoints';
 import RecordManager from '../data/RecordManager';
 import Session from './Session';
 import * as bodyParser from 'body-parser';
-import * as express from 'express';
+import cors from 'cors';
+import express from 'express';
 
 interface SessionStore {
 	[userId: number]: Session
@@ -10,7 +11,7 @@ interface SessionStore {
 
 export default class Server {
 
-	public readonly port: number = 3000;
+	public readonly port: number = 3001;
 
 	public app: express.Application = express();
 	public recordManager: RecordManager;
@@ -20,6 +21,7 @@ export default class Server {
 		this.recordManager = new RecordManager();
 	}
 	public start() {
+		this.app.use(cors());
 		this.app.use(bodyParser.json());
 		this.app.use((req, res, next) => {
 			// TODO: Add authentication
@@ -32,6 +34,7 @@ export default class Server {
 			new endpoint().attach(this.app);
 		}
 		this.app.listen(this.port);
+		console.log(`Listening on port ${this.port}`);
 	}
 
 	private _getSession(userId: number) {
@@ -41,12 +44,3 @@ export default class Server {
 		return this.sessions[userId];
 	}
 }
-
-async function handler(controller: any, req: express.Request, res: express.Response): Promise<void> {
-	try {
-		const result = await controller((req as any).session, req.query, req.body);
-		res.status(200).json(result);
-	} catch (err) {
-		res.status(500).send(err);
-	}
-};

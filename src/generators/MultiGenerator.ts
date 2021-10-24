@@ -1,4 +1,4 @@
-import * as targetRecords from '../data/targets.json';
+import targetRecords from '../data/targets.json';
 import Workout from '../Workout';
 import WorkoutGenerator from '../generators/WorkoutGenerator';
 import * as util from '../global/util';

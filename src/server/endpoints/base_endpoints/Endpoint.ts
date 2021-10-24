@@ -1,9 +1,9 @@
 import * as express from 'express';
-import Session from './Session';
+import Session from '../../Session';
 
 export default abstract class Endpoint {
 
-	public readonly baseUrl: string = 'http://localhost:3000';
+	public readonly baseUrl: string = 'http://localhost:3001';
 
 	constructor(public path: string) {
 
