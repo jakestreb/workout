@@ -1,8 +1,10 @@
 import Head from 'next/head'
+import React from 'react'
+import { api } from '../../src/api/endpoints';
 
-export default function Home() {
-  return (
-    <div className="container">
+export default class Home extends React.Component {
+  render() {
+    return <div className="container">
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
@@ -18,7 +20,16 @@ export default function Home() {
         </p>
 
         <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
+{/*          <button
+            onClick={async () => {
+               const newPosts = await getNewPostsFromApi();
+               setPosts(...posts, ...newPosts);
+            }}
+            type="button"
+          >
+          Load more
+          </button>
+*/}          <a href="https://nextjs.org/docs" className="card">
             <h3>Documentation &rarr;</h3>
             <p>Find in-depth information about Next.js features and API.</p>
           </a>
@@ -204,6 +215,23 @@ export default function Home() {
           box-sizing: border-box;
         }
       `}</style>
-    </div>
-  )
+    </div>;
+  }
 }
+
+// async function startGen() {
+//   await api.StartGenerator.call('back_day', 5, 45);
+//   await api.GenerateNext.call(this.genIndex, this.locked);
+// }
+
+// export async function getStaticProps() {
+//   // Get external data from the file system, API, DB, etc.
+//   const data = ...
+
+//   // The value of the `props` key will be
+//   //  passed to the `Home` component
+//   return {
+//     props: ...
+//   }
+// }
+

@@ -1,5 +1,5 @@
 import Endpoint from './Endpoint';
-import Session from './Session';
+import type Session from '../../Session';
 import axios from 'axios';
 import * as express from 'express';
 import * as qs from 'qs';

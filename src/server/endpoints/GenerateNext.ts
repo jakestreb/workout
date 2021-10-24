@@ -1,4 +1,4 @@
-import GetEndpoint from '../GetEndpoint';
+import GetEndpoint from './base_endpoints/GetEndpoint';
 import Session from '../Session';
 import Workout from '../../Workout';
 

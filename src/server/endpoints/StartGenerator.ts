@@ -1,4 +1,4 @@
-import PostEndpoint from '../PostEndpoint';
+import PostEndpoint from './base_endpoints/PostEndpoint';
 import Session from '../Session';
 
 export default class StartGenerator extends PostEndpoint {

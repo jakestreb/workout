@@ -1,4 +1,4 @@
-import { api } from './endpoints';
+import * as api from './api';
 import RecordManager from '../data/RecordManager';
 import Session from './Session';
 import * as bodyParser from 'body-parser';
@@ -41,3 +41,12 @@ export default class Server {
 		return this.sessions[userId];
 	}
 }
+
+async function handler(controller: any, req: express.Request, res: express.Response): Promise<void> {
+	try {
+		const result = await controller((req as any).session, req.query, req.body);
+		res.status(200).json(result);
+	} catch (err) {
+		res.status(500).send(err);
+	}
+};
