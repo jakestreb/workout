@@ -1,9 +1,16 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import React from 'react'
 import api from '../src/server/endpoints';
 
-export default class Home extends React.Component {
+export default class Generate extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isRunning: false,
+      workout: null,
+    };
+  }
+
   render() {
     return <div className="container">
       <Head>
@@ -12,15 +19,34 @@ export default class Home extends React.Component {
       </Head>
 
       <main>
-        <h1 className="title">
-          Workout Generator
-        </h1>
         <div className="grid">
-          <Link href="/generate">
-            <a className="card">
-              <h3>Generate</h3>
-            </a>
-          </Link>
+          {
+            !this.state.isRunning ? <button
+              onClick={async () => {
+                await api.StartGenerator.call('back_day', 5, 45);
+                this.setState({ isRunning: true });
+              }}
+              type="button"
+            >
+            Start
+            </button> : null
+          }
+          {
+            this.state.isRunning ? <button
+              onClick={async () => {
+                const workout = await api.GenerateNext.call(0, []);
+                this.setState({ workout });
+              }}
+              type="button"
+            >
+            Next
+            </button> : null
+          }
+          <div>
+            {
+              this.state.workout ? `${this.state.workout}` : null
+            }
+          </div>
         </div>
       </main>
 

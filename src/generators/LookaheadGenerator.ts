@@ -86,7 +86,6 @@ export default abstract class LookaheadGenerator {
 				const r = Math.floor(Math.random() * this._filtered.length);
 				[val] = this._filtered.splice(r, 1);
 			}
-			console.log('GENERATING', val);
 			yield val;
 		}
 	}
