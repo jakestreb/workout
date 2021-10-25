@@ -31,11 +31,12 @@ export default class MultiGenerator {
 
 		this.workoutGenerators = this._targets.map(t => new WorkoutGenerator(t));
 		this._gens = this.workoutGenerators.map(wg => wg.lookaheadGenerate());
+		this.workoutGenerators.forEach(wg => { wg.start(); });
 	}
 
 	public* generate(): Generator<Workout|null, any, number> {
-		let index = -1;
-		let value = null;
+		let index: number = -1;
+		let value: Workout|null = null;
 		while (true) {
 			if (index >= 0) {
 				value = this._gens[index].next().value;

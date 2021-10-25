@@ -21,7 +21,15 @@ export default class Home extends React.Component {
             }}
             type="button"
           >
-          Generate
+          Start
+          </button>
+          <button
+            onClick={async () => {
+               await getNext();
+            }}
+            type="button"
+          >
+          Next
           </button>
         </div>
       </main>
@@ -176,9 +184,12 @@ export default class Home extends React.Component {
 }
 
 async function startGen() {
-  console.log('calling');
   await api.StartGenerator.call('back_day', 5, 45);
-  await api.GenerateNext.call(this.genIndex, this.locked);
+}
+
+async function getNext() {
+  const result = await api.GenerateNext.call(0, []);
+  console.warn('result', result);
 }
 
 // export async function getStaticProps() {

@@ -17,6 +17,7 @@ export default class Session {
 	}
 
 	public async startGenerator({ name, intensity, timeMinutes }: any): Promise<void> {
+		console.log(`Starting generator: ${name}, intensity: ${intensity}, time: ${timeMinutes}`);
 		this.multiGenerator = new MultiGenerator({ name, intensity, timeMinutes });
 		this.gen = this.multiGenerator.generate();
 	}

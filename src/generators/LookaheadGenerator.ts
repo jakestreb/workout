@@ -40,31 +40,7 @@ export default abstract class LookaheadGenerator {
 		this._filtered = this._results.filter(w => this._isFilitered(w));
 	}
 
-	public* lookaheadGenerate(): Generator<Workout|null> {
-		if (!this._started) {
-			this._start();
-		}
-
-		while (true) {
-			if (this._results.length === 0) {
-				yield null
-			}
-			let val = null;
-			if (this._filtered.length > 0) {
-				const r = Math.floor(Math.random() * this._filtered.length);
-				[val] = this._filtered.splice(r, 1);
-			}
-			yield val;
-		}
-	}
-
-	private _isFilitered(w: Workout) {
-		const held = new Set(this._held);
-		w.sets.forEach(s => { held.delete(`${s.exercise}`); });
-		return held.size === 0;
-	}
-
-	private _start(): void {
+	public start(): void {
 		if (this._child) {
 			return;
 		}
@@ -94,5 +70,30 @@ export default abstract class LookaheadGenerator {
 		this._child.send(this._buildArg);
 
 		this._started = true;
+	}
+
+	public* lookaheadGenerate(): Generator<Workout|null> {
+		if (!this._started) {
+			this.start();
+		}
+
+		while (true) {
+			if (this._results.length === 0) {
+				yield null
+			}
+			let val = null;
+			if (this._filtered.length > 0) {
+				const r = Math.floor(Math.random() * this._filtered.length);
+				[val] = this._filtered.splice(r, 1);
+			}
+			console.log('GENERATING', val);
+			yield val;
+		}
+	}
+
+	private _isFilitered(w: Workout) {
+		const held = new Set(this._held);
+		w.sets.forEach(s => { held.delete(`${s.exercise}`); });
+		return held.size === 0;
 	}
 }
