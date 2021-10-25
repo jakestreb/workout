@@ -29,6 +29,10 @@ export default class MuscleActivity {
 		return this._activity[muscleName] || 0;
 	}
 
+	public getMap() {
+		return this._activity;
+	}
+
 	public getTotal(muscleNames: string[]) {
 		return util.sum(muscleNames.map(m => this.get(m)));
 	}
