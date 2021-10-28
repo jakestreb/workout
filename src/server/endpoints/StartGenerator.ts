@@ -10,8 +10,8 @@ export default class StartGenerator extends PostEndpoint {
 		super('/start');
 	}
 
-	public async controller(session: Session, query: any, body: any): Promise<void> {
+	public async controller(session: Session, query: any, body: any): Promise<number> {
 		const { name, intensity, timeMinutes } = body;
-		await session.startGenerator({ name, intensity, timeMinutes });
+		return session.startGenerator({ name, intensity, timeMinutes });
 	}
 }

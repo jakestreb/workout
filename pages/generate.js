@@ -8,7 +8,7 @@ export default class Generate extends React.Component {
     super(props);
     this.state = {
       isRunning: false,
-      workout: null,
+      workouts: [],
       progress: null,
       selected: [],
     };
@@ -27,8 +27,11 @@ export default class Generate extends React.Component {
             {
               !this.state.isRunning ? <button
                 onClick={async () => {
-                  await api.StartGenerator.call('back_day', 5, 45);
-                  this.setState({ isRunning: true });
+                  const workoutCount = await api.StartGenerator.call('back_day', 5, 45);
+                  this.setState({
+                    isRunning: true,
+                    workouts: new Array(workoutCount).fill(null)
+                  });
                   this.getProgress();
                 }}
                 type="button"
@@ -37,33 +40,13 @@ export default class Generate extends React.Component {
               </button> : null
             }
             {
-              this.state.isRunning ? <button
-                onClick={async () => {
-                  const workout = await api.GenerateNext.call(0, []);
-                  if (workout) {
-                    this.setState({
-                      workout: {
-                        time: util.timeString(workout.time),
-                        intensity: workout.intensity.toFixed(1),
-                        sets: `${workout.sets}`.split(','),
-                        activity: workout.activity.getMap()
-                      }
-                    });
-                  }
-                }}
-                type="button"
-              >
-              Next
-              </button> : null
-            }
-            {
-              this.state.workout ? renderWorkout(this.state.workout) : null
+              this.state.workouts.map((_, i) => this.renderWorkout(i))
             }
           </div>
           {
-            this.state.workout && this.state.progress ? <div className="vertical">
+            this.state.workouts[0] && this.state.progress ? <div className="vertical">
               {
-                renderWorkoutStats(this.state.workout, this.state.progress)
+                renderWorkoutStats(this.state.workouts[0], this.state.progress)
               }
             </div> : null
           }
@@ -84,19 +67,49 @@ export default class Generate extends React.Component {
     </div>;
   }
 
+  renderWorkout(i) {
+    return <span>
+      {
+        this.state.isRunning ? <button
+          onClick={async () => {
+            const workout = await api.GenerateNext.call(i, []);
+            if (workout) {
+              const workoutObj = {
+                time: util.timeString(workout.time),
+                intensity: workout.intensity.toFixed(1),
+                sets: `${workout.sets}`.split(','),
+                activity: workout.activity.getMap()
+              };
+              this.state.workouts.splice(i, 1, workoutObj);
+              this.setState({
+                workouts: this.state.workouts
+              });
+            }
+          }}
+          type="button"
+        >
+        Next
+        </button> : null
+      }
+      {
+        this.state.workouts[i] ? this.renderWorkoutSets(i) : null
+      }
+    </span>;
+  }
+
+  renderWorkoutSets(i) {
+    return <ol key="{i}">
+      {
+        this.state.workouts[i].sets.map((s, i) => <li key="{i}">{ s }</li>)
+      }
+    </ol>;
+  }
+
   async getProgress() {
     const progress = await api.GetProgress.call(0);
     this.setState({ progress });
     setTimeout(() => this.getProgress(), 500);
   }
-}
-
-function renderWorkout(workout) {
-  return <ol>
-    {
-      workout.sets.map(s => <li>{ s }</li>)
-    }
-  </ol>;
 }
 
 function renderWorkoutStats(workout, progress) {

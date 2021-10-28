@@ -12,12 +12,13 @@ export default abstract class PostEndpoint extends Endpoint {
 		app.post(this.path, (req: express.Request, res: express.Response) => this.handler(req, res));
 	}
 
-	public async call(query: any, body: any): Promise<void> {
-		await axios.post(this.path, body, {
+	public async call(query: any, body: any): Promise<any> {
+		const result = await axios.post(this.path, body, {
 			params: query,
 			baseURL: this.baseUrl,
 		});
+		return result.data;
 	}
 
-	public abstract controller(session: Session, query: any, body: any): Promise<void>;
+	public abstract controller(session: Session, query: any, body: any): Promise<any>;
 }

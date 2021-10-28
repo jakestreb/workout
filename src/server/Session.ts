@@ -16,10 +16,11 @@ export default class Session {
 		this.recordManager = recordManager;
 	}
 
-	public async startGenerator({ name, intensity, timeMinutes }: any): Promise<void> {
+	public async startGenerator({ name, intensity, timeMinutes }: any): Promise<number> {
 		console.log(`Starting generator: ${name}, intensity: ${intensity}, time: ${timeMinutes}`);
 		this.multiGenerator = new MultiGenerator({ name, intensity, timeMinutes });
 		this.gen = this.multiGenerator.generate();
+		return this.multiGenerator.workoutGenerators.length;
 	}
 
 	public async stopGenerator(): Promise<void> {

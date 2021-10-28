@@ -4,7 +4,8 @@
 		"deadlift": 75,
 		"overhead_press": 45,
 		"squat": 95,
-		"dumbbell_row": 20
+		"dumbbell_row": 20,
+		"barbell_row": 95
 	},
 	"Michael": {
 		"bench_press": 125,
@@ -21,14 +22,14 @@
 		"deadlift": 185,
 		"overhead_press": 55,
 		"squat": 135,
-		"barbell_row": 95
+		"barbell_row": 125
 	},
 	"Jake": {
 		"bench_press": 225,
 		"deadlift": 245,
 		"overhead_press": 95,
 		"squat": 275,
-		"barbell_row": 135,
+		"barbell_row": 155,
 		"good_morning": 95,
 		"kettlebell_swing": 45,
 		"standing_barbell_calf_raises": 135
