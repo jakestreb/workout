@@ -1,4 +1,3 @@
-import RecordManager from '../data/RecordManager';
 import MultiGenerator from '../generators/MultiGenerator';
 import Workout from '../Workout';
 
@@ -6,14 +5,12 @@ export default class Session {
 
 	public userId: number;
 
-	public recordManager: RecordManager;
 	public multiGenerator: MultiGenerator;
 
 	public gen: Generator<Workout|null>|null;
 
-	constructor(userId: number, recordManager: RecordManager) {
+	constructor(userId: number) {
 		this.userId = userId;
-		this.recordManager = recordManager;
 	}
 
 	public async startGenerator({ name, intensity, timeMinutes }: any): Promise<number> {

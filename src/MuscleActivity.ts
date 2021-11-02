@@ -8,10 +8,6 @@ export default class MuscleActivity {
 
 	private readonly _activity: {[muscle: string]: number} = {};
 
-	constructor() {
-
-	}
-
 	public get keys() {
 		return Object.keys(this._activity);
 	}

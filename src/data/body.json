@@ -1,93 +1,113 @@
 {
   "name" : "body",
-  "children" : [
+  "components" : [
     {
       "name" : "chest",
-      "children" : [
+      "components" : [
         {
-          "name" : "upper_chest"
+          "name" : "upper_chest",
+          "defaultWeight" : 10
         },
         {
-          "name" : "middle_chest"
+          "name" : "middle_chest",
+          "defaultWeight" : 10
         },
         {
-          "name" : "lower_chest"
+          "name" : "lower_chest",
+          "defaultWeight" : 10
         }
       ]
     },
     {
       "name" : "back",
-      "children" : [
+      "components" : [
         {
-          "name" : "traps"
+          "name" : "traps",
+          "defaultWeight" : 10
         },
         {
-          "name" : "lats"
+          "name" : "lats",
+          "defaultWeight" : 10
         },
         {
-          "name" : "erectors"
+          "name" : "erectors",
+          "defaultWeight" : 5
         },
         {
-          "name" : "rhomboids"
+          "name" : "rhomboids",
+          "defaultWeight" : 5
         }
       ]
     },
     {
       "name" : "shoulders",
-      "children" : [
+      "components" : [
         {
-          "name" : "front_delt"
+          "name" : "front_delt",
+          "defaultWeight" : 10
         },
         {
-          "name" : "middle_delt"
+          "name" : "middle_delt",
+          "defaultWeight" : 10
         },
         {
-          "name" : "rear_delt"
+          "name" : "rear_delt",
+          "defaultWeight" : 10
         }
       ]
     },
     {
       "name" : "core",
-      "children" : [
+      "components" : [
         {
-          "name" : "abs"
+          "name" : "abs",
+          "defaultWeight" : 20
         },
         {
-          "name" : "obliques"
+          "name" : "obliques",
+          "defaultWeight" : 5
         }
       ]
     },
     {
       "name" : "arms",
-      "children" : [
+      "components" : [
         {
-          "name" : "triceps"
+          "name" : "triceps",
+          "defaultWeight" : 10
         },
         {
-          "name" : "biceps"
+          "name" : "biceps",
+          "defaultWeight" : 10
         },
         {
-          "name" : "forearms"
+          "name" : "forearms",
+          "defaultWeight" : 10
         }
       ]
     },
     {
       "name" : "legs",
-      "children" : [
+      "components" : [
         {
-          "name" : "glutes"
+          "name" : "glutes",
+          "defaultWeight" : 15
         },
         {
-          "name" : "quads"
+          "name" : "quads",
+          "defaultWeight" : 10
         },
         {
-          "name" : "inner_thighs"
+          "name" : "inner_thighs",
+          "defaultWeight" : 5
         },
         {
-          "name" : "hamstrings"
+          "name" : "hamstrings",
+          "defaultWeight" : 10
         },
         {
-          "name" : "calves"
+          "name" : "calves",
+          "defaultWeight" : 5
         }
       ]
     }

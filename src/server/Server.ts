@@ -1,5 +1,5 @@
+import db from '../db/db';
 import api from './endpoints';
-import RecordManager from '../data/RecordManager';
 import Session from './Session';
 import * as bodyParser from 'body-parser';
 import cors from 'cors';
@@ -14,13 +14,10 @@ export default class Server {
 	public readonly port: number = 3001;
 
 	public app: express.Application = express();
-	public recordManager: RecordManager;
 	public sessions: SessionStore = {};
 
-	constructor() {
-		this.recordManager = new RecordManager();
-	}
-	public start() {
+	public async start() {
+		await db.init();
 		this.app.use(cors());
 		this.app.use(bodyParser.json());
 		this.app.use((req, res, next) => {
@@ -39,7 +36,7 @@ export default class Server {
 
 	private _getSession(userId: number) {
 		if (!this.sessions[userId]) {
-			this.sessions[userId] = new Session(userId, this.recordManager);
+			this.sessions[userId] = new Session(userId);
 		}
 		return this.sessions[userId];
 	}
