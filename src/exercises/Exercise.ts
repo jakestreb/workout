@@ -1,21 +1,8 @@
+import type * as exerciseRecords from '../data/exercises.json';
 import MuscleActivity from '../MuscleActivity';
 import type WorkoutTarget from '../targets/WorkoutTarget';
 import * as util from '../global/util';
 import * as records from '../data/records.json';
-
-interface ExerciseRecord {
-	name: string;
-  	weight: number;
-  	activations: Activation[];
-  	secondsPerRep: number;
-  	sets: number[];
-  	reps: number[];
-}
-
-interface Activation {
-	muscle: string;
-	intensityPerRep: number;
-}
 
 export default class Exercise {
 	public static* generator(target: WorkoutTarget, exclude: string[] = []) {
@@ -36,16 +23,20 @@ export default class Exercise {
 	private readonly _possibleSets: number[];
 	private readonly _possibleReps: number[];
 
-	constructor(exerciseRecord: ExerciseRecord) {
-		this.name = exerciseRecord.name;
+	private readonly _record: typeof exerciseRecords[0];
 
-		this._secondsPerRep = exerciseRecord.secondsPerRep;
-		this._possibleSets = exerciseRecord.sets;
-		this._possibleReps = exerciseRecord.reps;
+	constructor(exerciseRec: typeof exerciseRecords[0]) {
+		this.name = exerciseRec.name;
 
-		exerciseRecord.activations.forEach(a => {
+		this._secondsPerRep = exerciseRec.secondsPerRep;
+		this._possibleSets = exerciseRec.sets;
+		this._possibleReps = exerciseRec.reps;
+
+		exerciseRec.activations.forEach(a => {
 			this._activityPerRep.set(a.muscle, a.intensityPerRep);
 		});
+
+		this._record = exerciseRec;
 	}
 
 	public get names(): string[] {
@@ -75,6 +66,21 @@ export default class Exercise {
 
 	public get sortIndex(): number {
 		return -this._activityPerRep.total * this.repEstimate;
+	}
+
+	public getWeightStandard(gender: DBUser['gender']): number|null {
+		const record = this._record;
+		if (record.isBodyweightExercise) {
+			return null;
+		}
+		switch (gender) {
+			case 'female':
+				return record.femaleWeightRatio!;
+			case 'male':
+				return record.maleWeightRatio!;
+			default:
+				return (record.maleWeightRatio! + record.femaleWeightRatio!) / 2;
+		}
 	}
 
 	public getTime(sets: number, reps: number) {
