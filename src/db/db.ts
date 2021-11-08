@@ -20,9 +20,13 @@ export class Runner {
     this.users = await new Users(this).init();
     this.workouts = await new Workouts(this).init();
 
-    await this.records.addSampleData();
-    await this.users.addSampleData();
-    await this.workouts.addSampleData();
+    try {
+      await this.records.addSampleData();
+      await this.users.addSampleData();
+      await this.workouts.addSampleData();
+    } catch (err) {
+
+    }
   }
 
   public async all(sql: string, params: any[] = []): Promise<({ [column: string]: any })[]> {
