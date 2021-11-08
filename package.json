@@ -7,19 +7,18 @@
   "scripts": {
     "lint": "tslint -p tsconfig.json",
     "lines": "git -C src grep ^ | wc -l",
-    "dev": "next dev",
     "start": "ts-node --files index.ts"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jakestreb/swiper2.git"
+    "url": "git+https://github.com/jakestreb/workout.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jakestreb/swiper2/issues"
+    "url": "https://github.com/jakestreb/workout/issues"
   },
-  "homepage": "https://github.com/jakestreb/swiper2#readme",
+  "homepage": "https://github.com/jakestreb/workout#readme",
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/cors": "^2.8.12",
