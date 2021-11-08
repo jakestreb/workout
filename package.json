@@ -8,9 +8,7 @@
     "lint": "tslint -p tsconfig.json",
     "lines": "git -C src grep ^ | wc -l",
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "server": "ts-node --files index.ts"
+    "start": "ts-node --files index.ts"
   },
   "repository": {
     "type": "git",
