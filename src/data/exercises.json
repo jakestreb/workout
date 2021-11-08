@@ -33,10 +33,16 @@
       8,
       10
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 165,
+      "female": 90
+    },
     "supersetGroups": ["flat_bench"],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 165,
-    "femaleWeightRatio": 90
+    "isBodyweightExercise": false
   },
   {
     "name": "incline_bench_press",
@@ -73,9 +79,16 @@
       8,
       10
     ],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 135,
-    "femaleWeightRatio": 65
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 135,
+      "female": 65
+    },
+    "supersetGroups": [],
+    "isBodyweightExercise": false
   },
   {
     "name": "decline_bench_press",
@@ -112,9 +125,16 @@
       8,
       10
     ],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 145,
-    "femaleWeightRatio": 70
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 145,
+      "female": 70
+    },
+    "supersetGroups": [],
+    "isBodyweightExercise": false
   },
   {
     "name": "dumbbell_fly",
@@ -151,10 +171,16 @@
       8,
       10
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 20,
+      "female": 12
+    },
     "supersetGroups": ["flat_bench"],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 20,
-    "femaleWeightRatio": 12
+    "isBodyweightExercise": false
   },
   {
     "name": "close_grip_bench_press",
@@ -187,10 +213,16 @@
       8,
       10
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 165,
+      "female": 90
+    },
     "supersetGroups": ["flat_bench"],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 165,
-    "femaleWeightRatio": 90
+    "isBodyweightExercise": false
   },
   {
     "name": "push_up",
@@ -226,6 +258,14 @@
       15,
       20
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 0,
+      "female": 0
+    },
     "supersetGroups": ["mat"],
     "isBodyweightExercise": true
   },
@@ -267,6 +307,15 @@
       10,
       12
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 0,
+      "female": 0
+    },
+    "supersetGroups": [],
     "isBodyweightExercise": true
   },
   {
@@ -310,10 +359,16 @@
       10,
       12
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 110,
+      "female": 60
+    },
     "supersetGroups": ["medium_barbell"],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 110,
-    "femaleWeightRatio": 60
+    "isBodyweightExercise": false
   },
   {
     "name": "dumbbell_overhead_press",
@@ -356,10 +411,16 @@
       10,
       12
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 60,
+      "female": 60
+    },
     "supersetGroups": ["medium_dumbbell"],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 35,
-    "femaleWeightRatio": 20
+    "isBodyweightExercise": false
   },
   {
     "name": "front_raise",
@@ -392,10 +453,16 @@
       12,
       15
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 20,
+      "female": 12
+    },
     "supersetGroups": ["light_dumbbell"],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 20,
-    "femaleWeightRatio": 12
+    "isBodyweightExercise": false
   },
   {
     "name": "lateral_raise",
@@ -425,10 +492,16 @@
       8,
       10
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 20,
+      "female": 12
+    },
     "supersetGroups": ["light_dumbbell"],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 20,
-    "femaleWeightRatio": 12
+    "isBodyweightExercise": false
   },
   {
     "name": "arnold_press",
@@ -470,10 +543,16 @@
       8,
       10
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 35,
+      "female": 20
+    },
     "supersetGroups": ["medium_dumbbell"],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 35,
-    "femaleWeightRatio": 20
+    "isBodyweightExercise": false
   },
   {
     "name": "tricep_extension",
@@ -493,10 +572,16 @@
       10,
       12
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 25,
+      "female": 15
+    },
     "supersetGroups": ["medium_dumbbell"],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 25,
-    "femaleWeightRatio": 15
+    "isBodyweightExercise": false
   },
   {
     "name": "skullcrusher",
@@ -516,10 +601,16 @@
       10,
       12
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 60,
+      "female": 35
+    },
     "supersetGroups": ["flat_bench"],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 60,
-    "femaleWeightRatio": 35
+    "isBodyweightExercise": false
   },
   {
     "name": "tricep_kickback",
@@ -539,10 +630,16 @@
       10,
       12
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 25,
+      "female": 15
+    },
     "supersetGroups": ["light_dumbbell"],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 25,
-    "femaleWeightRatio": 15
+    "isBodyweightExercise": false
   },
   {
     "name": "diamond_push_up",
@@ -561,6 +658,14 @@
       8,
       10
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 0,
+      "female": 0
+    },
     "supersetGroups": ["mat"],
     "isBodyweightExercise": true
   },
@@ -581,6 +686,15 @@
       8,
       10
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 0,
+      "female": 0
+    },
+    "supersetGroups": [],
     "isBodyweightExercise": true
   },
   {
@@ -602,6 +716,14 @@
       15,
       20
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 0,
+      "female": 0
+    },
     "supersetGroups": ["mat"],
     "isBodyweightExercise": true
   },
@@ -623,6 +745,14 @@
       10,
       15
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 0,
+      "female": 0
+    },
     "supersetGroups": ["mat"],
     "isBodyweightExercise": true
   },
@@ -645,6 +775,14 @@
       45,
       60
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 0,
+      "female": 0
+    },
     "supersetGroups": ["mat"],
     "isBodyweightExercise": true
   },
@@ -667,6 +805,14 @@
       45,
       60
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 0,
+      "female": 0
+    },
     "supersetGroups": ["mat"],
     "isBodyweightExercise": true
   },
@@ -689,6 +835,14 @@
       45,
       60
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 0,
+      "female": 0
+    },
     "supersetGroups": ["mat"],
     "isBodyweightExercise": true
   },
@@ -711,6 +865,14 @@
       45,
       60
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 0,
+      "female": 0
+    },
     "supersetGroups": ["mat"],
     "isBodyweightExercise": true
   },
@@ -729,9 +891,16 @@
       20,
       24
     ],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 80,
-    "femaleWeightRatio": 60
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 80,
+      "female": 60
+    },
+    "supersetGroups": [],
+    "isBodyweightExercise": false
   },
   {
     "name": "hanging_leg_raise",
@@ -751,6 +920,15 @@
       10,
       15
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 0,
+      "female": 0
+    },
+    "supersetGroups": [],
     "isBodyweightExercise": true
   },
   {
@@ -772,6 +950,15 @@
       15,
       20
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 0,
+      "female": 0
+    },
+    "supersetGroups": [],
     "isBodyweightExercise": true
   },
   {
@@ -792,6 +979,14 @@
       5,
       10
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 0,
+      "female": 0
+    },
     "supersetGroups": ["mat"],
     "isBodyweightExercise": true
   },
@@ -814,6 +1009,14 @@
       15,
       20
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 0,
+      "female": 0
+    },
     "supersetGroups": ["mat"],
     "isBodyweightExercise": true
   },
@@ -836,6 +1039,14 @@
       20,
       30
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 0,
+      "female": 0
+    },
     "supersetGroups": ["mat"],
     "isBodyweightExercise": true
   },
@@ -857,10 +1068,16 @@
       10,
       15
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 35,
+      "female": 25
+    },
     "supersetGroups": ["mat"],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 35,
-    "femaleWeightRatio": 25
+    "isBodyweightExercise": false
   },
   {
     "name": "deadlift",
@@ -904,9 +1121,16 @@
       8,
       10
     ],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 275,
-    "femaleWeightRatio": 150
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 275,
+      "female": 150
+    },
+    "supersetGroups": [],
+    "isBodyweightExercise": false
   },
   {
     "name": "landmine_deadlift",
@@ -950,9 +1174,16 @@
       8,
       10
     ],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 225,
-    "femaleWeightRatio": 120
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 225,
+      "female": 120
+    },
+    "supersetGroups": [],
+    "isBodyweightExercise": false
   },
   {
     "name": "dumbbell_row",
@@ -981,9 +1212,16 @@
       10,
       12
     ],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 80,
-    "femaleWeightRatio": 45
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 80,
+      "female": 45
+    },
+    "supersetGroups": [],
+    "isBodyweightExercise": false
   },
   {
     "name": "barbell_row",
@@ -1012,9 +1250,16 @@
       8,
       10
     ],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 185,
-    "femaleWeightRatio": 100
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 185,
+      "female": 100
+    },
+    "supersetGroups": [],
+    "isBodyweightExercise": false
   },
   {
     "name": "t_bar_row",
@@ -1043,9 +1288,16 @@
       8,
       10
     ],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 175,
-    "femaleWeightRatio": 90
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 175,
+      "female": 90
+    },
+    "supersetGroups": [],
+    "isBodyweightExercise": false
   },
   {
     "name": "trx_row",
@@ -1072,6 +1324,15 @@
       15,
       20
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 0,
+      "female": 0
+    },
+    "supersetGroups": [],
     "isBodyweightExercise": true
   },
   {
@@ -1099,6 +1360,15 @@
       15,
       20
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 0,
+      "female": 0
+    },
+    "supersetGroups": [],
     "isBodyweightExercise": true
   },
   {
@@ -1132,6 +1402,15 @@
       8,
       10
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 0,
+      "female": 0
+    },
+    "supersetGroups": [],
     "isBodyweightExercise": true
   },
   {
@@ -1165,6 +1444,15 @@
       8,
       10
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 0,
+      "female": 0
+    },
+    "supersetGroups": [],
     "isBodyweightExercise": true
   },
   {
@@ -1200,9 +1488,16 @@
       8,
       10
     ],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 220,
-    "femaleWeightRatio": 120
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 220,
+      "female": 120
+    },
+    "supersetGroups": [],
+    "isBodyweightExercise": false
   },
   {
     "name": "goblet_squat",
@@ -1235,9 +1530,16 @@
       15,
       20
     ],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 60,
-    "femaleWeightRatio": 35
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 60,
+      "female": 35
+    },
+    "supersetGroups": [],
+    "isBodyweightExercise": false
   },
   {
     "name": "kettlebell_pistol_squat",
@@ -1270,9 +1572,16 @@
       15,
       20
     ],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 30,
-    "femaleWeightRatio": 20
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 30,
+      "female": 20
+    },
+    "supersetGroups": [],
+    "isBodyweightExercise": false
   },
   {
     "name": "landmine_squat",
@@ -1305,9 +1614,16 @@
       15,
       20
     ],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 190,
-    "femaleWeightRatio": 100
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 190,
+      "female": 100
+    },
+    "supersetGroups": [],
+    "isBodyweightExercise": false
   },
   {
     "name": "weighted_lunge",
@@ -1341,9 +1657,16 @@
       12,
       15
     ],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 125,
-    "femaleWeightRatio": 70
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 125,
+      "female": 70
+    },
+    "supersetGroups": [],
+    "isBodyweightExercise": false
   },
   {
     "name": "kettlebell_swing",
@@ -1377,9 +1700,16 @@
       20,
       30
     ],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 45,
-    "femaleWeightRatio": 25
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 45,
+      "female": 25
+    },
+    "supersetGroups": [],
+    "isBodyweightExercise": false
   },
   {
     "name": "kettlebell_snatch",
@@ -1416,9 +1746,16 @@
       20,
       30
     ],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 45,
-    "femaleWeightRatio": 25
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 45,
+      "female": 25
+    },
+    "supersetGroups": [],
+    "isBodyweightExercise": false
   },
   {
     "name": "good_morning",
@@ -1450,9 +1787,16 @@
       10,
       12
     ],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 125,
-    "femaleWeightRatio": 70
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 125,
+      "female": 70
+    },
+    "supersetGroups": [],
+    "isBodyweightExercise": false
   },
   {
     "name": "standing_barbell_calf_raises",
@@ -1471,9 +1815,16 @@
       20,
       25
     ],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 185,
-    "femaleWeightRatio": 100
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 185,
+      "female": 100
+    },
+    "supersetGroups": [],
+    "isBodyweightExercise": false
   },
   {
     "name": "leg_extension_iso_hold",
@@ -1491,9 +1842,16 @@
       15,
       20
     ],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 95,
-    "femaleWeightRatio": 50
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 95,
+      "female": 50
+    },
+    "supersetGroups": [],
+    "isBodyweightExercise": false
   },
   {
     "name": "lunge",
@@ -1527,6 +1885,15 @@
       12,
       15
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 0,
+      "female": 0
+    },
+    "supersetGroups": [],
     "isBodyweightExercise": true
   },
   {
@@ -1554,6 +1921,14 @@
       40,
       60
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 0,
+      "female": 0
+    },
     "supersetGroups": ["mat"],
     "isBodyweightExercise": true
   },
@@ -1577,10 +1952,16 @@
       12,
       15
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 75,
+      "female": 40
+    },
     "supersetGroups": ["medium_barbell"],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 75,
-    "femaleWeightRatio": 40
+    "isBodyweightExercise": false
   },
   {
     "name": "dumbbell_curl",
@@ -1602,10 +1983,16 @@
       12,
       15
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 35,
+      "female": 20
+    },
     "supersetGroups": ["medium_dumbbell"],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 35,
-    "femaleWeightRatio": 20
+    "isBodyweightExercise": false
   },
   {
     "name": "hammer_curl",
@@ -1627,10 +2014,16 @@
       12,
       15
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 35,
+      "female": 20
+    },
     "supersetGroups": ["medium_dumbbell"],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 35,
-    "femaleWeightRatio": 20
+    "isBodyweightExercise": false
   },
   {
     "name": "reverse_barbell_curl",
@@ -1652,10 +2045,16 @@
       12,
       15
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 60,
+      "female": 35
+    },
     "supersetGroups": ["medium_dumbbell"],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 60,
-    "femaleWeightRatio": 35
+    "isBodyweightExercise": false
   },
   {
     "name": "zottman_curl",
@@ -1677,10 +2076,16 @@
       12,
       15
     ],
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 35,
+      "female": 20
+    },
     "supersetGroups": ["medium_dumbbell"],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 35,
-    "femaleWeightRatio": 20
+    "isBodyweightExercise": false
   },
   {
     "name": "curl_to_press",
@@ -1708,9 +2113,16 @@
       12,
       15
     ],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 35,
-    "femaleWeightRatio": 20
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 35,
+      "female": 20
+    },
+    "supersetGroups": [],
+    "isBodyweightExercise": false
   },
   {
     "name": "plate_grips",
@@ -1728,8 +2140,15 @@
       40,
       60
     ],
-    "isBodyweightExercise": false,
-    "maleWeightRatio": 30,
-    "femaleWeightRatio": 20
+    "skills": {
+      "endurance": 1,
+      "strength": 1
+    },
+    "weightStandards": {
+      "male": 30,
+      "female": 20
+    },
+    "supersetGroups": [],
+    "isBodyweightExercise": false
   }
 ]

@@ -25,6 +25,10 @@ export default class MuscleActivity {
 		return this._activity[muscleName] || 0;
 	}
 
+	public getRatio(muscleName: string) {
+		return this.get(muscleName) / this.total;
+	}
+
 	public getMap() {
 		return this._activity;
 	}

@@ -4,20 +4,6 @@ import WorkoutTarget from '../targets/WorkoutTarget';
 import * as util from '../global/util';
 import * as records from '../data/records.json';
 
-interface ExerciseRecord {
-	name: string;
-  	weight: number;
-  	activations: Activation[];
-  	secondsPerRep: number;
-  	sets: number[];
-  	reps: number[];
-}
-
-interface Activation {
-	muscle: string;
-	intensityPerRep: number;
-}
-
 export default class ExercisePair extends Exercise {
 
 	public static swapTime: number = 80;
@@ -46,7 +32,7 @@ export default class ExercisePair extends Exercise {
 
 	public second: Exercise;
 
-	constructor(recordA: ExerciseRecord, recordB: ExerciseRecord) {
+	constructor(recordA: JSONExercise, recordB: JSONExercise) {
 		super(recordA);
 		this.second = new Exercise(recordB);
 	}

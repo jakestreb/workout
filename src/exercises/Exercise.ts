@@ -1,4 +1,3 @@
-import type * as exerciseRecords from '../data/exercises.json';
 import MuscleActivity from '../MuscleActivity';
 import type WorkoutTarget from '../targets/WorkoutTarget';
 import * as util from '../global/util';
@@ -23,9 +22,9 @@ export default class Exercise {
 	private readonly _possibleSets: number[];
 	private readonly _possibleReps: number[];
 
-	private readonly _record: typeof exerciseRecords[0];
+	private readonly _record: JSONExercise;
 
-	constructor(exerciseRec: typeof exerciseRecords[0]) {
+	constructor(exerciseRec: JSONExercise) {
 		this.name = exerciseRec.name;
 
 		this._secondsPerRep = exerciseRec.secondsPerRep;
@@ -68,6 +67,14 @@ export default class Exercise {
 		return -this._activityPerRep.total * this.repEstimate;
 	}
 
+	public get skills() {
+		return this._record.skills;
+	}
+
+	public get muscles() {
+		return this.activityPerRep.keys;
+	}
+
 	public getWeightStandard(gender: DBUser['gender']): number|null {
 		const record = this._record;
 		if (record.isBodyweightExercise) {
@@ -75,11 +82,11 @@ export default class Exercise {
 		}
 		switch (gender) {
 			case 'female':
-				return record.femaleWeightRatio!;
+				return record.weightStandards.female;
 			case 'male':
-				return record.maleWeightRatio!;
+				return record.weightStandards.male;
 			default:
-				return (record.maleWeightRatio! + record.femaleWeightRatio!) / 2;
+				return (record.weightStandards.male + record.weightStandards.female) / 2;
 		}
 	}
 

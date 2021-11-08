@@ -3,11 +3,6 @@ import type MuscleActivity from '../MuscleActivity';
 import Reporter from '../Reporter';
 import Workout from '../Workout';
 
-interface MuscleRecord {
-	name: string;
-	children?: MuscleRecord[];
-}
-
 export default class MuscleActivityTarget {
 
 	public static intensityTolerance = 1;
@@ -73,13 +68,13 @@ export default class MuscleActivityTarget {
 	}
 }
 
-function searchBody(name: string): MuscleRecord {
-	const doSearch = function(muscle: MuscleRecord): MuscleRecord|null {
+function searchBody(name: string): JSONMuscle {
+	const doSearch = function(muscle: JSONMuscle): JSONMuscle|null {
 		if (muscle.name === name) {
 			return muscle;
 		}
 		if (muscle.children) {
-			return muscle.children.reduce<MuscleRecord|null>((a, b) => a || doSearch(b), null);
+			return muscle.children.reduce<JSONMuscle|null>((a, b) => a || doSearch(b), null);
 		}
 		return null;
 	}
@@ -90,7 +85,7 @@ function searchBody(name: string): MuscleRecord {
 }
 
 function getChildren(name: string): string[] {
-	const doGetChildren = function(record: MuscleRecord): string[] {
+	const doGetChildren = function(record: JSONMuscle): string[] {
 		if (record.children) {
 			return ([] as string[]).concat.apply([], record.children.map(doGetChildren));
 		}

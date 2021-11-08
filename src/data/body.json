@@ -6,15 +6,27 @@
       "components" : [
         {
           "name" : "upper_chest",
-          "defaultWeight" : 10
+          "defaultWeight" : 10,
+          "minScores": {
+            "endurance": 10,
+            "strength": 10
+          }
         },
         {
           "name" : "middle_chest",
-          "defaultWeight" : 10
+          "defaultWeight" : 10,
+          "minScores": {
+            "endurance": 10,
+            "strength": 10
+          }
         },
         {
           "name" : "lower_chest",
-          "defaultWeight" : 10
+          "defaultWeight" : 10,
+          "minScores": {
+            "endurance": 10,
+            "strength": 10
+          }
         }
       ]
     },

@@ -43,6 +43,11 @@ export function avg(array: number[]): number {
 	return sum(array) / array.length;
 }
 
+export function weightedAvg(numbers: number[], weights: number[]): number {
+	const total = sum(weights);
+	return numbers.reduce((n, i) => n * (weights[i] / total), 0);
+}
+
 export function overlapping<T>(a: T[], b: T[]): T[] {
 	const result: T[] = [];
 	const aSet = new Set(a);

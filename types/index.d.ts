@@ -39,8 +39,37 @@ declare global {
 	  name: string,
 	  gender: 'male'|'female'|'other',
 	  experience: 'beginner'|'intermediate'|'advanced',
-	  primary_focus: 'strength'|'endurance',
-	  created_at: string
+	  primary_focus: 'strength'|'endurance'
+	}
+
+	interface JSONExercise {
+	    name: string,
+	    weight: number,
+	    activations: JSONActivation[],
+	    secondsPerRep: number,
+	    sets: number[]
+	    reps: number[]
+	    skills: {
+	    	endurance: number,
+	     	strength: number,
+	    },
+	    weightStandards: {
+	    	male: number,
+	    	female: number
+	    }
+	    supersetGroups: string[],
+	    isBodyweightExercise: boolean
+	}
+
+	interface JSONActivation {
+        muscle: string,
+        intensityPerRep: number
+	}
+
+	interface JSONMuscle {
+		name: string;
+		defaultWeight?: number;
+		children?: JSONMuscle[];
 	}
 }
 

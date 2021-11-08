@@ -1,5 +1,5 @@
 import PostEndpoint from './base_endpoints/PostEndpoint';
-import Users from '../../db/Users';
+import db from '../../db/db';
 import type Session from '../Session';
 
 export default class AddUser extends PostEndpoint {
@@ -12,7 +12,7 @@ export default class AddUser extends PostEndpoint {
 	}
 
 	public async controller(session: Session, query: any, body: any): Promise<void> {
-		const { name, experience, primaryFocus } = body;
-		await Users.add({ name, experience, primaryFocus });
+		const { name, experience, primaryFocus, gender } = body;
+		await db.users.add({ name, experience, primary_focus: primaryFocus, gender });
 	}
 }

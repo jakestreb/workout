@@ -15,7 +15,7 @@ export default class Users extends Base {
   }
 
   public async add(arg: DBUser): Promise<void> {
-    await this.db.run('INSERT INTO users (name, gender, experience, primary_focus) VALUES (?, ?, ?)',
+    await this.db.run('INSERT INTO users (name, gender, experience, primary_focus) VALUES (?, ?, ?, ?)',
       [arg.name, arg.gender, arg.experience, arg.primary_focus]);
   }
 
