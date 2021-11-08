@@ -143,7 +143,7 @@ export default class BodyProfile {
 
 		exercises.forEach((exercise, i) => {
 			exercise.muscles.forEach(muscle => {
-				totalSkillWeights[muscle] ||= { endurance: 0, strength: 0 };
+				totalSkillWeights[muscle] = totalSkillWeights[muscle] || { endurance: 0, strength: 0 };
 				totalSkillWeights[muscle].endurance += exercise.skills.endurance;
 				totalSkillWeights[muscle].strength += exercise.skills.strength;
 			});
