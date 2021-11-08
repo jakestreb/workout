@@ -1,3 +1,4 @@
+// @ts-nocheck
 // import Exercise from './exercises/Exercise';
 // import * as body from './data/body.json';
 // import * as exerciseRecords from './data/exercises.json';
@@ -28,12 +29,6 @@
 
 // 	public static REP_TOTAL_BONUS_FACTOR = 0.2;
 // 	public static WEIGHT_REP_BONUS_FACTOR = 0.035;
-
-// 	// public static ENDURANCE_FOCUS_FACTOR = 0.8;
-// 	// public static STRENGTH_FOCUS_FACTOR = 0.8;
-
-// 	// public static ENDURANCE_NON_FOCUS_FACTOR = 0.5;
-// 	// public static STRENGTH_NON_FOCUS_FACTOR = 0.5;
 
 // 	public static async fromUserId(userId: number): Promise<BodyProfile> {
 // 		const [user, records] = await Promise.all([
