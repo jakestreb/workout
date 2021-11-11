@@ -2,12 +2,14 @@
   "name": "workout",
   "version": "1.0.0",
   "description": "",
-  "main": "index",
   "typings": "types/index",
   "scripts": {
     "lint": "tslint -p tsconfig.json",
     "lines": "git -C src grep ^ | wc -l",
-    "start": "ts-node --files index.ts"
+    "dev": "ts-node ./index.ts",
+    "build": "tsc",
+    "start": "npm run build -- -w",
+    "config": "ts-node --show-config"
   },
   "repository": {
     "type": "git",
