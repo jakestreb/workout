@@ -11,7 +11,7 @@ interface SessionStore {
 
 export default class Server {
 
-	public readonly port: number = 3001;
+	public readonly port: string = process.env.PORT || '3001';
 
 	public app: express.Application = express();
 	public sessions: SessionStore = {};
