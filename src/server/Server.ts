@@ -2,7 +2,7 @@ import db from '../db/db';
 import api from './endpoints';
 import Session from './Session';
 import * as bodyParser from 'body-parser';
-import cors from 'cors';
+// import cors from 'cors';
 import express from 'express';
 
 interface SessionStore {
@@ -18,7 +18,12 @@ export default class Server {
 
 	public async start() {
 		await db.init();
-		this.app.use(cors());
+		// this.app.use(cors());
+		this.app.use((req, res, next) => {
+		  res.header("Access-Control-Allow-Origin", "*");
+		  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+		  next();
+		});
 		this.app.use(bodyParser.json());
 		this.app.use((req, res, next) => {
 			// TODO: Add authentication
