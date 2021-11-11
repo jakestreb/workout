@@ -8,7 +8,6 @@
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "moduleResolution": "node",
-    "baseUrl": ".",
     "plugins": [
       {
         "name": "tslint-language-service",
@@ -21,9 +20,9 @@
     "allowJs": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
     "esModuleInterop": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "outDir": "./dist"
   },
   "include": [
     "**/*.ts",

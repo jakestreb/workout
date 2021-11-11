@@ -8,8 +8,7 @@
     "lines": "git -C src grep ^ | wc -l",
     "dev": "ts-node ./index.ts",
     "build": "tsc",
-    "start": "npm run build -- -w",
-    "config": "ts-node --show-config"
+    "start": "npm run build; node dist/index.js"
   },
   "repository": {
     "type": "git",
