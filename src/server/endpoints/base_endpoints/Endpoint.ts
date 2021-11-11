@@ -16,6 +16,7 @@ export default abstract class Endpoint {
 	public abstract call(query: any, body: any): Promise<void>;
 
 	public async handler(req: express.Request, res: express.Response): Promise<void> {
+		console.log(`Request ${this.path}`);
 		try {
 			const result = await this.controller((req as any).session, req.query, req.body);
 			res.status(200).json(result);
