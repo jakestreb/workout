@@ -13,7 +13,7 @@ export default abstract class GetEndpoint extends Endpoint {
 		app.get(this.path, (req: express.Request, res: express.Response) => this.handler(req, res));
 	}
 
-	public async call(query: any): Promise<any> {
+	public async call(query: any = {}): Promise<any> {
 		const result = await axios.get(this.path, {
 			params: query,
 			baseURL: this.baseUrl,

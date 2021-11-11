@@ -43,5 +43,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ]
+  ],
+  "compilerOptions": {
+      "outDir": "./dist"
+  }
 }

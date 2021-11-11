@@ -33,12 +33,11 @@ export default class Session {
 		return value;
 	}
 
-	public async getProgress(index: number): Promise<GeneratorProgress> {
-		const wg = this.multiGenerator.workoutGenerators[index];
-		return {
+	public async getProgress(): Promise<GeneratorProgress[]> {
+		return this.multiGenerator.workoutGenerators.map(wg => ({
 			generated: wg.generatedCount,
 			filtered: wg.filteredCount,
 			isDone: wg.isDone,
-		};
+		}));
 	}
 }

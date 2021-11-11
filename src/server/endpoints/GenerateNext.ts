@@ -15,7 +15,7 @@ export default class GenerateNext extends GetEndpoint {
 
 	public async controller(session: Session, query: any): Promise<Workout> {
 		const { index, hold } = query;
-		const workout = await session.getNextWorkout(index, hold);
+		const workout = await session.getNextWorkout(index, hold || []);
 		return workout;
 	}
 }
