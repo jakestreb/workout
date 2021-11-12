@@ -186,7 +186,7 @@ export default class BodyProfile {
 			if (muscle.defaultWeight) {
 				this._muscleWeights[muscle.name] = muscle.defaultWeight;
 			}
-			(muscle.children || []).map(muscle => doInit(muscle));
+			(muscle.components || []).map(muscle => doInit(muscle));
 		}
 		doInit(body);
 	}
