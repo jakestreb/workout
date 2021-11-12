@@ -1,5 +1,5 @@
-import WorkoutGenerator from './WorkoutGenerator';
-import * as util from '../global/util';
+const WorkoutGenerator = require('./WorkoutGenerator');
+const util = require('../global/util');
 
 process.on('message', (buildArg) => {
 	const gen = new WorkoutGenerator(buildArg).generate();
@@ -9,6 +9,6 @@ process.on('message', (buildArg) => {
 		if (curr.done) {
 			process.exit(0);
 		}
-		process.send!(curr.value);
+		process.send(curr.value);
 	});
 });
