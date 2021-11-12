@@ -9,6 +9,6 @@ process.on('message', (buildArg) => {
 		if (curr.done) {
 			process.exit(0);
 		}
-		process.send!(curr.value);
+		process.send(curr.value);
 	});
 });
