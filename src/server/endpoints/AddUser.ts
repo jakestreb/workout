@@ -3,10 +3,6 @@ import db from '../../db/db';
 import type Session from '../Session';
 
 export default class AddUser extends PostEndpoint {
-	public static call(name: string, experience: string, primaryFocus: string): Promise<void> {
-		return new AddUser().call(null, { name, experience, primaryFocus });
-	}
-
 	constructor() {
 		super('/user');
 	}

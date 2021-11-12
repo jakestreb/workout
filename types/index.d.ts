@@ -20,7 +20,7 @@ declare interface GeneratorProgress {
 	isDone: boolean,
 }
 
-declare interface RecordBasics {
+declare interface DBRecordBasics {
   exercise: string,
   sets: number,
   reps: number,
@@ -29,7 +29,7 @@ declare interface RecordBasics {
   created_at: string
 }
 
-declare interface DBRecord extends RecordBasics {
+declare interface DBRecord extends DBRecordBasics {
   user_id: number,
   workout_id: string
 }
@@ -42,31 +42,49 @@ declare interface DBUser {
 }
 
 declare interface JSONExercise {
-    name: string,
-    weight: number,
-    activations: JSONActivation[],
-    secondsPerRep: number,
-    sets: number[]
-    reps: number[]
-    skills: {
-    	endurance: number,
-     	strength: number,
-    },
-    weightStandards: {
-    	male: number,
-    	female: number
-    }
-    supersetGroups: string[],
-    isBodyweightExercise: boolean
+  name: string,
+  weight: number,
+  activations: JSONActivation[],
+  secondsPerRep: number,
+  sets: number[]
+  reps: number[]
+  skills: {
+  	endurance: number,
+   	strength: number,
+  },
+  weightStandards: {
+  	male: number,
+  	female: number
+  }
+  supersetGroups: string[],
+  isBodyweightExercise: boolean
 }
 
 declare interface JSONActivation {
-    muscle: string,
-    intensityPerRep: number
+  muscle: string,
+  intensityPerRep: number
 }
 
 declare interface JSONMuscle {
 	name: string;
 	defaultWeight?: number;
-	children?: JSONMuscle[];
+	components?: JSONMuscle[];
+}
+
+declare interface APIWorkout {
+  sets: APIWorkoutSet[];
+  intensity: number;
+  activity: APIMuscleActivity;
+  time: number;
+}
+
+declare interface APIWorkoutSet {
+  exercise: string;
+  sets: number;
+  reps: number;
+  activity: APIMuscleActivity;
+}
+
+declare interface APIMuscleActivity {
+  [muscle: string]: number;
 }

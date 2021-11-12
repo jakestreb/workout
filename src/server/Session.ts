@@ -21,6 +21,9 @@ export default class Session {
 	}
 
 	public async stopGenerator(): Promise<void> {
+		if (!this.gen) {
+			throw new Error('Generator not started');
+		}
 		this.multiGenerator.killAll();
 		this.gen = null;
 	}
@@ -34,6 +37,9 @@ export default class Session {
 	}
 
 	public async getProgress(): Promise<GeneratorProgress[]> {
+		if (!this.gen) {
+			throw new Error('Generator not started');
+		}
 		return this.multiGenerator.workoutGenerators.map(wg => ({
 			generated: wg.generatedCount,
 			filtered: wg.filteredCount,

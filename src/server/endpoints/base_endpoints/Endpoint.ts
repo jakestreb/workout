@@ -13,8 +13,6 @@ export default abstract class Endpoint {
 
 	public abstract controller(session: Session, query: any, body: any): Promise<any>;
 
-	public abstract call(query: any, body: any): Promise<void>;
-
 	public async handler(req: express.Request, res: express.Response): Promise<void> {
 		console.log(`Request ${this.path}`);
 		try {

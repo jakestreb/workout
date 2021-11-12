@@ -73,8 +73,8 @@ function searchBody(name: string): JSONMuscle {
 		if (muscle.name === name) {
 			return muscle;
 		}
-		if (muscle.children) {
-			return muscle.children.reduce<JSONMuscle|null>((a, b) => a || doSearch(b), null);
+		if (muscle.components) {
+			return muscle.components.reduce<JSONMuscle|null>((a, b) => a || doSearch(b), null);
 		}
 		return null;
 	}
@@ -86,12 +86,12 @@ function searchBody(name: string): JSONMuscle {
 
 function getChildren(name: string): string[] {
 	const doGetChildren = function(record: JSONMuscle): string[] {
-		if (record.children) {
-			return ([] as string[]).concat.apply([], record.children.map(doGetChildren));
+		if (record.components) {
+			return ([] as string[]).concat.apply([], record.components.map(doGetChildren));
 		}
 		return [record.name];
 	}
 
 	const record = searchBody(name);
-	return record.children ? doGetChildren(record) : [];
+	return record.components ? doGetChildren(record) : [];
 }
