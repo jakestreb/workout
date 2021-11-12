@@ -8,9 +8,10 @@
     "lines": "git -C src grep ^ | wc -l",
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "ts-node ./index.ts"
+    "dev": "ts-node ./index.ts",
+    "heroku-postbuild": "echo Skip build on Heroku"
   },
-  "heroku-run-build-script": false,
+  "heroku-run-build-script": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jakestreb/workout.git"
