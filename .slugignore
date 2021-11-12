@@ -1,2 +1,3 @@
+# Only need dist and node_modules
 /src
 /types
