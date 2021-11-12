@@ -4,7 +4,7 @@ import Workout from '../Workout';
 import WorkoutTarget from '../targets/WorkoutTarget';
 import RepPicker from '../pickers/RepPicker';
 
-const PATH = './src/generators/gen_workout_process.ts';
+const PATH = './src/generators/gen_workout_process.js';
 
 // TODO: Why is this needed?
 interface Target {
