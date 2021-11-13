@@ -2,6 +2,7 @@ const WorkoutGenerator = require('./WorkoutGenerator');
 const util = require('../global/util');
 
 process.on('message', (buildArg) => {
+	console.log('WORKOUT GENERATOR', WorkoutGenerator);
 	const gen = new WorkoutGenerator(buildArg).generate();
 
 	util.forever(() => {
