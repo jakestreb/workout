@@ -25,7 +25,6 @@ export default class Server {
 		this.app.use(bodyParser.json());
 		this.app.use((req, res, next) => {
 			// TODO: Add authentication
-			console.log('req', req);
 			const userId = 1;
 			(req as any).session = this._getSession(userId);
 			next();
