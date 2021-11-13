@@ -1,5 +1,5 @@
-const WorkoutGenerator = require('./WorkoutGenerator');
-const util = require('../global/util');
+import WorkoutGenerator from './WorkoutGenerator';
+import * as util from '../global/util';
 
 process.on('message', (buildArg) => {
 	console.log('WORKOUT GENERATOR', WorkoutGenerator);
