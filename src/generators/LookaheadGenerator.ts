@@ -6,7 +6,6 @@ export default abstract class LookaheadGenerator {
 	public isDone: boolean = false;
 
 	private _buildArg: any;
-	private _path: string;
 
 	private _child: child.ChildProcess;
 
@@ -16,9 +15,8 @@ export default abstract class LookaheadGenerator {
 
 	private _started: boolean = false;
 
-	constructor(buildArg: any, path: string) {
+	constructor(buildArg: any) {
 		this._buildArg = buildArg;
-		this._path = path;
 	}
 
 	public get generatedCount(): number {
@@ -45,7 +43,7 @@ export default abstract class LookaheadGenerator {
 			return;
 		}
 
-		this._child = child.fork(this._path);
+		this._child = child.fork(`${process.env.GEN_WORKOUT_PROCESS_PATH}`);
 
 		this._child.on('message', (msg) => {
 			if (!msg) {

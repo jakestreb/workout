@@ -1,4 +1,0 @@
-# Only need dist and node_modules
-*.ts
-/src
-/types

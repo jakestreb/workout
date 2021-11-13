@@ -4,8 +4,6 @@ import Workout from '../Workout';
 import WorkoutTarget from '../targets/WorkoutTarget';
 import RepPicker from '../pickers/RepPicker';
 
-const PATH = './src/generators/gen_workout_process.ts';
-
 // TODO: Why is this needed?
 interface Target {
 	muscles: string[];
@@ -18,7 +16,7 @@ export default class WorkoutGenerator extends LookaheadGenerator {
 	public target: WorkoutTarget;
 
 	constructor({ muscles, intensity, timeMinutes }: Target) {
-		super({ muscles, intensity, timeMinutes }, PATH);
+		super({ muscles, intensity, timeMinutes });
 		this.target = new WorkoutTarget(muscles, intensity, timeMinutes * 60);
 	}
 
