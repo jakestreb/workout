@@ -1,14 +1,7 @@
-import targetRecords from '../data/targets.json';
+import targetRecords from '../../static_data/targets.json';
 import Workout from '../Workout';
 import WorkoutGenerator from '../generators/WorkoutGenerator';
 import * as util from '../global/util';
-
-// TODO: Why is this needed?
-interface Target {
-	muscles: string[];
-	intensity: number;
-	timeMinutes: number;
-}
 
 export default class MultiGenerator {
 
@@ -18,7 +11,7 @@ export default class MultiGenerator {
 	private _gens: Generator<Workout|null>[];
 
 	constructor({ name, intensity, timeMinutes }: any) {
-		// TODO: Add name picker
+		// TODO: Add target picker
 		const targetRecord  = targetRecords.find(t => t.name === name);
 		if (!targetRecord) { throw new Error('Target not found'); }
 

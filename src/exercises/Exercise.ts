@@ -1,7 +1,6 @@
 import MuscleActivity from '../MuscleActivity';
 import type WorkoutTarget from '../targets/WorkoutTarget';
 import * as util from '../global/util';
-import * as records from '../data/records.json';
 
 export default class Exercise {
 	public static* generator(target: WorkoutTarget, exclude: string[] = []) {
@@ -75,6 +74,10 @@ export default class Exercise {
 		return this.activityPerRep.keys;
 	}
 
+	public get weight() {
+		return this._record.weight;
+	}
+
 	public getWeightStandard(gender: DBUser['gender']): number|null {
 		const record = this._record;
 		if (record.isBodyweightExercise) {
@@ -92,16 +95,6 @@ export default class Exercise {
 
 	public getTime(sets: number, reps: number) {
 		return reps * sets * this._secondsPerRep + (sets - 1) * Exercise.restTime;
-	}
-
-	public getRecords(users: string[]): string {
-		const recordStrs = users.map(u => {
-			const userRecords: { [exercise: string]: number } = (records as any)[u];
-			if (!userRecords) { throw new Error(`User ${u} not found`); }
-			const val = userRecords[this.name] ? `${userRecords[this.name]} lbs` : '?';
-			return `${u} ${val}`;
-		});
-		return recordStrs.join('\n');
 	}
 
 	public* generateRepPatterns(): Generator<number[]> {

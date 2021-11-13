@@ -4,7 +4,7 @@ import Workouts from './tables/Workouts';
 import * as path from 'path';
 import * as sqlite3 from 'sqlite3';
 
-export class Runner {
+class DBManager {
 
   public records: Records;
   public users: Users;
@@ -61,6 +61,6 @@ export class Runner {
   }
 }
 
-const db = new Runner();
+const db = new DBManager();
 
 export default db;

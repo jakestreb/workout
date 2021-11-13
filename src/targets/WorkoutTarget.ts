@@ -1,5 +1,4 @@
-import exerciseRecords from '../data/exercises.json';
-import Exercise from '../exercises/Exercise';
+import data from '../data';
 import MuscleActivity from '../MuscleActivity';
 import MuscleActivityTarget from './MuscleActivityTarget';
 import Reporter from '../Reporter';
@@ -60,11 +59,10 @@ export default class WorkoutTarget {
 	}
 
 	private _initPossibleExercises(): void {
-		for (const e of util.weightedSelector(exerciseRecords)) {
-			const exercise = new Exercise(e);
+		for (const exercise of util.weightedSelector(data.exercises.all())) {
 			const overlaps = this.muscleActivityTarget.overlaps(exercise.activityPerRep);
 			if (overlaps) {
-				this._possibleExercises.push(e);
+				this._possibleExercises.push(exercise);
 			}
 		}
 	}

@@ -1,5 +1,5 @@
 import PostEndpoint from './base_endpoints/PostEndpoint';
-import db from '../../db/db';
+import db from '../../db';
 import type Session from '../Session';
 
 export default class AddUser extends PostEndpoint {

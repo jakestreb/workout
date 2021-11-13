@@ -1,7 +1,8 @@
-import * as body from '../data/body.json';
-import type MuscleActivity from '../MuscleActivity';
+import data from '../data';
 import Reporter from '../Reporter';
 import Workout from '../Workout';
+
+import type MuscleActivity from '../MuscleActivity';
 
 export default class MuscleActivityTarget {
 
@@ -28,7 +29,7 @@ export default class MuscleActivityTarget {
 			(this._intensity + MuscleActivityTarget.intensityTolerance) / this._intensity;
 
 		muscles.forEach(m => {
-			const childMuscles: string[] = getChildren(m);
+			const childMuscles: string[] = data.muscles.getComponents(m).map(m => m.name);
 			if (childMuscles.length > 0) {
 				childMuscles.forEach(m => { this._added.add(m); });
 			} else {
@@ -66,32 +67,4 @@ export default class MuscleActivityTarget {
 		this.reporter.reset();
 		return true;
 	}
-}
-
-function searchBody(name: string): JSONMuscle {
-	const doSearch = function(muscle: JSONMuscle): JSONMuscle|null {
-		if (muscle.name === name) {
-			return muscle;
-		}
-		if (muscle.components) {
-			return muscle.components.reduce<JSONMuscle|null>((a, b) => a || doSearch(b), null);
-		}
-		return null;
-	}
-
-	const result = doSearch(body);
-	if (!result) { throw new Error(`Muscle not found: ${name}`); }
-	return result;
-}
-
-function getChildren(name: string): string[] {
-	const doGetChildren = function(record: JSONMuscle): string[] {
-		if (record.components) {
-			return ([] as string[]).concat.apply([], record.components.map(doGetChildren));
-		}
-		return [record.name];
-	}
-
-	const record = searchBody(name);
-	return record.components ? doGetChildren(record) : [];
 }

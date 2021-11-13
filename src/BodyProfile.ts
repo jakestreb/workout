@@ -1,7 +1,6 @@
 import Exercise from './exercises/Exercise';
-import * as body from './data/body.json';
-import * as exerciseRecords from './data/exercises.json';
-import db from './db/db';
+import data from './data';
+import db from './db';
 
 interface RepsWeight {
 	reps: number[];
@@ -39,8 +38,6 @@ export default class BodyProfile {
 
 	public readonly user: DBUser;
 	public readonly records: DBRecord[];
-
-	private readonly _muscleWeights: { [muscle: string]: number };
 
 	private readonly _scores: ScoreMap;
 	private readonly _averageScore: Score;
@@ -130,9 +127,7 @@ export default class BodyProfile {
 	}
 
 	private _init() {
-		this._initMuscleWeights();
-
-		const allExercises = exerciseRecords.map(e => new Exercise(e));
+		const allExercises = data.exercises.all();
 		const allScores = allExercises.map(exercise => this.getScore(exercise));
 
 		const exercises = allExercises.filter((e, i) => allScores[i]);
@@ -168,31 +163,17 @@ export default class BodyProfile {
 		let totalMuscleWeight: number = 0;
 
 		muscles.forEach(muscle => {
-			totalMuscleWeight += this._getWeight(muscle);
+			totalMuscleWeight += data.muscles.getWeight(muscle);
 		});
 
 		muscles.forEach(muscle => {
-			const muscleFactor = this._getWeight(muscle) / totalMuscleWeight;
+			const muscleFactor = data.muscles.getWeight(muscle) / totalMuscleWeight;
 			this._averageScore.endurance += this._scores[muscle].endurance * muscleFactor;
 			this._averageScore.strength += this._scores[muscle].strength * muscleFactor;
 		});
 
 		this._minScore.endurance = Math.min(...muscles.map(m => this._scores[m].endurance));
 		this._minScore.strength = Math.min(...muscles.map(m => this._scores[m].strength));
-	}
-
-	private _initMuscleWeights() {
-		const doInit = (muscle: JSONMuscle): void => {
-			if (muscle.defaultWeight) {
-				this._muscleWeights[muscle.name] = muscle.defaultWeight;
-			}
-			(muscle.components || []).map(muscle => doInit(muscle));
-		}
-		doInit(body);
-	}
-
-	private _getWeight(muscle: string) {
-		return this._muscleWeights[muscle];
 	}
 }
 

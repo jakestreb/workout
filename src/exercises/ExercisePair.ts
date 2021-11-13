@@ -2,7 +2,6 @@ import Exercise from './Exercise';
 import MuscleActivity from '../MuscleActivity';
 import WorkoutTarget from '../targets/WorkoutTarget';
 import * as util from '../global/util';
-import * as records from '../data/records.json';
 
 export default class ExercisePair extends Exercise {
 
@@ -62,18 +61,6 @@ export default class ExercisePair extends Exercise {
 		return super.getTime(sets, reps) + this.second.getTime(sets, reps)
 			+ ((sets - 1) * 2) * (ExercisePair.swapTime - Exercise.restTime)
 			+ ExercisePair.swapTime;
-	}
-
-	public getRecords(users: string[]) {
-		const recordStrs = users.map(u => {
-			const userRecords: { [exercise: string]: number } = (records as any)[u];
-			if (!userRecords) { throw new Error(`User ${u} not found`); }
-			const first = userRecords[this.name];
-			const second = userRecords[this.second.name];
-			const val = first || second ? `${first} / ${second} lbs` : '?';
-			return `${u} ${val}`;
-		});
-		return recordStrs.join('\n');
 	}
 
 	public toString(): string {

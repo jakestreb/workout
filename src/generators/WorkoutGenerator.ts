@@ -4,13 +4,6 @@ import Workout from '../Workout';
 import WorkoutTarget from '../targets/WorkoutTarget';
 import RepPicker from '../pickers/RepPicker';
 
-// TODO: Why is this needed?
-interface Target {
-	muscles: string[];
-	intensity: number;
-	timeMinutes: number;
-}
-
 export default class WorkoutGenerator extends LookaheadGenerator {
 
 	public target: WorkoutTarget;
