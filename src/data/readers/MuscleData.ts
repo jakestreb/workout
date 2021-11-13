@@ -1,7 +1,7 @@
-import * as muscleTree from '../raw/muscle_tree.json';
+import muscleTree from '../raw/muscle_tree.json';
 
 export default class MuscleData {
-	private _map: {[name: string]: JSONMuscle};
+	private _map: {[name: string]: JSONMuscle} = {};
 
 	constructor() {
 		this._initMap();

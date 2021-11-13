@@ -1,8 +1,7 @@
-import Exercise from '../../exercises/Exercise';
-import * as exerciseRecords from '../raw/exercises.json';
+import exerciseRecords from '../raw/exercises.json';
 
 export default class ExerciseData {
-	private _map: {[name: string]: JSONExercise};
+	private _map: {[name: string]: JSONExercise} = {};
 
 	constructor() {
 		exerciseRecords.forEach((rec: JSONExercise) => {
@@ -11,11 +10,11 @@ export default class ExerciseData {
 		return this;
 	}
 
-	public all(): Exercise[] {
-		return exerciseRecords.map(e => new Exercise(e));
+	public all(): JSONExercise[] {
+		return exerciseRecords;
 	}
 
-	public get(name: string): Exercise {
-		return new Exercise(this._map[name]);
+	public get(name: string): JSONExercise {
+		return this._map[name];
 	}
 }

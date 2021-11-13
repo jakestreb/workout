@@ -127,7 +127,7 @@ export default class BodyProfile {
 	}
 
 	private _init() {
-		const allExercises = data.exercises.all();
+		const allExercises = data.exercises.all().map(e => new Exercise(e));
 		const allScores = allExercises.map(exercise => this.getScore(exercise));
 
 		const exercises = allExercises.filter((e, i) => allScores[i]);
