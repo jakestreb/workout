@@ -1,4 +1,4 @@
-import * as muscleTree from '../../../static_data/muscle_tree.json';
+import * as muscleTree from '../raw/muscle_tree.json';
 
 export default class MuscleData {
 	private _map: {[name: string]: JSONMuscle};

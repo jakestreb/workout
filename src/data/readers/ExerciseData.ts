@@ -1,5 +1,5 @@
 import Exercise from '../../exercises/Exercise';
-import * as exerciseRecords from '../../../static_data/exercises.json';
+import * as exerciseRecords from '../raw/exercises.json';
 
 export default class ExerciseData {
 	private _map: {[name: string]: JSONExercise};
