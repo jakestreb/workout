@@ -1,5 +1,5 @@
 import Exercise from '../exercises/Exercise';
-import MuscleActivity from '../MuscleActivity';
+import MuscleActivity from '../muscles/MuscleActivity';
 import Picker from './Picker';
 import WorkoutTarget from '../targets/WorkoutTarget'
 import Workout from '../Workout';

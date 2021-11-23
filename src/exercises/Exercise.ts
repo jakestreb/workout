@@ -1,4 +1,4 @@
-import MuscleActivity from '../MuscleActivity';
+import MuscleActivity from '../muscles/MuscleActivity';
 import type WorkoutTarget from '../targets/WorkoutTarget';
 import * as util from '../global/util';
 
@@ -49,6 +49,12 @@ export default class Exercise {
 		return this._possibleReps;
 	}
 
+	public get standardReps(): number[] {
+		const avgSets = this._possibleSets[this._possibleSets.length / 2]
+		const avgReps = this._possibleReps[this._possibleReps.length / 2]
+		return new Array(avgSets).fill(avgReps);
+	}
+
 	public get timeEstimate(): number {
 		const avgSets = util.avg(this.possibleSets);
 		return avgSets * util.avg(this.possibleReps) * this._secondsPerRep + (avgSets - 1) * Exercise.restTime;
@@ -70,11 +76,11 @@ export default class Exercise {
 		return this._record.skills;
 	}
 
-	public get muscles() {
+	public get muscles(): string[] {
 		return this.activityPerRep.keys;
 	}
 
-	public get weight() {
+	public get weight(): number {
 		return this._record.weight;
 	}
 

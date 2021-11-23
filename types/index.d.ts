@@ -66,9 +66,12 @@ declare interface JSONActivation {
 }
 
 declare interface JSONMuscle {
-	name: string;
-	defaultWeight?: number;
-	components?: JSONMuscle[];
+  name: string;
+  components?: JSONMuscle[];
+  defaultScores?: {
+    endurance: number;
+    strength: number;
+  };
 }
 
 declare interface APIWorkout {

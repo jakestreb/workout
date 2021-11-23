@@ -2,7 +2,7 @@ import data from '../data';
 import Reporter from '../Reporter';
 import Workout from '../Workout';
 
-import type MuscleActivity from '../MuscleActivity';
+import type MuscleActivity from '../muscles/MuscleActivity';
 
 export default class MuscleActivityTarget {
 

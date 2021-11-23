@@ -8,10 +8,6 @@ export default class Reporter {
 
 	private _entries: {[key: string]: NumericResult} = {};
 
-	constructor() {
-
-	}
-
 	public record(key: string, num: number): void {
 		const result: NumericResult = this._entries[key] || { target: 0, min: -1, max: -1 };
 		if (num < result.min || result.min === -1) {

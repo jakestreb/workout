@@ -1,5 +1,5 @@
 import type Exercise from './exercises/Exercise';
-import type MuscleActivity from './MuscleActivity';
+import type MuscleActivity from './muscles/MuscleActivity';
 import fromJsonObject from './exercises/fromJsonObject';
 
 export default class WorkoutSet {

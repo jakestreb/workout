@@ -1,6 +1,6 @@
 import Exercise from '../exercises/Exercise';
 import ExercisePair from '../exercises/ExercisePair';
-import MuscleActivity from '../MuscleActivity';
+import MuscleActivity from '../muscles/MuscleActivity';
 import Picker from './Picker';
 import WorkoutTarget from '../targets/WorkoutTarget';
 import { Result } from '../global/enums';

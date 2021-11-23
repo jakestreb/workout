@@ -90,3 +90,8 @@ export async function forever(callback: () => any, sleep: number = 0) {
     	setTimeout(() => forever(callback, sleep), sleep);
     }
 }
+
+export function maxIndex(a: number[]) {
+	// https://stackoverflow.com/a/30850912
+	return a.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
+}

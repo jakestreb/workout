@@ -1,6 +1,6 @@
 import data from '../data';
 import Exercise from '../exercises/Exercise';
-import MuscleActivity from '../MuscleActivity';
+import MuscleActivity from '../muscles/MuscleActivity';
 import MuscleActivityTarget from './MuscleActivityTarget';
 import Reporter from '../Reporter';
 import { Result } from '../global/enums';

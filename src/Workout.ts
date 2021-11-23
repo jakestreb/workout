@@ -1,5 +1,5 @@
 import Exercise from './exercises/Exercise';
-import MuscleActivity from './MuscleActivity';
+import MuscleActivity from './muscles/MuscleActivity';
 import WorkoutSet from './WorkoutSet';
 import * as util from './global/util';
 
