@@ -6,20 +6,20 @@ export default class GenerateNext extends GetEndpoint {
 		super('/next');
 	}
 
-	public async controller(session: Session, query: any): Promise<APIWorkout|null> {
+	public async controller(session: Session, query: any): Promise<IWorkout|null> {
+		const { user } = session;
 		const { index, hold } = query;
 		const workout = await session.getNextWorkout(index, hold || []);
 		if (workout) {
-			const sets: APIWorkoutSet[] = workout.sets.map(s => ({
+			const sets: IWorkoutSet[] = workout.sets.map(s => ({
 				exercise: `${s.exercise}`,
-				sets: s.reps.length,
-				reps: s.reps[0],
-				activity: s.activity.getMap()
+				sets: s.repsWeight.nSets,
+				reps: s.repsWeight.nReps,
+				muscleScores: s.getScores(user).getMap(),
 			}));
 			return {
 				sets,
-				intensity: workout.intensity,
-				activity: workout.activity.getMap(),
+				muscleScores: workout.getScores(user).getMap(),
 				time: workout.time
 			};
 		}

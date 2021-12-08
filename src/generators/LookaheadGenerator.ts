@@ -5,7 +5,7 @@ export default abstract class LookaheadGenerator {
 
 	public isDone: boolean = false;
 
-	private _buildArg: any;
+	private _buildArgs: [any, number];
 
 	private _child: child.ChildProcess;
 
@@ -15,8 +15,8 @@ export default abstract class LookaheadGenerator {
 
 	private _started: boolean = false;
 
-	constructor(buildArg: any) {
-		this._buildArg = buildArg;
+	constructor(...buildArgs: [any, number]) {
+		this._buildArgs = buildArgs;
 	}
 
 	public get generatedCount(): number {
@@ -65,7 +65,7 @@ export default abstract class LookaheadGenerator {
 			throw err;
 		});
 
-		this._child.send(this._buildArg);
+		this._child.send(this._buildArgs);
 
 		this._started = true;
 	}

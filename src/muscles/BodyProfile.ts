@@ -32,10 +32,10 @@ export default class BodyProfile {
 		const getMinReq = (x: number) => Math.max(x, 0) * difficultyRatio * timeRatio;
 
 		seed.muscles.forEach(m => {
-			const scoreDelta = this._goalScores.get(m).copy().subtract(this._scores.get(m));
+			const delta = this.getGoalDiscrepancy(m);
 			minScores[m] = {
-				endurance: getMinReq(scoreDelta.endurance),
-				strength: getMinReq(scoreDelta.strength),
+				endurance: getMinReq(delta.endurance),
+				strength: getMinReq(delta.strength),
 			};
 		});
 

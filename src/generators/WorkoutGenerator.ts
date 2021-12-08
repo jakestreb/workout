@@ -1,35 +1,29 @@
+import UserRecords from '../exercises/UserRecords';
 import BodyProfile from '../muscles/BodyProfile';
 import ExercisePicker from '../pickers/ExercisePicker';
+import RepPicker from '../pickers/RepPicker';
 import LookaheadGenerator from './LookaheadGenerator';
 import Workout from '../Workout';
 import WorkoutTarget from '../WorkoutTarget';
-import RepPicker from '../pickers/RepPicker';
-import db from '../db';
 
 export default class WorkoutGenerator extends LookaheadGenerator {
 
 	public target: WorkoutTarget;
-	public bodyProfile: BodyProfile;
+	public userId: number;
 
-	public static async create(target: IWorkoutTarget, userId: number): Promise<WorkoutGenerator> {
-		const [user, records] = await Promise.all([
-			db.users.getOne(userId),
-			db.records.getForUser(userId)
-		]);
-		return new WorkoutGenerator(target, new BodyProfile(user, records));
-	}
-
-	constructor(target: IWorkoutTarget, bodyProfile: BodyProfile) {
-		super(target);
+	constructor(target: IWorkoutTarget, userId: number) {
+		super(target, userId);
 		this.target = new WorkoutTarget(target);
-		this.bodyProfile = bodyProfile;
+		this.userId = userId;
 	}
 
-	public* generate(): Generator<Workout> {
-		const exercisePicker = new ExercisePicker(this.target, this.bodyProfile);
+	public async* generate(): AsyncGenerator<Workout> {
+		const userRecords = await UserRecords.fromUserId(this.userId);
+		const bodyProfile = new BodyProfile(userRecords);
+		const exercisePicker = new ExercisePicker(this.target);
 
 		for (const exercises of exercisePicker.pick()) {
-			const repPicker = new RepPicker(exercises!, this.target, this.bodyProfile);
+			const repPicker = new RepPicker(exercises!, this.target, bodyProfile);
 			for (const sets of repPicker.pick()) {
 				yield new Workout(sets!);
 				break;

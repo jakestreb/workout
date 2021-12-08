@@ -4,11 +4,7 @@ import type RepsWeight from './muscles/RepsWeight';
 import fromJsonObject from './exercises/fromJsonObject';
 
 export default class WorkoutSet {
-	public static DIFFICULTY_RATIOS = {
-		[Difficulty.Easy]: 0.7,
-		[Difficulty.Intermediate]: 0.9,
-		[Difficulty.Hard]: 1.1,
-	}
+	public static DIFFICULTY_RATIOS = [0.7, 0.9, 1.1];
 
 	public static fromJsonObject(obj: any): WorkoutSet {
 		const exercise = fromJsonObject(obj.exercise);
@@ -23,12 +19,8 @@ export default class WorkoutSet {
 		this.repsWeight = repsWeight;
 	}
 
-	public get totalReps(): number {
-		return this.reps[0] * this.reps.length;
-	}
-
 	public get time(): number {
-		return this.exercise.getTime(this.reps.length, this.reps[0]);
+		return this.exercise.getTime(this.repsWeight);
 	}
 
 	public getScaled(): WorkoutSet[] {
@@ -49,10 +41,6 @@ export default class WorkoutSet {
 	}
 
 	public toString(): string {
-		return `${this.exercise} ${this.reps.length}x${this.reps[0]}`;
-	}
-
-	public repString(): string {
-		return `${this.reps.length}x${this.reps[0]}`;
+		return `${this.exercise} ${this.repsWeight.toString()}`;
 	}
 }

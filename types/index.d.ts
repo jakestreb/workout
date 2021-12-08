@@ -6,7 +6,7 @@ declare enum Result {
 }
 
 declare enum Difficulty {
-  Easy = 1,
+  Easy = 0,
   Intermediate,
   Hard
 }
@@ -72,6 +72,7 @@ declare interface DBRecord extends DBRecordBasics {
 }
 
 declare interface DBUser {
+  id?: number,
   name: string,
   gender: 'male'|'female'|'other',
   weight: number,
@@ -112,20 +113,15 @@ declare interface JSONMuscle {
   };
 }
 
-declare interface APIWorkout {
-  sets: APIWorkoutSet[];
-  intensity: number;
-  activity: APIMuscleActivity;
+declare interface IWorkout {
+  sets: IWorkoutSet[];
+  muscleScores: IMuscleScores;
   time: number;
 }
 
-declare interface APIWorkoutSet {
+declare interface IWorkoutSet {
   exercise: string;
   sets: number;
   reps: number;
-  activity: APIMuscleActivity;
-}
-
-declare interface APIMuscleActivity {
-  [muscle: string]: number;
+  muscleScores: IMuscleScores;
 }

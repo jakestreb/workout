@@ -1,14 +1,9 @@
 import Exercise from './exercises/Exercise';
-import MuscleActivity from './muscles/MuscleActivity';
+import MuscleScores from './muscles/MuscleScores';
 import WorkoutSet from './WorkoutSet';
 import * as util from './global/util';
 
 export default class Workout {
-
-	// TODO: Change
-	public static avgTime = 45 * 60;
-	public static intensityScaler = 250;
-
 	public static fromJsonObject(obj: any): Workout {
 		const sets: WorkoutSet[] = obj.sets.map((s: any) => WorkoutSet.fromJsonObject(s));
 		return new Workout(sets);
@@ -24,17 +19,12 @@ export default class Workout {
 		return util.sum(this.sets.map(s => s.time)) + this._transitionTime;
 	}
 
-	public get activity(): MuscleActivity {
-		return MuscleActivity.combine(...this.sets.map(s => s.activity));
-	}
-
-	public get intensity(): number {
-		const relativeTime = 30 * 60 / Workout.avgTime;
-		return this.activity.total / (relativeTime * Workout.intensityScaler);
+	public getScores(user: DBUser): MuscleScores {
+		return MuscleScores.combine(...this.sets.map(s => s.getScores(user)));
 	}
 
 	private get _transitionTime() {
-		return (this.sets.length - 1) * Exercise.transitionTime;
+		return (this.sets.length - 1) * Exercise.TRANSITION_TIME;
 	}
 
 	public toString(): string {

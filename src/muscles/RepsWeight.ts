@@ -16,6 +16,14 @@ export default class RepsWeight {
 		this._weight = weight || null;
 	}
 
+	public get nReps(): number {
+		return this.reps[0];
+	}
+
+	public get nSets(): number {
+		return this.reps.length;
+	}
+
 	public get reps(): number[] {
 		return new Array(this._reps.length).fill(Math.round(this._reps[0]));
 	}
@@ -35,5 +43,10 @@ export default class RepsWeight {
 
 	public copy(): RepsWeight {
 		return new RepsWeight({ reps: this._reps, weight: this._weight });
+	}
+
+	public toString(): string {
+		const weightStr = this.weight ? `  ${this.weight}lbs` : '';
+		return `${this.nSets}x${this.nReps}${weightStr}`;
 	}
 }

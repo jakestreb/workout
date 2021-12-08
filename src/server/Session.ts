@@ -1,26 +1,27 @@
-import BodyProfile from '../muscles/BodyProfile';
+import UserRecords from '../exercises/UserRecords';
 import MultiGenerator from '../generators/MultiGenerator';
+import BodyProfile from '../muscles/BodyProfile';
 import Workout from '../Workout';
-import db from '../db';
 import targetRecords from '../data/raw/targets.json';
 import * as util from '../global/util';
 
 export default class Session {
 
 	public bodyProfile: BodyProfile;
+	public user: DBUser;
 
 	public multiGenerator: MultiGenerator;
 
 	public gen: Generator<Workout|null>|null;
 
 	public static async create(userId: number) {
-		const user = await db.users.getOne(userId);
-		const records = await db.records.getForUser(userId);
-		return new Session(user, records);
+		const userRecords = await UserRecords.fromUserId(userId);
+		return new Session(userRecords);
 	}
 
-	constructor(user: DBUser, records: DBRecord[]) {
-		this.bodyProfile = new BodyProfile(user, records);
+	constructor(userRecords: UserRecords) {
+		this.bodyProfile = new BodyProfile(userRecords);
+		this.user = userRecords.user;
 	}
 
 	// TODO: Name should be removed once there is a workout picker
@@ -41,7 +42,7 @@ export default class Session {
 			})
 		);
 
-		this.multiGenerator = new MultiGenerator(targets);
+		this.multiGenerator = new MultiGenerator(targets, this.user.id!);
 		this.gen = this.multiGenerator.generate();
 		return this.multiGenerator.workoutGenerators.length;
 	}

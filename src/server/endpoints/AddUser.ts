@@ -8,7 +8,7 @@ export default class AddUser extends PostEndpoint {
 	}
 
 	public async controller(session: Session, query: any, body: any): Promise<void> {
-		const { name, experience, primaryFocus, gender } = body;
-		await db.users.add({ name, experience, primary_focus: primaryFocus, gender });
+		const { name, experience, primaryFocus, gender, weight } = body;
+		await db.users.add({ name, experience, primary_focus: primaryFocus, gender, weight });
 	}
 }

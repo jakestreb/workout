@@ -32,7 +32,7 @@ export default class UserRecords {
 	constructor(user: DBUser, userRecords: DBRecord[]) {
 		this.user = user;
 		userRecords.forEach(rec => {
-			this._recordsByExercise[rec.exercise] ||= [];
+			this._recordsByExercise[rec.exercise] = this._recordsByExercise[rec.exercise] || [];
 			this._recordsByExercise[rec.exercise].push(rec);
 		});
 	}

@@ -1,5 +1,3 @@
-// TODO: Remove unnecessary code
-
 import BodyProfile from '../muscles/BodyProfile';
 import MuscleScores from '../muscles/MuscleScores';
 import RepsWeight from '../muscles/RepsWeight';
@@ -73,11 +71,7 @@ export default class Exercise {
 		return new Array(avgSets).fill(avgReps);
 	}
 
-	public get timeEstimate(): number {
-		const avgSets = util.avg(this.possibleSets);
-		return avgSets * util.avg(this.possibleReps) * this._secondsPerRep + (avgSets - 1) * Exercise.REST_TIME;
-	}
-
+	// TODO: Instead, use single standard reps value in exercise records
 	public get repEstimate(): number {
 		return util.avg(this.possibleSets) * util.avg(this.possibleReps);
 	}
@@ -117,8 +111,9 @@ export default class Exercise {
 		}
 	}
 
-	public getTime(sets: number, reps: number) {
-		return reps * sets * this._secondsPerRep + (sets - 1) * Exercise.REST_TIME;
+	public getTime(repsWeight: RepsWeight) {
+		const { nReps, nSets } = repsWeight;
+		return nReps * nSets * this._secondsPerRep + (nSets - 1) * Exercise.REST_TIME;
 	}
 
 	public getMuscleScores(repsWeight: RepsWeight, user: DBUser): MuscleScores {
@@ -186,23 +181,7 @@ export default class Exercise {
 		});
 	}
 
-	public* generateRepPatterns(): Generator<number[]> {
-		for (const reps of util.randomSelector(getRepPatterns(this.possibleSets, this.possibleReps))) {
-			yield reps;
-		}
-	}
-
 	public toString(): string {
 		return `${this.name}`;
 	}
-}
-
-function getRepPatterns(sets: number[], reps: number[]): number[][] {
-    const result: number[][] = [];
-    reps.forEach((r: number) => {
-        sets.forEach((s: number) => {
-        	result.push(Array(s).fill(r));
-		});
-	});
-    return result;
 }

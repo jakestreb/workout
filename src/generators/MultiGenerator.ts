@@ -7,8 +7,8 @@ export default class MultiGenerator {
 
 	private _gens: Generator<Workout|null>[];
 
-	constructor(targets: IWorkoutTarget[]) {
-		this.workoutGenerators = targets.map(t => new WorkoutGenerator(t));
+	constructor(targets: IWorkoutTarget[], userId: number) {
+		this.workoutGenerators = targets.map(t => new WorkoutGenerator(t, userId));
 		this._gens = this.workoutGenerators.map(wg => wg.lookaheadGenerate());
 		this.workoutGenerators.forEach(wg => { wg.start(); });
 	}

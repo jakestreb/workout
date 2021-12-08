@@ -1,12 +1,13 @@
 import Exercise from './Exercise';
-import MuscleActivity from '../muscles/MuscleActivity';
+import MuscleScores from '../muscles/MuscleScores';
+import RepsWeight from '../muscles/RepsWeight';
 import * as util from '../global/util';
 
 import type WorkoutTarget from '../WorkoutTarget';
 
 export default class ExercisePair extends Exercise {
 
-	public static swapTime: number = 80;
+	public static SWAP_TIME: number = 80;
 
 	public static* generator(target: WorkoutTarget, exclude: string[] = []) {
 		const viableExercises = target.exerciseRecords
@@ -49,19 +50,15 @@ export default class ExercisePair extends Exercise {
 		return util.overlapping(super.possibleReps, this.second.possibleReps);
 	}
 
-	public get timeEstimate(): number {
-		return super.timeEstimate + this.second.timeEstimate +
-			(util.avg(this.possibleSets) - 1) * (ExercisePair.swapTime - Exercise.restTime);
+	public get scoresPerRep(): MuscleScores {
+		return MuscleScores.combine(super.scoresPerRep, this.second.scoresPerRep);
 	}
 
-	public get activityPerRep(): MuscleActivity {
-		return MuscleActivity.combine(super.activityPerRep, this.second.activityPerRep);
-	}
-
-	public getTime(sets: number, reps: number) {
-		return super.getTime(sets, reps) + this.second.getTime(sets, reps)
-			+ ((sets - 1) * 2) * (ExercisePair.swapTime - Exercise.restTime)
-			+ ExercisePair.swapTime;
+	public getTime(repsWeight: RepsWeight) {
+		const { nSets } = repsWeight;
+		return super.getTime(repsWeight) + this.second.getTime(repsWeight)
+			+ ((nSets - 1) * 2) * (ExercisePair.SWAP_TIME - Exercise.REST_TIME)
+			+ ExercisePair.SWAP_TIME;
 	}
 
 	public toString(): string {

@@ -2,7 +2,6 @@ import Exercise from './exercises/Exercise';
 import MuscleTarget from './muscles/MuscleTarget';
 import * as util from './global/util';
 import data from './data';
-
 import type MuscleScores from './muscles/MuscleScores';
 
 export default class WorkoutTarget {
