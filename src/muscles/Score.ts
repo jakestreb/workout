@@ -3,13 +3,13 @@ interface BuildArg {
 	endurance?: number;
 }
 
-export default class MuscleScore {
-	public static combine(...args: MuscleScore[]): MuscleScore {
-		return args.reduce((a, b) => a.add(b), new MuscleScore());
+export default class Score {
+	public static combine(...args: Score[]): Score {
+		return args.reduce((a, b) => a.add(b), new Score());
 	}
 
-	public static getPercentileScores(percentile: number, ...muscleScores: MuscleScore[]): MuscleScore {
-		return new MuscleScore({
+	public static getPercentileScores(percentile: number, ...muscleScores: Score[]): Score {
+		return new Score({
 			strength: getPercentile(percentile, muscleScores.map(m => m.strength)),
 			endurance: getPercentile(percentile, muscleScores.map(m => m.endurance))
 		});
@@ -29,7 +29,7 @@ export default class MuscleScore {
 		return this.strength > this.endurance ? 'strength' : 'endurance';
 	}
 
-	public add(m: MuscleScore|number): MuscleScore {
+	public add(m: Score|number): Score {
 		if (typeof m === 'number') {
 			this.strength += m;
 			this.endurance += m;
@@ -40,7 +40,7 @@ export default class MuscleScore {
 		return this;
 	}
 
-	public subtract(m: MuscleScore|number): MuscleScore {
+	public subtract(m: Score|number): Score {
 		if (typeof m === 'number') {
 			this.strength -= m;
 			this.endurance -= m;
@@ -49,11 +49,11 @@ export default class MuscleScore {
 		return this.add(m.copy().multiply(-1));
 	}
 
-	public copy(): MuscleScore {
-		return new MuscleScore().add(this);
+	public copy(): Score {
+		return new Score().add(this);
 	}
 
-	public multiply(m: MuscleScore|number): MuscleScore {
+	public multiply(m: Score|number): Score {
 		if (typeof m === 'number') {
 			this.strength *= m;
 			this.endurance *= m;
@@ -64,7 +64,7 @@ export default class MuscleScore {
 		return this;
 	}
 
-	public divideBy(m: MuscleScore|number): MuscleScore {
+	public divideBy(m: Score|number): Score {
 		if (typeof m === 'number') {
 			this.strength /= m;
 			this.endurance /= m;
@@ -73,6 +73,10 @@ export default class MuscleScore {
 		this.strength /= m.strength;
 		this.endurance /= m.endurance;
 		return this;
+	}
+
+	public isLessThan(m: Score): boolean {
+		return this.strength < m.strength && this.endurance < m.endurance;
 	}
 }
 

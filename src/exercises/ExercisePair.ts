@@ -1,7 +1,8 @@
 import Exercise from './Exercise';
 import MuscleActivity from '../muscles/MuscleActivity';
-import WorkoutTarget from '../targets/WorkoutTarget';
 import * as util from '../global/util';
+
+import type WorkoutTarget from '../WorkoutTarget';
 
 export default class ExercisePair extends Exercise {
 

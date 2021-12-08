@@ -1,21 +1,47 @@
+import BodyProfile from '../muscles/BodyProfile';
 import MultiGenerator from '../generators/MultiGenerator';
 import Workout from '../Workout';
+import db from '../db';
+import targetRecords from '../data/raw/targets.json';
+import * as util from '../global/util';
 
 export default class Session {
 
-	public userId: number;
+	public bodyProfile: BodyProfile;
 
 	public multiGenerator: MultiGenerator;
 
 	public gen: Generator<Workout|null>|null;
 
-	constructor(userId: number) {
-		this.userId = userId;
+	public static async create(userId: number) {
+		const user = await db.users.getOne(userId);
+		const records = await db.records.getForUser(userId);
+		return new Session(user, records);
 	}
 
-	public async startGenerator({ name, intensity, timeMinutes }: any): Promise<number> {
-		console.log(`Starting generator: ${name}, intensity: ${intensity}, time: ${timeMinutes}`);
-		this.multiGenerator = new MultiGenerator({ name, intensity, timeMinutes });
+	constructor(user: DBUser, records: DBRecord[]) {
+		this.bodyProfile = new BodyProfile(user, records);
+	}
+
+	// TODO: Name should be removed once there is a workout picker
+	public async startGenerator(name: string, difficulty: Difficulty, timeMinutes: number): Promise<number> {
+		console.log(`Starting generator: ${name}, difficulty: ${difficulty}, time: ${timeMinutes}m`);
+
+		// TODO: Add workout picker
+		const targetRecord  = targetRecords.find(t => t.name === name);
+		if (!targetRecord) { throw new Error('Target not found'); }
+
+		const totalWeight = util.sum(targetRecord.phases.map(phase => phase.weight));
+
+		const targets = targetRecord.phases.map(phase =>
+			this.bodyProfile.getWorkoutTarget({
+				difficulty,
+				muscles: phase.muscles,
+				timeMinutes: timeMinutes * (phase.weight / totalWeight)
+			})
+		);
+
+		this.multiGenerator = new MultiGenerator(targets);
 		this.gen = this.multiGenerator.generate();
 		return this.multiGenerator.workoutGenerators.length;
 	}

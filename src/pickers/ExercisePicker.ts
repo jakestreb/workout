@@ -1,9 +1,9 @@
 import Exercise from '../exercises/Exercise';
 import ExercisePair from '../exercises/ExercisePair';
-import MuscleActivity from '../muscles/MuscleActivity';
+import BodyProfile from '../muscles/BodyProfile';
+import MuscleScores from '../muscles/MuscleScores';
 import Picker from './Picker';
-import WorkoutTarget from '../targets/WorkoutTarget';
-import { Result } from '../global/enums';
+import WorkoutTarget from '../WorkoutTarget';
 import * as util from '../global/util';
 
 export default class ExercisePicker extends Picker<Exercise> {
@@ -11,11 +11,13 @@ export default class ExercisePicker extends Picker<Exercise> {
 	private static _timeTolerance: number = 5 * 60;
 
 	private readonly _target: WorkoutTarget;
+	private readonly _bodyProfile: BodyProfile;
 
-	constructor(target: WorkoutTarget) {
+	constructor(target: WorkoutTarget, bodyProfile: BodyProfile) {
 		super();
 
 		this._target = target;
+		this._bodyProfile = bodyProfile;
 	}
 
 	public get checks() {
@@ -39,7 +41,7 @@ export default class ExercisePicker extends Picker<Exercise> {
 	}
 
 	private get _transitionTime() {
-		return (this.index - 1) * Exercise.transitionTime;
+		return (this.index - 1) * Exercise.TRANSITION_TIME;
 	}
 
 	private get _timeEstimate() {
@@ -60,9 +62,9 @@ export default class ExercisePicker extends Picker<Exercise> {
 	}
 
 	private _checkFocus(): Result {
-		const activityPerRep = MuscleActivity.combine(...this.exercises.map(e => e.activityPerRep));
+		const scoresPerRep = MuscleScores.combine(...this.exercises.map(e => e.scoresPerRep));
 
-		return this._target.checkFocusMuscles(activityPerRep) ? Result.Complete : Result.Incomplete;
+		return this._target.checkFocusMuscles(scoresPerRep) ? Result.Complete : Result.Incomplete;
 	}
 }
 

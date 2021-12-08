@@ -6,6 +6,7 @@ export default class Users extends Base {
       id INTEGER PRIMARY KEY,
       name TEXT UNIQUE,
       gender TEXT,
+      weight INTEGER,
       experience TEXT,
       primary_focus TEXT,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -15,8 +16,9 @@ export default class Users extends Base {
   }
 
   public async add(arg: DBUser): Promise<void> {
-    await this.db.run('INSERT INTO users (name, gender, experience, primary_focus) VALUES (?, ?, ?, ?)',
-      [arg.name, arg.gender, arg.experience, arg.primary_focus]);
+    await this.db.run('INSERT INTO users (name, gender, weight, experience, primary_focus)'
+      + ' VALUES (?, ?, ?, ?, ?)',
+      [arg.name, arg.gender, arg.weight, arg.experience, arg.primary_focus]);
   }
 
   public async getOne(id: number): Promise<DBUser> {
@@ -29,12 +31,12 @@ export default class Users extends Base {
 
   public async addSampleData(): Promise<void> {
     await this.db.run(
-      `INSERT INTO users (name, gender, experience, primary_focus) VALUES
-      ("Kelci", "female", "beginner", "endurance"),
-      ("Michael", "male", "beginner", "strength"),
-      ("Vini", "male", "beginner", "strength"),
-      ("Jake", "male", "intermediate", "endurance"),
-      ("Yudhi", "male", "beginner", "strength")`
+      `INSERT INTO users (name, gender, weight, experience, primary_focus) VALUES
+      ("Kelci", "female", "180", "beginner", "endurance"),
+      ("Michael", "male", "180", "beginner", "strength"),
+      ("Vini", "male", "180", "beginner", "strength"),
+      ("Jake", "male", "180", "intermediate", "endurance"),
+      ("Yudhi", "male", "180", "beginner", "strength")`
     );
   }
 }

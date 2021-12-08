@@ -1,28 +1,14 @@
-import targetRecords from '../data/raw/targets.json';
 import Workout from '../Workout';
 import WorkoutGenerator from '../generators/WorkoutGenerator';
-import * as util from '../global/util';
 
 export default class MultiGenerator {
 
 	public workoutGenerators: WorkoutGenerator[];
 
-	private _targets: Target[];
 	private _gens: Generator<Workout|null>[];
 
-	constructor({ name, intensity, timeMinutes }: any) {
-		// TODO: Add target picker
-		const targetRecord  = targetRecords.find(t => t.name === name);
-		if (!targetRecord) { throw new Error('Target not found'); }
-
-		const totalWeight = util.sum(targetRecord.phases.map(phase => phase.weight));
-
-		this._targets = targetRecord.phases.map(phase => {
-			const phaseTime = timeMinutes * (phase.weight / totalWeight);
-			return { muscles: phase.muscles, intensity, timeMinutes: phaseTime };
-		});
-
-		this.workoutGenerators = this._targets.map(t => new WorkoutGenerator(t));
+	constructor(targets: IWorkoutTarget[]) {
+		this.workoutGenerators = targets.map(t => new WorkoutGenerator(t));
 		this._gens = this.workoutGenerators.map(wg => wg.lookaheadGenerate());
 		this.workoutGenerators.forEach(wg => { wg.start(); });
 	}

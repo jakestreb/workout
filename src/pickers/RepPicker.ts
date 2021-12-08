@@ -1,21 +1,26 @@
+import BodyProfile from '../muscles/BodyProfile';
+import MuscleScores from '../muscles/MuscleScores';
 import Exercise from '../exercises/Exercise';
-import MuscleActivity from '../muscles/MuscleActivity';
 import Picker from './Picker';
-import WorkoutTarget from '../targets/WorkoutTarget'
+import WorkoutTarget from '../WorkoutTarget'
 import Workout from '../Workout';
 import WorkoutSet from '../WorkoutSet';
-import { Result } from '../global/enums';
+import * as util from '../global/util';
 
 export default class RepPicker extends Picker<WorkoutSet> {
 
 	private readonly _exercises: Exercise[];
 	private readonly _target: WorkoutTarget;
+	private readonly _bodyProfile: BodyProfile;
+	private readonly _user: DBUser;
 
-	constructor(exercises: Exercise[], target: WorkoutTarget) {
+	constructor(exercises: Exercise[], target: WorkoutTarget, bodyProfile: BodyProfile) {
 		super();
 
 		this._exercises = exercises;
-		this._target = target
+		this._target = target;
+		this._bodyProfile = bodyProfile;
+		this._user = bodyProfile.user;
 	}
 
 	public get checks() {
@@ -31,7 +36,7 @@ export default class RepPicker extends Picker<WorkoutSet> {
 
 	public buildGenerator(): Generator<WorkoutSet> {
 		if (this.index < this._exercises.length) {
-			return generateSets(this._exercises[this.index]);
+			return this._generateSets(this._exercises[this.index]);
 		}
 		return generateNothing();
 	}
@@ -52,14 +57,18 @@ export default class RepPicker extends Picker<WorkoutSet> {
 	}
 
 	private _checkFocus(): Result {
-		const activity = MuscleActivity.combine(...this.sets.map(s => s.activity));
-		return this._target.checkFocus(activity) ? Result.Complete : Result.Failed;
+		const scores = MuscleScores.combine(...this.sets.map(s => s.getScores(this._user)));
+		return this._target.checkFocus(scores) ? Result.Complete : Result.Failed;
 	}
-}
 
-function* generateSets(exercise: Exercise) {
-	for (const pattern of exercise.generateRepPatterns()) {
-		yield new WorkoutSet(exercise, pattern);
+	private* _generateSets(exercise: Exercise) {
+		const repsWeight = exercise.getRecommendation(this._bodyProfile);
+		const personalBestSet = new WorkoutSet(exercise, repsWeight);
+
+		const sets = personalBestSet.getScaled();
+		for (const set of util.randomSelector(sets)) {
+			yield set;
+		}
 	}
 }
 

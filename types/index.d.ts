@@ -1,8 +1,45 @@
-declare interface Target {
+declare enum Result {
+  Failed = 0,
+  Incomplete,
+  Complete,
+  Pending
+}
+
+declare enum Difficulty {
+  Easy = 1,
+  Intermediate,
+  Hard
+}
+
+declare interface IWorkoutSeed {
+  difficulty: Difficulty;
 	muscles: string[];
-	intensity: number;
 	timeMinutes: number;
 }
+
+declare interface IMuscleScore {
+  endurance: number;
+  strength: number;
+}
+
+declare interface IMuscleScores {
+  [muscle: string]: IMuscleScore;
+}
+
+declare interface IRepsWeight {
+  reps: number[];
+  weight: number|null;
+}
+
+declare interface Recommendation {
+  repsWeight: RepsWeight,
+  muscleScores: MuscleScores,
+}
+
+declare interface IWorkoutTarget {
+  minScores: IMuscleScores;
+  timeMinutes: number;
+};
 
 declare interface TargetRecord {
 	name: string;
@@ -37,6 +74,7 @@ declare interface DBRecord extends DBRecordBasics {
 declare interface DBUser {
   name: string,
   gender: 'male'|'female'|'other',
+  weight: number,
   experience: 'beginner'|'intermediate'|'advanced',
   primary_focus: 'strength'|'endurance'
 }

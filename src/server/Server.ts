@@ -23,10 +23,10 @@ export default class Server {
 		  	next();
 		});
 		this.app.use(bodyParser.json());
-		this.app.use((req, res, next) => {
+		this.app.use(async (req, res, next) => {
 			// TODO: Add authentication
 			const userId = 1;
-			(req as any).session = this._getSession(userId);
+			(req as any).session = await this._getSession(userId);
 			next();
 		});
 		for (const str in api) {
@@ -37,9 +37,9 @@ export default class Server {
 		console.log(`Listening on port ${this.port}`);
 	}
 
-	private _getSession(userId: number) {
+	private async _getSession(userId: number) {
 		if (!this.sessions[userId]) {
-			this.sessions[userId] = new Session(userId);
+			this.sessions[userId] = await Session.create(userId);
 		}
 		return this.sessions[userId];
 	}
