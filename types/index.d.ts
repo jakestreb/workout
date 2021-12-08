@@ -31,25 +31,23 @@ declare interface IRepsWeight {
   weight: number|null;
 }
 
-declare interface Recommendation {
-  repsWeight: RepsWeight,
-  muscleScores: MuscleScores,
+declare interface IWorkout {
+  sets: IWorkoutSet[];
+  muscleScores: IMuscleScores;
+  time: number;
+}
+
+declare interface IWorkoutSet {
+  exercise: string;
+  sets: number;
+  reps: number;
+  muscleScores: IMuscleScores;
 }
 
 declare interface IWorkoutTarget {
   minScores: IMuscleScores;
   timeMinutes: number;
 };
-
-declare interface TargetRecord {
-	name: string;
-	phases: TargetRecordPhase[];
-}
-
-declare interface TargetRecordPhase {
-	muscles: string[];
-	weight: number;
-}
 
 declare interface GeneratorProgress {
 	generated: number,
@@ -111,17 +109,4 @@ declare interface JSONMuscle {
     endurance: number;
     strength: number;
   };
-}
-
-declare interface IWorkout {
-  sets: IWorkoutSet[];
-  muscleScores: IMuscleScores;
-  time: number;
-}
-
-declare interface IWorkoutSet {
-  exercise: string;
-  sets: number;
-  reps: number;
-  muscleScores: IMuscleScores;
 }

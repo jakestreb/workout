@@ -1,5 +1,5 @@
 import type Exercise from './Exercise';
-import RepsWeight from '../muscles/RepsWeight';
+import RepsWeight from './RepsWeight';
 import Score from '../muscles/Score';
 import * as util from '../global/util';
 import db from '../db';

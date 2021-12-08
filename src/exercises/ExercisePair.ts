@@ -1,6 +1,6 @@
+import RepsWeight from './RepsWeight';
 import Exercise from './Exercise';
 import MuscleScores from '../muscles/MuscleScores';
-import RepsWeight from '../muscles/RepsWeight';
 import * as util from '../global/util';
 
 import type WorkoutTarget from '../WorkoutTarget';

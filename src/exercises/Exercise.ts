@@ -1,6 +1,6 @@
+import RepsWeight from './RepsWeight';
 import BodyProfile from '../muscles/BodyProfile';
 import MuscleScores from '../muscles/MuscleScores';
-import RepsWeight from '../muscles/RepsWeight';
 import Score from '../muscles/Score';
 import * as util from '../global/util';
 import data from '../data';

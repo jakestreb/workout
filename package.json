@@ -22,10 +22,12 @@
   "homepage": "https://github.com/jakestreb/workout#readme",
   "devDependencies": {
     "@types/express": "^4.17.13",
+    "@types/jest": "^27.0.3",
     "@types/madge": "^5.0.0",
     "@types/node": "^10.12.18",
     "@types/react": "^17.0.31",
     "@types/sqlite3": "^3.1.7",
+    "jest": "^27.4.3",
     "typescript": "^3.2.4"
   },
   "dependencies": {

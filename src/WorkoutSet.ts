@@ -1,7 +1,7 @@
 import type Exercise from './exercises/Exercise';
 import type MuscleScores from './muscles/MuscleScores';
-import type RepsWeight from './muscles/RepsWeight';
 import fromJsonObject from './exercises/fromJsonObject';
+import type RepsWeight from './exercises/RepsWeight';
 
 export default class WorkoutSet {
 	public static DIFFICULTY_RATIOS = [0.7, 0.9, 1.1];
