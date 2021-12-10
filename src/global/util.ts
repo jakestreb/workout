@@ -43,6 +43,13 @@ export function avg(array: number[]): number {
 	return sum(array) / array.length;
 }
 
+// https://stackoverflow.com/a/53577159
+export function stdDev(array: number[]) {
+  const n = array.length;
+  const mean = array.reduce((a, b) => a + b) / n;
+  return Math.sqrt(array.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / n);
+}
+
 export function weightedAvg(numbers: number[], weights: number[]): number {
 	const total = sum(weights);
 	return numbers.reduce((n, i) => n * (weights[i] / total), 0);
@@ -94,4 +101,23 @@ export async function forever(callback: () => any, sleep: number = 0) {
 export function maxIndex(a: number[]) {
 	// https://stackoverflow.com/a/30850912
 	return a.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
+}
+
+export function round(n: number, decimals: number) {
+	const factor = Math.pow(10, decimals);
+	return Math.round((n + Number.EPSILON) * factor) / factor;
+}
+
+// Modify normally distributed dataset mean and standard deviation
+// https://math.stackexchange.com/a/2894689
+export function normalScale(vals: number[], mean: number, std: number): number[] {
+	const initMean = avg(vals);
+	const initStd = stdDev(vals);
+	const initVariance = Math.pow(initStd, 2);
+	const variance = Math.pow(std, 2);
+
+	const coeff = Math.sqrt(variance / initVariance);
+	const shift = mean - (initMean * coeff);
+
+	return vals.map(n => n * coeff + shift);
 }

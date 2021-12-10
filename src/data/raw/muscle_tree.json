@@ -5,25 +5,13 @@
       "name" : "chest",
       "components" : [
         {
-          "name" : "upper_chest",
-          "defaultScores": {
-            "endurance": 10,
-            "strength": 10
-          }
+          "name" : "upper_chest"
         },
         {
-          "name" : "middle_chest",
-          "defaultScores": {
-            "endurance": 10,
-            "strength": 10
-          }
+          "name" : "middle_chest"
         },
         {
-          "name" : "lower_chest",
-          "defaultScores": {
-            "endurance": 10,
-            "strength": 10
-          }
+          "name" : "lower_chest"
         }
       ]
     },
@@ -31,32 +19,16 @@
       "name" : "back",
       "components" : [
         {
-          "name" : "traps",
-          "defaultScores": {
-            "endurance": 10,
-            "strength": 10
-          }
+          "name" : "traps"
         },
         {
-          "name" : "lats",
-          "defaultScores": {
-            "endurance": 10,
-            "strength": 10
-          }
+          "name" : "lats"
         },
         {
-          "name" : "erectors",
-          "defaultScores": {
-            "endurance": 5,
-            "strength": 5
-          }
+          "name" : "erectors"
         },
         {
-          "name" : "rhomboids",
-          "defaultScores": {
-            "endurance": 5,
-            "strength": 5
-          }
+          "name" : "rhomboids"
         }
       ]
     },
@@ -64,25 +36,13 @@
       "name" : "shoulders",
       "components" : [
         {
-          "name" : "front_delt",
-          "defaultScores": {
-            "endurance": 10,
-            "strength": 10
-          }
+          "name" : "front_delt"
         },
         {
-          "name" : "middle_delt",
-          "defaultScores": {
-            "endurance": 10,
-            "strength": 10
-          }
+          "name" : "middle_delt"
         },
         {
-          "name" : "rear_delt",
-          "defaultScores": {
-            "endurance": 10,
-            "strength": 10
-          }
+          "name" : "rear_delt"
         }
       ]
     },
@@ -90,18 +50,10 @@
       "name" : "core",
       "components" : [
         {
-          "name" : "abs",
-          "defaultScores": {
-            "endurance": 20,
-            "strength": 20
-          }
+          "name" : "abs"
         },
         {
-          "name" : "obliques",
-          "defaultScores": {
-            "endurance": 5,
-            "strength": 5
-          }
+          "name" : "obliques"
         }
       ]
     },
@@ -109,25 +61,13 @@
       "name" : "arms",
       "components" : [
         {
-          "name" : "triceps",
-          "defaultScores": {
-            "endurance": 10,
-            "strength": 10
-          }
+          "name" : "triceps"
         },
         {
-          "name" : "biceps",
-          "defaultScores": {
-            "endurance": 10,
-            "strength": 10
-          }
+          "name" : "biceps"
         },
         {
-          "name" : "forearms",
-          "defaultScores": {
-            "endurance": 10,
-            "strength": 10
-          }
+          "name" : "forearms"
         }
       ]
     },
@@ -135,39 +75,19 @@
       "name" : "legs",
       "components" : [
         {
-          "name" : "glutes",
-          "defaultScores": {
-            "endurance": 15,
-            "strength": 15
-          }
+          "name" : "glutes"
         },
         {
-          "name" : "quads",
-          "defaultScores": {
-            "endurance": 10,
-            "strength": 10
-          }
+          "name" : "quads"
         },
         {
-          "name" : "inner_thighs",
-          "defaultScores": {
-            "endurance": 5,
-            "strength": 5
-          }
+          "name" : "inner_thighs"
         },
         {
-          "name" : "hamstrings",
-          "defaultScores": {
-            "endurance": 10,
-            "strength": 10
-          }
+          "name" : "hamstrings"
         },
         {
-          "name" : "calves",
-          "defaultScores": {
-            "endurance": 5,
-            "strength": 5
-          }
+          "name" : "calves"
         }
       ]
     }

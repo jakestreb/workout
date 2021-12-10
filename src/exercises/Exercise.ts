@@ -1,5 +1,4 @@
 import RepsWeight from './RepsWeight';
-import BodyProfile from '../muscles/BodyProfile';
 import MuscleScores from '../muscles/MuscleScores';
 import Score from '../muscles/Score';
 import * as util from '../global/util';
@@ -8,8 +7,7 @@ import data from '../data';
 import type WorkoutTarget from '../WorkoutTarget';
 
 export default class Exercise {
-	public static REP_TOTAL_BONUS_FACTOR = 0.2;
-	public static WEIGHT_REP_BONUS_FACTOR = 0.035;
+	public static SKILL_BLEED_FACTOR = 0.2;
 
 	public static FIRST_TIME_WEIGHT_RATIO = 0.5;
 
@@ -17,9 +15,9 @@ export default class Exercise {
 	public static TRANSITION_TIME: number = 3 * 60;
 
 	public static* generator(target: WorkoutTarget, exclude: string[] = []) {
-		for (const exerciseRecord of target.exerciseRecords) {
-			if (!exclude.includes(exerciseRecord.name)) {
-				yield new Exercise(exerciseRecord);
+		for (const exercise of target.possibleExercises) {
+			if (!exclude.includes(exercise.name)) {
+				yield exercise;
 			}
 		}
 	}
@@ -28,29 +26,29 @@ export default class Exercise {
 	public readonly name: string;
 
 	private readonly _secondsPerRep: number;
-	private readonly _scoresPerRep: MuscleScores = new MuscleScores();
+	private readonly _scoreFactors: MuscleScores = new MuscleScores();
 	private readonly _possibleSets: number[];
 	private readonly _possibleReps: number[];
 
 	private readonly _record: JSONExercise;
 
-	constructor(exerciseRec: JSONExercise) {
-		this.name = exerciseRec.name;
+	constructor(name: string) {
+		this.name = name;
 
-		this._secondsPerRep = exerciseRec.secondsPerRep;
-		this._possibleSets = exerciseRec.sets;
-		this._possibleReps = exerciseRec.reps;
+		this._record = data.exercises.get(name);
 
-		exerciseRec.activations.forEach(a => {
-			this._scoresPerRep.set(a.muscle,
+		this._secondsPerRep = this._record.secondsPerRep;
+		this._possibleSets = this._record.sets;
+		this._possibleReps = this._record.reps;
+
+		this._record.activations.forEach(a => {
+			this._scoreFactors.set(a.muscle,
 				new Score({
-					endurance: a.intensityPerRep * exerciseRec.skills.endurance,
-					strength: a.intensityPerRep * exerciseRec.skills.strength,
+					endurance: a.activity,
+					strength: a.activity,
 				})
 			);
 		});
-
-		this._record = exerciseRec;
 	}
 
 	public get names(): string[] {
@@ -66,8 +64,8 @@ export default class Exercise {
 	}
 
 	public get standardReps(): number[] {
-		const avgSets = this._possibleSets[this._possibleSets.length / 2]
-		const avgReps = this._possibleReps[this._possibleReps.length / 2]
+		const avgSets = this.possibleSets[Math.floor(this.possibleSets.length / 2)];
+		const avgReps = this.possibleReps[Math.floor(this.possibleReps.length / 2)];
 		return new Array(avgSets).fill(avgReps);
 	}
 
@@ -76,24 +74,24 @@ export default class Exercise {
 		return util.avg(this.possibleSets) * util.avg(this.possibleReps);
 	}
 
-	public get scoresPerRep(): MuscleScores {
-		return this._scoresPerRep;
+	public get muscleScoreFactors(): MuscleScores {
+		return this._scoreFactors;
 	}
 
 	public get sortIndex(): number {
-		return -this._scoresPerRep.total * this.repEstimate;
-	}
-
-	public get skills() {
-		return this._record.skills;
+		return -this._scoreFactors.total * this.repEstimate;
 	}
 
 	public get muscles(): string[] {
-		return this.scoresPerRep.keys;
+		return this.muscleScoreFactors.keys;
 	}
 
 	public get weight(): number {
 		return this._record.weight;
+	}
+
+	public get supersetGroups(): string[] {
+		return this._record.supersetGroups;
 	}
 
 	public getWeightStandard(gender: DBUser['gender']): number|null {
@@ -116,68 +114,43 @@ export default class Exercise {
 		return nReps * nSets * this._secondsPerRep + (nSets - 1) * Exercise.REST_TIME;
 	}
 
-	public getMuscleScores(repsWeight: RepsWeight, user: DBUser): MuscleScores {
-		const reps = repsWeight.reps[0];
-		const sets = repsWeight.reps.length;
-		const weight = repsWeight.weight || user.weight;
-		const standardWeight = this.getWeightStandard(user.gender);
-		const weightFactor = standardWeight ? (weight / standardWeight) : 1;
-
-		const enduranceScore = reps * weightFactor;
-		const enduranceBonus = Exercise.REP_TOTAL_BONUS_FACTOR * sets * enduranceScore;
-		const endurance = enduranceScore + enduranceBonus;
-
-		const repFactor = (reps * sets) / this.repEstimate;
-		const strengthScore = weight * weightFactor;
-		const strengthBonus = Exercise.WEIGHT_REP_BONUS_FACTOR * repFactor * strengthScore;
-		const strength = strengthScore + strengthBonus;
-
-		const score = new Score({ endurance, strength });
+	public getFocusScores(repsWeight: RepsWeight, user: DBUser): MuscleScores {
+		const score = this.getScore(repsWeight, user);
 
 		const muscleScores = new MuscleScores();
-		data.muscles.names.forEach(m => {
-			muscleScores.set(m, score.multiply(this.scoresPerRep.get(m)))
+		data.muscles.componentNames.forEach(m => {
+			muscleScores.set(m, score.multiply(this.muscleScoreFactors.get(m)));
 		});
 
 		return muscleScores;
 	}
 
-	public getRecommendation(bodyProfile: BodyProfile): RepsWeight {
-		const userRecords = bodyProfile.userRecords;
-		const user = bodyProfile.userRecords.user;
+	public getScore(repsWeight: RepsWeight, user: DBUser): Score {
+		const { nReps, nSets } = repsWeight;
+		const weight = repsWeight.weight || user.weight;
+		const standardWeight = this.getWeightStandard(user.gender);
+		const weightFactor = standardWeight ? (weight / standardWeight) : 1;
 
-		// Get personal bests for strength and endurance
-		const best = userRecords.getPersonalBests(this);
-		if (!best) {
-			// Return the standard reps given basic user information
-			const standardWeight = this.getWeightStandard(user.gender);
-			const ratio = Exercise.FIRST_TIME_WEIGHT_RATIO;
-			return new RepsWeight({
-				reps: this.standardReps,
-				weight: standardWeight ? standardWeight * ratio : null,
-			});
-		}
+		const repFactor = nReps / this.standardReps[0];
+		const totalRepFactor = (nReps * nSets) / this.repEstimate;
 
-		// Determine which skill to focus on, and choose the personal best
-		// for that skill as a basis
-		const exerciseSkillTotal = this.skills.strength + this.skills.endurance;
-		const muscleFocusDecisions = this.muscles
-			.map(m =>
-				bodyProfile.getGoalDiscrepancy(m)
-					.multiply(new Score(this.skills).divideBy(exerciseSkillTotal))
-					.multiply(this.scoresPerRep.get(m))
-			);
-		const focusDecision = Score.combine(...muscleFocusDecisions);
-		const isStrengthFocus = focusDecision.strength > focusDecision.endurance;
-		const repsWeight = isStrengthFocus ? best.strength : best.endurance;
+		const enduranceScore = util.avg([repFactor, totalRepFactor]);
+		const strengthScore = weightFactor;
 
-		// Scale reps and weight by difficulty ratios relative to their focus determinations
-		const enduranceRatio = focusDecision.endurance / focusDecision.strength;
-		const strengthRatio = 1 / enduranceRatio;
+		const factor = Exercise.SKILL_BLEED_FACTOR;
 
-		return repsWeight.scale({
-			reps: Math.min(enduranceRatio, 1),
-			weight: Math.min(strengthRatio, 1),
+		return new Score({
+			endurance: (1 - factor) * enduranceScore + factor * strengthScore,
+			strength: (1 - factor) * strengthScore + factor * enduranceScore,
+		});
+	}
+
+	public getFirstTryRepsWeight(user: DBUser): RepsWeight {
+		const standardWeight = this.getWeightStandard(user.gender);
+		const ratio = Exercise.FIRST_TIME_WEIGHT_RATIO;
+		return new RepsWeight({
+			reps: this.standardReps,
+			weight: standardWeight ? standardWeight * ratio : null,
 		});
 	}
 

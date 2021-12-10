@@ -10,20 +10,20 @@ export default class ExercisePair extends Exercise {
 	public static SWAP_TIME: number = 80;
 
 	public static* generator(target: WorkoutTarget, exclude: string[] = []) {
-		const viableExercises = target.exerciseRecords
+		const viableExercises = target.possibleExercises
 			.filter(e => e.supersetGroups && e.supersetGroups.length > 0);
-		for (const recordA of util.weightedSelector(viableExercises)) {
-			if (exclude.includes(recordA.name)) {
+		for (const exerciseA of util.weightedSelector(viableExercises)) {
+			if (exclude.includes(exerciseA.name)) {
 				continue;
 			}
-			for (const recordB of util.weightedSelector(viableExercises)) {
-				if (recordA.name === recordB.name || exclude.includes(recordB.name)) {
+			for (const exerciseB of util.weightedSelector(viableExercises)) {
+				if (exerciseA.name === exerciseB.name || exclude.includes(exerciseB.name)) {
 					continue;
 				}
-				if (!haveSharedValue(recordA.supersetGroups, recordB.supersetGroups)) {
+				if (!haveSharedValue(exerciseA.supersetGroups, exerciseB.supersetGroups)) {
 					continue;
 				}
-				const pair = new ExercisePair(recordA, recordB);
+				const pair = new ExercisePair(exerciseA.name, exerciseB.name);
 				if (pair.sortIndex <= pair.second.sortIndex) {
 					yield pair;
 				}
@@ -33,9 +33,9 @@ export default class ExercisePair extends Exercise {
 
 	public second: Exercise;
 
-	constructor(recordA: JSONExercise, recordB: JSONExercise) {
-		super(recordA);
-		this.second = new Exercise(recordB);
+	constructor(nameA: string, nameB: string) {
+		super(nameA);
+		this.second = new Exercise(nameB);
 	}
 
 	public get names(): string[] {
@@ -50,8 +50,8 @@ export default class ExercisePair extends Exercise {
 		return util.overlapping(super.possibleReps, this.second.possibleReps);
 	}
 
-	public get scoresPerRep(): MuscleScores {
-		return MuscleScores.combine(super.scoresPerRep, this.second.scoresPerRep);
+	public get muscleScoreFactors(): MuscleScores {
+		return MuscleScores.combine(super.muscleScoreFactors, this.second.muscleScoreFactors);
 	}
 
 	public getTime(repsWeight: RepsWeight) {

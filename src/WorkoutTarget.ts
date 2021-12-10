@@ -11,7 +11,7 @@ export default class WorkoutTarget {
 	public muscleTarget: MuscleTarget;
 	public timeTarget: number;
 
-	private _possibleExercises: JSONExercise[] = [];
+	private _possibleExercises: Exercise[] = [];
 
 	constructor(target: IWorkoutTarget) {
 		this.muscleTarget = new MuscleTarget(target.minScores);
@@ -22,7 +22,7 @@ export default class WorkoutTarget {
 		this._initPossibleExercises();
 	}
 
-	public get exerciseRecords() {
+	public get possibleExercises() {
 		return this._possibleExercises;
 	}
 
@@ -50,10 +50,10 @@ export default class WorkoutTarget {
 
 	private _initPossibleExercises(): void {
 		for (const e of util.weightedSelector(data.exercises.all())) {
-			const exercise = new Exercise(e);
-			const overlaps = this.muscleTarget.overlaps(exercise.scoresPerRep);
+			const exercise = new Exercise(e.name);
+			const overlaps = this.muscleTarget.overlaps(exercise.muscleScoreFactors);
 			if (overlaps) {
-				this._possibleExercises.push(e);
+				this._possibleExercises.push(exercise);
 			}
 		}
 	}

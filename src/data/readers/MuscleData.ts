@@ -1,4 +1,3 @@
-import Score from '../../muscles/Score';
 import muscleTree from '../raw/muscle_tree.json';
 
 export default class MuscleData {
@@ -19,14 +18,6 @@ export default class MuscleData {
 
 	public get(name: string): JSONMuscle {
 		return this._all[name];
-	}
-
-	public getDefaultScore(name: string): Score {
-		const score = this._all[name].defaultScores;
-		if (!score) {
-			throw new Error(`Cannot get score of invalid component muscle: ${name}`);
-		}
-		return new Score(score);
 	}
 
 	public getComponents(name: string): JSONMuscle[] {

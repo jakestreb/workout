@@ -15,11 +15,11 @@ export default class GenerateNext extends GetEndpoint {
 				exercise: `${s.exercise}`,
 				sets: s.repsWeight.nSets,
 				reps: s.repsWeight.nReps,
-				muscleScores: s.getScores(user).getMap(),
+				muscleScores: s.getFocusScores(user).getMap(),
 			}));
 			return {
 				sets,
-				muscleScores: workout.getScores(user).getMap(),
+				muscleScores: workout.getFocusScores(user).getMap(),
 				time: workout.time
 			};
 		}

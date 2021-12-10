@@ -1,5 +1,4 @@
 import UserRecords from '../exercises/UserRecords';
-import BodyProfile from '../muscles/BodyProfile';
 import ExercisePicker from '../pickers/ExercisePicker';
 import RepPicker from '../pickers/RepPicker';
 import LookaheadGenerator from './LookaheadGenerator';
@@ -19,11 +18,10 @@ export default class WorkoutGenerator extends LookaheadGenerator {
 
 	public async* generate(): AsyncGenerator<Workout> {
 		const userRecords = await UserRecords.fromUserId(this.userId);
-		const bodyProfile = new BodyProfile(userRecords);
 		const exercisePicker = new ExercisePicker(this.target);
 
 		for (const exercises of exercisePicker.pick()) {
-			const repPicker = new RepPicker(exercises!, this.target, bodyProfile);
+			const repPicker = new RepPicker(exercises!, this.target, userRecords);
 			for (const sets of repPicker.pick()) {
 				yield new Workout(sets!);
 				break;

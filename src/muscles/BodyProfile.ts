@@ -6,16 +6,17 @@ import data from '../data';
 
 export default class BodyProfile {
 
-	public static TARGET_DIFFICULTY_RATIOS = [0.7, 0.9, 1.1];
-	public static AVG_WORKOUT_TIME = 60;
+	public static TARGET_DIFFICULTY_MEANS = [3, 4.5, 6];
+	public static TARGET_STD_DEV = 1;
+	public static STANDARD_WORKOUT_TIME = 60;
 
-	public static MIN_GOAL = 5;
+	public static MIN_GOAL_FACTOR = 1.10;
 
 	public readonly userRecords: UserRecords;
 	public readonly user: DBUser;
 
-	private readonly _scores: MuscleScores;
-	private readonly _goalScores: MuscleScores;
+	private readonly _scores: MuscleScores = new MuscleScores();
+	private _goal: Score;
 
 	constructor(userRecords: UserRecords) {
 		this.userRecords = userRecords;
@@ -25,89 +26,74 @@ export default class BodyProfile {
 	}
 
 	public getWorkoutTarget(seed: IWorkoutSeed): IWorkoutTarget {
-		const minScores: IMuscleScores = {};
-		const timeRatio = seed.timeMinutes / BodyProfile.AVG_WORKOUT_TIME;
-		const difficultyRatio = BodyProfile.TARGET_DIFFICULTY_RATIOS[seed.difficulty];
-
-		const getMinReq = (x: number) => Math.max(x, 0) * difficultyRatio * timeRatio;
+		const minScores = new MuscleScores();
+		const timeRatio = seed.timeMinutes / BodyProfile.STANDARD_WORKOUT_TIME;
+		const mean = BodyProfile.TARGET_DIFFICULTY_MEANS[seed.difficulty];
 
 		seed.muscles.forEach(m => {
-			const delta = this.getGoalDiscrepancy(m);
-			minScores[m] = {
-				endurance: getMinReq(delta.endurance),
-				strength: getMinReq(delta.strength),
-			};
+			minScores.set(m, this.getGoalDiscrepancy(m));
 		});
 
+		const scaled = minScores.scale(mean * timeRatio, BodyProfile.TARGET_STD_DEV);
+
 		return {
-			minScores,
+			minScores: scaled.round().getMap(),
 			timeMinutes: seed.timeMinutes,
 		};
 	}
 
+	public getMuscleScores(): MuscleScores {
+		return this._scores.copy();
+	}
+
+	public getMuscleScore(m: string): Score {
+		return this._scores.get(m).copy();
+	}
+
+	public getGoalScore(): Score {
+		return this._goal.copy();
+	}
+
 	public getGoalDiscrepancy(m: string): Score {
-		return this._goalScores.get(m).copy().subtract(this._scores.get(m));
+		const { strength, endurance } = this._goal.subtract(this._scores.get(m));
+		return new Score({
+			strength: Math.max(strength, 0),
+			endurance: Math.max(endurance, 0),
+		});
 	}
 
 	private _init() {
-		const allExercises = data.exercises.all().map(e => new Exercise(e));
-		const allScores = allExercises.map(exercise => this.userRecords.getBestScores(exercise));
+		const allExercises = data.exercises.all().map(e => new Exercise(e.name));
+		const allScores = allExercises.map(e => this.userRecords.getBestScores(e.name));
 
 		const exercises = allExercises.filter((e, i) => allScores[i]);
 		const exerciseScores = allScores.filter(s => s) as Score[];
 
-		// Sums of strength/endurance exercise type weights over each muscle
-		const muscleSkillSums = initScoreMap();
-		exercises.forEach((exercise, i) => {
-			exercise.muscles.forEach(m => {
-				muscleSkillSums[m].add(new Score(exercise.skills));
-			});
-		});
+		// Sums of total muscle activity (score factors) per muscle across exercises
+		const muscleFactorSums = MuscleScores.combine(
+			...exercises.map(e => e.muscleScoreFactors)
+		);
 
 		// Init muscle scores
 		exercises.forEach((exercise, i) => {
 			const exerciseScore = exerciseScores[i];
-			const { scoresPerRep } = exercise;
+			const { muscleScoreFactors } = exercise;
 			exercise.muscles.forEach(m => {
-				const muscleFactor = scoresPerRep.getRatio(m);
-				const skillFactor = new Score(exercise.skills)
-					.divideBy(muscleSkillSums[m]);
-				const muscleScore = exerciseScore
-					.multiply(muscleFactor)
-					.multiply(skillFactor);
-				this._scores.add(m, muscleScore);
+				const muscleFactor = muscleScoreFactors.get(m);
+				const muscleSum = muscleFactorSums.get(m);
+				const muscleRatio = muscleFactor.divideBy(muscleSum);
+				// Weight exercise scores by ratio of muscle use across exercises
+				this._scores.add(m, exerciseScore.multiply(muscleRatio));
 			});
 		});
 
-		// TODO: Save goals to db, allow users to modify
-		// Init goal muscle scores
-		const allMuscles = data.muscles.componentNames;
-		const relativeScores = allMuscles
-			.map(m => {
-				const score = this._scores.get(m);
-				return score.copy().subtract(data.muscles.getDefaultScore(m));
-			});
+		const lowScore = this._scores.getPercentile(.25);
+		this._goal = this._scores.getPercentile(.75);
 
-		const lowScores = Score.getPercentileScores(.25, ...relativeScores);
-		const goalScores = Score.getPercentileScores(.75, ...relativeScores);
-		const range = goalScores.copy().subtract(lowScores);
-
+		// Ensure goal is sufficiently high
 		const { primary_focus: primaryFocus } = this.userRecords.user;
-		if (range[primaryFocus] < BodyProfile.MIN_GOAL) {
-			goalScores[primaryFocus] = lowScores[primaryFocus] + BodyProfile.MIN_GOAL;
+		if (this._goal[primaryFocus] / lowScore[primaryFocus] < BodyProfile.MIN_GOAL_FACTOR) {
+			this._goal[primaryFocus] = lowScore[primaryFocus] * BodyProfile.MIN_GOAL_FACTOR;
 		}
-
-		allMuscles.forEach((m, i) => {
-			const toReachGoal = goalScores.copy().subtract(relativeScores[i]);
-			toReachGoal.strength = Math.max(toReachGoal.strength, 0);
-			toReachGoal.endurance = Math.max(toReachGoal.endurance, 0);
-			this._goalScores.set(m, this._scores.get(m).copy().add(toReachGoal));
-		});
 	}
-}
-
-function initScoreMap(): {[muscle: string]: Score} {
-	const ret: {[muscle: string]: Score} = {};
-	data.muscles.names.forEach(m => { ret[m] = new Score(); });
-	return ret;
 }

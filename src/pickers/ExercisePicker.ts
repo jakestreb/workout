@@ -43,9 +43,9 @@ export default class ExercisePicker extends Picker<Exercise> {
 	}
 
 	private _checkFocus(): Result {
-		const scoresPerRep = MuscleScores.combine(...this.exercises.map(e => e.scoresPerRep));
+		const muscleScoreFactors = MuscleScores.combine(...this.exercises.map(e => e.muscleScoreFactors));
 
-		return this._target.checkFocusMuscles(scoresPerRep) ? Result.Complete : Result.Incomplete;
+		return this._target.checkFocusMuscles(muscleScoreFactors) ? Result.Complete : Result.Incomplete;
 	}
 }
 

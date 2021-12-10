@@ -15,6 +15,9 @@ export default class ExerciseData {
 	}
 
 	public get(name: string): JSONExercise {
+		if (!this._map[name]) {
+			throw new Error(`Exercise not found: ${name}`);
+		}
 		return this._map[name];
 	}
 }

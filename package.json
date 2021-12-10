@@ -8,7 +8,8 @@
     "lines": "git -C src grep ^ | wc -l",
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "ts-node ./index.ts"
+    "dev": "ts-node ./index.ts",
+    "test": "node ./node_modules/.bin/jest"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     "@types/react": "^17.0.31",
     "@types/sqlite3": "^3.1.7",
     "jest": "^27.4.3",
+    "ts-jest": "^27.1.1",
     "typescript": "^3.2.4"
   },
   "dependencies": {

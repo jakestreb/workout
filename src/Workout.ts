@@ -19,8 +19,8 @@ export default class Workout {
 		return util.sum(this.sets.map(s => s.time)) + this._transitionTime;
 	}
 
-	public getScores(user: DBUser): MuscleScores {
-		return MuscleScores.combine(...this.sets.map(s => s.getScores(user)));
+	public getFocusScores(user: DBUser): MuscleScores {
+		return MuscleScores.combine(...this.sets.map(s => s.getFocusScores(user)));
 	}
 
 	private get _transitionTime() {

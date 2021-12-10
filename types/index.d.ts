@@ -11,19 +11,21 @@ declare enum Difficulty {
   Hard
 }
 
+declare type Skill = 'endurance'|'strength';
+
 declare interface IWorkoutSeed {
   difficulty: Difficulty;
 	muscles: string[];
 	timeMinutes: number;
 }
 
-declare interface IMuscleScore {
+declare interface IScore {
   endurance: number;
   strength: number;
 }
 
 declare interface IMuscleScores {
-  [muscle: string]: IMuscleScore;
+  [muscle: string]: IScore;
 }
 
 declare interface IRepsWeight {
@@ -75,7 +77,7 @@ declare interface DBUser {
   gender: 'male'|'female'|'other',
   weight: number,
   experience: 'beginner'|'intermediate'|'advanced',
-  primary_focus: 'strength'|'endurance'
+  primary_focus: Skill
 }
 
 declare interface JSONExercise {
@@ -85,10 +87,6 @@ declare interface JSONExercise {
   secondsPerRep: number,
   sets: number[]
   reps: number[]
-  skills: {
-  	endurance: number,
-   	strength: number,
-  },
   weightStandards: {
   	male: number,
   	female: number
@@ -99,14 +97,10 @@ declare interface JSONExercise {
 
 declare interface JSONActivation {
   muscle: string,
-  intensityPerRep: number
+  activity: number
 }
 
 declare interface JSONMuscle {
   name: string;
   components?: JSONMuscle[];
-  defaultScores?: {
-    endurance: number;
-    strength: number;
-  };
 }

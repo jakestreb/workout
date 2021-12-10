@@ -3,23 +3,23 @@
     "weight": 1,
     "activations": [{
         "muscle": "upper_chest",
-        "intensityPerRep": 2.5
+        "activity": 2.5
       },
       {
         "muscle": "middle_chest",
-        "intensityPerRep": 3
+        "activity": 3
       },
       {
         "muscle": "lower_chest",
-        "intensityPerRep": 2.5
+        "activity": 2.5
       },
       {
         "muscle": "triceps",
-        "intensityPerRep": 1.5
+        "activity": 1.5
       },
       {
         "muscle": "front_delt",
-        "intensityPerRep": 2.5
+        "activity": 2.5
       }
     ],
     "secondsPerRep": 3,
@@ -33,10 +33,6 @@
       8,
       10
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 165,
       "female": 90
@@ -49,23 +45,23 @@
     "weight": 1,
     "activations": [{
         "muscle": "upper_chest",
-        "intensityPerRep": 3
+        "activity": 3
       },
       {
         "muscle": "middle_chest",
-        "intensityPerRep": 1.5
+        "activity": 1.5
       },
       {
         "muscle": "lower_chest",
-        "intensityPerRep": 1.5
+        "activity": 1.5
       },
       {
         "muscle": "triceps",
-        "intensityPerRep": 1.5
+        "activity": 1.5
       },
       {
         "muscle": "front_delt",
-        "intensityPerRep": 3
+        "activity": 3
       }
     ],
     "secondsPerRep": 3,
@@ -79,10 +75,6 @@
       8,
       10
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 135,
       "female": 65
@@ -95,23 +87,23 @@
     "weight": 1,
     "activations": [{
         "muscle": "upper_chest",
-        "intensityPerRep": 1.5
+        "activity": 1.5
       },
       {
         "muscle": "middle_chest",
-        "intensityPerRep": 1.5
+        "activity": 1.5
       },
       {
         "muscle": "lower_chest",
-        "intensityPerRep": 3
+        "activity": 3
       },
       {
         "muscle": "triceps",
-        "intensityPerRep": 1.5
+        "activity": 1.5
       },
       {
         "muscle": "front_delt",
-        "intensityPerRep": 1.5
+        "activity": 1.5
       }
     ],
     "secondsPerRep": 3,
@@ -125,10 +117,6 @@
       8,
       10
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 145,
       "female": 70
@@ -141,23 +129,23 @@
     "weight": 1,
     "activations": [{
         "muscle": "upper_chest",
-        "intensityPerRep": 2
+        "activity": 2
       },
       {
         "muscle": "middle_chest",
-        "intensityPerRep": 2.5
+        "activity": 2.5
       },
       {
         "muscle": "lower_chest",
-        "intensityPerRep": 1.5
+        "activity": 1.5
       },
       {
         "muscle": "biceps",
-        "intensityPerRep": 2.5
+        "activity": 2.5
       },
       {
         "muscle": "front_delt",
-        "intensityPerRep": 1.5
+        "activity": 1.5
       }
     ],
     "secondsPerRep": 5,
@@ -171,10 +159,6 @@
       8,
       10
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 20,
       "female": 12
@@ -187,19 +171,19 @@
     "weight": 1,
     "activations": [{
         "muscle": "upper_chest",
-        "intensityPerRep": 3
+        "activity": 3
       },
       {
         "muscle": "middle_chest",
-        "intensityPerRep": 3.5
+        "activity": 3.5
       },
       {
         "muscle": "lower_chest",
-        "intensityPerRep": 3
+        "activity": 3
       },
       {
         "muscle": "triceps",
-        "intensityPerRep": 3
+        "activity": 3
       }
     ],
     "secondsPerRep": 4,
@@ -213,10 +197,6 @@
       8,
       10
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 165,
       "female": 90
@@ -229,23 +209,23 @@
     "weight": 1,
     "activations": [{
         "muscle": "upper_chest",
-        "intensityPerRep": 0.5
+        "activity": 0.5
       },
       {
         "muscle": "middle_chest",
-        "intensityPerRep": 0.5
+        "activity": 0.5
       },
       {
         "muscle": "lower_chest",
-        "intensityPerRep": 0.5
+        "activity": 0.5
       },
       {
         "muscle": "triceps",
-        "intensityPerRep": 1
+        "activity": 1
       },
       {
         "muscle": "front_delt",
-        "intensityPerRep": 2.5
+        "activity": 2.5
       }
     ],
     "secondsPerRep": 2,
@@ -258,10 +238,6 @@
       15,
       20
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -274,27 +250,27 @@
     "weight": 1,
     "activations": [{
         "muscle": "upper_chest",
-        "intensityPerRep": 1.5
+        "activity": 1.5
       },
       {
         "muscle": "middle_chest",
-        "intensityPerRep": 2
+        "activity": 2
       },
       {
         "muscle": "lower_chest",
-        "intensityPerRep": 2.5
+        "activity": 2.5
       },
       {
         "muscle": "triceps",
-        "intensityPerRep": 2.5
+        "activity": 2.5
       },
       {
         "muscle": "front_delt",
-        "intensityPerRep": 1.5
+        "activity": 1.5
       },
       {
         "muscle": "lats",
-        "intensityPerRep": 0.5
+        "activity": 0.5
       }
     ],
     "secondsPerRep": 3,
@@ -307,10 +283,6 @@
       10,
       12
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -324,27 +296,27 @@
     "activations": [
       {
         "muscle": "upper_chest",
-        "intensityPerRep": 1.5
+        "activity": 1.5
       },
       {
         "muscle": "middle_chest",
-        "intensityPerRep": 0.5
+        "activity": 0.5
       },
       {
         "muscle": "front_delt",
-        "intensityPerRep": 3
+        "activity": 3
       },
       {
         "muscle": "middle_delt",
-        "intensityPerRep": 2.5
+        "activity": 2.5
       },
       {
         "muscle": "rear_delt",
-        "intensityPerRep": 1
+        "activity": 1
       },
       {
         "muscle": "triceps",
-        "intensityPerRep": 2
+        "activity": 2
       }
     ],
     "secondsPerRep": 3,
@@ -359,10 +331,6 @@
       10,
       12
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 110,
       "female": 60
@@ -376,27 +344,27 @@
     "activations": [
       {
         "muscle": "upper_chest",
-        "intensityPerRep": 1.5
+        "activity": 1.5
       },
       {
         "muscle": "middle_chest",
-        "intensityPerRep": 0.5
+        "activity": 0.5
       },
       {
         "muscle": "front_delt",
-        "intensityPerRep": 3.5
+        "activity": 3.5
       },
       {
         "muscle": "middle_delt",
-        "intensityPerRep": 3
+        "activity": 3
       },
       {
         "muscle": "rear_delt",
-        "intensityPerRep": 1.5
+        "activity": 1.5
       },
       {
         "muscle": "triceps",
-        "intensityPerRep": 3
+        "activity": 3
       }
     ],
     "secondsPerRep": 6,
@@ -411,10 +379,6 @@
       10,
       12
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 60,
       "female": 60
@@ -428,19 +392,19 @@
     "activations": [
       {
         "muscle": "upper_chest",
-        "intensityPerRep": 1
+        "activity": 1
       },
       {
         "muscle": "front_delt",
-        "intensityPerRep": 3
+        "activity": 3
       },
       {
         "muscle": "middle_delt",
-        "intensityPerRep": 1
+        "activity": 1
       },
       {
         "muscle": "rear_delt",
-        "intensityPerRep": 0.5
+        "activity": 0.5
       }
     ],
     "secondsPerRep": 2,
@@ -453,10 +417,6 @@
       12,
       15
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 20,
       "female": 12
@@ -470,15 +430,15 @@
     "activations": [
       {
         "muscle": "front_delt",
-        "intensityPerRep": 1
+        "activity": 1
       },
       {
         "muscle": "middle_delt",
-        "intensityPerRep": 3
+        "activity": 3
       },
       {
         "muscle": "rear_delt",
-        "intensityPerRep": 1.5
+        "activity": 1.5
       }
     ],
     "secondsPerRep": 2,
@@ -492,10 +452,6 @@
       8,
       10
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 20,
       "female": 12
@@ -509,27 +465,27 @@
     "activations": [
       {
         "muscle": "upper_chest",
-        "intensityPerRep": 1.5
+        "activity": 1.5
       },
       {
         "muscle": "middle_chest",
-        "intensityPerRep": 0.5
+        "activity": 0.5
       },
       {
         "muscle": "front_delt",
-        "intensityPerRep": 4
+        "activity": 4
       },
       {
         "muscle": "middle_delt",
-        "intensityPerRep": 3.5
+        "activity": 3.5
       },
       {
         "muscle": "rear_delt",
-        "intensityPerRep": 2
+        "activity": 2
       },
       {
         "muscle": "triceps",
-        "intensityPerRep": 4
+        "activity": 4
       }
     ],
     "secondsPerRep": 3,
@@ -543,10 +499,6 @@
       8,
       10
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 35,
       "female": 20
@@ -559,7 +511,7 @@
     "weight": 1,
     "activations": [{
       "muscle": "triceps",
-      "intensityPerRep": 6
+      "activity": 6
     }],
     "secondsPerRep": 4,
     "sets": [
@@ -572,10 +524,6 @@
       10,
       12
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 25,
       "female": 15
@@ -588,7 +536,7 @@
     "weight": 1,
     "activations": [{
       "muscle": "triceps",
-      "intensityPerRep": 4
+      "activity": 4
     }],
     "secondsPerRep": 5,
     "sets": [
@@ -601,10 +549,6 @@
       10,
       12
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 60,
       "female": 35
@@ -617,7 +561,7 @@
     "weight": 1,
     "activations": [{
       "muscle": "triceps",
-      "intensityPerRep": 7.5
+      "activity": 7.5
     }],
     "secondsPerRep": 5,
     "sets": [
@@ -630,10 +574,6 @@
       10,
       12
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 25,
       "female": 15
@@ -646,7 +586,7 @@
     "weight": 1,
     "activations": [{
       "muscle": "triceps",
-      "intensityPerRep": 9
+      "activity": 9
     }],
     "secondsPerRep": 5,
     "sets": [
@@ -658,10 +598,6 @@
       8,
       10
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -674,7 +610,7 @@
     "weight": 1,
     "activations": [{
       "muscle": "triceps",
-      "intensityPerRep": 7.5
+      "activity": 7.5
     }],
     "secondsPerRep": 3,
     "sets": [
@@ -686,10 +622,6 @@
       8,
       10
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -702,10 +634,10 @@
     "weight": 1,
     "activations": [{
       "muscle": "abs",
-      "intensityPerRep": 2
+      "activity": 2
     }, {
       "muscle": "obliques",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }],
     "secondsPerRep": 2,
     "sets": [
@@ -716,10 +648,6 @@
       15,
       20
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -732,10 +660,10 @@
     "weight": 1,
     "activations": [{
       "muscle": "abs",
-      "intensityPerRep": 1
+      "activity": 1
     }, {
       "muscle": "obliques",
-      "intensityPerRep": 2
+      "activity": 2
     }],
     "secondsPerRep": 2,
     "sets": [
@@ -745,10 +673,6 @@
       10,
       15
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -761,10 +685,10 @@
     "weight": 1,
     "activations": [{
       "muscle": "abs",
-      "intensityPerRep": 0.3
+      "activity": 0.3
     }, {
       "muscle": "obliques",
-      "intensityPerRep": 0.4
+      "activity": 0.4
     }],
     "secondsPerRep": 1,
     "sets": [
@@ -775,10 +699,6 @@
       45,
       60
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -791,10 +711,10 @@
     "weight": 1,
     "activations": [{
       "muscle": "abs",
-      "intensityPerRep": 1.2
+      "activity": 1.2
     }, {
       "muscle": "obliques",
-      "intensityPerRep": 1.2
+      "activity": 1.2
     }],
     "secondsPerRep": 1,
     "sets": [
@@ -805,10 +725,6 @@
       45,
       60
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -821,10 +737,10 @@
     "weight": 1,
     "activations": [{
       "muscle": "abs",
-      "intensityPerRep": 0.4
+      "activity": 0.4
     }, {
       "muscle": "obliques",
-      "intensityPerRep": 0.8
+      "activity": 0.8
     }],
     "secondsPerRep": 1,
     "sets": [
@@ -835,10 +751,6 @@
       45,
       60
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -851,10 +763,10 @@
     "weight": 1,
     "activations": [{
       "muscle": "abs",
-      "intensityPerRep": 0.6
+      "activity": 0.6
     }, {
       "muscle": "obliques",
-      "intensityPerRep": 0.8
+      "activity": 0.8
     }],
     "secondsPerRep": 1,
     "sets": [
@@ -865,10 +777,6 @@
       45,
       60
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -881,7 +789,7 @@
     "weight": 1,
     "activations": [{
       "muscle": "obliques",
-      "intensityPerRep": 2.5
+      "activity": 2.5
     }],
     "secondsPerRep": 3,
     "sets": [
@@ -891,10 +799,6 @@
       20,
       24
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 80,
       "female": 60
@@ -907,10 +811,10 @@
     "weight": 1,
     "activations": [{
       "muscle": "abs",
-      "intensityPerRep": 3
+      "activity": 3
     }, {
       "muscle": "obliques",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }],
     "secondsPerRep": 2,
     "sets": [
@@ -920,10 +824,6 @@
       10,
       15
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -936,10 +836,10 @@
     "weight": 1,
     "activations": [{
       "muscle": "abs",
-      "intensityPerRep": 3
+      "activity": 3
     }, {
       "muscle": "obliques",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }],
     "secondsPerRep": 5,
     "sets": [
@@ -950,10 +850,6 @@
       15,
       20
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -966,10 +862,10 @@
     "weight": 1,
     "activations": [{
       "muscle": "abs",
-      "intensityPerRep": 5
+      "activity": 5
     }, {
       "muscle": "obliques",
-      "intensityPerRep": 5
+      "activity": 5
     }],
     "secondsPerRep": 5,
     "sets": [
@@ -979,10 +875,6 @@
       5,
       10
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -995,10 +887,10 @@
     "weight": 1,
     "activations": [{
       "muscle": "abs",
-      "intensityPerRep": 2
+      "activity": 2
     }, {
       "muscle": "obliques",
-      "intensityPerRep": 2
+      "activity": 2
     }],
     "secondsPerRep": 3,
     "sets": [
@@ -1009,10 +901,6 @@
       15,
       20
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -1025,10 +913,10 @@
     "weight": 1,
     "activations": [{
       "muscle": "abs",
-      "intensityPerRep": 0.1
+      "activity": 0.1
     }, {
       "muscle": "obliques",
-      "intensityPerRep": 0.1
+      "activity": 0.1
     }],
     "secondsPerRep": 0.5,
     "sets": [
@@ -1039,10 +927,6 @@
       20,
       30
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -1055,10 +939,10 @@
     "weight": 1,
     "activations": [{
       "muscle": "abs",
-      "intensityPerRep": 1
+      "activity": 1
     }, {
       "muscle": "obliques",
-      "intensityPerRep": 3.5
+      "activity": 3.5
     }],
     "secondsPerRep": 2,
     "sets": [
@@ -1068,10 +952,6 @@
       10,
       15
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 35,
       "female": 25
@@ -1084,31 +964,31 @@
     "weight": 1,
     "activations": [{
       "muscle": "traps",
-      "intensityPerRep": 2
+      "activity": 2
     }, {
       "muscle": "lats",
-      "intensityPerRep": 2
+      "activity": 2
     }, {
       "muscle": "erectors",
-      "intensityPerRep": 2.5
+      "activity": 2.5
     }, {
       "muscle": "rhomboids",
-      "intensityPerRep": 1
+      "activity": 1
     }, {
       "muscle": "glutes",
-      "intensityPerRep": 3
+      "activity": 3
     }, {
       "muscle": "quads",
-      "intensityPerRep": 2.5
+      "activity": 2.5
     }, {
       "muscle": "hamstrings",
-      "intensityPerRep": 2.5
+      "activity": 2.5
     }, {
       "muscle": "inner_thighs",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }, {
       "muscle": "forearms",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }],
     "secondsPerRep": 4,
     "sets": [
@@ -1121,10 +1001,6 @@
       8,
       10
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 275,
       "female": 150
@@ -1137,31 +1013,31 @@
     "weight": 1,
     "activations": [{
       "muscle": "traps",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }, {
       "muscle": "lats",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }, {
       "muscle": "erectors",
-      "intensityPerRep": 2
+      "activity": 2
     }, {
       "muscle": "rhomboids",
-      "intensityPerRep": 1
+      "activity": 1
     }, {
       "muscle": "glutes",
-      "intensityPerRep": 2.5
+      "activity": 2.5
     }, {
       "muscle": "quads",
-      "intensityPerRep": 2
+      "activity": 2
     }, {
       "muscle": "hamstrings",
-      "intensityPerRep": 2
+      "activity": 2
     }, {
       "muscle": "inner_thighs",
-      "intensityPerRep": 1
+      "activity": 1
     }, {
       "muscle": "forearms",
-      "intensityPerRep": 1
+      "activity": 1
     }],
     "secondsPerRep": 3,
     "sets": [
@@ -1174,10 +1050,6 @@
       8,
       10
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 225,
       "female": 120
@@ -1190,16 +1062,16 @@
     "weight": 1,
     "activations": [{
       "muscle": "traps",
-      "intensityPerRep": 3
+      "activity": 3
     }, {
       "muscle": "lats",
-      "intensityPerRep": 2
+      "activity": 2
     }, {
       "muscle": "erectors",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }, {
       "muscle": "rhomboids",
-      "intensityPerRep": 2
+      "activity": 2
     }],
     "secondsPerRep": 6,
     "sets": [
@@ -1212,10 +1084,6 @@
       10,
       12
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 80,
       "female": 45
@@ -1228,16 +1096,16 @@
     "weight": 1,
     "activations": [{
       "muscle": "traps",
-      "intensityPerRep": 2.5
+      "activity": 2.5
     }, {
       "muscle": "lats",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }, {
       "muscle": "erectors",
-      "intensityPerRep": 3
+      "activity": 3
     }, {
       "muscle": "rhomboids",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }],
     "secondsPerRep": 3,
     "sets": [
@@ -1250,10 +1118,6 @@
       8,
       10
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 185,
       "female": 100
@@ -1266,16 +1130,16 @@
     "weight": 1,
     "activations": [{
       "muscle": "traps",
-      "intensityPerRep": 2.5
+      "activity": 2.5
     }, {
       "muscle": "lats",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }, {
       "muscle": "erectors",
-      "intensityPerRep": 3
+      "activity": 3
     }, {
       "muscle": "rhomboids",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }],
     "secondsPerRep": 3,
     "sets": [
@@ -1288,10 +1152,6 @@
       8,
       10
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 175,
       "female": 90
@@ -1304,16 +1164,16 @@
     "weight": 1,
     "activations": [{
       "muscle": "traps",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }, {
       "muscle": "lats",
-      "intensityPerRep": 1
+      "activity": 1
     }, {
       "muscle": "erectors",
-      "intensityPerRep": 2
+      "activity": 2
     }, {
       "muscle": "rhomboids",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }],
     "secondsPerRep": 2,
     "sets": [
@@ -1324,10 +1184,6 @@
       15,
       20
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -1340,16 +1196,16 @@
     "weight": 1,
     "activations": [{
       "muscle": "traps",
-      "intensityPerRep": 2.5
+      "activity": 2.5
     }, {
       "muscle": "lats",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }, {
       "muscle": "erectors",
-      "intensityPerRep": 2
+      "activity": 2
     }, {
       "muscle": "rhomboids",
-      "intensityPerRep": 1
+      "activity": 1
     }],
     "secondsPerRep": 2,
     "sets": [
@@ -1360,10 +1216,6 @@
       15,
       20
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -1376,22 +1228,22 @@
     "weight": 1,
     "activations": [{
       "muscle": "traps",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }, {
       "muscle": "lats",
-      "intensityPerRep": 3
+      "activity": 3
     }, {
       "muscle": "erectors",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }, {
       "muscle": "rhomboids",
-      "intensityPerRep": 1
+      "activity": 1
     }, {
       "muscle": "biceps",
-      "intensityPerRep": 4
+      "activity": 4
     }, {
       "muscle": "abs",
-      "intensityPerRep": 3
+      "activity": 3
     }],
     "secondsPerRep": 2,
     "sets": [
@@ -1402,10 +1254,6 @@
       8,
       10
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -1418,22 +1266,22 @@
     "weight": 1,
     "activations": [{
       "muscle": "traps",
-      "intensityPerRep": 2
+      "activity": 2
     }, {
       "muscle": "lats",
-      "intensityPerRep": 3
+      "activity": 3
     }, {
       "muscle": "erectors",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }, {
       "muscle": "rhomboids",
-      "intensityPerRep": 1
+      "activity": 1
     }, {
       "muscle": "biceps",
-      "intensityPerRep": 3
+      "activity": 3
     }, {
       "muscle": "abs",
-      "intensityPerRep": 4
+      "activity": 4
     }],
     "secondsPerRep": 2,
     "sets": [
@@ -1444,10 +1292,6 @@
       8,
       10
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -1460,22 +1304,22 @@
     "weight": 1,
     "activations": [{
       "muscle": "erectors",
-      "intensityPerRep": 2.5
+      "activity": 2.5
     }, {
       "muscle": "glutes",
-      "intensityPerRep": 4
+      "activity": 4
     }, {
       "muscle": "quads",
-      "intensityPerRep": 3.5
+      "activity": 3.5
     }, {
       "muscle": "hamstrings",
-      "intensityPerRep": 3.5
+      "activity": 3.5
     }, {
       "muscle": "inner_thighs",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }, {
       "muscle": "calves",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }],
     "secondsPerRep": 4,
     "sets": [
@@ -1488,10 +1332,6 @@
       8,
       10
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 220,
       "female": 120
@@ -1504,22 +1344,22 @@
     "weight": 1,
     "activations": [{
       "muscle": "erectors",
-      "intensityPerRep": 0.5
+      "activity": 0.5
     }, {
       "muscle": "glutes",
-      "intensityPerRep": 1
+      "activity": 1
     }, {
       "muscle": "quads",
-      "intensityPerRep": 1
+      "activity": 1
     }, {
       "muscle": "hamstrings",
-      "intensityPerRep": 1
+      "activity": 1
     }, {
       "muscle": "inner_thighs",
-      "intensityPerRep": 0.5
+      "activity": 0.5
     }, {
       "muscle": "calves",
-      "intensityPerRep": 0.5
+      "activity": 0.5
     }],
     "secondsPerRep": 2,
     "sets": [
@@ -1530,10 +1370,6 @@
       15,
       20
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 60,
       "female": 35
@@ -1546,22 +1382,22 @@
     "weight": 1,
     "activations": [{
       "muscle": "erectors",
-      "intensityPerRep": 0.5
+      "activity": 0.5
     }, {
       "muscle": "glutes",
-      "intensityPerRep": 1
+      "activity": 1
     }, {
       "muscle": "quads",
-      "intensityPerRep": 1
+      "activity": 1
     }, {
       "muscle": "hamstrings",
-      "intensityPerRep": 1
+      "activity": 1
     }, {
       "muscle": "inner_thighs",
-      "intensityPerRep": 0.5
+      "activity": 0.5
     }, {
       "muscle": "calves",
-      "intensityPerRep": 0.5
+      "activity": 0.5
     }],
     "secondsPerRep": 5,
     "sets": [
@@ -1572,10 +1408,6 @@
       15,
       20
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 30,
       "female": 20
@@ -1588,22 +1420,22 @@
     "weight": 1,
     "activations": [{
       "muscle": "erectors",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }, {
       "muscle": "glutes",
-      "intensityPerRep": 2.5
+      "activity": 2.5
     }, {
       "muscle": "quads",
-      "intensityPerRep": 2
+      "activity": 2
     }, {
       "muscle": "hamstrings",
-      "intensityPerRep": 2
+      "activity": 2
     }, {
       "muscle": "inner_thighs",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }, {
       "muscle": "calves",
-      "intensityPerRep": 1
+      "activity": 1
     }],
     "secondsPerRep": 3,
     "sets": [
@@ -1614,10 +1446,6 @@
       15,
       20
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 190,
       "female": 100
@@ -1630,22 +1458,22 @@
     "weight": 1,
     "activations": [{
       "muscle": "erectors",
-      "intensityPerRep": 2
+      "activity": 2
     }, {
       "muscle": "glutes",
-      "intensityPerRep": 3
+      "activity": 3
     }, {
       "muscle": "quads",
-      "intensityPerRep": 2.5
+      "activity": 2.5
     }, {
       "muscle": "hamstrings",
-      "intensityPerRep": 2.5
+      "activity": 2.5
     }, {
       "muscle": "inner_thighs",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }, {
       "muscle": "calves",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }],
     "secondsPerRep": 6,
     "sets": [
@@ -1657,10 +1485,6 @@
       12,
       15
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 125,
       "female": 70
@@ -1673,22 +1497,22 @@
     "weight": 1,
     "activations": [{
       "muscle": "erectors",
-      "intensityPerRep": 1
+      "activity": 1
     }, {
       "muscle": "glutes",
-      "intensityPerRep": 2
+      "activity": 2
     }, {
       "muscle": "quads",
-      "intensityPerRep": 1
+      "activity": 1
     }, {
       "muscle": "hamstrings",
-      "intensityPerRep": 1
+      "activity": 1
     }, {
       "muscle": "inner_thighs",
-      "intensityPerRep": 0.5
+      "activity": 0.5
     }, {
       "muscle": "biceps",
-      "intensityPerRep": 0.5
+      "activity": 0.5
     }],
     "secondsPerRep": 2,
     "sets": [
@@ -1700,10 +1524,6 @@
       20,
       30
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 45,
       "female": 25
@@ -1716,25 +1536,25 @@
     "weight": 1,
     "activations": [{
       "muscle": "erectors",
-      "intensityPerRep": 2
+      "activity": 2
     }, {
       "muscle": "glutes",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }, {
       "muscle": "quads",
-      "intensityPerRep": 1
+      "activity": 1
     }, {
       "muscle": "hamstrings",
-      "intensityPerRep": 1
+      "activity": 1
     }, {
       "muscle": "inner_thighs",
-      "intensityPerRep": 0.5
+      "activity": 0.5
     }, {
       "muscle": "biceps",
-      "intensityPerRep": 0.5
+      "activity": 0.5
     }, {
       "muscle": "obliques",
-      "intensityPerRep": 1
+      "activity": 1
     }],
     "secondsPerRep": 3,
     "sets": [
@@ -1746,10 +1566,6 @@
       20,
       30
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 45,
       "female": 25
@@ -1762,19 +1578,19 @@
     "weight": 1,
     "activations": [{
       "muscle": "erectors",
-      "intensityPerRep": 3
+      "activity": 3
     }, {
       "muscle": "glutes",
-      "intensityPerRep": 4.5
+      "activity": 4.5
     }, {
       "muscle": "quads",
-      "intensityPerRep": 3.5
+      "activity": 3.5
     }, {
       "muscle": "hamstrings",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }, {
       "muscle": "inner_thighs",
-      "intensityPerRep": 0.5
+      "activity": 0.5
     }],
     "secondsPerRep": 4,
     "sets": [
@@ -1787,10 +1603,6 @@
       10,
       12
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 125,
       "female": 70
@@ -1803,7 +1615,7 @@
     "weight": 1,
     "activations": [{
       "muscle": "calves",
-      "intensityPerRep": 4
+      "activity": 4
     }],
     "secondsPerRep": 1.5,
     "sets": [
@@ -1815,10 +1627,6 @@
       20,
       25
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 185,
       "female": 100
@@ -1831,7 +1639,7 @@
     "weight": 1,
     "activations": [{
       "muscle": "quads",
-      "intensityPerRep": 0.5
+      "activity": 0.5
     }],
     "secondsPerRep": 1,
     "sets": [
@@ -1842,10 +1650,6 @@
       15,
       20
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 95,
       "female": 50
@@ -1858,22 +1662,22 @@
     "weight": 1,
     "activations": [{
       "muscle": "erectors",
-      "intensityPerRep": 0.5
+      "activity": 0.5
     }, {
       "muscle": "glutes",
-      "intensityPerRep": 1
+      "activity": 1
     }, {
       "muscle": "quads",
-      "intensityPerRep": 0.5
+      "activity": 0.5
     }, {
       "muscle": "hamstrings",
-      "intensityPerRep": 0.5
+      "activity": 0.5
     }, {
       "muscle": "inner_thighs",
-      "intensityPerRep": 0.5
+      "activity": 0.5
     }, {
       "muscle": "calves",
-      "intensityPerRep": 0.5
+      "activity": 0.5
     }],
     "secondsPerRep": 4,
     "sets": [
@@ -1885,10 +1689,6 @@
       12,
       15
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -1901,16 +1701,16 @@
     "weight": 1,
     "activations": [{
       "muscle": "quads",
-      "intensityPerRep": 0.5
+      "activity": 0.5
     }, {
       "muscle": "hamstrings",
-      "intensityPerRep": 0.3
+      "activity": 0.3
     }, {
       "muscle": "calves",
-      "intensityPerRep": 0.1
+      "activity": 0.1
     }, {
       "muscle": "abs",
-      "intensityPerRep": 0.3
+      "activity": 0.3
     }],
     "secondsPerRep": 1,
     "sets": [
@@ -1921,10 +1721,6 @@
       40,
       60
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -1937,10 +1733,10 @@
     "weight": 1,
     "activations": [{
       "muscle": "biceps",
-      "intensityPerRep": 3
+      "activity": 3
     }, {
       "muscle": "forearms",
-      "intensityPerRep": 1
+      "activity": 1
     }],
     "secondsPerRep": 2,
     "sets": [
@@ -1952,10 +1748,6 @@
       12,
       15
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 75,
       "female": 40
@@ -1968,10 +1760,10 @@
     "weight": 1,
     "activations": [{
       "muscle": "biceps",
-      "intensityPerRep": 3.5
+      "activity": 3.5
     }, {
       "muscle": "forearms",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }],
     "secondsPerRep": 4,
     "sets": [
@@ -1983,10 +1775,6 @@
       12,
       15
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 35,
       "female": 20
@@ -1999,10 +1787,10 @@
     "weight": 1,
     "activations": [{
       "muscle": "biceps",
-      "intensityPerRep": 3.5
+      "activity": 3.5
     }, {
       "muscle": "forearms",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }],
     "secondsPerRep": 2,
     "sets": [
@@ -2014,10 +1802,6 @@
       12,
       15
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 35,
       "female": 20
@@ -2030,10 +1814,10 @@
     "weight": 1,
     "activations": [{
       "muscle": "biceps",
-      "intensityPerRep": 3
+      "activity": 3
     }, {
       "muscle": "forearms",
-      "intensityPerRep": 1
+      "activity": 1
     }],
     "secondsPerRep": 2,
     "sets": [
@@ -2045,10 +1829,6 @@
       12,
       15
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 60,
       "female": 35
@@ -2061,10 +1841,10 @@
     "weight": 1,
     "activations": [{
       "muscle": "biceps",
-      "intensityPerRep": 3.5
+      "activity": 3.5
     }, {
       "muscle": "forearms",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }],
     "secondsPerRep": 2,
     "sets": [
@@ -2076,10 +1856,6 @@
       12,
       15
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 35,
       "female": 20
@@ -2092,16 +1868,16 @@
     "weight": 1,
     "activations": [{
       "muscle": "biceps",
-      "intensityPerRep": 3
+      "activity": 3
     }, {
       "muscle": "forearms",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }, {
       "muscle": "triceps",
-      "intensityPerRep": 1.5
+      "activity": 1.5
     }, {
       "muscle": "front_delt",
-      "intensityPerRep": 2
+      "activity": 2
     }],
     "secondsPerRep": 4,
     "sets": [
@@ -2113,10 +1889,6 @@
       12,
       15
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 35,
       "female": 20
@@ -2129,7 +1901,7 @@
     "weight": 1,
     "activations": [{
       "muscle": "forearms",
-      "intensityPerRep": 0.5
+      "activity": 0.5
     }],
     "secondsPerRep": 1,
     "sets": [
@@ -2140,10 +1912,6 @@
       40,
       60
     ],
-    "skills": {
-      "endurance": 1,
-      "strength": 1
-    },
     "weightStandards": {
       "male": 30,
       "female": 20

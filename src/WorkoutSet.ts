@@ -36,8 +36,8 @@ export default class WorkoutSet {
 		);
 	}
 
-	public getScores(user: DBUser): MuscleScores {
-		return this.exercise.getMuscleScores(this.repsWeight, user);
+	public getFocusScores(user: DBUser): MuscleScores {
+		return this.exercise.getFocusScores(this.repsWeight, user);
 	}
 
 	public toString(): string {

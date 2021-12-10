@@ -46,7 +46,7 @@ export default class RepsWeight {
 	}
 
 	public toString(): string {
-		const weightStr = this.weight ? `  ${this.weight}lbs` : '';
+		const weightStr = this.weight ? ` ${this.weight}` : '';
 		return `${this.nSets}x${this.nReps}${weightStr}`;
 	}
 }

@@ -1,4 +1,4 @@
-import type Exercise from './Exercise';
+import Exercise from './Exercise';
 import RepsWeight from './RepsWeight';
 import Score from '../muscles/Score';
 import * as util from '../global/util';
@@ -27,7 +27,7 @@ export default class UserRecords {
 
 	public readonly user: DBUser;
 
-	private readonly _recordsByExercise: {[exercise: string]: DBRecord[]};
+	private readonly _recordsByExercise: {[exercise: string]: DBRecord[]} = {};
 
 	constructor(user: DBUser, userRecords: DBRecord[]) {
 		this.user = user;
@@ -37,17 +37,18 @@ export default class UserRecords {
 		});
 	}
 
-	public getRecords(exercise: Exercise): DBRecord[] {
-		return this._recordsByExercise[exercise.name] || [];
+	public getRecords(exercise: string): DBRecord[] {
+		return this._recordsByExercise[exercise] || [];
 	}
 
-	public getAdjustedRecords(exercise: Exercise): DBRecord[] {
+	public getAdjustedRecords(exercise: string): DBRecord[] {
 		return this.getRecords(exercise)
 			.map(rec => failureDegrade(rec))
 			.map(rec => timeDegrade(rec));
 	}
 
-	public getPersonalBests(exercise: Exercise): PersonalBests|null {
+	// Note that this returns time-adjusted personal bests
+	public getPersonalBests(exercise: string): PersonalBests|null {
 		const records = this.getAdjustedRecords(exercise);
 		const scores = records.map(rec => this._getRecordScore(exercise, rec));
 		if (records.length === 0) {
@@ -63,7 +64,7 @@ export default class UserRecords {
 		};
 	}
 
-	public getBestScores(exercise: Exercise): Score|null {
+	public getBestScores(exercise: string): Score|null {
 		const records = this.getAdjustedRecords(exercise);
 		const scores = records.map(rec => this._getRecordScore(exercise, rec));
 		if (records.length === 0) {
@@ -76,17 +77,27 @@ export default class UserRecords {
 		});
 	}
 
-	private _getRecordScore(exercise: Exercise, record: DBRecord): Score {
+	public getRecommendations(exercise: string): RepsWeight[] {
+		// Get personal bests for strength and endurance
+		const best = this.getPersonalBests(exercise);
+		if (!best) {
+			return [
+				new Exercise(exercise).getFirstTryRepsWeight(this.user),
+			];
+		}
+		return [
+			best.strength,
+			best.endurance,
+		];
+	}
+
+	private _getRecordScore(exercise: string, record: DBRecord): Score {
 		const { reps, sets, weight } = record;
 		const repsWeight = new RepsWeight({
 			reps: new Array(sets).fill(reps),
 			weight,
 		});
-		return this._getTotalScore(exercise, repsWeight);
-	}
-
-	private _getTotalScore(exercise: Exercise, repsWeight: RepsWeight): Score {
-		return exercise.getMuscleScores(repsWeight, this.user).total;
+		return new Exercise(exercise).getScore(repsWeight, this.user);
 	}
 }
 
@@ -99,12 +110,12 @@ function getRepsWeight(rec: DBRecord): RepsWeight {
 
 function timeDegrade(rec: DBRecord): DBRecord {
 	const monthsAgo = Math.floor((Date.now() - new Date(rec.created_at).getTime()) / oneMonthMs);
-	const keepEndurance = (1 - UserRecords.ENDURANCE_LOSS_PER_MONTH) ^ monthsAgo;
-	const keepStrength = (1 - UserRecords.STRENGTH_LOSS_PER_MONTH) ^ monthsAgo;
+	const keepEndurance = Math.pow(1 - UserRecords.ENDURANCE_LOSS_PER_MONTH, monthsAgo);
+	const keepStrength = Math.pow(1 - UserRecords.STRENGTH_LOSS_PER_MONTH, monthsAgo);
 	return {
 		...rec,
-		reps: rec.reps * keepEndurance,
-		weight: rec.weight * keepStrength,
+		reps: util.round(rec.reps * keepEndurance, 2),
+		weight: util.round(rec.weight * keepStrength, 2),
 	};
 }
 
