@@ -1,6 +1,6 @@
 import UserRecords from '../exercises/UserRecords';
 import ExercisePicker from '../pickers/ExercisePicker';
-import RepPicker from '../pickers/RepPicker';
+import RepsWeightPicker from '../pickers/RepsWeightPicker';
 import LookaheadGenerator from './LookaheadGenerator';
 import Workout from '../Workout';
 import WorkoutTarget from '../WorkoutTarget';
@@ -21,7 +21,7 @@ export default class WorkoutGenerator extends LookaheadGenerator {
 		const exercisePicker = new ExercisePicker(this.target);
 
 		for (const exercises of exercisePicker.pick()) {
-			const repPicker = new RepPicker(exercises!, this.target, userRecords);
+			const repPicker = new RepsWeightPicker(exercises!, this.target, userRecords);
 			for (const sets of repPicker.pick()) {
 				yield new Workout(sets!);
 				break;
