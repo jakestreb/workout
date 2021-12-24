@@ -1,21 +1,22 @@
 import Exercise from './Exercise';
 import RepsWeight from './RepsWeight';
 import Score from '../muscles/Score';
+import { Difficulty } from '../global/enum';
 import * as util from '../global/util';
 import db from '../db';
 
 const oneMonthMs = 30 * 24 * 60 * 60 * 1000;
 
 interface PersonalBests {
-	endurance: RepsWeight,
-	strength: RepsWeight
+	endurance: RepsWeight;
+	strength: RepsWeight;
 }
 
 export default class UserRecords {
-	public static ENDURANCE_LOSS_PER_MONTH = 0.04;
-	public static STRENGTH_LOSS_PER_MONTH = 0.03;
+	public static ENDURANCE_LOSS_PER_MONTH = 0.025;
+	public static STRENGTH_LOSS_PER_MONTH = 0.015;
 
-	public static FAILURE_FACTOR = 0.5;
+	public static FAILURE_FACTOR = 0.7;
 
 	public static async fromUserId(userId: number): Promise<UserRecords> {
 		const [user, records] = await Promise.all([
@@ -58,54 +59,57 @@ export default class UserRecords {
 			endurance: util.maxIndex(scores.map(s => s.endurance)),
 			strength: util.maxIndex(scores.map(s => s.strength)),
 		};
+		console.warn('RECS', exercise,
+			getRepsWeight(records[bestIndexes.endurance]),
+			getRepsWeight(records[bestIndexes.strength])
+		);
 		return {
 			endurance: getRepsWeight(records[bestIndexes.endurance]),
 			strength: getRepsWeight(records[bestIndexes.strength]),
 		};
 	}
 
+	// Note that this returns time-adjusted bests
 	public getBestScores(exercise: string): Score|null {
 		const records = this.getAdjustedRecords(exercise);
 		const scores = records.map(rec => this._getRecordScore(exercise, rec));
 		if (records.length === 0) {
 			return null;
 		}
-		// TODO: Score should add some bonus confidence amount for number of times completed
-		return new Score({
-			endurance: Math.max(...scores.map(rec => rec.endurance)),
-			strength: Math.max(...scores.map(rec => rec.strength)),
-		});
+		return new Score(
+			{
+				endurance: Math.max(...scores.map(rec => rec.endurance)),
+				strength: Math.max(...scores.map(rec => rec.strength)),
+			}
+		);
 	}
 
-	public getRecommendations(exercise: string): RepsWeight[] {
-		// Get personal bests for strength and endurance
+	// TODO
+	// public getShiftedBest(exercise: string): Score|null;
+
+	// TODO: This is too simple - each focus and difficulty should return a single RepsWeight,
+	// but it should be scaled toward the focus with difficulty static, to a factor
+	// determined by recent records
+	public getRecommendation(exercise: string, focus: Skill, difficulty: Difficulty): RepsWeight {
 		const best = this.getPersonalBests(exercise);
 		if (!best) {
-			return [
-				new Exercise(exercise).getFirstTryRepsWeight(this.user),
-			];
+			return new Exercise(exercise).getFirstTryRepsWeight(this.user);
 		}
-		return [
-			best.strength,
-			best.endurance,
-		];
+		if (focus === 'endurance') {
+			return best.endurance.copy().scaleReps(0.8 + (difficulty * 0.2));
+		}
+		return best.strength.copy().incWeight(-1 + difficulty);
 	}
 
-	private _getRecordScore(exercise: string, record: DBRecord): Score {
-		const { reps, sets, weight } = record;
-		const repsWeight = new RepsWeight({
-			reps: new Array(sets).fill(reps),
-			weight,
-		});
+	private _getRecordScore(exercise: string, rec: DBRecord): Score {
+		const repsWeight = getRepsWeight(rec);
 		return new Exercise(exercise).getScore(repsWeight, this.user);
 	}
 }
 
 function getRepsWeight(rec: DBRecord): RepsWeight {
-	return new RepsWeight({
-		reps: new Array(rec.sets).fill(rec.reps),
-		weight: rec.weight
-	});
+	const { reps, sets, weight } = rec;
+	return new RepsWeight({ reps, sets, weight });
 }
 
 function timeDegrade(rec: DBRecord): DBRecord {

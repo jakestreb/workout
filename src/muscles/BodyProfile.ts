@@ -6,11 +6,18 @@ import data from '../data';
 
 export default class BodyProfile {
 
-	public static TARGET_DIFFICULTY_MEANS = [3, 4.5, 6];
-	public static TARGET_STD_DEV = 1;
-	public static STANDARD_WORKOUT_TIME = 60;
+	// new!!!!!
+	// Fractions represent a scale of the personal best reps weight selections
+	// for each muscle
+	// public static PRIMARY_MEANS = [0.7, 0.85, 1];
+	// public static STD_DEV_FACTOR = 0.2;
 
-	public static MIN_GOAL_FACTOR = 1.10;
+	// old!!!!
+	// public static TARGET_MEANS = [8, 12, 16];
+	// public static TARGET_STD_DEV_FACTOR = 0.2;
+	// public static STANDARD_WORKOUT_TIME = 60;
+
+	// public static MIN_GOAL_FACTOR = 1.05;
 
 	public readonly userRecords: UserRecords;
 	public readonly user: DBUser;
@@ -25,21 +32,27 @@ export default class BodyProfile {
 		this._init();
 	}
 
-	public getWorkoutTarget(seed: IWorkoutSeed): IWorkoutTarget {
-		const minScores = new MuscleScores();
-		const timeRatio = seed.timeMinutes / BodyProfile.STANDARD_WORKOUT_TIME;
-		const mean = BodyProfile.TARGET_DIFFICULTY_MEANS[seed.difficulty];
+	// TODO: Remove
+	// public getWorkoutTarget(seed: IWorkoutSeed): IWorkoutTarget {
+	// 	const targetScores = new MuscleScores();
+	// 	const timeRatio = seed.timeMinutes / BodyProfile.STANDARD_WORKOUT_TIME;
+	// 	const mean = BodyProfile.PRIMARY_MEANS[seed.difficulty] * timeRatio;
 
-		seed.muscles.forEach(m => {
-			minScores.set(m, this.getGoalDiscrepancy(m));
-		});
+	// 	seed.muscles.forEach(m => {
+	// 		targetScores.set(m, this.getGoalDiscrepancy(m));
+	// 	});
 
-		const scaled = minScores.scale(mean * timeRatio, BodyProfile.TARGET_STD_DEV);
+	// 	const scaled = targetScores.scale(mean, mean * BodyProfile.STD_DEV_FACTOR);
 
-		return {
-			minScores: scaled.round().getMap(),
-			timeMinutes: seed.timeMinutes,
-		};
+	// 	return {
+	// 		scores: scaled.zeroFloor().round().getMap(),
+	// 		timeMinutes: seed.timeMinutes,
+	// 	};
+	// }
+
+	public getWorkoutEnduranceRatio(): number {
+		// TODO: Allow user customization
+		return 0.5;
 	}
 
 	public getMuscleScores(): MuscleScores {
@@ -87,13 +100,6 @@ export default class BodyProfile {
 			});
 		});
 
-		const lowScore = this._scores.getPercentile(.25);
 		this._goal = this._scores.getPercentile(.75);
-
-		// Ensure goal is sufficiently high
-		const { primary_focus: primaryFocus } = this.userRecords.user;
-		if (this._goal[primaryFocus] / lowScore[primaryFocus] < BodyProfile.MIN_GOAL_FACTOR) {
-			this._goal[primaryFocus] = lowScore[primaryFocus] * BodyProfile.MIN_GOAL_FACTOR;
-		}
 	}
 }

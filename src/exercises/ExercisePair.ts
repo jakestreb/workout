@@ -55,9 +55,9 @@ export default class ExercisePair extends Exercise {
 	}
 
 	public getTime(repsWeight: RepsWeight) {
-		const { nSets } = repsWeight;
+		const { sets } = repsWeight;
 		return super.getTime(repsWeight) + this.second.getTime(repsWeight)
-			+ ((nSets - 1) * 2) * (ExercisePair.SWAP_TIME - Exercise.REST_TIME)
+			+ ((sets - 1) * 2) * (ExercisePair.SWAP_TIME - Exercise.REST_TIME)
 			+ ExercisePair.SWAP_TIME;
 	}
 

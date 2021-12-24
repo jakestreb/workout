@@ -3,8 +3,12 @@ import Exercise from '../exercises/Exercise';
 import MuscleScores from '../muscles/MuscleScores';
 import Picker from './Picker';
 import WorkoutTarget from '../WorkoutTarget';
+import { Result } from '../global/enum';
 
 export default class ExercisePicker extends Picker<Exercise> {
+
+	// TODO: Lower
+	public static MAX_AVG_DIST = 100000;
 
 	private readonly _target: WorkoutTarget;
 
@@ -45,7 +49,7 @@ export default class ExercisePicker extends Picker<Exercise> {
 	private _checkFocus(): Result {
 		const muscleScoreFactors = MuscleScores.combine(...this.exercises.map(e => e.muscleScoreFactors));
 
-		return this._target.checkFocusMuscles(muscleScoreFactors) ? Result.Complete : Result.Incomplete;
+		return this._target.hasAllMuscles(muscleScoreFactors) ? Result.Complete : Result.Incomplete;
 	}
 }
 

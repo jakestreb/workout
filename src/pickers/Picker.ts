@@ -1,8 +1,14 @@
+import { Result } from '../global/enum';
+
 export default abstract class Picker<T> {
 
 	public readonly items: T[] = [];
 
-	private readonly _generators: Generator<T|null>[] = [];
+	// Map from number of progress checks passed to a count of instances
+	// Useful for debugging
+	public readonly progressMap: { [n: number]: number } = {};
+
+	private readonly _generators: Generator<T>[] = [];
 
 	constructor() {
 
@@ -14,34 +20,35 @@ export default abstract class Picker<T> {
 		return this.items.length;
 	}
 
-	public abstract buildGenerator(): Generator<T|null>;
+	public abstract buildGenerator(): Generator<T>;
 
 	public checkProgress(): Result {
-		return checkAll(...this.checks);
+		return this._checkAll(...this.checks);
 	}
 
-	public* pick(): Generator<T[]|null> {
+	public* pick(): Generator<T[], T[]|null, Result> {
 		this._generators.push(this.buildGenerator());
 		while (true) {
+			let feedback: Result = Result.Incomplete;
 			const status = this._add();
-
-			if (status === Result.Pending) {
-				yield null;
-			}
 
 			// If the status check is successful, yield
 			if (status === Result.Complete) {
-				yield this.items;
+				feedback = yield this.items || Result.Complete;
 			}
 
 			// If nothing from current generator works, backtrack
-			if (status === Result.Failed) {
+			if (status === Result.Failed || feedback === Result.Failed || feedback === Result.Complete) {
 				if (this.index === 0) {
-					return;
+					return this.getFinalYield();
 				}
 				this._remove();
 			}
 		}
+	}
+
+	public getFinalYield(): T[]|null {
+		return null
 	}
 
 	private _add(): Result {
@@ -50,9 +57,6 @@ export default abstract class Picker<T> {
 
 		let curr = gen.next();
 		while (!curr.done) {
-			if (!curr.value) {
-				return Result.Pending;
-			}
 			this.items.push(curr.value);
 			const status = this.checkProgress();
 			if (status === Result.Failed) {
@@ -71,18 +75,22 @@ export default abstract class Picker<T> {
 		this.items.pop();
 		this._generators.pop();
 	}
-}
 
-
-export function checkAll(...args: (() => Result)[]): Result {
-	let min = Infinity;
-	for (const arg of args) {
-		const argResult = arg();
-		if (argResult === Result.Failed) {
-			return Result.Failed;
-		} else if (argResult < min) {
-			min = argResult;
+	private _checkAll(...args: (() => Result)[]): Result {
+		let worst = Result.Complete;
+		let i = 0;
+		for (const arg of args) {
+			const result = arg();
+			if (result < worst) {
+				this.progressMap[i] = this.progressMap[i] || 0;
+				this.progressMap[i] += 1;
+				worst = result;
+			}
+			if (worst === Result.Failed) {
+				return worst;
+			}
+			i++;
 		}
+		return worst;
 	}
-	return min;
 }

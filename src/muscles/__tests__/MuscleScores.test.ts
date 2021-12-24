@@ -2,6 +2,27 @@ import MuscleScores from '../MuscleScores'
 import Score from '../Score';
 
 describe('MuscleScores unit test', () => {
+	test('MuscleScores.combineExerciseScores', () => {
+		const deadlift = new MuscleScores();
+		deadlift.set('glutes', new Score({ endurance: 1, strength: 3 }));
+		deadlift.set('hamstrings', new Score({ endurance: 2, strength: 4 }));
+
+		const squat = new MuscleScores();
+		squat.set('glutes', new Score({ endurance: 5, strength: 7 }));
+		squat.set('hamstrings', new Score({ endurance: 6, strength: 8 }));
+		squat.set('quads', new Score({ endurance: 2, strength: 1 }));
+
+		const combined = MuscleScores.combineExerciseScores(deadlift, squat);
+
+		expect(combined.round().getMap()).toEqual(
+			{
+				'glutes': { endurance: 3, strength: 8.5 },
+				'hamstrings': { endurance: 4, strength: 10 },
+				'quads': { endurance: 1, strength: 1 },
+			}
+		);
+	});
+
 	test('scale', () => {
 		const ms = new MuscleScores();
 		ms.set('glutes', new Score({ endurance: 2, strength: 8 }));

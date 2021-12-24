@@ -3,8 +3,45 @@ import * as util from '../global/util';
 
 export default class MuscleScores {
 
+	// Exponential factor by which repeated exercises of the same muscle affect the
+	// overall strength focus score of that muscle
+	public static STRENGTH_EXP_FACTOR = 0.5;
+
 	public static combine(...args: MuscleScores[]): MuscleScores {
 		return args.reduce((a, b) => a.combine(b), new MuscleScores());
+	}
+
+	// Combine muscle scores across exercises in a way that takes into account
+	// diminishing returns for strength
+	public static combineExerciseScores(...args: MuscleScores[]): MuscleScores {
+		const total = MuscleScores.combine(...args);
+		const keys = total.keys;
+
+		// Endurance scores - additive
+		const enduranceScores = new MuscleScores();
+
+		keys.forEach(m => {
+			let endurance = total.get(m).endurance;
+			// To balance out overall values for consumption, multiply overall
+			// endurance score by STRENGTH_EXP_FACTOR to reduce it
+			endurance *= MuscleScores.STRENGTH_EXP_FACTOR;
+			enduranceScores.add(m, new Score({ endurance }));
+		});
+
+		// Strength scores - additive with exponential diminishing returns from max
+		const strengthScores = new MuscleScores();
+
+		keys.forEach(m => {
+			args.map(muscleScores => muscleScores.get(m).strength)
+			.filter(val => val)
+			.sort((a, b) => b - a)
+			.map((val, i) => val * Math.pow(MuscleScores.STRENGTH_EXP_FACTOR, i))
+			.forEach(val => {
+				strengthScores.add(m, new Score({ strength: val }));
+			});
+		});
+
+		return MuscleScores.combine(enduranceScores, strengthScores);
 	}
 
 	private readonly _scores: {[muscle: string]: Score} = {};
@@ -84,6 +121,15 @@ export default class MuscleScores {
 		return result;
 	}
 
+	public zeroFloor(): MuscleScores {
+		const result = new MuscleScores();
+		this.keys.forEach(key => {
+			const floored = this.get(key).zeroFloor();
+			result.set(key, floored);
+		});
+		return result;
+	}
+
 	public getPercentile(percentile: number): Score {
 		return new Score({
 			strength: getPercentile(percentile, this.values.map(m => m.strength)),
@@ -105,17 +151,44 @@ export default class MuscleScores {
 	}
 
 	// Scale scores such that:
-	// - the mean of the primary skill is scaled to 'mean'
+	// - the mean of the primary skill is scaled to 'primaryMean'
 	// - the ratios of the skill means remains the same
 	// - the standard deviations of both skills is scaled to 'std'
-	public scale(mean: number, std: number): MuscleScores {
+	public scale(primaryMean: number, std: number): MuscleScores {
 		const skillRatio = this.total[this.secondary] / this.total[this.primary];
 
-		const primaryFn = (vs: number[]) => util.normalScale(vs, mean, std);
-		const secondaryFn = (vs: number[]) => util.normalScale(vs, mean * skillRatio, std);
+		const primaryFn = (vs: number[]) => util.normalScale(vs, primaryMean, std);
+		const secondaryFn = (vs: number[]) => util.normalScale(vs, primaryMean * skillRatio, std);
 
 		return this.applyToSkill(primaryFn, this.primary)
 			.applyToSkill(secondaryFn, this.secondary);
+	}
+
+	public hasSubsetOf(scores: MuscleScores): boolean {
+		for (const m of scores.keys) {
+			if (this.get(m).isNonZero()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public hasAllOf(scores: MuscleScores): boolean {
+		for (const m of scores.keys) {
+			if (!this.get(m).isNonZero()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	// Average of euclidean distances between scores
+	public avgDistance(scores: MuscleScores): number {
+		const dists = this.keys
+			.map(m => scores.get(m).subtract(this.get(m)))
+			.map(diff => Math.pow(diff.endurance, 2) + Math.pow(diff.strength, 2))
+			.map(sum => Math.sqrt(sum));
+		return util.sum(dists);
 	}
 }
 

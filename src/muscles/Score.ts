@@ -74,8 +74,19 @@ export default class Score {
 		return result;
 	}
 
+	public zeroFloor(): Score {
+		const result = this.copy();
+		result.endurance = Math.max(this.endurance, 0);
+		result.strength = Math.max(this.strength, 0);
+		return result;
+	}
+
 	public isLessThan(m: Score): boolean {
 		return this.strength < m.strength && this.endurance < m.endurance;
+	}
+
+	public isGreaterThan(m: Score): boolean {
+		return this.strength > m.strength && this.endurance > m.endurance;
 	}
 
 	public isNonZero(): boolean {

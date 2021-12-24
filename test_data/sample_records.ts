@@ -107,6 +107,6 @@ export const BASIC_USER_1: DBRecord[] = [
 		reps: 10,
 		weight: 135,
 		completed: true,
-		created_at: '2021-01-06T00:00:00.000Z',
+		created_at: '2021-12-08T00:00:00.000Z',
 	},
 ];

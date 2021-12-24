@@ -1,16 +1,3 @@
-declare enum Result {
-  Failed = 0,
-  Incomplete,
-  Complete,
-  Pending
-}
-
-declare enum Difficulty {
-  Easy = 0,
-  Intermediate,
-  Hard
-}
-
 declare type Skill = 'endurance'|'strength';
 
 declare interface IWorkoutSeed {
@@ -47,7 +34,7 @@ declare interface IWorkoutSet {
 }
 
 declare interface IWorkoutTarget {
-  minScores: IMuscleScores;
+  scores: IMuscleScores;
   timeMinutes: number;
 };
 

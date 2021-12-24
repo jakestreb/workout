@@ -1,20 +1,20 @@
 import Exercise from './exercises/Exercise';
-import MuscleTarget from './muscles/MuscleTarget';
+import MuscleScores from './muscles/MuscleScores';
+import { Result } from './global/enum';
 import * as util from './global/util';
 import data from './data';
-import type MuscleScores from './muscles/MuscleScores';
 
 export default class WorkoutTarget {
 
-	public static maxLeftoverTime: number = 5 * 60;
+	public static MAX_LEFTOVER_TIME_FACTOR: number = 0.1;
 
-	public muscleTarget: MuscleTarget;
+	public muscleTarget: MuscleScores;
 	public timeTarget: number;
 
 	private _possibleExercises: Exercise[] = [];
 
 	constructor(target: IWorkoutTarget) {
-		this.muscleTarget = new MuscleTarget(target.minScores);
+		this.muscleTarget = new MuscleScores(target.scores);
 
 		const time = target.timeMinutes * 60;
 		this.timeTarget = time;
@@ -26,32 +26,31 @@ export default class WorkoutTarget {
 		return this._possibleExercises;
 	}
 
-	// Checks that the focus is in the right muscles
-	public checkFocusMuscles(scores: MuscleScores): boolean {
-		return this.muscleTarget.hasSameMuscles(scores);
+	public hasAllMuscles(scores: MuscleScores): boolean {
+		return scores.hasAllOf(this.muscleTarget);
 	}
 
-	// Checks that the focus is in the right muscles and is the right magnitude
-	public checkFocus(scores: MuscleScores): boolean {
-		return this.muscleTarget.isSatisfiedBy(scores);
+	public avgScoreDistance(scores: MuscleScores): number {
+		return this.muscleTarget.avgDistance(scores);
 	}
 
-	public checkTime(time: number, tolerance: number = 0): Result {
-		const minTime = this.timeTarget - WorkoutTarget.maxLeftoverTime - tolerance;
-		const maxTime = this.timeTarget + tolerance;
+	public checkTime(time: number): Result {
+		const maxLeftoverTime = this.timeTarget * WorkoutTarget.MAX_LEFTOVER_TIME_FACTOR;
+		const minTime = this.timeTarget - maxLeftoverTime;
+		const maxTime = this.timeTarget;
 
 		if (time < minTime) {
 			return Result.Incomplete;
-		} else if (time >= minTime && time <= maxTime) {
-			return Result.Complete;
+		} else if (time > maxTime) {
+			return Result.Failed;
 		}
-		return Result.Failed;
+		return Result.Complete;
 	}
 
 	private _initPossibleExercises(): void {
 		for (const e of util.weightedSelector(data.exercises.all())) {
 			const exercise = new Exercise(e.name);
-			const overlaps = this.muscleTarget.overlaps(exercise.muscleScoreFactors);
+			const overlaps = exercise.muscleScoreFactors.hasSubsetOf(this.muscleTarget);
 			if (overlaps) {
 				this._possibleExercises.push(exercise);
 			}

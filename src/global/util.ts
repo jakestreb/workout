@@ -43,6 +43,11 @@ export function avg(array: number[]): number {
 	return sum(array) / array.length;
 }
 
+export function uniq(array: any[]) {
+	const onlyUnique = (value: any, index: number, self: any[]) => self.indexOf(value) === index;
+	return array.filter(onlyUnique);
+}
+
 // https://stackoverflow.com/a/53577159
 export function stdDev(array: number[]) {
   const n = array.length;
@@ -120,4 +125,18 @@ export function normalScale(vals: number[], mean: number, std: number): number[]
 	const shift = mean - (initMean * coeff);
 
 	return vals.map(n => n * coeff + shift);
+}
+
+// Splits total into whole-numbered values according to the given ratios
+export function splitEvenly(total: number, ratios: number[]): number[] {
+	const counts = ratios.map(r => r * total);
+	const decimals = counts.map(c => c - Math.floor(c));
+
+	while (total > sum(counts.map(Math.floor))) {
+		const i = maxIndex(decimals);
+		counts[i] = Math.ceil(counts[i]);
+		decimals[i] = 0;
+	}
+
+	return counts.map(Math.floor);
 }

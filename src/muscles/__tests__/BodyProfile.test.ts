@@ -2,6 +2,7 @@ import UserRecords from '../../exercises/UserRecords';
 import BodyProfile from '../BodyProfile';
 import Score from '../Score'
 import db from '../../db';
+import { Difficulty } from '../../global/enum';
 import * as sampleRecords from '../../../test_data/sample_records';
 
 const RECORDS = sampleRecords.BASIC_USER_1.slice();
@@ -15,7 +16,7 @@ describe('BodyProfile unit test', () => {
 		await db.init();
 
 		db.users.getOne = jest.fn().mockResolvedValue({
-		  id: 1,
+		  id: Difficulty.Intermediate,
 		  name: 'Jake',
 		  gender: 'male',
 		  weight: 180,
@@ -69,16 +70,30 @@ describe('BodyProfile unit test', () => {
 		expect(target).toEqual({
   			minScores: {
   				glutes: {
-  					endurance: 2.24,
-  					strength: 1.65,
+  					endurance: 1.91,
+  					strength: 1.39,
   				},
   				quads: {
-  					endurance: 2.34,
-  					strength: 1.65,
+  					endurance: 2.01,
+  					strength: 1.38,
   				},
   				calves: {
-  					endurance: 4.41,
-  					strength: 3.77,
+  					endurance: 4.08,
+  					strength: 3.51,
+  				},
+  			},
+  			maxScores: {
+  				glutes: {
+  					endurance: 2.58,
+  					strength: 1.91,
+  				},
+  				quads: {
+  					endurance: 2.68,
+  					strength: 1.91,
+  				},
+  				calves: {
+  					endurance: 4.75,
+  					strength: 4.03,
   				},
   			},
   			timeMinutes: 40,

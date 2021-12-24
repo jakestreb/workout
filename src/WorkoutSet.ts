@@ -4,8 +4,6 @@ import fromJsonObject from './exercises/fromJsonObject';
 import type RepsWeight from './exercises/RepsWeight';
 
 export default class WorkoutSet {
-	public static DIFFICULTY_RATIOS = [0.7, 0.9, 1.1];
-
 	public static fromJsonObject(obj: any): WorkoutSet {
 		const exercise = fromJsonObject(obj.exercise);
 		return new WorkoutSet(exercise, obj.reps);
@@ -23,17 +21,9 @@ export default class WorkoutSet {
 		return this.exercise.getTime(this.repsWeight);
 	}
 
-	public getScaled(): WorkoutSet[] {
-		const ratios: number[] = Object.values(WorkoutSet.DIFFICULTY_RATIOS);
-
-		return ratios.map(r =>
-			new WorkoutSet(this.exercise,
-				this.repsWeight.copy().scale({
-					reps: r,
-					weight: r,
-				})
-			)
-		);
+	public getAdjacent(): WorkoutSet[] {
+		return this.repsWeight.getAdjacent()
+			.map(rw => new WorkoutSet(this.exercise, rw));
 	}
 
 	public getFocusScores(user: DBUser): MuscleScores {

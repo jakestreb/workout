@@ -63,10 +63,12 @@ export default class Exercise {
 		return this._possibleReps;
 	}
 
-	public get standardReps(): number[] {
-		const avgSets = this.possibleSets[Math.floor(this.possibleSets.length / 2)];
-		const avgReps = this.possibleReps[Math.floor(this.possibleReps.length / 2)];
-		return new Array(avgSets).fill(avgReps);
+	public get standardReps(): number {
+		return this.possibleReps[Math.floor(this.possibleReps.length / 2)];
+	}
+
+	public get standardSets(): number {
+		return this.possibleSets[Math.floor(this.possibleSets.length / 2)];
 	}
 
 	// TODO: Instead, use single standard reps value in exercise records
@@ -109,9 +111,17 @@ export default class Exercise {
 		}
 	}
 
+	public getStandardRepsWeight(gender: DBUser['gender']): RepsWeight {
+		return new RepsWeight({
+			reps: this.standardReps,
+			sets: this.standardSets,
+			weight: this.getWeightStandard(gender),
+		});
+	}
+
 	public getTime(repsWeight: RepsWeight) {
-		const { nReps, nSets } = repsWeight;
-		return nReps * nSets * this._secondsPerRep + (nSets - 1) * Exercise.REST_TIME;
+		const { reps, sets } = repsWeight;
+		return reps * sets * this._secondsPerRep + (sets - 1) * Exercise.REST_TIME;
 	}
 
 	public getFocusScores(repsWeight: RepsWeight, user: DBUser): MuscleScores {
@@ -125,14 +135,19 @@ export default class Exercise {
 		return muscleScores;
 	}
 
+	public getStandardFocusScores(user: DBUser): MuscleScores {
+		const standard = this.getStandardRepsWeight(user.gender);
+		return this.getFocusScores(standard, user);
+	}
+
 	public getScore(repsWeight: RepsWeight, user: DBUser): Score {
-		const { nReps, nSets } = repsWeight;
+		const { reps, sets } = repsWeight;
 		const weight = repsWeight.weight || user.weight;
 		const standardWeight = this.getWeightStandard(user.gender);
 		const weightFactor = standardWeight ? (weight / standardWeight) : 1;
 
-		const repFactor = nReps / this.standardReps[0];
-		const totalRepFactor = (nReps * nSets) / this.repEstimate;
+		const repFactor = reps / this.standardReps;
+		const totalRepFactor = (reps * sets) / this.repEstimate;
 
 		const enduranceScore = util.avg([repFactor, totalRepFactor]);
 		const strengthScore = weightFactor;
@@ -148,10 +163,13 @@ export default class Exercise {
 	public getFirstTryRepsWeight(user: DBUser): RepsWeight {
 		const standardWeight = this.getWeightStandard(user.gender);
 		const ratio = Exercise.FIRST_TIME_WEIGHT_RATIO;
-		return new RepsWeight({
-			reps: this.standardReps,
-			weight: standardWeight ? standardWeight * ratio : null,
-		});
+		return new RepsWeight(
+			{
+				reps: this.standardReps,
+				sets: this.standardSets,
+				weight: standardWeight ? standardWeight * ratio : null,
+			}
+		);
 	}
 
 	public toString(): string {
