@@ -1,6 +1,6 @@
 import Exercise from './exercises/Exercise';
 import MuscleScores from './muscles/MuscleScores';
-import { Result } from './global/enum';
+import { Difficulty, Result } from './global/enum';
 import * as util from './global/util';
 import data from './data';
 
@@ -8,16 +8,18 @@ export default class WorkoutTarget {
 
 	public static MAX_LEFTOVER_TIME_FACTOR: number = 0.1;
 
+	// TODO: Remove?
 	public muscleTarget: MuscleScores;
+
 	public timeTarget: number;
+	public difficulty: Difficulty;
 
 	private _possibleExercises: Exercise[] = [];
 
 	constructor(target: IWorkoutTarget) {
 		this.muscleTarget = new MuscleScores(target.scores);
-
-		const time = target.timeMinutes * 60;
-		this.timeTarget = time;
+		this.timeTarget = target.timeMinutes * 60;
+		this.difficulty = target.difficulty;
 
 		this._initPossibleExercises();
 	}

@@ -1,5 +1,3 @@
-import * as util from '../global/util';
-
 interface BuildArg {
 	reps: number;
 	sets: number;

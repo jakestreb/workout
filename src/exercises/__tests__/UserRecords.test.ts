@@ -1,8 +1,6 @@
 import UserRecords from '../UserRecords';
 import db from '../../db';
-import * as sampleRecords from '../../../test_data/sample_records';
-
-const RECORDS = sampleRecords.BASIC_USER_1.slice();
+import testRecords from './data/records.json';
 
 const BENCH_PRESS_RECORDS: DBRecord[] = [
 	{
@@ -85,7 +83,7 @@ describe('UserRecords unit test', () => {
 		  experience: 'advanced',
 		  primary_focus: 'strength',
 		});
-		db.records.getForUser = jest.fn().mockResolvedValue(RECORDS);
+		db.records.getForUser = jest.fn().mockResolvedValue(testRecords);
 
 		userRecords = await UserRecords.fromUserId(1);
 	});

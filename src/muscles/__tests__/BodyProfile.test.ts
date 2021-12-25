@@ -3,9 +3,7 @@ import BodyProfile from '../BodyProfile';
 import Score from '../Score'
 import db from '../../db';
 import { Difficulty } from '../../global/enum';
-import * as sampleRecords from '../../../test_data/sample_records';
-
-const RECORDS = sampleRecords.BASIC_USER_1.slice();
+import testRecords from './data/records.json';
 
 describe('BodyProfile unit test', () => {
 
@@ -23,7 +21,7 @@ describe('BodyProfile unit test', () => {
 		  experience: 'advanced',
 		  primary_focus: 'strength',
 		});
-		db.records.getForUser = jest.fn().mockResolvedValue(RECORDS);
+		db.records.getForUser = jest.fn().mockResolvedValue(testRecords);
 
 		userRecords = await UserRecords.fromUserId(1);
 

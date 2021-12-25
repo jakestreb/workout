@@ -7,9 +7,7 @@ import Workout from '../../Workout';
 import WorkoutTarget from '../../WorkoutTarget';
 import db from '../../db';
 import { Difficulty, Result, getKeys } from '../../global/enum';
-import * as sampleRecords from '../../../test_data/sample_records';
-
-const RECORDS = sampleRecords.BASIC_USER_1.slice();
+import testRecords from './data/records.json';
 
 interface RepsWeightArgs {
 	target: IWorkoutTarget,
@@ -93,7 +91,7 @@ describe('RepsWeightPicker unit test', () => {
 		  experience: 'advanced',
 		  primary_focus: 'strength',
 		});
-		db.records.getForUser = jest.fn().mockResolvedValue(RECORDS);
+		db.records.getForUser = jest.fn().mockResolvedValue(testRecords);
 
 		userRecords = await UserRecords.fromUserId(1);
 		user = userRecords.user;

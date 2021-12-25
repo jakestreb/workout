@@ -34,6 +34,7 @@ declare interface IWorkoutSet {
 }
 
 declare interface IWorkoutTarget {
+  difficulty: Difficulty;
   scores: IMuscleScores;
   timeMinutes: number;
 };

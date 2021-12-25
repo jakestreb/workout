@@ -3,6 +3,7 @@ import MultiGenerator from '../generators/MultiGenerator';
 import BodyProfile from '../muscles/BodyProfile';
 import Workout from '../Workout';
 import targetRecords from '../data/raw/targets.json';
+import { Difficulty } from '../global/enum';
 import * as util from '../global/util';
 
 export default class Session {
