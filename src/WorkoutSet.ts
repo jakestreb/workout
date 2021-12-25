@@ -21,11 +21,6 @@ export default class WorkoutSet {
 		return this.exercise.getTime(this.repsWeight);
 	}
 
-	public getAdjacent(): WorkoutSet[] {
-		return this.repsWeight.getAdjacent()
-			.map(rw => new WorkoutSet(this.exercise, rw));
-	}
-
 	public getFocusScores(user: DBUser): MuscleScores {
 		return this.exercise.getFocusScores(this.repsWeight, user);
 	}

@@ -40,15 +40,11 @@ export default abstract class Picker<T> {
 			// If nothing from current generator works, backtrack
 			if (status === Result.Failed || feedback === Result.Failed || feedback === Result.Complete) {
 				if (this.index === 0) {
-					return this.getFinalYield();
+					return null;
 				}
 				this._remove();
 			}
 		}
-	}
-
-	public getFinalYield(): T[]|null {
-		return null
 	}
 
 	private _add(): Result {

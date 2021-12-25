@@ -8,20 +8,26 @@ export default class WorkoutTarget {
 
 	public static MAX_LEFTOVER_TIME_FACTOR: number = 0.1;
 
-	// TODO: Remove?
-	public muscleTarget: MuscleScores;
+	public readonly timeTarget: number;
+	public readonly difficulty: Difficulty;
+	public readonly enduranceRatio: number;
+	public user: DBUser;
 
-	public timeTarget: number;
-	public difficulty: Difficulty;
-
+	private _muscleGoals: MuscleScores;
 	private _possibleExercises: Exercise[] = [];
 
-	constructor(target: IWorkoutTarget) {
-		this.muscleTarget = new MuscleScores(target.scores);
+	constructor(target: IWorkoutTarget, user: DBUser) {
+		this._muscleGoals = new MuscleScores(target.muscleGoals);
 		this.timeTarget = target.timeMinutes * 60;
 		this.difficulty = target.difficulty;
+		this.enduranceRatio = target.enduranceRatio;
+		this.user = user;
 
 		this._initPossibleExercises();
+	}
+
+	public get muscleGoals() {
+		return this._muscleGoals.copy();
 	}
 
 	public get possibleExercises() {
@@ -29,11 +35,11 @@ export default class WorkoutTarget {
 	}
 
 	public hasAllMuscles(scores: MuscleScores): boolean {
-		return scores.hasAllOf(this.muscleTarget);
+		return scores.hasAllOf(this._muscleGoals);
 	}
 
 	public avgScoreDistance(scores: MuscleScores): number {
-		return this.muscleTarget.avgDistance(scores);
+		return this._muscleGoals.avgDistance(scores);
 	}
 
 	public checkTime(time: number): Result {
@@ -52,7 +58,7 @@ export default class WorkoutTarget {
 	private _initPossibleExercises(): void {
 		for (const e of util.weightedSelector(data.exercises.all())) {
 			const exercise = new Exercise(e.name);
-			const overlaps = exercise.muscleScoreFactors.hasSubsetOf(this.muscleTarget);
+			const overlaps = exercise.muscleScoreFactors.hasSubsetOf(this._muscleGoals);
 			if (overlaps) {
 				this._possibleExercises.push(exercise);
 			}

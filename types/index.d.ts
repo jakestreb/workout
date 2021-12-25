@@ -6,6 +6,14 @@ declare interface IWorkoutSeed {
 	timeMinutes: number;
 }
 
+declare interface IWorkoutTarget {
+  difficulty: Difficulty;
+  muscleGoals: IMuscleScores;
+  focusMuscleGoals: IMuscleScores;
+  enduranceRatio: number;
+  timeMinutes: number;
+};
+
 declare interface IScore {
   endurance: number;
   strength: number;
@@ -32,12 +40,6 @@ declare interface IWorkoutSet {
   reps: number;
   muscleScores: IMuscleScores;
 }
-
-declare interface IWorkoutTarget {
-  difficulty: Difficulty;
-  scores: IMuscleScores;
-  timeMinutes: number;
-};
 
 declare interface GeneratorProgress {
 	generated: number,

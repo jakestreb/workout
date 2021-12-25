@@ -6,24 +6,12 @@ import data from '../data';
 
 export default class BodyProfile {
 
-	// new!!!!!
-	// Fractions represent a scale of the personal best reps weight selections
-	// for each muscle
-	// public static PRIMARY_MEANS = [0.7, 0.85, 1];
-	// public static STD_DEV_FACTOR = 0.2;
-
-	// old!!!!
-	// public static TARGET_MEANS = [8, 12, 16];
-	// public static TARGET_STD_DEV_FACTOR = 0.2;
-	// public static STANDARD_WORKOUT_TIME = 60;
-
-	// public static MIN_GOAL_FACTOR = 1.05;
-
 	public readonly userRecords: UserRecords;
 	public readonly user: DBUser;
 
 	private readonly _scores: MuscleScores = new MuscleScores();
 	private _goal: Score;
+	private _distances: MuscleScores = new MuscleScores();
 
 	constructor(userRecords: UserRecords) {
 		this.userRecords = userRecords;
@@ -32,25 +20,23 @@ export default class BodyProfile {
 		this._init();
 	}
 
-	// TODO: Remove
-	// public getWorkoutTarget(seed: IWorkoutSeed): IWorkoutTarget {
-	// 	const targetScores = new MuscleScores();
-	// 	const timeRatio = seed.timeMinutes / BodyProfile.STANDARD_WORKOUT_TIME;
-	// 	const mean = BodyProfile.PRIMARY_MEANS[seed.difficulty] * timeRatio;
+	public getWorkoutTarget(seed: IWorkoutSeed): IWorkoutTarget {
+		const focusMuscleGoals = new MuscleScores();
 
-	// 	seed.muscles.forEach(m => {
-	// 		targetScores.set(m, this.getGoalDiscrepancy(m));
-	// 	});
+		seed.muscles.forEach(m => {
+			focusMuscleGoals.set(m, this._distances.get(m));
+		});
 
-	// 	const scaled = targetScores.scale(mean, mean * BodyProfile.STD_DEV_FACTOR);
+		return {
+			muscleGoals: this._distances.getMap(),
+			focusMuscleGoals: focusMuscleGoals.getMap(),
+			enduranceRatio: this.getStandardEnduranceRatio(),
+			difficulty: seed.difficulty,
+			timeMinutes: seed.timeMinutes,
+		};
+	}
 
-	// 	return {
-	// 		scores: scaled.zeroFloor().round().getMap(),
-	// 		timeMinutes: seed.timeMinutes,
-	// 	};
-	// }
-
-	public getWorkoutEnduranceRatio(): number {
+	public getStandardEnduranceRatio(): number {
 		// TODO: Allow user customization
 		return 0.5;
 	}
@@ -67,12 +53,18 @@ export default class BodyProfile {
 		return this._goal.copy();
 	}
 
-	public getGoalDiscrepancy(m: string): Score {
-		const { strength, endurance } = this._goal.subtract(this._scores.get(m));
-		return new Score({
-			strength: Math.max(strength, 0),
-			endurance: Math.max(endurance, 0),
+	public getGoalDiscrepancies(): MuscleScores {
+		const result = new MuscleScores();
+		this._scores.keys.forEach(m => {
+			const { strength, endurance } = this._goal.subtract(this._scores.get(m));
+			result.set(m,
+				new Score({
+					strength: Math.max(strength, 0),
+					endurance: Math.max(endurance, 0),
+				})
+			);
 		});
+		return result;
 	}
 
 	private _init() {
@@ -101,5 +93,15 @@ export default class BodyProfile {
 		});
 
 		this._goal = this._scores.getPercentile(.75);
+
+		this._scores.keys.forEach(m => {
+			const { strength, endurance } = this._goal.subtract(this._scores.get(m));
+			this._distances.set(m,
+				new Score({
+					strength: Math.max(strength, 0),
+					endurance: Math.max(endurance, 0),
+				})
+			);
+		});
 	}
 }

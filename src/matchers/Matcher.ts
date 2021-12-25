@@ -1,5 +1,5 @@
+import WorkoutTarget from '../WorkoutTarget';
 import Exercise from '../exercises/Exercise';
-import BodyProfile from '../muscles/BodyProfile';
 import MuscleScores from '../muscles/MuscleScores';
 import Score from '../muscles/Score';
 import * as util from '../global/util';
@@ -10,11 +10,11 @@ import * as util from '../global/util';
  */
 export default abstract class Matcher<T> {
 	public exercises: Exercise[];
-	public bodyProfile: BodyProfile;
+	public target: WorkoutTarget;
 
-	constructor(exercises: Exercise[], bodyProfile: BodyProfile) {
+	constructor(exercises: Exercise[], target: WorkoutTarget) {
 		this.exercises = exercises;
-		this.bodyProfile = bodyProfile;
+		this.target = target;
 	}
 
 	/**
@@ -29,15 +29,15 @@ export default abstract class Matcher<T> {
 
 	// Should return an array of attributes to match to exercises, sorted such that
 	// the exercise with the highest comparative priority matches with the last item.
-	public abstract getSortedAttributes(...args: any): T[];
+	public abstract getSortedAttributes(): T[];
 
 	public get total(): number {
 		return this.exercises.length;
 	}
 
-	public getMatch(...args: any): T[] {
+	public getMatch(): T[] {
 		const result: T[] = new Array(this.total);
-		const attributes = this.getSortedAttributes(...args).slice();
+		const attributes = this.getSortedAttributes().slice();
 		const priorities = this._getPriorityValues();
 
 		while (attributes.length > 0) {
@@ -56,9 +56,9 @@ export default abstract class Matcher<T> {
 
 	private _getPriorityScore(exercise: Exercise): Score {
 		const goalFactorScores = new MuscleScores();
-		const standardScores = exercise.getStandardFocusScores(this.bodyProfile.user);
+		const standardScores = exercise.getStandardFocusScores(this.target.user);
 		standardScores.keys.forEach(m => {
-			const goal = this.bodyProfile.getGoalDiscrepancy(m);
+			const goal = this.target.muscleGoals.get(m);
 			const priority = standardScores.get(m).multiply(goal); // exercise score x goal dist
 			goalFactorScores.set(m, priority);
 		});

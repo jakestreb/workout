@@ -1,19 +1,19 @@
+import WorkoutTarget from '../WorkoutTarget';
 import Exercise from '../exercises/Exercise';
 import Matcher from './Matcher';
-import BodyProfile from '../muscles/BodyProfile';
 import Score from '../muscles/Score';
 import * as util from '../global/util';
 
 export default class SkillMatcher extends Matcher<Skill> {
 	constructor(
 		exercises: Exercise[],
-		bodyProfile: BodyProfile
+		target: WorkoutTarget
 	) {
-		super(exercises, bodyProfile);
+		super(exercises, target);
 	}
 
 	public getSortedAttributes(): Skill[] {
-		const ratio = this.bodyProfile.getWorkoutEnduranceRatio();
+		const ratio = this.target.enduranceRatio;
 		const counts = util.splitEvenly(this.total, [1 - ratio, ratio]);
 
 		const strengths = new Array(counts[0]).fill('strength');

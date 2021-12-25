@@ -7,9 +7,6 @@ import { Result } from '../global/enum';
 
 export default class ExercisePicker extends Picker<Exercise> {
 
-	// TODO: Lower
-	public static MAX_AVG_DIST = 100000;
-
 	private readonly _target: WorkoutTarget;
 
 	constructor(target: WorkoutTarget) {

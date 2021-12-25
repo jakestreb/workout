@@ -1,6 +1,6 @@
+import WorkoutTarget from '../WorkoutTarget';
 import Exercise from '../exercises/Exercise';
 import Matcher from './Matcher';
-import BodyProfile from '../muscles/BodyProfile';
 import Score from '../muscles/Score';
 import { Difficulty, getKeys } from '../global/enum';
 import * as util from '../global/util';
@@ -19,24 +19,20 @@ export default class DifficultyMatcher extends Matcher<Difficulty> {
 	constructor(
 		exercises: Exercise[],
 		skills: Skill[],
-		bodyProfile: BodyProfile
+		target: WorkoutTarget
 	) {
-		super(exercises, bodyProfile);
+		super(exercises, target);
 
 		this.skills = skills;
 	}
 
-	public getSortedAttributes(workoutDifficulty: Difficulty): Difficulty[] {
-		if (workoutDifficulty === undefined) {
-			throw new Error('workoutDifficulty is required');
-		}
-
-		const ratios = DifficultyMatcher.RATIOS[workoutDifficulty];
+	public getSortedAttributes(): Difficulty[] {
+		const ratios = DifficultyMatcher.RATIOS[this.target.difficulty];
 		const counts = util.splitEvenly(this.total, ratios);
 
 		const sortedDifficulties: Difficulty[] = [];
 		getKeys(Difficulty).forEach(d => {
-			const items = new Array(counts[d]).fill(Difficulty[d]);
+			const items = new Array(counts[d]).fill(d);
 			sortedDifficulties.push(...items);
 		});
 		return sortedDifficulties;

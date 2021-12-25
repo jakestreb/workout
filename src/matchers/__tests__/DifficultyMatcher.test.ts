@@ -2,6 +2,7 @@ import DifficultyMatcher from '../DifficultyMatcher';
 import Exercise from '../../exercises/Exercise';
 import UserRecords from '../../exercises/UserRecords';
 import BodyProfile from '../../muscles/BodyProfile';
+import WorkoutTarget from '../../WorkoutTarget';
 import db from '../../db';
 import { Difficulty } from '../../global/enum';
 import testRecords from './data/records.json';
@@ -36,18 +37,29 @@ describe('DifficultyMatcher unit test', () => {
 			.map(e => new Exercise(e));
 		const skills: Skill[] = ['endurance', 'strength', 'endurance', 'strength'];
 		// [3x5, 220lbs, 4x6, 200lbs]
-		const matcher = new DifficultyMatcher(exercises, skills, bodyProfile);
 
-		expect(matcher.getMatch(Easy)).toEqual(
-			['Hard', 'Easy', 'Intermediate', 'Easy']
-		);
-		expect(matcher.getMatch(Intermediate)).toEqual(
-			['Hard', 'Easy', 'Intermediate', 'Intermediate']
-		);
-		expect(matcher.getMatch(Hard)).toEqual(
-			['Hard', 'Intermediate', 'Hard', 'Intermediate']
+		const seed = { difficulty: Easy, muscles: [], timeMinutes: 0 };
+		const target = bodyProfile.getWorkoutTarget(seed);
+
+		// Easy workout
+		let workoutTarget = new WorkoutTarget(target, userRecords.user);
+		let matcher = new DifficultyMatcher(exercises, skills, workoutTarget);
+		expect(matcher.getMatch()).toEqual(
+			[Hard, Easy, Intermediate, Easy]
 		);
 
-		expect(() => matcher.getMatch()).toThrow('workoutDifficulty is required');
+		// Intermediate workout
+		workoutTarget = new WorkoutTarget({ ...target, difficulty: Intermediate }, userRecords.user);
+		matcher = new DifficultyMatcher(exercises, skills, workoutTarget);
+		expect(matcher.getMatch()).toEqual(
+			[Hard, Easy, Intermediate, Intermediate]
+		);
+
+		// Hard workout
+		workoutTarget = new WorkoutTarget({ ...target, difficulty: Hard }, userRecords.user);
+		matcher = new DifficultyMatcher(exercises, skills, workoutTarget);
+		expect(matcher.getMatch()).toEqual(
+			[Hard, Intermediate, Hard, Intermediate]
+		);
 	});
 });

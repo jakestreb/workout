@@ -59,10 +59,6 @@ export default class UserRecords {
 			endurance: util.maxIndex(scores.map(s => s.endurance)),
 			strength: util.maxIndex(scores.map(s => s.strength)),
 		};
-		console.warn('RECS', exercise,
-			getRepsWeight(records[bestIndexes.endurance]),
-			getRepsWeight(records[bestIndexes.strength])
-		);
 		return {
 			endurance: getRepsWeight(records[bestIndexes.endurance]),
 			strength: getRepsWeight(records[bestIndexes.strength]),

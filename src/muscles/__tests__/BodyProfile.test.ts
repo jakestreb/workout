@@ -53,10 +53,11 @@ describe('BodyProfile unit test', () => {
 		expect(bodyProfile.getGoalScore().round()).toEqual(scores.getPercentile(.75).round());
 	});
 
-	test('getGoalDiscrepancy', () => {
-		const discrepancy = bodyProfile.getGoalScore()
+	test('getGoalDiscrepancies', () => {
+		const discrepancies = bodyProfile.getGoalDiscrepancies();
+		const manualDiscrepancy = bodyProfile.getGoalScore()
 			.subtract(bodyProfile.getMuscleScore('glutes'));
-		expect(bodyProfile.getGoalDiscrepancy('glutes').round()).toEqual(discrepancy.round());
+		expect(discrepancies.get('glutes').round()).toEqual(manualDiscrepancy.round());
 	});
 
 	test('getWorkoutTarget', () => {

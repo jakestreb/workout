@@ -1,8 +1,10 @@
+import WorkoutTarget from '../../WorkoutTarget';
 import SkillMatcher from '../SkillMatcher';
 import Exercise from '../../exercises/Exercise';
 import UserRecords from '../../exercises/UserRecords';
 import BodyProfile from '../../muscles/BodyProfile';
 import db from '../../db';
+import { Difficulty } from '../../global/enum';
 import testRecords from './data/records.json';
 
 describe('SkillMatcher unit test', () => {
@@ -32,7 +34,14 @@ describe('SkillMatcher unit test', () => {
 	test('should run successfully', () => {
 		const exercises = ['deadlift', 'bench_press', 'squat', 'barbell_row']
 			.map(e => new Exercise(e));
-		const matcher = new SkillMatcher(exercises, bodyProfile);
+		const target = bodyProfile.getWorkoutTarget({
+			difficulty: Difficulty.Easy,
+			muscles: [],
+			timeMinutes: 0,
+		});
+		const workoutTarget = new WorkoutTarget(target, userRecords.user);
+
+		const matcher = new SkillMatcher(exercises, workoutTarget);
 		expect(matcher.getMatch()).toEqual(['endurance', 'strength', 'endurance', 'strength']);
 	});
 });
