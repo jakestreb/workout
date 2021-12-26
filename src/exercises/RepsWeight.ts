@@ -38,6 +38,11 @@ export default class RepsWeight {
 		return this;
 	}
 
+	public scaleWeight(factor: number): this {
+		this._weight = roundWeight(this._weight ? this._weight * factor : null);
+		return this;
+	}
+
 	public incWeight(inc: number): this {
 		this._weight = incWeight(this._weight, inc);
 		return this;
@@ -52,55 +57,6 @@ export default class RepsWeight {
 		this._sets = incCount(this._sets, inc);
 		return this;
 	}
-
-	// TODO: Remove
-	// Returns an array of this and neighboring whole-numbered repsWeight values
-	// public getAdjacent(): RepsWeight[] {
-	// 	let weightIters: (number|null)[] = [];
-	// 	let setIters: number[] = [];
-	// 	let repIters: number[] = [];
-	// 	let largeRepIters: number[] = [];
-	// 	[-1, 0, 1].forEach(n => {
-	// 		weightIters.push(incWeight(this._weight, n));
-	// 		setIters.push(incCount(this._sets, n));
-	// 	});
-	// 	[0.7, 1, 1.3].forEach(x => {
-	// 		repIters.push(incCount(this._reps, this._reps * (x - 1)));
-	// 	});
-	// 	[0.5, 1, 1.5].forEach(x => {
-	// 		largeRepIters.push(incCount(this._reps, this._reps * (x - 1)));
-	// 	});
-
-	// 	const results: RepsWeight[] = [];
-	// 	// util.uniq(weightIters).forEach(weight => {
-	// 	// 	const reps = this.reps;
-	// 	// 	const sets = this.sets;
-	// 	// 	results.push(new RepsWeight({ reps, sets, weight }));
-	// 	// });
-	// 	// util.uniq(setIters).forEach(sets => {
-	// 	// 	const weight = this.weight;
-	// 	// 	const reps = this.reps;
-	// 	// 	results.push(new RepsWeight({ reps, sets, weight }));
-	// 	// });
-	// 	// util.uniq(repIters).forEach(reps => {
-	// 	// 	const weight = this.weight;
-	// 	// 	const sets = this.sets;
-	// 	// 	results.push(new RepsWeight({ reps, sets, weight }));
-	// 	// });
-	// 	util.uniq(weightIters).forEach(weight => {
-	// 		util.uniq(setIters).forEach(sets => {
-	// 			util.uniq(repIters).forEach(reps => {
-	// 				results.push(new RepsWeight({ reps, sets, weight }));
-	// 			});
-	// 		});
-	// 		util.uniq(largeRepIters).forEach(reps => {
-	// 			const sets = this._sets;
-	// 			results.push(new RepsWeight({ reps, sets, weight }));
-	// 		});
-	// 	});
-
-	// 	return results;
-	// }
 
 	public copy(): RepsWeight {
 		return new RepsWeight({ reps: this._reps, sets: this._sets, weight: this._weight });

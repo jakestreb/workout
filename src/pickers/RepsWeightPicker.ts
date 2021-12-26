@@ -7,6 +7,7 @@ import type WorkoutTarget from '../WorkoutTarget'
 import Workout from '../Workout';
 import WorkoutSet from '../WorkoutSet';
 import { Difficulty, Result } from '../global/enum';
+import * as util from '../global/util';
 
 export default class RepsWeightPicker extends Picker<WorkoutSet> {
 
@@ -19,7 +20,7 @@ export default class RepsWeightPicker extends Picker<WorkoutSet> {
 	private _target: WorkoutTarget;
 	private _userRecords: UserRecords;
 
-	private _recCache: { [exercise: string]: WorkoutSet } = {};
+	private _recCache: { [exercise: string]: WorkoutSet[] } = {};
 
 	constructor(exercises: Exercise[], target: WorkoutTarget, userRecords: UserRecords) {
 		super();
@@ -39,7 +40,6 @@ export default class RepsWeightPicker extends Picker<WorkoutSet> {
 	public get checks() {
 		return [
 			() => this._checkTime(),
-			// () => this._checkFocus(),
 		];
 	}
 
@@ -78,20 +78,20 @@ export default class RepsWeightPicker extends Picker<WorkoutSet> {
 	}
 
 	private* _generateSets(exercise: Exercise) {
-		yield this._getRecommendation(exercise);
-		// for (const set of util.randomSelector(recs)) {
-		// 	yield set;
-		// }
+		const recs = this._getRecommendations(exercise);
+		for (const set of util.randomSelector(recs)) {
+			yield set;
+		}
 	}
 
-	private _getRecommendation(exercise: Exercise) {
+	private _getRecommendations(exercise: Exercise): WorkoutSet[] {
 		if (!this._recCache[exercise.name]) {
-			const rec = this._userRecords.getRecommendation(
+			const recs = this._userRecords.getPossibleRepsWeights(
 				exercise.name,
 				this.skill,
 				this.difficulty
 			);
-			this._recCache[exercise.name] = new WorkoutSet(exercise, rec);
+			this._recCache[exercise.name] = recs.map(r => new WorkoutSet(exercise, r));
 		}
 		return this._recCache[exercise.name];
 	}

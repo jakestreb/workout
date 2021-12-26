@@ -22,7 +22,6 @@ export default class Exercise {
 		}
 	}
 
-
 	public readonly name: string;
 
 	private readonly _secondsPerRep: number;
@@ -158,6 +157,22 @@ export default class Exercise {
 			endurance: (1 - factor) * enduranceScore + factor * strengthScore,
 			strength: (1 - factor) * strengthScore + factor * enduranceScore,
 		});
+	}
+
+	// Scales RepsWeight toward the skill such that the total score remains the same
+	public scaleRepsWeight(repsWeight: RepsWeight, skill: Skill, user: DBUser): RepsWeight {
+		const result = repsWeight.copy();
+		if (skill === 'endurance' && repsWeight.weight !== null) {
+			const factor = (this.getWeightStandard(user.gender)! + repsWeight.weight) * 0.5;
+			result.scaleWeight(factor);
+			result.scaleReps(1 / factor);
+		}
+		if (skill === 'strength') {
+			const factor = (this.standardReps + repsWeight.reps) * 0.5;
+			result.scaleReps(factor);
+			result.scaleWeight(1 / factor);
+		}
+		return result;
 	}
 
 	public getFirstTryRepsWeight(user: DBUser): RepsWeight {

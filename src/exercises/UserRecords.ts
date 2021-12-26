@@ -48,6 +48,21 @@ export default class UserRecords {
 			.map(rec => timeDegrade(rec));
 	}
 
+	// Note that this returns time-adjusted bests
+	public getBestScores(exercise: string): Score|null {
+		const records = this.getAdjustedRecords(exercise);
+		const scores = records.map(rec => this._getRecordScore(exercise, rec));
+		if (records.length === 0) {
+			return null;
+		}
+		return new Score(
+			{
+				endurance: Math.max(...scores.map(rec => rec.endurance)),
+				strength: Math.max(...scores.map(rec => rec.strength)),
+			}
+		);
+	}
+
 	// Note that this returns time-adjusted personal bests
 	public getPersonalBests(exercise: string): PersonalBests|null {
 		const records = this.getAdjustedRecords(exercise);
@@ -65,36 +80,40 @@ export default class UserRecords {
 		};
 	}
 
-	// Note that this returns time-adjusted bests
-	public getBestScores(exercise: string): Score|null {
-		const records = this.getAdjustedRecords(exercise);
-		const scores = records.map(rec => this._getRecordScore(exercise, rec));
-		if (records.length === 0) {
+	public getRecommendations(e: string): PersonalBests|null {
+		const bests = this.getPersonalBests(e);
+		if (!bests) {
 			return null;
 		}
-		return new Score(
-			{
-				endurance: Math.max(...scores.map(rec => rec.endurance)),
-				strength: Math.max(...scores.map(rec => rec.strength)),
-			}
-		);
+		const exercise = new Exercise(e);
+		return {
+			endurance: exercise.scaleRepsWeight(bests.endurance, 'endurance', this.user),
+			strength: exercise.scaleRepsWeight(bests.strength, 'strength', this.user),
+		};
 	}
 
-	// TODO
-	// public getShiftedBest(exercise: string): Score|null;
-
-	// TODO: This is too simple - each focus and difficulty should return a single RepsWeight,
-	// but it should be scaled toward the focus with difficulty static, to a factor
-	// determined by recent records
-	public getRecommendation(exercise: string, focus: Skill, difficulty: Difficulty): RepsWeight {
-		const best = this.getPersonalBests(exercise);
+	public getPossibleRepsWeights(exercise: string, focus: Skill, difficulty: Difficulty): RepsWeight[] {
+		const best = this.getRecommendations(exercise);
 		if (!best) {
-			return new Exercise(exercise).getFirstTryRepsWeight(this.user);
+			return [
+				new Exercise(exercise).getFirstTryRepsWeight(this.user),
+			];
 		}
+		const { endurance, strength } = best;
 		if (focus === 'endurance') {
-			return best.endurance.copy().scaleReps(0.8 + (difficulty * 0.2));
+			const scaled = endurance.copy().scaleReps(0.8 + (difficulty * 0.2));
+			return [
+				scaled.copy().incSets(-1),
+				scaled.copy().incSets(0),
+				scaled.copy().incSets(1),
+			].filter((x, i) => i >= difficulty - 1);
 		}
-		return best.strength.copy().incWeight(-1 + difficulty);
+		const scaled = strength.copy().incWeight(-1 + difficulty);
+		return [
+			scaled.copy().incSets(-1),
+			scaled.copy().incSets(0),
+			scaled.copy().incSets(1),
+		].filter((x, i) => i >= difficulty - 1);
 	}
 
 	private _getRecordScore(exercise: string, rec: DBRecord): Score {

@@ -41,4 +41,6 @@ describe('Exercise unit test', () => {
 	        rear_delt: new Score({ endurance: 1.58, strength: 1.24 }),
 		});
 	});
+
+	test.todo('scaleRepsWeight');
 });
