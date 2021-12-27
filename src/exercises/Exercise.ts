@@ -159,18 +159,24 @@ export default class Exercise {
 		});
 	}
 
-	// Scales RepsWeight toward the skill such that the total score remains the same
+	// Scales RepsWeight toward the skill such that the skill score remains the same
 	public scaleRepsWeight(repsWeight: RepsWeight, skill: Skill, user: DBUser): RepsWeight {
 		const result = repsWeight.copy();
 		if (skill === 'endurance' && repsWeight.weight !== null) {
-			const factor = (this.getWeightStandard(user.gender)! + repsWeight.weight) * 0.5;
-			result.scaleWeight(factor);
-			result.scaleReps(1 / factor);
-		}
-		if (skill === 'strength') {
-			const factor = (this.standardReps + repsWeight.reps) * 0.5;
+			// TODO: Half to standard doesn't make sense - add enduranceReps and
+			// strengthReps to exercise records and shift towards them
+			const halfToStandard = (this.getWeightStandard(user.gender)! + repsWeight.weight) * 0.5;
+			const factor = repsWeight.weight / halfToStandard;
 			result.scaleReps(factor);
 			result.scaleWeight(1 / factor);
+		}
+		if (skill === 'strength') {
+			// TODO: Half to standard doesn't make sense - add enduranceReps and
+			// strengthReps to exercise records and shift towards them
+			const halfToStandard = (this.standardReps + repsWeight.reps) * 0.5;
+			const factor = repsWeight.reps / halfToStandard
+			result.scaleReps(1 / factor);
+			result.scaleWeight(factor);
 		}
 		return result;
 	}

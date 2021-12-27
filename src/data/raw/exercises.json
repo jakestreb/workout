@@ -23,6 +23,8 @@
       }
     ],
     "secondsPerRep": 3,
+    "enduranceReps": 10,
+    "strengthReps": 4,
     "sets": [
       3,
       4,

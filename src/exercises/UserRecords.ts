@@ -101,19 +101,19 @@ export default class UserRecords {
 		}
 		const { endurance, strength } = best;
 		if (focus === 'endurance') {
-			const scaled = endurance.copy().scaleReps(0.8 + (difficulty * 0.2));
+			const scaled = endurance.copy().scaleReps(0.8 + (difficulty * 0.4));
 			return [
 				scaled.copy().incSets(-1),
 				scaled.copy().incSets(0),
 				scaled.copy().incSets(1),
-			].filter((x, i) => i >= difficulty - 1);
+			].filter((x, i) => i >= (difficulty - 1) && i <= (difficulty + 1));
 		}
 		const scaled = strength.copy().incWeight(-1 + difficulty);
 		return [
 			scaled.copy().incSets(-1),
 			scaled.copy().incSets(0),
 			scaled.copy().incSets(1),
-		].filter((x, i) => i >= difficulty - 1);
+			].filter((x, i) => i >= (difficulty - 1) && i <= (difficulty + 1));
 	}
 
 	private _getRecordScore(exercise: string, rec: DBRecord): Score {

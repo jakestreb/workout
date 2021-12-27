@@ -23,7 +23,6 @@ describe('DifficultyMatcher unit test', () => {
 		  gender: 'male',
 		  weight: 180,
 		  experience: 'advanced',
-		  primary_focus: 'strength',
 		});
 		db.records.getForUser = jest.fn().mockResolvedValue(testRecords);
 

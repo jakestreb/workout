@@ -1,5 +1,6 @@
 import UserRecords from '../UserRecords';
 import db from '../../db';
+import { Difficulty } from '../../global/enum';
 import testRecords from './data/records.json';
 
 const BENCH_PRESS_RECORDS: DBRecord[] = [
@@ -51,8 +52,8 @@ const ADJUSTED_BENCH_PRESS_RECORDS: DBRecord[] = [
 		workout_id: '1',
 		exercise: 'bench_press',
 		sets: 4,
-		reps: 3.84,
-		weight: 227.95,
+		reps: 5.46,
+		weight: 231.48,
 		completed: false,
 		created_at: '2021-11-08T16:49:35.220Z',
 	},
@@ -61,8 +62,8 @@ const ADJUSTED_BENCH_PRESS_RECORDS: DBRecord[] = [
 		workout_id: '1',
 		exercise: 'bench_press',
 		sets: 4,
-		reps: 7.51,
-		weight: 149.48,
+		reps: 8.38,
+		weight: 166.43,
 		completed: true,
 		created_at: '2021-05-08T16:49:35.220Z',
 	},
@@ -81,7 +82,6 @@ describe('UserRecords unit test', () => {
 		  gender: 'male',
 		  weight: 180,
 		  experience: 'advanced',
-		  primary_focus: 'strength',
 		});
 		db.records.getForUser = jest.fn().mockResolvedValue(testRecords);
 
@@ -103,7 +103,7 @@ describe('UserRecords unit test', () => {
 		expect(personalBests).not.toBeNull();
 
 		const { endurance, strength } = personalBests!;
-		expect(`${endurance}`).toEqual('4x8 150');
+		expect(`${endurance}`).toEqual('4x8 165');
 		expect(`${strength}`).toEqual('4x6 225');
 	});
 
@@ -112,15 +112,39 @@ describe('UserRecords unit test', () => {
 		expect(score).not.toBeNull();
 
 		const { endurance, strength } = score!.round();
-		expect(endurance).toEqual(0.98);
+		expect(endurance).toEqual(1);
 		expect(strength).toEqual(1.24);
 	});
 
 	test('getRecommendations', () => {
 		const recs = userRecords.getRecommendations('bench_press');
-		expect(recs.map(r => r.toString())).toEqual(['4x6 225', '4x8 150']);
+		expect(`${recs!.endurance}`).toEqual('4x8 165');
+		expect(`${recs!.strength}`).toEqual('4x7 195'); // TODO: Should be fewer reps / higher weight
+	});
 
-		const standardRecs = userRecords.getRecommendations('goblet_squat');
+	test('getPossibleRepsWeights', () => {
+		// Strength
+		let recs = userRecords.getPossibleRepsWeights('bench_press', 'strength', Difficulty.Easy);
+		expect(recs.map(r => r.toString())).toEqual(['3x7 190', '4x7 190']);
+
+		recs = userRecords.getPossibleRepsWeights('bench_press', 'strength', Difficulty.Intermediate);
+		expect(recs.map(r => r.toString())).toEqual(['3x7 195', '4x7 195', '5x7 195']);
+
+		recs = userRecords.getPossibleRepsWeights('bench_press', 'strength', Difficulty.Hard);
+		expect(recs.map(r => r.toString())).toEqual(['4x7 200', '5x7 200']);
+
+		// Endurance
+		recs = userRecords.getPossibleRepsWeights('bench_press', 'endurance', Difficulty.Easy);
+		expect(recs.map(r => r.toString())).toEqual(['3x6 165', '4x6 165']);
+
+		recs = userRecords.getPossibleRepsWeights('bench_press', 'endurance', Difficulty.Intermediate);
+		expect(recs.map(r => r.toString())).toEqual(['3x10 165', '4x10 165', '5x10 165']);
+
+		recs = userRecords.getPossibleRepsWeights('bench_press', 'endurance', Difficulty.Hard);
+		expect(recs.map(r => r.toString())).toEqual(['4x13 165', '5x13 165']);
+
+		// New exercise
+		const standardRecs = userRecords.getPossibleRepsWeights('goblet_squat', 'endurance', Difficulty.Easy);
 		expect(standardRecs.map(r => r.toString())).toEqual(['3x15 30']);
 	});
 });

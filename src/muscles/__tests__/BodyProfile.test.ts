@@ -19,7 +19,6 @@ describe('BodyProfile unit test', () => {
 		  gender: 'male',
 		  weight: 180,
 		  experience: 'advanced',
-		  primary_focus: 'strength',
 		});
 		db.records.getForUser = jest.fn().mockResolvedValue(testRecords);
 
@@ -43,7 +42,7 @@ describe('BodyProfile unit test', () => {
 			userRecords.getBestScores('squat')!.multiply(4 / 13.5),
 			userRecords.getBestScores('good_morning')!.multiply(4.5 / 13.5),
 			userRecords.getBestScores('kettlebell_swing')!.multiply(2 / 13.5)
-		);
+		).multiply(BodyProfile.SCORE_MULTPLIER);
 
 		expect(bodyProfile.getMuscleScore('glutes').round()).toEqual(score.round());
 	});
@@ -62,40 +61,35 @@ describe('BodyProfile unit test', () => {
 
 	test('getWorkoutTarget', () => {
 		const target = bodyProfile.getWorkoutTarget({
-			difficulty: 1,
+			difficulty: Difficulty.Intermediate,
 			muscles: ['glutes', 'quads', 'calves'],
 			timeMinutes: 40,
 		});
 		expect(target).toEqual({
-  			minScores: {
-  				glutes: {
-  					endurance: 1.91,
-  					strength: 1.39,
-  				},
-  				quads: {
-  					endurance: 2.01,
-  					strength: 1.38,
-  				},
-  				calves: {
-  					endurance: 4.08,
-  					strength: 3.51,
-  				},
-  			},
-  			maxScores: {
-  				glutes: {
-  					endurance: 2.58,
-  					strength: 1.91,
-  				},
-  				quads: {
-  					endurance: 2.68,
-  					strength: 1.91,
-  				},
-  				calves: {
-  					endurance: 4.75,
-  					strength: 4.03,
-  				},
-  			},
+			difficulty: Difficulty.Intermediate,
   			timeMinutes: 40,
+  			enduranceRatio: 0.5,
+  			focusMuscleGoals: {
+		    	glutes: { endurance: 1.48, strength: 1.45 },
+		      	quads: { endurance: 3.09, strength: 1.4 },
+		      	calves: { endurance: 28.72, strength: 20.11 },
+  			},
+  			muscleGoals: {
+		      	glutes: { endurance: 1.48, strength: 1.45 },
+		      	quads: { endurance: 3.09, strength: 1.4 },
+		      	calves: { endurance: 28.72, strength: 20.11 },
+		    	upper_chest: { endurance: 6.78, strength: 0 },
+		      	triceps: { endurance: 14.39, strength: 2.42 },
+		      	front_delt: { endurance: 13.38, strength: 1.28 },
+		      	middle_delt: { endurance: 30.99, strength: 21.28 },
+		      	rear_delt: { endurance: 30.99, strength: 21.28 },
+		      	traps: { endurance: 13.76, strength: 13.41 },
+		      	lats: { endurance: 12.05, strength: 14.89 },
+		      	erectors: { endurance: 7.2, strength: 4.32 },
+		      	rhomboids: { endurance: 14.36, strength: 12.89 },
+		      	inner_thighs: { endurance: 0, strength: 1.78 },
+		      	forearms: { endurance: 6.26, strength: 19.87 },
+  			},
 		});
 	});
 });

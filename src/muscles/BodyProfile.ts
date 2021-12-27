@@ -6,10 +6,13 @@ import data from '../data';
 
 export default class BodyProfile {
 
+	// Score multiplier for more appealing values
+	public static SCORE_MULTPLIER = 100;
+
 	public readonly userRecords: UserRecords;
 	public readonly user: DBUser;
 
-	private readonly _scores: MuscleScores = new MuscleScores();
+	private _scores: MuscleScores = new MuscleScores();
 	private _goal: Score;
 	private _distances: MuscleScores = new MuscleScores();
 
@@ -54,17 +57,7 @@ export default class BodyProfile {
 	}
 
 	public getGoalDiscrepancies(): MuscleScores {
-		const result = new MuscleScores();
-		this._scores.keys.forEach(m => {
-			const { strength, endurance } = this._goal.subtract(this._scores.get(m));
-			result.set(m,
-				new Score({
-					strength: Math.max(strength, 0),
-					endurance: Math.max(endurance, 0),
-				})
-			);
-		});
-		return result;
+		return this._distances.copy();
 	}
 
 	private _init() {
@@ -84,13 +77,14 @@ export default class BodyProfile {
 			const exerciseScore = exerciseScores[i];
 			const { muscleScoreFactors } = exercise;
 			exercise.muscles.forEach(m => {
-				const muscleFactor = muscleScoreFactors.get(m);
+				const muscleFactor = muscleScoreFactors.get(m).multiply(BodyProfile.SCORE_MULTPLIER);
 				const muscleSum = muscleFactorSums.get(m);
 				const muscleRatio = muscleFactor.divideBy(muscleSum);
 				// Weight exercise scores by ratio of muscle use across exercises
 				this._scores.add(m, exerciseScore.multiply(muscleRatio));
 			});
 		});
+		this._scores = this._scores.round();
 
 		this._goal = this._scores.getPercentile(.75);
 
@@ -103,5 +97,6 @@ export default class BodyProfile {
 				})
 			);
 		});
+		this._distances = this._distances.round();
 	}
 }

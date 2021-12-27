@@ -12,9 +12,8 @@ describe('Exercise unit test', () => {
 			gender: 'male',
 			weight: 180,
 			experience: 'advanced',
-			primary_focus: 'strength',
 		};
-		const repsWeight = new RepsWeight({ reps: [8, 8, 8, 8, 8], weight: 15 });
+		const repsWeight = new RepsWeight({ sets: 5, reps: 8, weight: 15 });
 		const score = exercise.getScore(repsWeight, user).round();
 
 		expect(score).toEqual(
@@ -30,9 +29,8 @@ describe('Exercise unit test', () => {
 			gender: 'male',
 			weight: 180,
 			experience: 'advanced',
-			primary_focus: 'strength',
 		};
-		const repsWeight = new RepsWeight({ reps: [8, 8, 8, 8, 8], weight: 15 });
+		const repsWeight = new RepsWeight({ sets: 5, reps: 8, weight: 15 });
 		const muscleScores = exercise.getFocusScores(repsWeight, user).round();
 
 		expect(muscleScores.getMap()).toEqual({
@@ -42,5 +40,38 @@ describe('Exercise unit test', () => {
 		});
 	});
 
-	test.todo('scaleRepsWeight');
+	test('scaleRepsWeight', () => {
+		const exercise = new Exercise('lateral_raise');
+		const user: DBUser = {
+			id: 1,
+			name: 'Jake',
+			gender: 'male',
+			weight: 180,
+			experience: 'advanced',
+		};
+
+		// Endurance
+		let repsWeight = new RepsWeight({ sets: 3, reps: 8, weight: 30 });
+		let scaled = exercise.scaleRepsWeight(repsWeight, 'endurance', user);
+
+		expect(`${scaled}`).toEqual('3x10 25');
+
+		let beforeScore = exercise.getScore(repsWeight, user);
+		let afterScore = exercise.getScore(scaled, user);
+
+		expect(afterScore.endurance).toBeGreaterThanOrEqual(beforeScore.endurance);
+		expect(afterScore.strength).toBeLessThanOrEqual(beforeScore.strength);
+
+		// Strength
+		repsWeight = new RepsWeight({ sets: 3, reps: 8, weight: 30 });
+		scaled = exercise.scaleRepsWeight(repsWeight, 'strength', user);
+
+		expect(`${scaled}`).toEqual('3x8 30');
+
+		beforeScore = exercise.getScore(repsWeight, user);
+		afterScore = exercise.getScore(scaled, user);
+
+		expect(afterScore.endurance).toBeLessThanOrEqual(beforeScore.endurance);
+		expect(afterScore.strength).toBeGreaterThanOrEqual(beforeScore.strength);
+	});
 });

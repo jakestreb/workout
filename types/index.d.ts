@@ -67,7 +67,6 @@ declare interface DBUser {
   gender: 'male'|'female'|'other',
   weight: number,
   experience: 'beginner'|'intermediate'|'advanced',
-  primary_focus: Skill
 }
 
 declare interface JSONExercise {
