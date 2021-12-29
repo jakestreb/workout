@@ -42,51 +42,51 @@ declare interface IWorkoutSet {
 }
 
 declare interface GeneratorProgress {
-	generated: number,
-	filtered: number,
-	isDone: boolean,
+	generated: number;
+	filtered: number;
+	isDone: boolean;
 }
 
 declare interface DBRecordBasics {
-  exercise: string,
-  sets: number,
-  reps: number,
-  weight: number,
-  completed: boolean,
-  created_at: string
+  exercise: string;
+  sets: number;
+  reps: number;
+  weight: number;
+  completed: boolean;
+  created_at: string;
 }
 
 declare interface DBRecord extends DBRecordBasics {
-  user_id: number,
-  workout_id: string
+  user_id: number;
+  workout_id: string;
 }
 
 declare interface DBUser {
-  id?: number,
-  name: string,
-  gender: 'male'|'female'|'other',
-  weight: number,
-  experience: 'beginner'|'intermediate'|'advanced',
+  id?: number;
+  name: string;
+  gender: 'male'|'female'|'other';
+  weight: number;
+  experience: 'beginner'|'intermediate'|'advanced';
 }
 
 declare interface JSONExercise {
-  name: string,
-  weight: number,
-  activations: JSONActivation[],
-  secondsPerRep: number,
-  sets: number[]
-  reps: number[]
+  name: string;
+  weight: number;
+  activations: JSONActivation[];
+  secondsPerRep: number;
+  sets: number[];
+  reps: number[];
   weightStandards: {
-  	male: number,
-  	female: number
+  	male: number;
+  	female: number;
   }
-  supersetGroups: string[],
-  isBodyweightExercise: boolean
+  supersetGroups: string[];
+  isBodyweightExercise: boolean;
 }
 
 declare interface JSONActivation {
-  muscle: string,
-  activity: number
+  muscle: string;
+  activity: number;
 }
 
 declare interface JSONMuscle {

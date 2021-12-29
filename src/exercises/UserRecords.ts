@@ -18,6 +18,9 @@ export default class UserRecords {
 
 	public static FAILURE_FACTOR = 0.7;
 
+	public static QUALITY_CLIFF = 4;
+	public static QUALITY_LIMIT = 12;
+
 	public static async fromUserId(userId: number): Promise<UserRecords> {
 		const [user, records] = await Promise.all([
 			db.users.getOne(userId),
@@ -44,8 +47,10 @@ export default class UserRecords {
 
 	public getAdjustedRecords(exercise: string): DBRecord[] {
 		return this.getRecords(exercise)
+			.filter((rec, i) => i < UserRecords.QUALITY_LIMIT)
 			.map(rec => failureDegrade(rec))
-			.map(rec => timeDegrade(rec));
+			.map(rec => timeDegrade(rec))
+			.map((rec, i) => qualityDegrade(rec, i));
 	}
 
 	// Note that this returns time-adjusted bests
@@ -102,6 +107,8 @@ export default class UserRecords {
 		const { endurance, strength } = best;
 		if (focus === 'endurance') {
 			const scaled = endurance.copy().scaleReps(0.8 + (difficulty * 0.4));
+			// TODO: Should offer any reasonable numbers of sets (2 - 5) depending
+			// on difficulty (not relative to previous)
 			return [
 				scaled.copy().incSets(-1),
 				scaled.copy().incSets(0),
@@ -109,6 +116,8 @@ export default class UserRecords {
 			].filter((x, i) => i >= (difficulty - 1) && i <= (difficulty + 1));
 		}
 		const scaled = strength.copy().incWeight(-1 + difficulty);
+		// TODO: Should offer any reasonable numbers of sets (2 - 5) depending
+		// on difficulty (not relative to previous)
 		return [
 			scaled.copy().incSets(-1),
 			scaled.copy().incSets(0),
@@ -142,5 +151,16 @@ function failureDegrade(rec: DBRecord): DBRecord {
 	return {
 		...rec,
 		reps: rec.reps * (rec.completed ? 1 : UserRecords.FAILURE_FACTOR)
+	};
+}
+
+function qualityDegrade(rec: DBRecord, i: number): DBRecord {
+	// Choose a slope such that at the limit, the factor is 0.5
+	const slopeVal = (UserRecords.QUALITY_LIMIT - UserRecords.QUALITY_CLIFF) * 2;
+	const c = (UserRecords.QUALITY_LIMIT * 2) - UserRecords.QUALITY_CLIFF - 1;
+	const factor = (c - i) / slopeVal;
+	return {
+		...rec,
+		reps: rec.reps * Math.min(factor, 1),
 	};
 }

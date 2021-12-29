@@ -2,6 +2,7 @@ import UserRecords from '../UserRecords';
 import db from '../../db';
 import { Difficulty } from '../../global/enum';
 import testRecords from './data/records.json';
+import qualityTestRecords from './data/quality_test_records.json';
 
 const BENCH_PRESS_RECORDS: DBRecord[] = [
 	{
@@ -76,6 +77,9 @@ describe('UserRecords unit test', () => {
 	beforeAll(async () => {
 		await db.init();
 
+		// 2021-12-31T00:00:00.000Z
+		Date.now = jest.fn().mockReturnValue(1640908800000);
+
 		db.users.getOne = jest.fn().mockResolvedValue({
 		  id: 1,
 		  name: 'Jake',
@@ -93,12 +97,23 @@ describe('UserRecords unit test', () => {
 			.toEqual(BENCH_PRESS_RECORDS);
 	});
 
-	test('getAdjustedRecords', () => {
+	test('getAdjustedRecords - basic', () => {
 		expect(userRecords.getAdjustedRecords('bench_press'))
 			.toEqual(ADJUSTED_BENCH_PRESS_RECORDS);
 	});
 
-	test('getPersonalBests', () => {
+	test('getAdjustedRecords - degradeQuality', async () => {
+		db.records.getForUser = jest.fn().mockResolvedValue(qualityTestRecords.original);
+		const qualityUserRecords = await UserRecords.fromUserId(1);
+
+		expect(qualityUserRecords.getAdjustedRecords('bench_press'))
+			.toEqual(qualityTestRecords.adjusted);
+	});
+
+	test('getPersonalBests', async () => {
+		db.records.getForUser = jest.fn().mockResolvedValue(testRecords);
+		userRecords = await UserRecords.fromUserId(1);
+
 		const personalBests = userRecords.getPersonalBests('bench_press');
 		expect(personalBests).not.toBeNull();
 
