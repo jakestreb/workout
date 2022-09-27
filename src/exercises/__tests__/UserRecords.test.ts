@@ -127,14 +127,14 @@ describe('UserRecords unit test', () => {
 		expect(score).not.toBeNull();
 
 		const { endurance, strength } = score!.round();
-		expect(endurance).toEqual(1);
-		expect(strength).toEqual(1.24);
+		expect(endurance).toEqual(1.11);
+		expect(strength).toEqual(1.26);
 	});
 
 	test('getRecommendations', () => {
 		const recs = userRecords.getRecommendations('bench_press');
-		expect(`${recs!.endurance}`).toEqual('4x8 165');
-		expect(`${recs!.strength}`).toEqual('4x7 195'); // TODO: Should be fewer reps / higher weight
+		expect(`${recs!.endurance}`).toEqual('4x9 150');
+		expect(`${recs!.strength}`).toEqual('4x5 270'); // TODO: Should be fewer reps / higher weight
 	});
 
 	test('getPossibleRepsWeights', () => {

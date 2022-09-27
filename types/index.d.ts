@@ -74,8 +74,10 @@ declare interface JSONExercise {
   weight: number;
   activations: JSONActivation[];
   secondsPerRep: number;
-  sets: number[];
-  reps: number[];
+  reps: {
+    endurance: number;
+    strength: number;
+  }
   weightStandards: {
   	male: number;
   	female: number;

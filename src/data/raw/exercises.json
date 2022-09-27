@@ -23,18 +23,10 @@
       }
     ],
     "secondsPerRep": 3,
-    "enduranceReps": 10,
-    "strengthReps": 4,
-    "sets": [
-      3,
-      4,
-      5
-    ],
-    "reps": [
-      6,
-      8,
-      10
-    ],
+    "reps": {
+      "endurance": 10,
+      "strength": 4
+    },
     "weightStandards": {
       "male": 165,
       "female": 90
@@ -67,16 +59,10 @@
       }
     ],
     "secondsPerRep": 3,
-    "sets": [
-      3,
-      4,
-      5
-    ],
-    "reps": [
-      6,
-      8,
-      10
-    ],
+    "reps": {
+      "endurance": 10,
+      "strength": 4
+    },
     "weightStandards": {
       "male": 135,
       "female": 65
@@ -109,16 +95,10 @@
       }
     ],
     "secondsPerRep": 3,
-    "sets": [
-      3,
-      4,
-      5
-    ],
-    "reps": [
-      6,
-      8,
-      10
-    ],
+    "reps": {
+      "endurance": 10,
+      "strength": 4
+    },
     "weightStandards": {
       "male": 145,
       "female": 70
@@ -151,16 +131,10 @@
       }
     ],
     "secondsPerRep": 5,
-    "sets": [
-      3,
-      4,
-      5
-    ],
-    "reps": [
-      6,
-      8,
-      10
-    ],
+    "reps": {
+      "endurance": 10,
+      "strength": 4
+    },
     "weightStandards": {
       "male": 20,
       "female": 12
@@ -189,16 +163,10 @@
       }
     ],
     "secondsPerRep": 4,
-    "sets": [
-      3,
-      4,
-      5
-    ],
-    "reps": [
-      6,
-      8,
-      10
-    ],
+    "reps": {
+      "endurance": 10,
+      "strength": 4
+    },
     "weightStandards": {
       "male": 165,
       "female": 90
@@ -231,15 +199,10 @@
       }
     ],
     "secondsPerRep": 2,
-    "sets": [
-      3,
-      4
-    ],
-    "reps": [
-      10,
-      15,
-      20
-    ],
+    "reps": {
+      "endurance": 20,
+      "strength": 10
+    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -276,15 +239,10 @@
       }
     ],
     "secondsPerRep": 3,
-    "sets": [
-      3,
-      4
-    ],
-    "reps": [
-      8,
-      10,
-      12
-    ],
+    "reps": {
+      "endurance": 15,
+      "strength": 8
+    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -322,17 +280,10 @@
       }
     ],
     "secondsPerRep": 3,
-    "sets": [
-      3,
-      4,
-      5
-    ],
-    "reps": [
-      6,
-      8,
-      10,
-      12
-    ],
+    "reps": {
+      "endurance": 12,
+      "strength": 6
+    },
     "weightStandards": {
       "male": 110,
       "female": 60
@@ -370,17 +321,10 @@
       }
     ],
     "secondsPerRep": 6,
-    "sets": [
-      3,
-      4,
-      5
-    ],
-    "reps": [
-      6,
-      8,
-      10,
-      12
-    ],
+    "reps": {
+      "endurance": 12,
+      "strength": 6
+    },
     "weightStandards": {
       "male": 60,
       "female": 60
@@ -410,15 +354,10 @@
       }
     ],
     "secondsPerRep": 2,
-    "sets": [
-      3,
-      4
-    ],
-    "reps": [
-      10,
-      12,
-      15
-    ],
+    "reps": {
+      "endurance": 15,
+      "strength": 8
+    },
     "weightStandards": {
       "male": 20,
       "female": 12
@@ -444,16 +383,10 @@
       }
     ],
     "secondsPerRep": 2,
-    "sets": [
-      3,
-      4,
-      5
-    ],
-    "reps": [
-      6,
-      8,
-      10
-    ],
+    "reps": {
+      "endurance": 15,
+      "strength": 8
+    },
     "weightStandards": {
       "male": 20,
       "female": 12
@@ -491,16 +424,10 @@
       }
     ],
     "secondsPerRep": 3,
-    "sets": [
-      3,
-      4,
-      5
-    ],
-    "reps": [
-      6,
-      8,
-      10
-    ],
+    "reps": {
+      "endurance": 12,
+      "strength": 6
+    },
     "weightStandards": {
       "male": 35,
       "female": 20
@@ -516,16 +443,10 @@
       "activity": 6
     }],
     "secondsPerRep": 4,
-    "sets": [
-      3,
-      4,
-      5
-    ],
-    "reps": [
-      8,
-      10,
-      12
-    ],
+    "reps": {
+      "endurance": 12,
+      "strength": 8
+    },
     "weightStandards": {
       "male": 25,
       "female": 15
@@ -541,16 +462,10 @@
       "activity": 4
     }],
     "secondsPerRep": 5,
-    "sets": [
-      3,
-      4,
-      5
-    ],
-    "reps": [
-      8,
-      10,
-      12
-    ],
+    "reps": {
+      "endurance": 12,
+      "strength": 8
+    },
     "weightStandards": {
       "male": 60,
       "female": 35
@@ -566,16 +481,10 @@
       "activity": 7.5
     }],
     "secondsPerRep": 5,
-    "sets": [
-      3,
-      4,
-      5
-    ],
-    "reps": [
-      8,
-      10,
-      12
-    ],
+    "reps": {
+      "endurance": 12,
+      "strength": 8
+    },
     "weightStandards": {
       "male": 25,
       "female": 15
@@ -591,15 +500,10 @@
       "activity": 9
     }],
     "secondsPerRep": 5,
-    "sets": [
-      3,
-      4
-    ],
-    "reps": [
-      6,
-      8,
-      10
-    ],
+    "reps": {
+      "endurance": 20,
+      "strength": 10
+    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -615,15 +519,10 @@
       "activity": 7.5
     }],
     "secondsPerRep": 3,
-    "sets": [
-      3,
-      4
-    ],
-    "reps": [
-      6,
-      8,
-      10
-    ],
+    "reps": {
+      "endurance": 15,
+      "strength": 6
+    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -642,14 +541,10 @@
       "activity": 1.5
     }],
     "secondsPerRep": 2,
-    "sets": [
-      3
-    ],
-    "reps": [
-      10,
-      15,
-      20
-    ],
+    "reps": {
+      "endurance": 30,
+      "strength": 10
+    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -668,13 +563,10 @@
       "activity": 2
     }],
     "secondsPerRep": 2,
-    "sets": [
-      3
-    ],
-    "reps": [
-      10,
-      15
-    ],
+    "reps": {
+      "endurance": 20,
+      "strength": 10
+    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -693,14 +585,10 @@
       "activity": 0.4
     }],
     "secondsPerRep": 1,
-    "sets": [
-      3
-    ],
-    "reps": [
-      30,
-      45,
-      60
-    ],
+    "reps": {
+      "endurance": 60,
+      "strength": 30
+    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -719,14 +607,10 @@
       "activity": 1.2
     }],
     "secondsPerRep": 1,
-    "sets": [
-      3
-    ],
-    "reps": [
-      30,
-      45,
-      60
-    ],
+    "reps": {
+      "endurance": 60,
+      "strength": 30
+    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -745,14 +629,10 @@
       "activity": 0.8
     }],
     "secondsPerRep": 1,
-    "sets": [
-      3
-    ],
-    "reps": [
-      30,
-      45,
-      60
-    ],
+    "reps": {
+      "endurance": 60,
+      "strength": 30
+    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -771,14 +651,10 @@
       "activity": 0.8
     }],
     "secondsPerRep": 1,
-    "sets": [
-      3
-    ],
-    "reps": [
-      30,
-      45,
-      60
-    ],
+    "reps": {
+      "endurance": 60,
+      "strength": 30
+    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -794,13 +670,10 @@
       "activity": 2.5
     }],
     "secondsPerRep": 3,
-    "sets": [
-      3
-    ],
-    "reps": [
-      20,
-      24
-    ],
+    "reps": {
+      "endurance": 12,
+      "strength": 6
+    },
     "weightStandards": {
       "male": 80,
       "female": 60
@@ -819,13 +692,10 @@
       "activity": 1.5
     }],
     "secondsPerRep": 2,
-    "sets": [
-      3
-    ],
-    "reps": [
-      10,
-      15
-    ],
+    "reps": {
+      "endurance": 15,
+      "strength": 8
+    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -844,14 +714,10 @@
       "activity": 1.5
     }],
     "secondsPerRep": 5,
-    "sets": [
-      3
-    ],
-    "reps": [
-      10,
-      15,
-      20
-    ],
+    "reps": {
+      "endurance": 20,
+      "strength": 8
+    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -870,13 +736,10 @@
       "activity": 5
     }],
     "secondsPerRep": 5,
-    "sets": [
-      3
-    ],
-    "reps": [
-      5,
-      10
-    ],
+    "reps": {
+      "endurance": 12,
+      "strength": 6
+    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -895,14 +758,10 @@
       "activity": 2
     }],
     "secondsPerRep": 3,
-    "sets": [
-      3
-    ],
-    "reps": [
-      10,
-      15,
-      20
-    ],
+    "reps": {
+      "endurance": 20,
+      "strength": 10
+    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -921,14 +780,10 @@
       "activity": 0.1
     }],
     "secondsPerRep": 0.5,
-    "sets": [
-      3
-    ],
-    "reps": [
-      10,
-      20,
-      30
-    ],
+    "reps": {
+      "endurance": 30,
+      "strength": 10
+    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -947,13 +802,10 @@
       "activity": 3.5
     }],
     "secondsPerRep": 2,
-    "sets": [
-      3
-    ],
-    "reps": [
-      10,
-      15
-    ],
+    "reps": {
+      "endurance": 20,
+      "strength": 10
+    },
     "weightStandards": {
       "male": 35,
       "female": 25
@@ -993,16 +845,10 @@
       "activity": 1.5
     }],
     "secondsPerRep": 4,
-    "sets": [
-      3,
-      4,
-      5
-    ],
-    "reps": [
-      6,
-      8,
-      10
-    ],
+    "reps": {
+      "endurance": 10,
+      "strength": 4
+    },
     "weightStandards": {
       "male": 275,
       "female": 150
@@ -1042,16 +888,10 @@
       "activity": 1
     }],
     "secondsPerRep": 3,
-    "sets": [
-      3,
-      4,
-      5
-    ],
-    "reps": [
-      6,
-      8,
-      10
-    ],
+    "reps": {
+      "endurance": 10,
+      "strength": 4
+    },
     "weightStandards": {
       "male": 225,
       "female": 120
@@ -1076,16 +916,10 @@
       "activity": 2
     }],
     "secondsPerRep": 6,
-    "sets": [
-      3,
-      4,
-      5
-    ],
-    "reps": [
-      8,
-      10,
-      12
-    ],
+    "reps": {
+      "endurance": 12,
+      "strength": 6
+    },
     "weightStandards": {
       "male": 80,
       "female": 45
@@ -1110,16 +944,10 @@
       "activity": 1.5
     }],
     "secondsPerRep": 3,
-    "sets": [
-      3,
-      4,
-      5
-    ],
-    "reps": [
-      6,
-      8,
-      10
-    ],
+    "reps": {
+      "endurance": 12,
+      "strength": 6
+    },
     "weightStandards": {
       "male": 185,
       "female": 100
@@ -1144,16 +972,10 @@
       "activity": 1.5
     }],
     "secondsPerRep": 3,
-    "sets": [
-      3,
-      4,
-      5
-    ],
-    "reps": [
-      6,
-      8,
-      10
-    ],
+    "reps": {
+      "endurance": 12,
+      "strength": 6
+    },
     "weightStandards": {
       "male": 175,
       "female": 90
@@ -1178,14 +1000,10 @@
       "activity": 1.5
     }],
     "secondsPerRep": 2,
-    "sets": [
-      3
-    ],
-    "reps": [
-      10,
-      15,
-      20
-    ],
+    "reps": {
+      "endurance": 20,
+      "strength": 10
+    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -1210,14 +1028,10 @@
       "activity": 1
     }],
     "secondsPerRep": 2,
-    "sets": [
-      3
-    ],
-    "reps": [
-      10,
-      15,
-      20
-    ],
+    "reps": {
+      "endurance": 20,
+      "strength": 10
+    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -1248,14 +1062,10 @@
       "activity": 3
     }],
     "secondsPerRep": 2,
-    "sets": [
-      3
-    ],
-    "reps": [
-      5,
-      8,
-      10
-    ],
+    "reps": {
+      "endurance": 12,
+      "strength": 4
+    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -1286,14 +1096,10 @@
       "activity": 4
     }],
     "secondsPerRep": 2,
-    "sets": [
-      3
-    ],
-    "reps": [
-      5,
-      8,
-      10
-    ],
+    "reps": {
+      "endurance": 12,
+      "strength": 4
+    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -1324,16 +1130,10 @@
       "activity": 1.5
     }],
     "secondsPerRep": 4,
-    "sets": [
-      3,
-      4,
-      5
-    ],
-    "reps": [
-      6,
-      8,
-      10
-    ],
+    "reps": {
+      "endurance": 10,
+      "strength": 4
+    },
     "weightStandards": {
       "male": 220,
       "female": 120
@@ -1364,14 +1164,10 @@
       "activity": 0.5
     }],
     "secondsPerRep": 2,
-    "sets": [
-      3
-    ],
-    "reps": [
-      10,
-      15,
-      20
-    ],
+    "reps": {
+      "endurance": 20,
+      "strength": 10
+    },
     "weightStandards": {
       "male": 60,
       "female": 35
@@ -1380,7 +1176,7 @@
     "isBodyweightExercise": false
   },
   {
-    "name": "kettlebell_pistol_squat",
+    "name": "pistol_squat",
     "weight": 1,
     "activations": [{
       "muscle": "erectors",
@@ -1402,14 +1198,10 @@
       "activity": 0.5
     }],
     "secondsPerRep": 5,
-    "sets": [
-      3
-    ],
-    "reps": [
-      10,
-      15,
-      20
-    ],
+    "reps": {
+      "endurance": 12,
+      "strength": 6
+    },
     "weightStandards": {
       "male": 30,
       "female": 20
@@ -1440,14 +1232,10 @@
       "activity": 1
     }],
     "secondsPerRep": 3,
-    "sets": [
-      3
-    ],
-    "reps": [
-      10,
-      15,
-      20
-    ],
+    "reps": {
+      "endurance": 20,
+      "strength": 10
+    },
     "weightStandards": {
       "male": 190,
       "female": 100
@@ -1478,15 +1266,10 @@
       "activity": 1.5
     }],
     "secondsPerRep": 6,
-    "sets": [
-      3,
-      4
-    ],
-    "reps": [
-      10,
-      12,
-      15
-    ],
+    "reps": {
+      "endurance": 15,
+      "strength": 6
+    },
     "weightStandards": {
       "male": 125,
       "female": 70
@@ -1517,15 +1300,10 @@
       "activity": 0.5
     }],
     "secondsPerRep": 2,
-    "sets": [
-      3,
-      4
-    ],
-    "reps": [
-      15,
-      20,
-      30
-    ],
+    "reps": {
+      "endurance": 30,
+      "strength": 15
+    },
     "weightStandards": {
       "male": 45,
       "female": 25
@@ -1559,15 +1337,10 @@
       "activity": 1
     }],
     "secondsPerRep": 3,
-    "sets": [
-      3,
-      4
-    ],
-    "reps": [
-      15,
-      20,
-      30
-    ],
+    "reps": {
+      "endurance": 25,
+      "strength": 10
+    },
     "weightStandards": {
       "male": 45,
       "female": 25
@@ -1595,16 +1368,10 @@
       "activity": 0.5
     }],
     "secondsPerRep": 4,
-    "sets": [
-      3,
-      4,
-      5
-    ],
-    "reps": [
-      8,
-      10,
-      12
-    ],
+    "reps": {
+      "endurance": 12,
+      "strength": 6
+    },
     "weightStandards": {
       "male": 125,
       "female": 70
@@ -1620,15 +1387,10 @@
       "activity": 4
     }],
     "secondsPerRep": 1.5,
-    "sets": [
-      3,
-      4
-    ],
-    "reps": [
-      15,
-      20,
-      25
-    ],
+    "reps": {
+      "endurance": 25,
+      "strength": 10
+    },
     "weightStandards": {
       "male": 185,
       "female": 100
@@ -1644,14 +1406,10 @@
       "activity": 0.5
     }],
     "secondsPerRep": 1,
-    "sets": [
-      3
-    ],
-    "reps": [
-      10,
-      15,
-      20
-    ],
+    "reps": {
+      "endurance": 20,
+      "strength": 10
+    },
     "weightStandards": {
       "male": 95,
       "female": 50
@@ -1682,15 +1440,10 @@
       "activity": 0.5
     }],
     "secondsPerRep": 4,
-    "sets": [
-      3,
-      4
-    ],
-    "reps": [
-      10,
-      12,
-      15
-    ],
+    "reps": {
+      "endurance": 15,
+      "strength": 6
+    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -1715,14 +1468,10 @@
       "activity": 0.3
     }],
     "secondsPerRep": 1,
-    "sets": [
-      3
-    ],
-    "reps": [
-      20,
-      40,
-      60
-    ],
+    "reps": {
+      "endurance": 60,
+      "strength": 30
+    },
     "weightStandards": {
       "male": 0,
       "female": 0
@@ -1741,15 +1490,10 @@
       "activity": 1
     }],
     "secondsPerRep": 2,
-    "sets": [
-      3,
-      4
-    ],
-    "reps": [
-      10,
-      12,
-      15
-    ],
+    "reps": {
+      "endurance": 15,
+      "strength": 6
+    },
     "weightStandards": {
       "male": 75,
       "female": 40
@@ -1768,15 +1512,10 @@
       "activity": 1.5
     }],
     "secondsPerRep": 4,
-    "sets": [
-      3,
-      4
-    ],
-    "reps": [
-      10,
-      12,
-      15
-    ],
+    "reps": {
+      "endurance": 15,
+      "strength": 6
+    },
     "weightStandards": {
       "male": 35,
       "female": 20
@@ -1795,15 +1534,10 @@
       "activity": 1.5
     }],
     "secondsPerRep": 2,
-    "sets": [
-      3,
-      4
-    ],
-    "reps": [
-      10,
-      12,
-      15
-    ],
+    "reps": {
+      "endurance": 15,
+      "strength": 6
+    },
     "weightStandards": {
       "male": 35,
       "female": 20
@@ -1822,15 +1556,10 @@
       "activity": 1
     }],
     "secondsPerRep": 2,
-    "sets": [
-      3,
-      4
-    ],
-    "reps": [
-      10,
-      12,
-      15
-    ],
+    "reps": {
+      "endurance": 15,
+      "strength": 6
+    },
     "weightStandards": {
       "male": 60,
       "female": 35
@@ -1849,15 +1578,10 @@
       "activity": 1.5
     }],
     "secondsPerRep": 2,
-    "sets": [
-      3,
-      4
-    ],
-    "reps": [
-      10,
-      12,
-      15
-    ],
+    "reps": {
+      "endurance": 15,
+      "strength": 6
+    },
     "weightStandards": {
       "male": 35,
       "female": 20
@@ -1882,15 +1606,10 @@
       "activity": 2
     }],
     "secondsPerRep": 4,
-    "sets": [
-      3,
-      4
-    ],
-    "reps": [
-      10,
-      12,
-      15
-    ],
+    "reps": {
+      "endurance": 15,
+      "strength": 6
+    },
     "weightStandards": {
       "male": 35,
       "female": 20
@@ -1906,14 +1625,10 @@
       "activity": 0.5
     }],
     "secondsPerRep": 1,
-    "sets": [
-      3
-    ],
-    "reps": [
-      30,
-      40,
-      60
-    ],
+    "reps": {
+      "endurance": 60,
+      "strength": 30
+    },
     "weightStandards": {
       "male": 30,
       "female": 20

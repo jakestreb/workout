@@ -16,8 +16,6 @@ export default class UserRecords {
 	public static ENDURANCE_LOSS_PER_MONTH = 0.025;
 	public static STRENGTH_LOSS_PER_MONTH = 0.015;
 
-	public static FAILURE_FACTOR = 0.7;
-
 	public static QUALITY_CLIFF = 4;
 	public static QUALITY_LIMIT = 12;
 
@@ -92,37 +90,26 @@ export default class UserRecords {
 		}
 		const exercise = new Exercise(e);
 		return {
-			endurance: exercise.scaleRepsWeight(bests.endurance, 'endurance', this.user),
-			strength: exercise.scaleRepsWeight(bests.strength, 'strength', this.user),
+			endurance: exercise.scaleToward(bests.endurance, 'endurance', this.user),
+			strength: exercise.scaleToward(bests.strength, 'strength', this.user),
 		};
 	}
 
 	public getPossibleRepsWeights(exercise: string, focus: Skill, difficulty: Difficulty): RepsWeight[] {
-		const best = this.getRecommendations(exercise);
-		if (!best) {
-			return [
-				new Exercise(exercise).getFirstTryRepsWeight(this.user),
-			];
+		let result: RepsWeight;
+		const recs = this.getRecommendations(exercise);
+		if (!recs) {
+			result = new Exercise(exercise).getFirstTryRepsWeight(this.user);
+		} else if (focus === 'endurance') {
+			result = recs.endurance.copy().scaleReps(0.8 + (difficulty * 0.4));
+		} else {
+			result = recs.strength.copy().incWeight(-1 + difficulty);
 		}
-		const { endurance, strength } = best;
-		if (focus === 'endurance') {
-			const scaled = endurance.copy().scaleReps(0.8 + (difficulty * 0.4));
-			// TODO: Should offer any reasonable numbers of sets (2 - 5) depending
-			// on difficulty (not relative to previous)
-			return [
-				scaled.copy().incSets(-1),
-				scaled.copy().incSets(0),
-				scaled.copy().incSets(1),
-			].filter((x, i) => i >= (difficulty - 1) && i <= (difficulty + 1));
-		}
-		const scaled = strength.copy().incWeight(-1 + difficulty);
-		// TODO: Should offer any reasonable numbers of sets (2 - 5) depending
-		// on difficulty (not relative to previous)
 		return [
-			scaled.copy().incSets(-1),
-			scaled.copy().incSets(0),
-			scaled.copy().incSets(1),
-			].filter((x, i) => i >= (difficulty - 1) && i <= (difficulty + 1));
+			result.copy().setSets(3),
+			result.copy().setSets(4),
+			result.copy().setSets(5),
+		].filter((x, i) => i >= (difficulty - 1) && i <= (difficulty + 1));
 	}
 
 	private _getRecordScore(exercise: string, rec: DBRecord): Score {
@@ -150,7 +137,7 @@ function timeDegrade(rec: DBRecord): DBRecord {
 function failureDegrade(rec: DBRecord): DBRecord {
 	return {
 		...rec,
-		reps: rec.reps * (rec.completed ? 1 : UserRecords.FAILURE_FACTOR)
+		sets: rec.completed ? rec.sets : 1,
 	};
 }
 

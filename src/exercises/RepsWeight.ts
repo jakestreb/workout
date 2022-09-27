@@ -48,13 +48,20 @@ export default class RepsWeight {
 		return this;
 	}
 
+	public addWeight(amount: number): this {
+		if (this._weight !== null) {
+			this._weight += amount;
+		}
+		return this;
+	}
+
 	public scaleReps(factor: number): this {
 		this._reps = incCount(this._reps, this._reps * (factor - 1));
 		return this;
 	}
 
-	public incSets(inc: number): this {
-		this._sets = incCount(this._sets, inc);
+	public setSets(count: number): this {
+		this._sets = count;
 		return this;
 	}
 

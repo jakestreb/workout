@@ -42,14 +42,6 @@ export default class ExercisePair extends Exercise {
 		return [this.name, this.second.name];
 	}
 
-	public get possibleSets(): number[] {
-		return util.overlapping(super.possibleSets, this.second.possibleSets);
-	}
-
-	public get possibleReps(): number[] {
-		return util.overlapping(super.possibleReps, this.second.possibleReps);
-	}
-
 	public get muscleScoreFactors(): MuscleScores {
 		return MuscleScores.combine(super.muscleScoreFactors, this.second.muscleScoreFactors);
 	}
