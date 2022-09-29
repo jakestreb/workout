@@ -134,7 +134,7 @@ export default class Exercise {
 
 		const endurance = reps / stdReps;
 		return new Score({
-			endurance: endurance + (0.25 * endurance * sets),
+			endurance: endurance + (0.25 * endurance * (sets - 1)),
 			strength: weight ? weight / stdWeight : 1,
 		});
 	}

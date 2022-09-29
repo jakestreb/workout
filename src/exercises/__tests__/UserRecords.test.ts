@@ -115,7 +115,7 @@ describe('UserRecords unit test', () => {
 		expect(score).not.toBeNull();
 
 		const { endurance, strength } = score!.round();
-		expect(endurance).toEqual(2.29);
+		expect(endurance).toEqual(2.0);
 		expect(strength).toEqual(1.39);
 	});
 
