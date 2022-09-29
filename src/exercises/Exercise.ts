@@ -128,14 +128,30 @@ export default class Exercise {
 	}
 
 	public getScore(repsWeight: RepsWeight, user: DBUser): Score {
-		const { reps, weight } = repsWeight;
+		const { reps, sets, weight } = repsWeight;
 		const stdReps = this.standardReps;
 		const stdWeight = this.getWeightStandard(user.gender);
 
+		const endurance = reps / stdReps;
 		return new Score({
-			endurance: reps / stdReps,
+			endurance: endurance + (0.25 * endurance * sets),
 			strength: weight ? weight / stdWeight : 1,
 		});
+	}
+
+	public incReps(repsWeight: RepsWeight, factor: number = 1): RepsWeight {
+		const { reps, sets, weight } = repsWeight;
+		const incremented = Math.round(reps + (this.standardReps * 0.2 * factor));
+
+		return new RepsWeight({
+			reps: Math.max(incremented, 1),
+			sets,
+			weight,
+		});
+	}
+
+	public incWeight(repsWeight: RepsWeight): RepsWeight {
+		return repsWeight.incWeight(1);
 	}
 
 	public getFirstTryRepsWeight(user: DBUser): RepsWeight {

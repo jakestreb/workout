@@ -38,11 +38,6 @@ export default class RepsWeight {
 		return this;
 	}
 
-	public scaleWeight(factor: number): this {
-		this._weight = roundWeight(this._weight ? this._weight * factor : null);
-		return this;
-	}
-
 	public incWeight(inc: number): this {
 		this._weight = incWeight(this._weight, inc);
 		return this;
@@ -52,6 +47,14 @@ export default class RepsWeight {
 		if (this._weight !== null) {
 			this._weight += amount;
 		}
+		return this;
+	}
+
+	public setWeight(weight: number): this {
+		if (this._weight === null) {
+			throw new Error('Cannot set to null weight');
+		}
+		this._weight = weight;
 		return this;
 	}
 

@@ -11,10 +11,12 @@ import * as util from '../global/util';
 export default abstract class Matcher<T> {
 	public exercises: Exercise[];
 	public target: WorkoutTarget;
+	public user: DBUser;
 
-	constructor(exercises: Exercise[], target: WorkoutTarget) {
+	constructor(exercises: Exercise[], target: WorkoutTarget, user: DBUser) {
 		this.exercises = exercises;
 		this.target = target;
+		this.user = user;
 	}
 
 	/**
@@ -56,7 +58,7 @@ export default abstract class Matcher<T> {
 
 	private _getPriorityScore(exercise: Exercise): Score {
 		const goalFactorScores = new MuscleScores();
-		const standardScores = exercise.getStandardFocusScores(this.target.user);
+		const standardScores = exercise.getStandardFocusScores(this.user);
 		standardScores.keys.forEach(m => {
 			const goal = this.target.muscleGoals.get(m);
 			const priority = standardScores.get(m).multiply(goal); // exercise score x goal dist

@@ -19,9 +19,10 @@ export default class DifficultyMatcher extends Matcher<Difficulty> {
 	constructor(
 		exercises: Exercise[],
 		skills: Skill[],
-		target: WorkoutTarget
+		target: WorkoutTarget,
+		user: DBUser,
 	) {
-		super(exercises, target);
+		super(exercises, target, user);
 
 		this.skills = skills;
 	}

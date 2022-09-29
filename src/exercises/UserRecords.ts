@@ -83,33 +83,42 @@ export default class UserRecords {
 		};
 	}
 
-	public getRecommendations(e: string): PersonalBests|null {
-		const bests = this.getPersonalBests(e);
-		if (!bests) {
-			return null;
-		}
-		const exercise = new Exercise(e);
-		return {
-			endurance: exercise.scaleToward(bests.endurance, 'endurance', this.user),
-			strength: exercise.scaleToward(bests.strength, 'strength', this.user),
-		};
-	}
-
 	public getPossibleRepsWeights(exercise: string, focus: Skill, difficulty: Difficulty): RepsWeight[] {
-		let result: RepsWeight;
-		const recs = this.getRecommendations(exercise);
-		if (!recs) {
-			result = new Exercise(exercise).getFirstTryRepsWeight(this.user);
+		let rec: RepsWeight;
+		const e = new Exercise(exercise);
+		const bests = this.getPersonalBests(exercise);
+		// const recs = this.getRecommendations(exercise);
+		if (!bests) {
+			rec = e.getFirstTryRepsWeight(this.user);
 		} else if (focus === 'endurance') {
-			result = recs.endurance.copy().scaleReps(0.8 + (difficulty * 0.4));
+			const best = bests.endurance.copy();
+			// Note that incrementing, then scaling the expected next value
+			// gives a better result than scaling the previous directly
+			rec = e.incReps(best)
+				.scaleReps(0.75 + (difficulty * 0.25));
+			// Add next rec (more reps) scaled by difficulty
+			const stdWeight = e.getWeightStandard(this.user.gender);
+			// If using more weight than std, add a decreased weight version
+			const easierWeightRec = rec.copy().incWeight(-1);
+			if (easierWeightRec.weight !== rec.weight && easierWeightRec.weight! >= stdWeight) {
+				rec = easierWeightRec;
+			}
 		} else {
-			result = recs.strength.copy().incWeight(-1 + difficulty);
+			const best = bests.strength.copy();
+			rec = best.incWeight(difficulty);
+			// Add next rec (more reps) scaled by difficulty
+			const easierRepsRec = e.incReps(rec.copy(), -1);
+			// If doing more reps than std, add a decreased rep version
+			if (easierRepsRec.reps !== rec.reps && easierRepsRec.reps >= e.standardReps) {
+				rec = easierRepsRec;
+			}
 		}
 		return [
-			result.copy().setSets(3),
-			result.copy().setSets(4),
-			result.copy().setSets(5),
-		].filter((x, i) => i >= (difficulty - 1) && i <= (difficulty + 1));
+			rec.copy().setSets(2),
+			rec.copy().setSets(3),
+			rec.copy().setSets(4),
+			rec.copy().setSets(5),
+		];
 	}
 
 	private _getRecordScore(exercise: string, rec: DBRecord): Score {

@@ -11,17 +11,15 @@ export default class WorkoutTarget {
 	public readonly timeTarget: number;
 	public readonly difficulty: Difficulty;
 	public readonly enduranceRatio: number;
-	public user: DBUser;
 
 	private _muscleGoals: MuscleScores;
 	private _possibleExercises: Exercise[] = [];
 
-	constructor(target: IWorkoutTarget, user: DBUser) {
+	constructor(target: IWorkoutTarget) {
 		this._muscleGoals = new MuscleScores(target.muscleGoals);
 		this.timeTarget = target.timeMinutes * 60;
 		this.difficulty = target.difficulty;
 		this.enduranceRatio = target.enduranceRatio;
-		this.user = user;
 
 		this._initPossibleExercises();
 	}

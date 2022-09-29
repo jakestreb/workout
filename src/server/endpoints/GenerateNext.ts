@@ -13,8 +13,8 @@ export default class GenerateNext extends GetEndpoint {
 		if (workout) {
 			const sets: IWorkoutSet[] = workout.sets.map(s => ({
 				exercise: `${s.exercise}`,
-				sets: s.repsWeight.nSets,
-				reps: s.repsWeight.nReps,
+				sets: s.repsWeight.sets,
+				reps: s.repsWeight.reps,
 				muscleScores: s.getFocusScores(user).getMap(),
 			}));
 			return {
