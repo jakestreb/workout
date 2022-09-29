@@ -8,6 +8,7 @@ import { Difficulty } from '../../global/enum';
 import testRecords from './data/records.json';
 
 describe('DifficultyMatcher unit test', () => {
+	let user: DBUser;
 	let userRecords: UserRecords;
 	let bodyProfile: BodyProfile;
 
@@ -27,6 +28,7 @@ describe('DifficultyMatcher unit test', () => {
 		db.records.getForUser = jest.fn().mockResolvedValue(testRecords);
 
 		userRecords = await UserRecords.fromUserId(1);
+		user = userRecords.user;
 		bodyProfile = new BodyProfile(userRecords);
 	});
 
@@ -41,22 +43,22 @@ describe('DifficultyMatcher unit test', () => {
 		const target = bodyProfile.getWorkoutTarget(seed);
 
 		// Easy workout
-		let workoutTarget = new WorkoutTarget(target, userRecords.user);
-		let matcher = new DifficultyMatcher(exercises, skills, workoutTarget);
+		let workoutTarget = new WorkoutTarget(target);
+		let matcher = new DifficultyMatcher(exercises, skills, workoutTarget, user);
 		expect(matcher.getMatch()).toEqual(
 			[Hard, Easy, Intermediate, Easy]
 		);
 
 		// Intermediate workout
-		workoutTarget = new WorkoutTarget({ ...target, difficulty: Intermediate }, userRecords.user);
-		matcher = new DifficultyMatcher(exercises, skills, workoutTarget);
+		workoutTarget = new WorkoutTarget({ ...target, difficulty: Intermediate });
+		matcher = new DifficultyMatcher(exercises, skills, workoutTarget, user);
 		expect(matcher.getMatch()).toEqual(
 			[Hard, Easy, Intermediate, Intermediate]
 		);
 
 		// Hard workout
-		workoutTarget = new WorkoutTarget({ ...target, difficulty: Hard }, userRecords.user);
-		matcher = new DifficultyMatcher(exercises, skills, workoutTarget);
+		workoutTarget = new WorkoutTarget({ ...target, difficulty: Hard });
+		matcher = new DifficultyMatcher(exercises, skills, workoutTarget, user);
 		expect(matcher.getMatch()).toEqual(
 			[Hard, Intermediate, Hard, Intermediate]
 		);

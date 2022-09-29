@@ -8,6 +8,7 @@ import { Difficulty } from '../../global/enum';
 import testRecords from './data/records.json';
 
 describe('SkillMatcher unit test', () => {
+	let user: DBUser;
 	let userRecords: UserRecords;
 	let bodyProfile: BodyProfile;
 
@@ -27,6 +28,7 @@ describe('SkillMatcher unit test', () => {
 		db.records.getForUser = jest.fn().mockResolvedValue(testRecords);
 
 		userRecords = await UserRecords.fromUserId(1);
+		user = userRecords.user;
 		bodyProfile = new BodyProfile(userRecords);
 	});
 
@@ -38,9 +40,9 @@ describe('SkillMatcher unit test', () => {
 			muscles: [],
 			timeMinutes: 0,
 		});
-		const workoutTarget = new WorkoutTarget(target, userRecords.user);
+		const workoutTarget = new WorkoutTarget(target);
 
-		const matcher = new SkillMatcher(exercises, workoutTarget);
+		const matcher = new SkillMatcher(exercises, workoutTarget, user);
 		expect(matcher.getMatch()).toEqual(['endurance', 'strength', 'endurance', 'strength']);
 	});
 });
