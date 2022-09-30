@@ -43,6 +43,6 @@ describe('SkillMatcher unit test', () => {
 		const workoutTarget = new WorkoutTarget(target);
 
 		const matcher = new SkillMatcher(exercises, workoutTarget, user);
-		expect(matcher.getMatch()).toEqual(['endurance', 'strength', 'endurance', 'strength']);
+		expect(matcher.getMatch()).toEqual(['endurance', 'strength', 'strength', 'endurance']);
 	});
 });
