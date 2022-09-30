@@ -75,8 +75,6 @@ describe('UserRecords unit test', () => {
 	let userRecords: UserRecords;
 
 	beforeAll(async () => {
-		await db.init();
-
 		// 2021-12-31T00:00:00.000Z
 		Date.now = jest.fn().mockReturnValue(1640908800000);
 

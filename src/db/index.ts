@@ -12,13 +12,19 @@ class DBManager {
 
   private _db: sqlite3.Database;
 
+  constructor() {
+    this.records = new Records(this);
+    this.users = new Users(this);
+    this.workouts = new Workouts(this);
+  }
+
   public async init(): Promise<void> {
     const dbPath = path.resolve(__dirname, './records.db');
     this._db = new sqlite3.Database(dbPath);
 
-    this.records = await new Records(this).init();
-    this.users = await new Users(this).init();
-    this.workouts = await new Workouts(this).init();
+    await this.records.init();
+    await this.users.init();
+    await this.workouts.init();
 
     try {
       await this.records.addSampleData();
