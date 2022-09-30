@@ -8,7 +8,7 @@ import type WorkoutTarget from '../WorkoutTarget';
 
 export default class Exercise {
 
-	public static STD_SETS = 4;
+	public static STD_SETS = 3;
 	public static FIRST_TIME_WEIGHT_RATIO = 0.5;
 
 	public static REST_TIME = 60;
@@ -28,13 +28,16 @@ export default class Exercise {
 	public readonly name: string;
 
 	private readonly _record: JSONExercise;
+	private readonly _activity: { [muscle: string]: number } = {};
 	private readonly _scoreFactors: MuscleScores = new MuscleScores();
 
 	constructor(name: string) {
 		this.name = name;
 		this._record = data.exercises.get(name);
 		this._record.activations.forEach(a => {
+			this._activity[a.muscle] = a.activity;
 			this._scoreFactors.set(a.muscle,
+				// TODO: Why not just numbers?
 				new Score({
 					endurance: a.activity,
 					strength: a.activity,
@@ -61,12 +64,16 @@ export default class Exercise {
 		return this.standardSets * this.standardReps;
 	}
 
+	public get muscleActivity(): { [muscle: string]: number } {
+		return this._activity;
+	}
+
 	public get muscleScoreFactors(): MuscleScores {
 		return this._scoreFactors;
 	}
 
 	public get sortIndex(): number {
-		return -this._scoreFactors.total * this.repEstimate;
+		return -(this._scoreFactors.total.strength * this.repEstimate);
 	}
 
 	public get muscles(): string[] {
@@ -134,7 +141,7 @@ export default class Exercise {
 
 		const endurance = reps / stdReps;
 		return new Score({
-			endurance: endurance + (0.25 * endurance * (sets - 1)),
+			endurance: endurance + (0.2 * endurance * (sets - this.standardSets)),
 			strength: weight ? weight / stdWeight : 1,
 		});
 	}

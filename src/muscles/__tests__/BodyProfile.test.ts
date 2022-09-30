@@ -17,7 +17,7 @@ describe('BodyProfile unit test', () => {
 		Date.now = jest.fn().mockReturnValue(1640908800000);
 
 		db.users.getOne = jest.fn().mockResolvedValue({
-		  id: Difficulty.Intermediate,
+		  id: 1,
 		  name: 'Jake',
 		  gender: 'male',
 		  weight: 180,
@@ -45,7 +45,7 @@ describe('BodyProfile unit test', () => {
 			userRecords.getBestScores('squat')!.multiply(4 / 13.5),
 			userRecords.getBestScores('good_morning')!.multiply(4.5 / 13.5),
 			userRecords.getBestScores('kettlebell_swing')!.multiply(2 / 13.5)
-		).multiply(BodyProfile.SCORE_MULTPLIER);
+		);
 
 		expect(bodyProfile.getMuscleScore('glutes').round()).toEqual(score.round());
 	});
@@ -58,7 +58,7 @@ describe('BodyProfile unit test', () => {
 	test('getGoalDiscrepancies', () => {
 		const discrepancies = bodyProfile.getGoalDiscrepancies();
 		const manualDiscrepancy = bodyProfile.getGoalScore()
-			.subtract(bodyProfile.getMuscleScore('glutes'));
+			.divideBy(bodyProfile.getMuscleScore('glutes'));
 		expect(discrepancies.get('glutes').round()).toEqual(manualDiscrepancy.round());
 	});
 

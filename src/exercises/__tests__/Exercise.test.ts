@@ -79,12 +79,12 @@ describe('Exercise unit test', () => {
 		repsWeight = new RepsWeight({ sets: 4, reps: 7, weight: 165 });
 		score = benchPress.getScore(repsWeight, user).round();
 		expect(score).toEqual(
-			new Score({ endurance: 1.75, strength: 1.0 })
+			new Score({ endurance: 1.2, strength: 1.0 })
 		);
 		repsWeight = new RepsWeight({ sets: 4, reps: 10, weight: 165 });
 		score = benchPress.getScore(repsWeight, user).round();
 		expect(score).toEqual(
-			new Score({ endurance: 2.5, strength: 1.0 })
+			new Score({ endurance: 1.71, strength: 1.0 })
 		);
 		repsWeight = new RepsWeight({ sets: 4, reps: 7, weight: 185 });
 		score = benchPress.getScore(repsWeight, user).round();
@@ -114,9 +114,9 @@ describe('Exercise unit test', () => {
 		let repsWeight = new RepsWeight({ sets: 5, reps: 8, weight: 15 });
 		let muscleScores = exercise.getFocusScores(repsWeight, user).round();
 		expect(muscleScores.getMap()).toEqual({
-			front_delt: new Score({ endurance: 1.45, strength: 0.75 }),
-			middle_delt: new Score({ endurance: 4.36, strength: 2.25 }),
-	        rear_delt: new Score({ endurance: 2.18, strength: 1.13 }),
+			front_delt: new Score({ endurance: 1.02, strength: 0.75 }),
+			middle_delt: new Score({ endurance: 3.05, strength: 2.25 }),
+	        rear_delt: new Score({ endurance: 1.53, strength: 1.13 }),
 		});
 
 		user = {
