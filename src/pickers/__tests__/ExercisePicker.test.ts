@@ -10,20 +10,13 @@ describe('ExercisePicker unit test', () => {
 			glutes: { endurance: 100, strength: 100 },
 			biceps: { endurance: 100, strength: 100 },
 		};
-		const user: DBUser = {
-		  id: 1,
-		  name: 'Jake',
-		  gender: 'male',
-		  weight: 180,
-		  experience: 'advanced',
-		};
 		const target = new WorkoutTarget({
 			difficulty: Difficulty.Easy,
 			muscleGoals,
 			focusMuscleGoals: muscleGoals,
 			enduranceRatio: 0.5,
 			timeMinutes: 40,
-		}, user);
+		});
 		const picker = new ExercisePicker(target);
 
 		const gen = picker.pick();

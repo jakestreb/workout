@@ -17,12 +17,11 @@ interface RepsWeightPickerArgs {
 function makeRepsWeightPicker(args: RepsWeightPickerArgs) {
 	const { target, userRecords, exercises: exerciseNames } = args;
 	const exercises = exerciseNames.map(s => new Exercise(s));
-	const workoutTarget = new WorkoutTarget(target, userRecords.user);
+	const workoutTarget = new WorkoutTarget(target);
 	return new RepsWeightPicker(exercises, workoutTarget, userRecords);
 }
 
 describe('RepsWeightPicker unit test', () => {
-	let user: DBUser;
 	let userRecords: UserRecords;
 	let bodyProfile: BodyProfile;
 
@@ -42,7 +41,6 @@ describe('RepsWeightPicker unit test', () => {
 		db.records.getForUser = jest.fn().mockResolvedValue(testRecords);
 
 		userRecords = await UserRecords.fromUserId(1);
-		user = userRecords.user;
 		bodyProfile = new BodyProfile(userRecords);
 	});
 
@@ -53,7 +51,7 @@ describe('RepsWeightPicker unit test', () => {
 			muscles: ['glutes', 'calves'],
 			timeMinutes: 10,
 		});
-		const workoutTarget = new WorkoutTarget(target, user);
+		const workoutTarget = new WorkoutTarget(target);
 
 		const picker = makeRepsWeightPicker({
 			target,

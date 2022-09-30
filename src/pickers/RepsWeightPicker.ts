@@ -25,12 +25,14 @@ export default class RepsWeightPicker extends Picker<WorkoutSet> {
 	constructor(exercises: Exercise[], target: WorkoutTarget, userRecords: UserRecords) {
 		super();
 
+		const user = userRecords.user;
+
 		this._exercises = exercises;
 
-		const skillsMatcher = new SkillMatcher(exercises, target);
+		const skillsMatcher = new SkillMatcher(exercises, target, user);
 		this._skills = skillsMatcher.getMatch();
 
-		const difficultyMatcher = new DifficultyMatcher(exercises, this._skills, target);
+		const difficultyMatcher = new DifficultyMatcher(exercises, this._skills, target, user);
 		this._difficulties = difficultyMatcher.getMatch();
 
 		this._target = target;

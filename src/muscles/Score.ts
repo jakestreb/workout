@@ -18,6 +18,10 @@ export default class Score {
 		this.endurance = endurance || 0;
 	}
 
+	public get total(): number {
+		return this.strength + this.endurance;
+	}
+
 	public getMax(): string {
 		return this.strength > this.endurance ? 'strength' : 'endurance';
 	}

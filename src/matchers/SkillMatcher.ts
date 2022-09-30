@@ -7,9 +7,10 @@ import * as util from '../global/util';
 export default class SkillMatcher extends Matcher<Skill> {
 	constructor(
 		exercises: Exercise[],
-		target: WorkoutTarget
+		target: WorkoutTarget,
+		user: DBUser,
 	) {
-		super(exercises, target);
+		super(exercises, target, user);
 	}
 
 	public getSortedAttributes(): Skill[] {

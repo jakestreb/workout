@@ -26,10 +26,10 @@ export default abstract class Picker<T> {
 		return this._checkAll(...this.checks);
 	}
 
-	public* pick(): Generator<T[], T[]|null, Result> {
+	public* pick(): Generator<T[], T[]|null, Result|undefined> {
 		this._generators.push(this.buildGenerator());
 		while (true) {
-			let feedback: Result = Result.Incomplete;
+			let feedback: Result|undefined = Result.Incomplete;
 			const status = this._add();
 
 			// If the status check is successful, yield

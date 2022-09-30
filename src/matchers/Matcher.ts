@@ -1,6 +1,5 @@
 import WorkoutTarget from '../WorkoutTarget';
 import Exercise from '../exercises/Exercise';
-import MuscleScores from '../muscles/MuscleScores';
 import Score from '../muscles/Score';
 import * as util from '../global/util';
 
@@ -11,10 +10,12 @@ import * as util from '../global/util';
 export default abstract class Matcher<T> {
 	public exercises: Exercise[];
 	public target: WorkoutTarget;
+	public user: DBUser;
 
-	constructor(exercises: Exercise[], target: WorkoutTarget) {
+	constructor(exercises: Exercise[], target: WorkoutTarget, user: DBUser) {
 		this.exercises = exercises;
 		this.target = target;
+		this.user = user;
 	}
 
 	/**
@@ -54,14 +55,26 @@ export default abstract class Matcher<T> {
 			this.getPriorityValue(e, i, this._getPriorityScore(e)));
 	}
 
+	/**
+	 * Return the total priorty score for which skill/difficulty to choose for the exercise
+	 * Finds the weighted average of muscle goals with muscle activity in the exercise
+	 */
 	private _getPriorityScore(exercise: Exercise): Score {
-		const goalFactorScores = new MuscleScores();
-		const standardScores = exercise.getStandardFocusScores(this.target.user);
-		standardScores.keys.forEach(m => {
+		let priorityScore = new Score();
+		let totalActivity = 0;
+		Object.keys(exercise.muscleActivity).forEach(m => {
 			const goal = this.target.muscleGoals.get(m);
-			const priority = standardScores.get(m).multiply(goal); // exercise score x goal dist
-			goalFactorScores.set(m, priority);
+			const activity = exercise.muscleActivity[m];
+
+			const prevTotal = totalActivity;
+			totalActivity += activity;
+			const newTotal = totalActivity;
+
+			const currentPart = priorityScore.multiply(prevTotal / newTotal);
+			const newPart = goal.multiply(activity / newTotal);
+
+			priorityScore = currentPart.add(newPart);
 		});
-		return goalFactorScores.total;
+		return priorityScore;
 	}
 }

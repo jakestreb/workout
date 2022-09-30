@@ -16,8 +16,6 @@ export default class UserRecords {
 	public static ENDURANCE_LOSS_PER_MONTH = 0.025;
 	public static STRENGTH_LOSS_PER_MONTH = 0.015;
 
-	public static FAILURE_FACTOR = 0.7;
-
 	public static QUALITY_CLIFF = 4;
 	public static QUALITY_LIMIT = 12;
 
@@ -85,44 +83,42 @@ export default class UserRecords {
 		};
 	}
 
-	public getRecommendations(e: string): PersonalBests|null {
-		const bests = this.getPersonalBests(e);
-		if (!bests) {
-			return null;
-		}
-		const exercise = new Exercise(e);
-		return {
-			endurance: exercise.scaleRepsWeight(bests.endurance, 'endurance', this.user),
-			strength: exercise.scaleRepsWeight(bests.strength, 'strength', this.user),
-		};
-	}
-
 	public getPossibleRepsWeights(exercise: string, focus: Skill, difficulty: Difficulty): RepsWeight[] {
-		const best = this.getRecommendations(exercise);
-		if (!best) {
-			return [
-				new Exercise(exercise).getFirstTryRepsWeight(this.user),
-			];
+		let rec: RepsWeight;
+		const e = new Exercise(exercise);
+		const bests = this.getPersonalBests(exercise);
+		// const recs = this.getRecommendations(exercise);
+		if (!bests) {
+			rec = e.getFirstTryRepsWeight(this.user);
+		} else if (focus === 'endurance') {
+			const best = bests.endurance.copy();
+			// Note that incrementing, then scaling the expected next value
+			// gives a better result than scaling the previous directly
+			rec = e.incReps(best)
+				.scaleReps(0.75 + (difficulty * 0.25));
+			// Add next rec (more reps) scaled by difficulty
+			const stdWeight = e.getWeightStandard(this.user.gender);
+			// If using more weight than std, add a decreased weight version
+			const easierWeightRec = rec.copy().incWeight(-1);
+			if (easierWeightRec.weight !== rec.weight && easierWeightRec.weight! >= stdWeight) {
+				rec = easierWeightRec;
+			}
+		} else {
+			const best = bests.strength.copy();
+			rec = best.incWeight(difficulty);
+			// Add next rec (more reps) scaled by difficulty
+			const easierRepsRec = e.incReps(rec.copy(), -1);
+			// If doing more reps than std, add a decreased rep version
+			if (easierRepsRec.reps !== rec.reps && easierRepsRec.reps >= e.standardReps) {
+				rec = easierRepsRec;
+			}
 		}
-		const { endurance, strength } = best;
-		if (focus === 'endurance') {
-			const scaled = endurance.copy().scaleReps(0.8 + (difficulty * 0.4));
-			// TODO: Should offer any reasonable numbers of sets (2 - 5) depending
-			// on difficulty (not relative to previous)
-			return [
-				scaled.copy().incSets(-1),
-				scaled.copy().incSets(0),
-				scaled.copy().incSets(1),
-			].filter((x, i) => i >= (difficulty - 1) && i <= (difficulty + 1));
-		}
-		const scaled = strength.copy().incWeight(-1 + difficulty);
-		// TODO: Should offer any reasonable numbers of sets (2 - 5) depending
-		// on difficulty (not relative to previous)
 		return [
-			scaled.copy().incSets(-1),
-			scaled.copy().incSets(0),
-			scaled.copy().incSets(1),
-			].filter((x, i) => i >= (difficulty - 1) && i <= (difficulty + 1));
+			rec.copy().setSets(2),
+			rec.copy().setSets(3),
+			rec.copy().setSets(4),
+			rec.copy().setSets(5),
+		];
 	}
 
 	private _getRecordScore(exercise: string, rec: DBRecord): Score {
@@ -150,7 +146,7 @@ function timeDegrade(rec: DBRecord): DBRecord {
 function failureDegrade(rec: DBRecord): DBRecord {
 	return {
 		...rec,
-		reps: rec.reps * (rec.completed ? 1 : UserRecords.FAILURE_FACTOR)
+		sets: rec.completed ? rec.sets : 1,
 	};
 }
 

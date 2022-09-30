@@ -38,13 +38,23 @@ export default class RepsWeight {
 		return this;
 	}
 
-	public scaleWeight(factor: number): this {
-		this._weight = roundWeight(this._weight ? this._weight * factor : null);
+	public incWeight(inc: number): this {
+		this._weight = incWeight(this._weight, inc);
 		return this;
 	}
 
-	public incWeight(inc: number): this {
-		this._weight = incWeight(this._weight, inc);
+	public addWeight(amount: number): this {
+		if (this._weight !== null) {
+			this._weight += amount;
+		}
+		return this;
+	}
+
+	public setWeight(weight: number): this {
+		if (this._weight === null) {
+			throw new Error('Cannot set to null weight');
+		}
+		this._weight = weight;
 		return this;
 	}
 
@@ -53,8 +63,8 @@ export default class RepsWeight {
 		return this;
 	}
 
-	public incSets(inc: number): this {
-		this._sets = incCount(this._sets, inc);
+	public setSets(count: number): this {
+		this._sets = count;
 		return this;
 	}
 

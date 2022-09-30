@@ -45,6 +45,7 @@ export default class MuscleScores {
 	}
 
 	private readonly _scores: {[muscle: string]: Score} = {};
+	private readonly _scoreWeights: {[muscle: string]: number} = {};
 
 	constructor(scores: IMuscleScores = {}) {
 		Object.keys(scores).forEach(m => {
@@ -72,6 +73,19 @@ export default class MuscleScores {
 		return this.total.endurance > this.total.strength ? 'strength' : 'endurance';
 	}
 
+	// TODO: REMOVE OTHER UNUSED FUNCTIONS!!
+	public avgIn(m: string, score: Score, weight: number = 1) {
+		this._scoreWeights[m] = this._scoreWeights[m] || 0;
+		const prevTotal = this._scoreWeights[m];
+
+		this._scoreWeights[m] += weight;
+		const newTotal = this._scoreWeights[m];
+
+		const currentPart = this.get(m).multiply(prevTotal / newTotal);
+		const newPart = score.multiply(weight / newTotal);
+		this.set(m, currentPart.add(newPart));
+	}
+
 	// Note that muscle groups should not be pushed to MuscleScores
 	public set(muscleName: string, score: Score) {
 		if (this._scores[muscleName] || score.isNonZero()) {
@@ -82,6 +96,13 @@ export default class MuscleScores {
 	public add(muscleName: string, score: Score): Score {
 		this._scores[muscleName] = this.get(muscleName).add(score);
 		return this._scores[muscleName];
+	}
+
+	public multiply(m: Score|number): MuscleScores {
+		this.keys.forEach(muscleName => {
+			this._scores[muscleName] = this._scores[muscleName].multiply(m);
+		});
+		return this;
 	}
 
 	public combine(muscleScores: MuscleScores): MuscleScores {
